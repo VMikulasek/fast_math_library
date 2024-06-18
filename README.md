@@ -1,2 +1,2 @@
-# fast_math_library
+# Fast math library
 Library for fast calculations of mathematical operations
