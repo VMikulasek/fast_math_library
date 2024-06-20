@@ -10,9 +10,9 @@
 namespace simd
 {
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
-        float op1, float op2, float op3, float op4, float op5,
-        float op6, float op7, float op8)
-        : vector{ op1, op2, op3, op4, op5, op6, op7, op8 }{};
+        float n1, float n2, float n3, float n4, float n5,
+        float n6, float n7, float n8)
+        : vector{ n1, n2, n3, n4, n5, n6, n7, n8 }{};
 
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
         std::vector<float> vec)

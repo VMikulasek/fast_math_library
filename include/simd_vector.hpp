@@ -20,19 +20,19 @@ namespace simd
 
     public:
         /**
-         * @brief Construct a new AVX (256 B) float SIMDVector
+         * @brief Construct a new AVX (256 b) float SIMDVector
          * 
-         * @param op1 float 1
-         * @param op2 float 2
-         * @param op3 float 3
-         * @param op4 float 4
-         * @param op5 float 5
-         * @param op6 float 6
-         * @param op7 float 7
-         * @param op8 float 8
+         * @param n1 float 1
+         * @param n2 float 2
+         * @param n3 float 3
+         * @param n4 float 4
+         * @param n5 float 5
+         * @param n6 float 6
+         * @param n7 float 7
+         * @param n8 float 8
          */
-        SIMDVector(float f1, float f2, float f3, float f4,
-            float f5, float f6, float f7, float f8);
+        SIMDVector(float n1, float n2, float n3, float n4,
+            float n5, float n6, float n7, float b8);
 
         /**
          * @brief Construct a new SIMDVector object from std::vector<float>
