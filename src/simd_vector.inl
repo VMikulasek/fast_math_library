@@ -22,7 +22,7 @@ namespace simd
             // throw invalid vector size exception
         }
 
-        std::memcpy(vector, vec.data(), VECTOR_SIZE);
+        std::memcpy(vector, vec.data(), VECTOR_SIZE * sizeof(float));
     }
 }
 
