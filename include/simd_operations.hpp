@@ -15,10 +15,12 @@ namespace simd
     class SIMDOperations<float, InstructionSet::AVX>
     {
     private:
-        static __m256 op1;
-        static __m256 op2;
+        using NumType = float;
+        static const InstructionSet INS_SET = InstructionSet::AVX;
 
-        static __m256 result;
+        static __m256 op1Reg;
+        static __m256 op2Reg;
+        static __m256 resultReg;
 
     public:
         /**
@@ -27,7 +29,7 @@ namespace simd
          * 
          * @param vector Vector of floats to load to register
          */
-        static void load_op1(SIMDVector<float, InstructionSet::AVX> vector);
+        static void load_op1(SIMDVector<NumType, INS_SET> vector);
 
         /**
          * @brief Loads vector of floats to float vector register
@@ -35,7 +37,7 @@ namespace simd
          * 
          * @param vector Vector of floats to load to register
          */
-        static void load_op2(SIMDVector<float, InstructionSet::AVX> vector);
+        static void load_op2(SIMDVector<NumType, INS_SET> vector);
 
         /**
          * @brief Loads 2 vectors of floats into 2 vector float registers
@@ -44,7 +46,7 @@ namespace simd
          * @param vector1 Vector of floats to load to register representing op1
          * @param vector2 Vector of floats to load to register representing op2
          */
-        static void load_ops(SIMDVector<float, InstructionSet::AVX> vector1, SIMDVector<float, InstructionSet::AVX> vector2);
+        static void load_ops(SIMDVector<NumType, INS_SET> vector1, SIMDVector<NumType, INS_SET> vector2);
 
         /**
          * @brief Stores result from register to memory and returns
@@ -52,7 +54,7 @@ namespace simd
          * 
          * @return SIMDVector<float, InstructionSet::AVX> Content of result register
          */
-        static SIMDVector<float, InstructionSet::AVX> get_result();
+        static SIMDVector<NumType, INS_SET> get_result();
     };
 }
 

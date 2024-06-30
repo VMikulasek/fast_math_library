@@ -10,13 +10,20 @@ namespace simd
     template<typename T, InstructionSet S>
     class SIMDVector;
 
+    template<typename T, InstructionSet S>
+    class SIMDOperations;
+
     template<>
     class SIMDVector<float, InstructionSet::AVX>
     {
+        friend class SIMDOperations<float, InstructionSet::AVX>;
+
     private:
         const static unsigned VECTOR_SIZE = 8;
 
         alignas(32) float vector[VECTOR_SIZE];
+
+        SIMDVector(){}
 
     public:
         /**
