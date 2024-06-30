@@ -19,7 +19,8 @@ namespace simd
         friend class SIMDOperations<float, InstructionSet::AVX>;
 
     private:
-        const static unsigned VECTOR_SIZE = 8;
+        using NumType = float;
+        static const unsigned VECTOR_SIZE = 8;
 
         alignas(32) float vector[VECTOR_SIZE];
 
@@ -38,8 +39,8 @@ namespace simd
          * @param n7 float 7
          * @param n8 float 8
          */
-        SIMDVector(float n1, float n2, float n3, float n4,
-            float n5, float n6, float n7, float b8);
+        SIMDVector(NumType n1, NumType n2, NumType n3, NumType n4,
+            NumType n5, NumType n6, NumType n7, NumType b8);
 
         /**
          * @brief Construct a new SIMDVector object from std::vector<float>
@@ -48,7 +49,7 @@ namespace simd
          *
          * @throws {NameOfException} if vector size isnt 8
          */
-        SIMDVector(std::vector<float> vec);
+        SIMDVector(std::vector<NumType> &vec);
 
         /**
          * @brief Gets content of the vector

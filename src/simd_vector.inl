@@ -6,20 +6,21 @@
 
 #include <vector>
 #include <cstring>
+#include <stdexcept>
 
 namespace simd
 {
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
-        float n1, float n2, float n3, float n4, float n5,
-        float n6, float n7, float n8)
+        NumType n1, NumType n2, NumType n3, NumType n4, NumType n5,
+        NumType n6, NumType n7, NumType n8)
         : vector{ n1, n2, n3, n4, n5, n6, n7, n8 }{};
 
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
-        std::vector<float> vec)
+        std::vector<NumType> &vec)
     {
         if (vec.size() != VECTOR_SIZE)
         {
-            // throw invalid vector size exception
+            throw std::invalid_argument(std::string(__func__) + ": invalid vector size");
         }
 
         std::memcpy(vector, vec.data(), VECTOR_SIZE * sizeof(float));
