@@ -24,6 +24,11 @@ namespace simd
 
         std::memcpy(vector, vec.data(), VECTOR_SIZE * sizeof(float));
     }
+
+    inline const float *SIMDVector<float, InstructionSet::AVX>::get_content()
+    {
+        return this->vector;
+    }
 }
 
-#endif SIMD_VECTOR_INL
+#endif // SIMD_VECTOR_INL

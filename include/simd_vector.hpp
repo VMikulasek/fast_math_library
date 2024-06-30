@@ -16,7 +16,7 @@ namespace simd
     private:
         const static unsigned VECTOR_SIZE = 8;
 
-        float vector[VECTOR_SIZE];
+        alignas(32) float vector[VECTOR_SIZE];
 
     public:
         /**
@@ -36,15 +36,22 @@ namespace simd
 
         /**
          * @brief Construct a new SIMDVector object from std::vector<float>
-         * 
+         *
          * @param vec Vector with exactly 8 floats
-         * 
+         *
          * @throws {NameOfException} if vector size isnt 8
          */
         SIMDVector(std::vector<float> vec);
+
+        /**
+         * @brief Gets content of the vector
+         *
+         * @return const float[8] array
+         */
+        const float *get_content();
     };
 }
 
-#include "../src/simd_vector.inl";
+#include "../src/simd_vector.inl"
 
 #endif // SIMD_VECTOR_HPP
