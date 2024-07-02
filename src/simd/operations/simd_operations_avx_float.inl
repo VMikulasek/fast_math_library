@@ -33,6 +33,66 @@ namespace simd
         _mm256_store_ps(result.vector, resultReg);
         return result;
     }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::add()
+    {
+        resultReg = _mm256_add_ps(op1Reg, op2Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::add_op1_result()
+    {
+        resultReg = _mm256_add_ps(op1Reg, resultReg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::add_op2_result()
+    {
+        resultReg = _mm256_add_ps(op2Reg, resultReg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::sub()
+    {
+        resultReg = _mm256_sub_ps(op1Reg, op2Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::sub_result_op1()
+    {
+        resultReg = _mm256_sub_ps(resultReg, op1Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::sub_result_op2()
+    {
+        resultReg = _mm256_sub_ps(resultReg, op2Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::mul()
+    {
+        resultReg = _mm256_mul_ps(op1Reg, op2Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::mul_op1_result()
+    {
+        resultReg = _mm256_mul_ps(op1Reg, resultReg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::mul_op2_result()
+    {
+        resultReg = _mm256_mul_ps(op2Reg, resultReg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::div()
+    {
+        resultReg = _mm256_div_ps(op1Reg, op2Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::div_result_op1()
+    {
+        resultReg = _mm256_div_ps(resultReg, op1Reg);
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::div_result_op2()
+    {
+        resultReg = _mm256_div_ps(resultReg, op2Reg);
+    }
 }
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

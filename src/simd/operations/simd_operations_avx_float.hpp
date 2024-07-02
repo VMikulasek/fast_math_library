@@ -52,6 +52,66 @@ namespace simd
          * @return SIMDVector<float, InstructionSet::AVX> Content of result register
          */
         static SIMDVector<NumType, INS_SET> get_result();
+
+        /**
+         * @brief Adds op1Reg and op2Reg and stores result into resultReg
+         */
+        static void add();
+
+        /**
+         * @brief Adds op1Reg and resultReg and stores result into resultReg
+         */
+        static void add_op1_result();
+
+        /**
+         * @brief Adds op2Reg and resultReg and stores result into resultReg
+         */
+        static void add_op2_result();
+
+        /**
+         * @brief Subtracts op2Reg from op1Reg and stores result into resultReg
+         */
+        static void sub();
+
+        /**
+         * @brief Subtracts op1Reg from resultReg and stores result into resultReg
+         */
+        static void sub_result_op1();
+
+        /**
+         * @brief Subtracts op2Reg from resultReg and stores result into resultReg
+         */
+        static void sub_result_op2();
+
+        /**
+         * @brief Multiplies op1Reg with op2Reg and stores result into resultReg
+         */
+        static void mul();
+
+        /**
+         * @brief Multiplies op1Reg with resultReg and stores result into resultReg
+         */
+        static void mul_op1_result();
+
+        /**
+         * @brief Multiplies op2Reg with resultReg and stores result into resultReg
+         */
+        static void mul_op2_result();
+
+        /**
+         * @brief Divides op1Reg by op2Reg and stores result into resultReg
+         */
+        static void div();
+
+        /**
+         * @brief Divides resultReg by op1Reg and stores result into resultReg
+         */
+        static void div_result_op1();
+
+        /**
+         * @brief Divides resultReg by op2Reg and stores result into resultReg
+         */
+        static void div_result_op2();
     };
 }
 
