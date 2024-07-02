@@ -1,16 +1,13 @@
-#ifndef SIMD_OPERATIONS_HPP
-#define SIMD_OPERATIONS_HPP
+#ifndef SIMD_OPERATIONS_AVX_FLOAT_HPP
+#define SIMD_OPERATIONS_AVX_FLOAT_HPP
 
-#include "simd_common.hpp"
-#include "simd_vector.hpp"
+#include "./simd_operations_base.hpp"
+#include "../vector/simd_vector_avx_float.hpp"
 
 #include <immintrin.h>
 
 namespace simd
 {
-    template<typename T, InstructionSet S>
-    class SIMDOperations;
-
     template<>
     class SIMDOperations<float, InstructionSet::AVX>
     {
@@ -58,6 +55,6 @@ namespace simd
     };
 }
 
-#include "../src/simd_operations.inl"
+#include "simd_operations_avx_float.inl"
 
-#endif // SIMD_OPERATIONS_HPP
+#endif // SIMD_OPERATIONS_AVX_FLOAT_HPP
