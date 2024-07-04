@@ -8,6 +8,19 @@
 
 namespace simd
 {
+    /**
+     * @brief Enum represeting variants of AVX comparison
+     */
+    enum AvxCmpVariant
+    {
+        EQ = 0,
+        NEQ = 12,
+        LT = 17,
+        LE = 18,
+        GE = 29,
+        GT = 30
+    };
+
     template<>
     class SIMDOperations<float, InstructionSet::AVX>
     {
@@ -58,6 +71,30 @@ namespace simd
          * @brief Divides vec1 by vec2 and returns result
          */
         static AvxReg div(AvxReg &vec1, AvxReg &vec2);
+
+        /**
+         * @brief Computes bitwise and of vec1 and vec2 and returns result
+         */
+        static AvxReg bitwise_and(AvxReg &vec1, AvxReg &vec2);
+
+        /**
+         * @brief Computes bitwise or of vec1 and vec2 and returns result
+         */
+        static AvxReg bitwise_or(AvxReg &vec1, AvxReg &vec2);
+
+        /**
+         * @brief Computes bitwise xor of vec1 and vec2 and returns result
+         */
+        static AvxReg bitwise_xor(AvxReg &vec1, AvxReg &vec2);
+
+        /**
+         * @brief Compares every float in vector with cmp variant based on
+         * parameter variant and stores into result on each index either all
+         * 0 or all 1
+         * 
+         * @param variant Variant of comparison {EQ, NEQ, LT, LE, GT, GE}
+         */
+        static AvxReg cmp(AvxReg &vec1, AvxReg &vec2, AvxCmpVariant variant);
     };
 }
 
