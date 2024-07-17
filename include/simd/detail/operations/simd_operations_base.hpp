@@ -1,7 +1,7 @@
 #ifndef SIMD_OPERATIONS_BASE_HPP
 #define SIMD_OPERATIONS_BASE_HPP
 
-#include "../../../include/simd/simd_common.hpp"
+#include "../../simd_common.hpp"
 
 namespace simd
 {

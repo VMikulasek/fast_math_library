@@ -1,7 +1,7 @@
 #ifndef SIMD_OPERATIONS_AVX_FLOAT_INL
 #define SIMD_OPERATIONS_AVX_FLOAT_INL
 
-#include "../../../include/simd/simd_common.hpp"
+#include "../../simd_common.hpp"
 #include "./simd_operations_avx_float.hpp"
 #include "../vector/simd_vector_avx_float.hpp"
 
