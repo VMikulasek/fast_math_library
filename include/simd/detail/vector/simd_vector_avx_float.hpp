@@ -1,8 +1,8 @@
 #ifndef SIMD_VECTOR_AVX_FLOAT_HPP
 #define SIMD_VECTOR_AVX_FLOAT_HPP
 
-#include <include/simd/simd_common.hpp>
-#include <include/simd/detail/vector/simd_vector_base.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/detail/vector/simd_vector_base.hpp>
 
 #include <vector>
 
@@ -58,6 +58,6 @@ namespace simd
     };
 }
 
-#include "simd_vector_avx_float.inl"
+#include <simd/detail/vector/simd_vector_avx_float.inl>
 
 #endif // SIMD_VECTOR_AVX_FLOAT_HPP

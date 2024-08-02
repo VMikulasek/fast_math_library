@@ -1,9 +1,9 @@
 #ifndef SIMD_OPERATIONS_AVX_FLOAT_HPP
 #define SIMD_OPERATIONS_AVX_FLOAT_HPP
 
-#include <include/simd/simd_common.hpp>
-#include <include/simd/detail/operations/simd_operations_base.hpp>
-#include <include/simd/detail/vector/simd_vector_avx_float.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/detail/operations/simd_operations_base.hpp>
+#include <simd/detail/vector/simd_vector_avx_float.hpp>
 
 #include <immintrin.h>
 
@@ -99,6 +99,6 @@ namespace simd
     };
 }
 
-#include "simd_operations_avx_float.inl"
+#include <simd/detail/operations/simd_operations_avx_float.inl>
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_HPP
