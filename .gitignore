@@ -45,6 +45,8 @@ CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
 
+build
+
 # VS Code
 .vscode/
 
