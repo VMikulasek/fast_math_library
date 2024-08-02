@@ -1,5 +1,5 @@
-add_library(math_lib INTERFACE)
-target_include_directories(math_lib INTERFACE
+add_library(${PROJECT_NAME} INTERFACE)
+target_include_directories(${PROJECT_NAME} INTERFACE
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
     "$<INSTALL_INTERFACE:include>")
 
@@ -27,5 +27,5 @@ else ()
 	message("AVX512F not supported")
 endif()
 
-target_compile_definitions(math_lib INTERFACE ${MATH_LIB_DEFINITIONS})
-target_compile_options(math_lib INTERFACE ${MATH_LIB_OPTIONS})
+target_compile_definitions(${PROJECT_NAME} INTERFACE ${MATH_LIB_DEFINITIONS})
+target_compile_options(${PROJECT_NAME} INTERFACE ${MATH_LIB_OPTIONS})
