@@ -12,7 +12,9 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 set(TESTS_NAME math_lib_tests)
-set(TESTS_SOURCES test.cpp)
+set(TESTS_SOURCES
+tests_common.cpp
+simd/simd_avx_float_tests.cpp)
 
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 
@@ -20,6 +22,11 @@ target_link_libraries(
     ${TESTS_NAME}
     PRIVATE ${PROJECT_NAME}
     PRIVATE GTest::gtest_main
+)
+
+target_include_directories(
+    ${TESTS_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 include(GoogleTest)
