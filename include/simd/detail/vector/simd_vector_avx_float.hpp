@@ -21,10 +21,13 @@ namespace simd
         static const unsigned VECTOR_SIZE = 8;
 
         alignas(32) float vector[VECTOR_SIZE];
-
-        SIMDVector(){}
-
     public:
+
+        /**
+         * @brief Construct a new AVX (256 b) float SIMDVector with all zeros
+         */
+        SIMDVector();
+
         /**
          * @brief Construct a new AVX (256 b) float SIMDVector
          * 

@@ -10,6 +10,10 @@
 
 namespace simd
 {
+    inline SIMDVector<float, InstructionSet::AVX>::SIMDVector()
+        : vector{ 0 }
+    {}
+
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
         NumType n1, NumType n2, NumType n3, NumType n4, NumType n5,
         NumType n6, NumType n7, NumType n8)
