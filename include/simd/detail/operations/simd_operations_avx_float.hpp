@@ -42,7 +42,7 @@ namespace simd
          * @param vector Vector of floats to load to register
          * @return Register with loaded vector
          */
-        static AvxReg load_vector(SIMDVector<NumType, INS_SET> &vector);
+        static AvxReg load_vector(const SIMDVector<NumType, INS_SET> &vector);
 
         /**
          * @brief Stores vector from register to memory and returns

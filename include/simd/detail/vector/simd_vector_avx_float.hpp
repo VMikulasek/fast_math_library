@@ -57,7 +57,7 @@ namespace simd
          *
          * @return const float[8] array
          */
-        const float *get_content();
+        const float *get_content() const;
     };
 }
 

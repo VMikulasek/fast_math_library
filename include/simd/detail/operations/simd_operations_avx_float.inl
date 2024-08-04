@@ -8,7 +8,7 @@
 namespace simd
 {
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_vector(
-        SIMDVector<NumType, INS_SET> &vector)
+        const SIMDVector<NumType, INS_SET> &vector)
     {
         return _mm256_load_ps(vector.get_content());
     }

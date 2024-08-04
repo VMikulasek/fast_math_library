@@ -30,7 +30,7 @@ namespace simd
         std::memcpy(vector, vec.data(), VECTOR_SIZE * sizeof(float));
     }
 
-    inline const float *SIMDVector<float, InstructionSet::AVX>::get_content()
+    inline const float *SIMDVector<float, InstructionSet::AVX>::get_content() const
     {
         return this->vector;
     }
