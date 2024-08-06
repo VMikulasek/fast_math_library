@@ -95,7 +95,8 @@ namespace simd
          * 
          * @param variant Variant of comparison {EQ, NEQ, LT, LE, GT, GE}
          */
-        static AvxReg cmp(AvxReg &vec1, AvxReg &vec2, AvxCmpVariant variant);
+        template<AvxCmpVariant variant>
+        static AvxReg cmp(AvxReg &vec1, AvxReg &vec2);
     };
 }
 

@@ -63,10 +63,11 @@ namespace simd
         return _mm256_xor_ps(vec1, vec2);
     }
 
+    template<AvxCmpVariant Variant>
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::cmp(
-        AvxReg &vec1, AvxReg &vec2, AvxCmpVariant variant)
+        AvxReg &vec1, AvxReg &vec2)
     {
-        return _mm256_cmp_ps(vec1, vec2, static_cast<int>(variant));
+        return _mm256_cmp_ps(vec1, vec2, static_cast<int>(Variant));
     }
 }
 
