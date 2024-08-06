@@ -1,9 +1,9 @@
 #ifndef SIMD_OPERATIONS_AVX_FLOAT_HPP
 #define SIMD_OPERATIONS_AVX_FLOAT_HPP
 
-#include <include/simd/simd_common.hpp>
-#include <include/simd/detail/operations/simd_operations_base.hpp>
-#include <include/simd/detail/vector/simd_vector_avx_float.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/detail/operations/simd_operations_base.hpp>
+#include <simd/detail/vector/simd_vector_avx_float.hpp>
 
 #include <immintrin.h>
 
@@ -42,7 +42,7 @@ namespace simd
          * @param vector Vector of floats to load to register
          * @return Register with loaded vector
          */
-        static AvxReg load_vector(SIMDVector<NumType, INS_SET> &vector);
+        static AvxReg load_vector(const SIMDVector<NumType, INS_SET> &vector);
 
         /**
          * @brief Stores vector from register to memory and returns
@@ -95,10 +95,11 @@ namespace simd
          * 
          * @param variant Variant of comparison {EQ, NEQ, LT, LE, GT, GE}
          */
-        static AvxReg cmp(AvxReg &vec1, AvxReg &vec2, AvxCmpVariant variant);
+        template<AvxCmpVariant variant>
+        static AvxReg cmp(AvxReg &vec1, AvxReg &vec2);
     };
 }
 
-#include "simd_operations_avx_float.inl"
+#include <simd/detail/operations/simd_operations_avx_float.inl>
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_HPP

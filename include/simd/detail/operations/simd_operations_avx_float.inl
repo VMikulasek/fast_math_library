@@ -1,14 +1,14 @@
 #ifndef SIMD_OPERATIONS_AVX_FLOAT_INL
 #define SIMD_OPERATIONS_AVX_FLOAT_INL
 
-#include <include/simd/simd_common.hpp>
-#include <include/simd/detail/operations/simd_operations_avx_float.hpp>
-#include <include/simd/detail/vector/simd_vector_avx_float.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/detail/operations/simd_operations_avx_float.hpp>
+#include <simd/detail/vector/simd_vector_avx_float.hpp>
 
 namespace simd
 {
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_vector(
-        SIMDVector<NumType, INS_SET> &vector)
+        const SIMDVector<NumType, INS_SET> &vector)
     {
         return _mm256_load_ps(vector.get_content());
     }
@@ -63,10 +63,11 @@ namespace simd
         return _mm256_xor_ps(vec1, vec2);
     }
 
+    template<AvxCmpVariant Variant>
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::cmp(
-        AvxReg &vec1, AvxReg &vec2, AvxCmpVariant variant)
+        AvxReg &vec1, AvxReg &vec2)
     {
-        return _mm256_cmp_ps(vec1, vec2, static_cast<int>(variant));
+        return _mm256_cmp_ps(vec1, vec2, static_cast<int>(Variant));
     }
 }
 

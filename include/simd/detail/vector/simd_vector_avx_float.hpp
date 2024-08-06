@@ -1,8 +1,8 @@
 #ifndef SIMD_VECTOR_AVX_FLOAT_HPP
 #define SIMD_VECTOR_AVX_FLOAT_HPP
 
-#include <include/simd/simd_common.hpp>
-#include <include/simd/detail/vector/simd_vector_base.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/detail/vector/simd_vector_base.hpp>
 
 #include <vector>
 
@@ -21,10 +21,13 @@ namespace simd
         static const unsigned VECTOR_SIZE = 8;
 
         alignas(32) float vector[VECTOR_SIZE];
-
-        SIMDVector(){}
-
     public:
+
+        /**
+         * @brief Construct a new AVX (256 b) float SIMDVector with all zeros
+         */
+        SIMDVector();
+
         /**
          * @brief Construct a new AVX (256 b) float SIMDVector
          * 
@@ -54,10 +57,10 @@ namespace simd
          *
          * @return const float[8] array
          */
-        const float *get_content();
+        const float *get_content() const;
     };
 }
 
-#include "simd_vector_avx_float.inl"
+#include <simd/detail/vector/simd_vector_avx_float.inl>
 
 #endif // SIMD_VECTOR_AVX_FLOAT_HPP

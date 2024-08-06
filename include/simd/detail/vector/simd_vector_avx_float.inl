@@ -1,8 +1,8 @@
 #ifndef SIMD_VECTOR_AVX_FLOAT_INL
 #define SIMD_VECTOR_AVX_FLOAT_INL
 
-#include <include/simd/simd_common.hpp>
-#include <include/simd/detail/vector/simd_vector_avx_float.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/detail/vector/simd_vector_avx_float.hpp>
 
 #include <vector>
 #include <cstring>
@@ -10,6 +10,10 @@
 
 namespace simd
 {
+    inline SIMDVector<float, InstructionSet::AVX>::SIMDVector()
+        : vector{ 0 }
+    {}
+
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
         NumType n1, NumType n2, NumType n3, NumType n4, NumType n5,
         NumType n6, NumType n7, NumType n8)
@@ -26,7 +30,7 @@ namespace simd
         std::memcpy(vector, vec.data(), VECTOR_SIZE * sizeof(float));
     }
 
-    inline const float *SIMDVector<float, InstructionSet::AVX>::get_content()
+    inline const float *SIMDVector<float, InstructionSet::AVX>::get_content() const
     {
         return this->vector;
     }
