@@ -10,6 +10,11 @@ namespace tests
     float bitwise_and(float op1, float op2);
     float bitwise_or(float op1, float op2);
     float bitwise_xor(float op1, float op2);
+    float cmp_lt(float op1, float op2);
+    float cmp_gt(float op1, float op2);
+    float cmp_eq(float op1, float op2);
+    float cmp_le(float op1, float op2);
+    float cmp_ge(float op1, float op2);
 }
 
 #endif // TESTS_COMMON_HPP

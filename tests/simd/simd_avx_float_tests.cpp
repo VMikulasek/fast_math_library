@@ -59,7 +59,7 @@ namespace tests
                 int expectedI = *reinterpret_cast<int *>(&expected);
                 int resultI = *reinterpret_cast<const int *>(&(result[i]));
 
-                EXPECT_FLOAT_EQ(resultI, expectedI);
+                EXPECT_EQ(resultI, expectedI);
             }
         }
     };
@@ -91,7 +91,6 @@ namespace tests
 
         CheckResult(add);
     }
-
     TEST_F(SimdAvxFloatTest, AddDecimal)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -100,7 +99,6 @@ namespace tests
 
         CheckResult(add);
     }
-
     TEST_F(SimdAvxFloatTest, AddNegative)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -109,7 +107,6 @@ namespace tests
 
         CheckResult(add);
     }
-
     TEST_F(SimdAvxFloatTest, AddZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -118,7 +115,6 @@ namespace tests
 
         CheckResult(add);
     }
-
     TEST_F(SimdAvxFloatTest, AddBigNums)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -136,7 +132,6 @@ namespace tests
 
         CheckResult(sub);
     }
-
     TEST_F(SimdAvxFloatTest, SubDecimal)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -145,7 +140,6 @@ namespace tests
 
         CheckResult(sub);
     }
-
     TEST_F(SimdAvxFloatTest, SubNegative)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -154,7 +148,6 @@ namespace tests
 
         CheckResult(sub);
     }
-
     TEST_F(SimdAvxFloatTest, SubZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -163,7 +156,6 @@ namespace tests
 
         CheckResult(sub);
     }
-
     TEST_F(SimdAvxFloatTest, SubBigNums)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -181,7 +173,6 @@ namespace tests
 
         CheckResult(mul);
     }
-
     TEST_F(SimdAvxFloatTest, MulDecimal)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -190,7 +181,6 @@ namespace tests
 
         CheckResult(mul);
     }
-
     TEST_F(SimdAvxFloatTest, MulNegative)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -199,7 +189,6 @@ namespace tests
 
         CheckResult(mul);
     }
-
     TEST_F(SimdAvxFloatTest, MulZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -208,7 +197,6 @@ namespace tests
 
         CheckResult(mul);
     }
-
     TEST_F(SimdAvxFloatTest, MulDecimalZeros)
     {
         SetRegisters(decimalVec1, zerosVec);
@@ -217,7 +205,6 @@ namespace tests
 
         CheckResult(mul);
     }
-
     TEST_F(SimdAvxFloatTest, MulBigNums)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -235,7 +222,6 @@ namespace tests
 
         CheckResult(div);
     }
-
     TEST_F(SimdAvxFloatTest, DivDecimal)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -244,7 +230,6 @@ namespace tests
 
         CheckResult(div);
     }
-
     TEST_F(SimdAvxFloatTest, DivNegative)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -253,7 +238,6 @@ namespace tests
 
         CheckResult(div);
     }
-
     TEST_F(SimdAvxFloatTest, DivZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -262,7 +246,6 @@ namespace tests
 
         CheckResult(div);
     }
-
     TEST_F(SimdAvxFloatTest, DivDecimalZeros)
     {
         SetRegisters(decimalVec1, zerosVec);
@@ -271,7 +254,6 @@ namespace tests
 
         CheckResult(div);
     }
-
     TEST_F(SimdAvxFloatTest, DivBigNums)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -289,7 +271,6 @@ namespace tests
 
         CheckResult(bitwise_and);
     }
-
     TEST_F(SimdAvxFloatTest, And2)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -298,7 +279,6 @@ namespace tests
 
         CheckResult(bitwise_and);
     }
-
     TEST_F(SimdAvxFloatTest, And3)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -307,7 +287,6 @@ namespace tests
 
         CheckResult(bitwise_and);
     }
-
     TEST_F(SimdAvxFloatTest, AndZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -316,7 +295,6 @@ namespace tests
 
         CheckResult(bitwise_and);
     }
-
     TEST_F(SimdAvxFloatTest, And4)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -334,7 +312,6 @@ namespace tests
 
         CheckResult(bitwise_or);
     }
-
     TEST_F(SimdAvxFloatTest, Or2)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -343,7 +320,6 @@ namespace tests
 
         CheckResult(bitwise_or);
     }
-
     TEST_F(SimdAvxFloatTest, Or3)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -352,7 +328,6 @@ namespace tests
 
         CheckResult(bitwise_or);
     }
-
     TEST_F(SimdAvxFloatTest, OrZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -361,7 +336,6 @@ namespace tests
 
         CheckResult(bitwise_or);
     }
-
     TEST_F(SimdAvxFloatTest, Or4)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -379,7 +353,6 @@ namespace tests
 
         CheckResult(bitwise_xor);
     }
-
     TEST_F(SimdAvxFloatTest, Xor2)
     {
         SetRegisters(decimalVec1, decimalVec2);
@@ -388,7 +361,6 @@ namespace tests
 
         CheckResult(bitwise_xor);
     }
-
     TEST_F(SimdAvxFloatTest, Xor3)
     {
         SetRegisters(negativeVec1, negativeVec2);
@@ -397,7 +369,6 @@ namespace tests
 
         CheckResult(bitwise_xor);
     }
-
     TEST_F(SimdAvxFloatTest, XorZeros)
     {
         SetRegisters(zerosVec, zerosVec);
@@ -406,7 +377,6 @@ namespace tests
 
         CheckResult(bitwise_xor);
     }
-
     TEST_F(SimdAvxFloatTest, Xor4)
     {
         SetRegisters(bigNumsVec1, bigNumsVec2);
@@ -414,5 +384,170 @@ namespace tests
         resultReg = Ops::bitwise_xor(reg1, reg2);
 
         CheckResult(bitwise_xor);
+    }
+
+    TEST_F(SimdAvxFloatTest, LTAllLess)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LT>(reg1, reg2);
+
+        CheckResult(cmp_lt);
+    }
+    TEST_F(SimdAvxFloatTest, LTAllGreater)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LT>(reg1, reg2);
+
+        CheckResult(cmp_lt);
+    }
+    TEST_F(SimdAvxFloatTest, LTAllEq)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LT>(reg1, reg2);
+
+        CheckResult(cmp_lt);
+    }
+    TEST_F(SimdAvxFloatTest, LTMixed)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LT>(reg1, reg2);
+
+        CheckResult(cmp_lt);
+    }
+
+    TEST_F(SimdAvxFloatTest, GTAllLess)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GT>(reg1, reg2);
+
+        CheckResult(cmp_gt);
+    }
+    TEST_F(SimdAvxFloatTest, GTAllGreater)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GT>(reg1, reg2);
+
+        CheckResult(cmp_gt);
+    }
+    TEST_F(SimdAvxFloatTest, GTAllEq)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GT>(reg1, reg2);
+
+        CheckResult(cmp_gt);
+    }
+    TEST_F(SimdAvxFloatTest, GTMixed)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GT>(reg1, reg2);
+
+        CheckResult(cmp_gt);
+    }
+
+    TEST_F(SimdAvxFloatTest, EQAllLess)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::EQ>(reg1, reg2);
+
+        CheckResult(cmp_eq);
+    }
+    TEST_F(SimdAvxFloatTest, EQAllGreater)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::EQ>(reg1, reg2);
+
+        CheckResult(cmp_eq);
+    }
+    TEST_F(SimdAvxFloatTest, EQAllEq)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::EQ>(reg1, reg2);
+
+        CheckResult(cmp_eq);
+    }
+    TEST_F(SimdAvxFloatTest, EQMixed)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::EQ>(reg1, reg2);
+
+        CheckResult(cmp_eq);
+    }
+
+    TEST_F(SimdAvxFloatTest, LEAllLess)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LE>(reg1, reg2);
+
+        CheckResult(cmp_le);
+    }
+    TEST_F(SimdAvxFloatTest, LEAllGreater)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LE>(reg1, reg2);
+
+        CheckResult(cmp_le);
+    }
+    TEST_F(SimdAvxFloatTest, LEAllEq)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LE>(reg1, reg2);
+
+        CheckResult(cmp_le);
+    }
+    TEST_F(SimdAvxFloatTest, LEMixed)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::LE>(reg1, reg2);
+
+        CheckResult(cmp_le);
+    }
+
+    TEST_F(SimdAvxFloatTest, GEAllLess)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GE>(reg1, reg2);
+
+        CheckResult(cmp_ge);
+    }
+    TEST_F(SimdAvxFloatTest, GEAllGreater)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GE>(reg1, reg2);
+
+        CheckResult(cmp_ge);
+    }
+    TEST_F(SimdAvxFloatTest, GEAllEq)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GE>(reg1, reg2);
+
+        CheckResult(cmp_ge);
+    }
+    TEST_F(SimdAvxFloatTest, GEMixed)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::cmp<simd::AvxCmpVariant::GE>(reg1, reg2);
+
+        CheckResult(cmp_ge);
     }
 }
