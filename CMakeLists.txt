@@ -10,15 +10,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(CheckCXXSourceRuns)
 
 function(check_runtime_program PROGRAM_NAME RESULT_VAR)
-    try_run(${RESULT_VAR} RUN_RESULT
+    try_run(${RESULT_VAR} COMPILE_RESULT
             ${CMAKE_BINARY_DIR}/CMakeTmp
             ${CMAKE_CURRENT_SOURCE_DIR}/runtimechecks/${PROGRAM_NAME}.cpp)
-    if (NOT RUN_RESULT)
+    if (NOT COMPILE_RESULT)
+        message(FATAL_ERROR "compilation failed")
         set(${RESULT_VAR} FALSE)
     endif()
 endfunction()
 
-message("-- Checking for SIMD units")
+message(STATUS "Checking for SIMD units")
 
 check_runtime_program(check_avx_support AVX_SUPPORTED)
 check_runtime_program(check_avx2_support AVX2_SUPPORTED)
