@@ -3,6 +3,14 @@
 
 namespace tests
 {
+    enum OperationDirection
+    {
+        // Performs operation on adjacents
+        HORIZONTAL,
+        // Performs operation on same indexes different vectors
+        VERTICAL
+    };
+
     float add(float op1, float op2);
     float sub(float op1, float op2);
     float mul(float op1, float op2);

@@ -97,6 +97,16 @@ namespace simd
          */
         template<AvxCmpVariant variant>
         static AvxReg cmp(AvxReg &vec1, AvxReg &vec2);
+
+        /**
+         * @brief Adds horizontal adjacent floats and stores the
+         * into register (result reg: first quarter = first half of vec1
+         * results, second quarter = first half of vec2 results,
+         * and then second half of vec1, and finally second half of vec2)
+         *  
+         * @return AvxReg register with 8 result floats
+         */
+        static AvxReg horizontal_add(AvxReg &vec1, AvxReg &vec2);
     };
 }
 

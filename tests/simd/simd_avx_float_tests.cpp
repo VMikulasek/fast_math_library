@@ -5,6 +5,8 @@
 #include <tests_common.hpp>
 #include <functional>
 
+#include <iostream>
+
 namespace tests
 {
     class SimdAvxFloatTest : public testing::Test
@@ -24,7 +26,7 @@ namespace tests
         const Vec basicVec2{ 2, 2, 2, 2, 2, 2, 2, 3 };
         const Vec decimalVec1 { 1.543, 1.2, 1.134, 1.3, 1.5, 1.13413, 1.1, 1.0 };
         const Vec decimalVec2 { 2.1, 2.2, 2.3, 2.1341, 2.341, 2.34, 2.1324, 3.1431 };
-        const Vec negativeVec1 { 1.2, 1.1, 1.2, 1.1, 1.2, 1.1, 1.2, 1.1 };
+        const Vec negativeVec1 { 1.2, 1.1, 1.2, -1.1, 1.2, -1.1, 1.2, 1.1 };
         const Vec negativeVec2 { -2.1, -2.2, -2.1, -2.2, -2.1, -2.2, -2.1, -3.2 };
         const Vec zerosVec { 0, 0, 0, 0, 0, 0, 0, 0 };
         const Vec bigNumsVec1 { 134541516143341341534.1, 35736435.0, 674674763465.0, 145598647.3, 354.2, 12413451.1324, 134134112141.12, 123341.1341 };
@@ -43,7 +45,43 @@ namespace tests
             usedVec2 = vec2;
         }
 
-        void CheckResult(std::function<float(float, float)> operation)
+        float GetExpected(unsigned i, const float *vec1, const float *vec2,
+            OperationDirection direction, std::function<float(float,float)> operation)
+        {
+            if (direction == VERTICAL)
+            {
+                return operation(vec1[i], vec2[i]);
+            }
+            else
+            {
+                i *= 2;
+                const float *workingVec;
+
+                if (i < VECTOR_LEN / 2)
+                {
+                    workingVec = vec1;
+                }
+                else if (i < VECTOR_LEN)
+                {
+                    i -= VECTOR_LEN / 2;
+                    workingVec = vec2;
+                }
+                else if (i < VECTOR_LEN + VECTOR_LEN / 2)
+                {
+                    i -= VECTOR_LEN / 2;
+                    workingVec = vec1;
+                }
+                else
+                {
+                    i -= VECTOR_LEN;
+                    workingVec = vec2;
+                }
+
+                return operation(workingVec[i], workingVec[i + 1]);
+            }
+        }
+
+        void CheckResult(std::function<float(float, float)> operation, OperationDirection direction = VERTICAL)
         {
             Vec resultVec = Ops::materialize_register(resultReg);
             const float *result = resultVec.get_content();
@@ -53,8 +91,9 @@ namespace tests
 
             for (unsigned i = 0; i < VECTOR_LEN; i++)
             {
-                float expected = operation(vec1Content[i], vec2Content[i]);
+                float expected = GetExpected(i, vec1Content, vec2Content, direction, operation);
 
+                std::cout << expected << " " << result[i] << std::endl;
                 // cast to int to compare bitwise, to dodge NaN non equality
                 int expectedI = *reinterpret_cast<int *>(&expected);
                 int resultI = *reinterpret_cast<const int *>(&(result[i]));
@@ -550,4 +589,46 @@ namespace tests
 
         CheckResult(cmp_ge);
     }
+
+    TEST_F(SimdAvxFloatTest, HaddBasic)
+    {
+        SetRegisters(basicVec1, basicVec2);
+
+        resultReg = Ops::horizontal_add(reg1, reg2);
+
+        CheckResult(add, HORIZONTAL);
+    }
+    TEST_F(SimdAvxFloatTest, HaddDecimal)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::horizontal_add(reg1, reg2);
+
+        CheckResult(add, HORIZONTAL);
+    }
+    TEST_F(SimdAvxFloatTest, HaddNegative)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::horizontal_add(reg1, reg2);
+
+        CheckResult(add, HORIZONTAL);
+    }
+    TEST_F(SimdAvxFloatTest, HaddZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::horizontal_add(reg1, reg2);
+
+        CheckResult(add, HORIZONTAL);
+    }
+    TEST_F(SimdAvxFloatTest, HaddBigNums)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::horizontal_add(reg1, reg2);
+
+        CheckResult(add, HORIZONTAL);
+    }
+
 }
