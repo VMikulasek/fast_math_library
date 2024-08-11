@@ -47,9 +47,10 @@ namespace simd
         /**
          * @brief Construct a new SIMDVector object from std::vector<float>
          *
-         * @param vec Vector with exactly 8 floats
+         * @param vec Vector with 8 or less floats, if less, zeros
+         * will be appended until the size is 8
          *
-         * @throws {NameOfException} if vector size isnt 8
+         * @throws invalid_argument exception if vector size is greater than 8
          */
         SIMDVector(std::vector<NumType> &vec);
 

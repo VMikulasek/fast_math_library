@@ -14,7 +14,7 @@ namespace tests
         using Vec = simd::SIMDVector<float, simd::AVX>;
         using Ops = simd::SIMDOperations<float, simd::AVX>;
 
-        const unsigned VECTOR_LEN = 8;
+        const unsigned VECTOR_SIZE = simd::SIMDVector<float, simd::AVX>::VECTOR_SIZE;
 
         Ops::AvxReg reg1;
         Ops::AvxReg reg2;
@@ -55,23 +55,23 @@ namespace tests
                 i *= 2;
                 const float *workingVec;
 
-                if (i < VECTOR_LEN / 2)
+                if (i < VECTOR_SIZE / 2)
                 {
                     workingVec = vec1;
                 }
-                else if (i < VECTOR_LEN)
+                else if (i < VECTOR_SIZE)
                 {
-                    i -= VECTOR_LEN / 2;
+                    i -= VECTOR_SIZE / 2;
                     workingVec = vec2;
                 }
-                else if (i < VECTOR_LEN + VECTOR_LEN / 2)
+                else if (i < VECTOR_SIZE + VECTOR_SIZE / 2)
                 {
-                    i -= VECTOR_LEN / 2;
+                    i -= VECTOR_SIZE / 2;
                     workingVec = vec1;
                 }
                 else
                 {
-                    i -= VECTOR_LEN;
+                    i -= VECTOR_SIZE;
                     workingVec = vec2;
                 }
 
@@ -87,7 +87,7 @@ namespace tests
             const float *vec1Content = usedVec1.get_content();
             const float *vec2Content = usedVec2.get_content();
 
-            for (unsigned i = 0; i < VECTOR_LEN; i++)
+            for (unsigned i = 0; i < VECTOR_SIZE; i++)
             {
                 float expected = GetExpected(i, vec1Content, vec2Content, direction, operation);
 
@@ -113,7 +113,7 @@ namespace tests
         vec = simd::SIMDOperations<float, simd::AVX>::materialize_register(reg);
         const float *content = vec.get_content();
 
-        for (unsigned i = 0; i < 8; i++)
+        for (unsigned i = 0; i < VECTOR_SIZE; i++)
         {
             EXPECT_FLOAT_EQ(content[i], 2);
         }

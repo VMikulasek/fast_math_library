@@ -1,5 +1,5 @@
 #ifndef TESTS_COMMON_HPP
-#define TESTS_COMMON_HPP 1
+#define TESTS_COMMON_HPP
 
 namespace tests
 {

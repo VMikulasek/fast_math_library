@@ -22,9 +22,14 @@ namespace simd
     inline SIMDVector<float, InstructionSet::AVX>::SIMDVector(
         std::vector<NumType> &vec)
     {
-        if (vec.size() != VECTOR_SIZE)
+        if (vec.size() > VECTOR_SIZE)
         {
             throw std::invalid_argument(std::string(__func__) + ": invalid vector size");
+        }
+
+        for (unsigned i = 0; i < VECTOR_SIZE - vec.size(); i++)
+        {
+            vec.push_back(0);
         }
 
         std::memcpy(vector, vec.data(), VECTOR_SIZE * sizeof(float));
