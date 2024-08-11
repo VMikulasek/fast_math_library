@@ -1,4 +1,5 @@
 #ifndef SEQ_SUMS_HPP
+#define SEQ_SUMS_HPP
 
 #include <cstddef>
 

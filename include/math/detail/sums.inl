@@ -1,4 +1,5 @@
 #ifndef SUMS_INL
+#define SUMS_INL
 
 #include <math/sums.hpp>
 #include <math/detail/AVX/avx_sums.hpp>
@@ -17,7 +18,7 @@ namespace math
 
     inline float sum(const float *arr, size_t size)
     {
-        SUM(arr, size);
+        return SUM(arr, size);
     }    
 } // namespace math
 

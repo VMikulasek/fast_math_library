@@ -1,4 +1,5 @@
 #ifndef SUMS_HPP
+#define SUMS_HPP
 
 #include <cstddef>
 

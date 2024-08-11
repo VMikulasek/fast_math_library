@@ -1,4 +1,5 @@
 #ifndef AVX_SUMS_HPP
+#define AVX_SUMS_HPP
 
 #include <cstddef>
 
