@@ -15,10 +15,11 @@ namespace simd
     class SIMDVector<float, InstructionSet::AVX>
     {
         friend class SIMDOperations<float, InstructionSet::AVX>;
+    public:
+        static const unsigned VECTOR_SIZE = 8;
 
     private:
         using NumType = float;
-        static const unsigned VECTOR_SIZE = 8;
 
         alignas(32) float vector[VECTOR_SIZE];
     public:

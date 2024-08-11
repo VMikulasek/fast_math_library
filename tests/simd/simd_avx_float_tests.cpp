@@ -5,8 +5,6 @@
 #include <tests_common.hpp>
 #include <functional>
 
-#include <iostream>
-
 namespace tests
 {
     class SimdAvxFloatTest : public testing::Test
@@ -93,7 +91,6 @@ namespace tests
             {
                 float expected = GetExpected(i, vec1Content, vec2Content, direction, operation);
 
-                std::cout << expected << " " << result[i] << std::endl;
                 // cast to int to compare bitwise, to dodge NaN non equality
                 int expectedI = *reinterpret_cast<int *>(&expected);
                 int resultI = *reinterpret_cast<const int *>(&(result[i]));
