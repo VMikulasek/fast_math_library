@@ -4,7 +4,7 @@
 #include <mathops/sums.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
 
-namespace math
+namespace mathops
 {
 #ifdef HAS_AVX
 

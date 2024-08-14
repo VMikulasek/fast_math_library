@@ -5,7 +5,7 @@
 
 #include <cstddef>
 
-namespace math
+namespace mathops
 {
 namespace seq
 {

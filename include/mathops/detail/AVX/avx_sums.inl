@@ -5,7 +5,7 @@
 #include <mathops/detail/SEQ/seq_sums.hpp>
 #include <simd/simd_operations.hpp>
 
-namespace math
+namespace mathops
 {
 namespace avx
 {
