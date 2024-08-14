@@ -3,21 +3,22 @@
 
 #include <simd/simd_common.hpp>
 #include <simd/detail/operations/simd_operations_avx_float.hpp>
-#include <simd/detail/vector/simd_vector_avx_float.hpp>
+
+#include <cstdlib>
 
 namespace simd
 {
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_vector(
-        const SIMDVector<NumType, INS_SET> &vector)
+        const float *arr)
     {
-        return _mm256_load_ps(vector.get_content());
+        return _mm256_load_ps(arr);
     }
 
-    inline SIMDVector<float, InstructionSet::AVX> SIMDOperations<float, InstructionSet::AVX>::materialize_register(
+    inline float *SIMDOperations<float, InstructionSet::AVX>::materialize_register(
         AvxReg &reg)
     {
-        SIMDVector<NumType, INS_SET> result;
-        _mm256_store_ps(result.vector, reg);
+        float *result = static_cast<float *>(std::aligned_alloc(32, AVX_FLOAT_VECTOR_SIZE * sizeof(float)));
+        _mm256_store_ps(result, reg);
         return result;
     }
 

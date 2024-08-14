@@ -11,6 +11,6 @@ namespace avx
 } // namespace avx
 } // namespace math
 
-#include <math/detail/AVX/avx_sums.inl>
+#include <mathops/detail/AVX/avx_sums.inl>
 
 #endif // AVX_SUMS_HPP

@@ -11,6 +11,6 @@ namespace seq
 } // namespace seq
 } // namespace math
 
-#include <math/detail/SEQ/seq_sums.inl>
+#include <mathops/detail/SEQ/seq_sums.inl>
 
 #endif // SEQ_SUMS_HPP

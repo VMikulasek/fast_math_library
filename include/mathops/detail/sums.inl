@@ -1,8 +1,8 @@
 #ifndef SUMS_INL
 #define SUMS_INL
 
-#include <math/sums.hpp>
-#include <math/detail/AVX/avx_sums.hpp>
+#include <mathops/sums.hpp>
+#include <mathops/detail/AVX/avx_sums.hpp>
 
 namespace math
 {

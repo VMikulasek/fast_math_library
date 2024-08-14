@@ -1,7 +1,9 @@
 #ifndef SEQ_SUMS_INL
 #define SEQ_SUMS_INL
 
-#include <math/detail/SEQ/seq_sums.hpp>
+#include <mathops/detail/SEQ/seq_sums.hpp>
+
+#include <cstddef>
 
 namespace math
 {

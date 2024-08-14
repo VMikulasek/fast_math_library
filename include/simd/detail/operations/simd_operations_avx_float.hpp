@@ -3,7 +3,6 @@
 
 #include <simd/simd_common.hpp>
 #include <simd/detail/operations/simd_operations_base.hpp>
-#include <simd/detail/vector/simd_vector_avx_float.hpp>
 
 #include <immintrin.h>
 
@@ -30,6 +29,7 @@ namespace simd
         static const InstructionSet INS_SET = InstructionSet::AVX;
 
     public:
+
         /**
          * @brief 256 b vector register, works as intermediate result,
          * has to be materialized for the value
@@ -37,21 +37,25 @@ namespace simd
         using AvxReg = __m256;
 
         /**
-         * @brief Loads vector of floats to register which is returned
+         * @brief Loads array of floats to register which is returned
          * 
-         * @param vector Vector of floats to load to register
+         * @param arr Float array to load to register,
+         * 8 floats will be loaded to register, so has to be
+         * at least 8 floats long, also has to be aligned to 32 bytes
+         * otherwise segmentation fault will be generated
+         * 
          * @return Register with loaded vector
          */
-        static AvxReg load_vector(const SIMDVector<NumType, INS_SET> &vector);
+        static AvxReg load_vector(const float *arr);
 
         /**
          * @brief Stores vector from register to memory and returns
-         * wrapped in SIMDVector
          * 
          * @param register 
-         * @return SIMDVector<float, InstructionSet::AVX> Content of register
+         * @return float * Content of register, that has to be freed
+         * after use
          */
-        static SIMDVector<NumType, INS_SET> materialize_register(AvxReg &reg);
+        static float *materialize_register(AvxReg &reg);
 
         /**
          * @brief Adds vec1 and vec2 and returns result
