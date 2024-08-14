@@ -14,7 +14,8 @@ enable_testing()
 set(TESTS_NAME math_lib_tests)
 set(TESTS_SOURCES
 tests_common.cpp
-simd/simd_avx_float_tests.cpp)
+simd/simd_avx_float_tests.cpp
+mathops/sums/sums_avx_tests.cpp)
 
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 

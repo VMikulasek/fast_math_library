@@ -612,4 +612,4 @@ namespace tests
         CheckResult(add, HORIZONTAL);
     }
 
-}
+} // namespace tests
