@@ -15,7 +15,8 @@ set(TESTS_NAME math_lib_tests)
 set(TESTS_SOURCES
 tests_common.cpp
 simd/simd_avx_float_tests.cpp
-mathops/sums/sums_avx_tests.cpp)
+mathops/AVX/avx_sums_tests.cpp
+mathops/SEQ/seq_sums_tests.cpp)
 
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 
