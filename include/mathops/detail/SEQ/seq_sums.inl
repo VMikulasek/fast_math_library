@@ -4,6 +4,7 @@
 #include <mathops/detail/SEQ/seq_sums.hpp>
 
 #include <cstddef>
+#include <numeric>
 
 namespace mathops
 {
@@ -11,14 +12,7 @@ namespace seq
 {
     inline float sum(const float *arr, size_t size)
     {
-        float sum = 0;
-
-        for (size_t i = 0; i < size; i++)
-        {
-            sum += arr[i];
-        }
-
-        return sum;
+        return std::accumulate(arr, arr + size, 0.0f);
     }
 } // namespace seq
 } // namespace math
