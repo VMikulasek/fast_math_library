@@ -14,6 +14,11 @@ namespace seq
     {
         return std::accumulate(arr, arr + size, 0.0f);
     }
+
+    inline void prefix_sum(const float *arr, size_t size, float *dstArr)
+    {
+        std::inclusive_scan(arr, arr + size, dstArr);
+    }
 } // namespace seq
 } // namespace math
 

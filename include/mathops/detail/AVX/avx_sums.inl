@@ -56,6 +56,11 @@ namespace avx
         return resultArr[0] + resultArr[4] + tailSum;
     }
 
+    inline void prefix_sum(const float *arr, size_t size, float *dstArr)
+    {
+        //TODO
+    }
+
 #endif
 
 } // namespace avx

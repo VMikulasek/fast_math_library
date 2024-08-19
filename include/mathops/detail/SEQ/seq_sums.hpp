@@ -8,6 +8,8 @@ namespace mathops
 namespace seq
 {
     float sum(const float *arr, size_t size);
+
+    void prefix_sum(const float *arr, size_t size, float *dstArr);
 } // namespace seq
 } // namespace math
 

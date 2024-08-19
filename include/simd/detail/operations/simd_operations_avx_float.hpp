@@ -29,7 +29,6 @@ namespace simd
         static const InstructionSet INS_SET = InstructionSet::AVX;
 
     public:
-
         /**
          * @brief 256 b vector register, works as intermediate result,
          * has to be materialized for the value
