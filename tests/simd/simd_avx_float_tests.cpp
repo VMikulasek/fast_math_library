@@ -1,3 +1,5 @@
+#if HAS_AVX
+
 #include <gtest/gtest.h>
 #include <simd/simd_operations.hpp>
 #include <simd/simd_common.hpp>
@@ -613,3 +615,5 @@ namespace tests
     }
 
 } // namespace tests
+
+#endif // HAS_AVX

@@ -1,3 +1,5 @@
+#if HAS_AVX
+
 #include <mathops/sums_fixture.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
 
@@ -50,3 +52,5 @@ namespace tests
                   std::reduce(bigArr, bigArr + BIG_ARR_SIZE, 0.0f));
     }
 } // namespace testing
+
+#endif // HAS_AVX
