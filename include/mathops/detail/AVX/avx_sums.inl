@@ -37,7 +37,7 @@ namespace avx
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
             secondOpReg = load_reg(arr, size);
-            tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
+            tmpResultReg = FloatOps::add(tmpResultReg, secondOpReg);
         }
 
         auto resultArr1 = FloatOps::materialize_register(tmpResultReg);
