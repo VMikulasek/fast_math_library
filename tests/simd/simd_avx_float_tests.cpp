@@ -77,7 +77,8 @@ namespace tests
 
         void CheckResult(std::function<float(float, float)> operation, OperationDirection direction = VERTICAL)
         {
-            const float *result = Ops::materialize_register(resultReg);
+            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            Ops::materialize_register(resultReg, result);
 
             for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
             {
@@ -94,10 +95,11 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, LoadStore)
     {
-        alignas(32) const float vec[8]{ 2, 2, 2, 2, 2, 2, 2, 2 };
+        alignas(AVX_ALIGNMENT) const float vec[AVX_FLOAT_VECTOR_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 2 };
         
         Ops::AvxReg reg = simd::SIMDOperations<float, simd::AVX>::load_vector(vec);
-        const float *result = simd::SIMDOperations<float, simd::AVX>::materialize_register(reg);
+        alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+        simd::SIMDOperations<float, simd::AVX>::materialize_register(reg, result);
 
         for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
         {

@@ -14,12 +14,10 @@ namespace simd
         return _mm256_load_ps(arr);
     }
 
-    inline float *SIMDOperations<float, InstructionSet::AVX>::materialize_register(
-        AvxReg &reg)
+    inline void SIMDOperations<float, InstructionSet::AVX>::materialize_register(
+        AvxReg &reg, float *dst)
     {
-        float *result = static_cast<float *>(std::aligned_alloc(32, AVX_FLOAT_VECTOR_SIZE * sizeof(float)));
-        _mm256_store_ps(result, reg);
-        return result;
+        _mm256_store_ps(dst, reg);
     }
 
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::add(

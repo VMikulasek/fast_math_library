@@ -48,13 +48,13 @@ namespace simd
         static AvxReg load_vector(const float *arr);
 
         /**
-         * @brief Stores vector from register to memory and returns
+         * @brief Stores vector from register to float *dst
          * 
-         * @param register 
-         * @return float * Content of register, that has to be freed
-         * after use
+         * @param reg register to materialize
+         * @param dst float * aligned to 32 bits with at least 8 floats
+         * of size
          */
-        static float *materialize_register(AvxReg &reg);
+        static void materialize_register(AvxReg &reg, float *dst);
 
         /**
          * @brief Adds vec1 and vec2 and returns result

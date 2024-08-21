@@ -40,18 +40,17 @@ namespace avx
             tmpResultReg = FloatOps::add(tmpResultReg, secondOpReg);
         }
 
-        auto resultArr1 = FloatOps::materialize_register(tmpResultReg);
-
         float tailSum = seq::sum(arr, size);
 
         // merge all sums to the 0th and 4th indexes
-        alignas(32) const float zeroVec[8]{ 0, 0, 0, 0, 0, 0, 0, 0 };
+        alignas(AVX_ALIGNMENT) const float zeroVec[AVX_FLOAT_VECTOR_SIZE]{ 0, 0, 0, 0, 0, 0, 0, 0 };
         secondOpReg = FloatOps::load_vector(zeroVec);
         tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
         tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
 
         // materialize and return final sum
-        auto resultArr = FloatOps::materialize_register(tmpResultReg);
+        alignas(AVX_ALIGNMENT) float resultArr[AVX_FLOAT_VECTOR_SIZE];
+        FloatOps::materialize_register(tmpResultReg, resultArr);
 
         return resultArr[0] + resultArr[4] + tailSum;
     }
