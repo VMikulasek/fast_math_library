@@ -43,8 +43,7 @@ namespace avx
         float tailSum = seq::sum(arr, size);
 
         // merge all sums to the 0th and 4th indexes
-        alignas(AVX_ALIGNMENT) const float zeroVec[AVX_FLOAT_VECTOR_SIZE]{ 0, 0, 0, 0, 0, 0, 0, 0 };
-        secondOpReg = FloatOps::load_vector(zeroVec);
+        secondOpReg = FloatOps::load_zero_vector();
         tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
         tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
 

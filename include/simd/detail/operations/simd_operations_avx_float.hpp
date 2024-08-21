@@ -48,6 +48,13 @@ namespace simd
         static AvxReg load_vector(const float *arr);
 
         /**
+         * @brief Loads zeros to register which is returned
+         * 
+         * @return Register with zeros
+         */
+        static AvxReg load_zero_vector();
+
+        /**
          * @brief Stores vector from register to float *dst
          * 
          * @param reg register to materialize

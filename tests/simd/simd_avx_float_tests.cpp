@@ -97,13 +97,26 @@ namespace tests
     {
         alignas(AVX_ALIGNMENT) const float vec[AVX_FLOAT_VECTOR_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 2 };
         
-        Ops::AvxReg reg = simd::SIMDOperations<float, simd::AVX>::load_vector(vec);
+        Ops::AvxReg reg = Ops::load_vector(vec);
         alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
-        simd::SIMDOperations<float, simd::AVX>::materialize_register(reg, result);
+        Ops::materialize_register(reg, result);
 
         for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
         {
             EXPECT_FLOAT_EQ(result[i], 2);
+        }
+    }
+
+    TEST_F(SimdAvxFloatTest, LoadZeros)
+    {
+        Ops::AvxReg reg = Ops::load_zero_vector();
+
+        alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+        Ops::materialize_register(reg, result);
+
+        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        {
+            EXPECT_FLOAT_EQ(result[i], 0);
         }
     }
 
