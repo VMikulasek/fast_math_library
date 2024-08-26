@@ -23,6 +23,24 @@ namespace tests
     float cmp_eq(float op1, float op2);
     float cmp_le(float op1, float op2);
     float cmp_ge(float op1, float op2);
+    
+    template<int mask>
+    float blend(float op1, float op2)
+    {
+        static unsigned index = 0;
+
+        int decisionFlag = (1 << index) & mask;
+        index++;
+
+        if (decisionFlag == 0)
+        {
+            return op1;
+        }
+        else
+        {
+            return op2;
+        }
+    }
 }
 
 #endif // TESTS_COMMON_HPP

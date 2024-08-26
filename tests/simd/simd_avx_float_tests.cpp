@@ -629,6 +629,61 @@ namespace tests
         CheckResult(add, HORIZONTAL);
     }
 
+    TEST_F(SimdAvxFloatTest, BlendZigZag)
+    {
+        SetRegisters(basicVec1, basicVec2);
+        const int mask = 0b01010101;
+
+        resultReg = Ops::blend<mask>(reg1, reg2);
+
+        CheckResult(blend<mask>);
+    }
+    TEST_F(SimdAvxFloatTest, BlendAllZero)
+    {
+        SetRegisters(basicVec1, basicVec2);
+        const int mask = 0b00000000;
+
+        resultReg = Ops::blend<mask>(reg1, reg2);
+
+        CheckResult(blend<mask>);
+    }
+    TEST_F(SimdAvxFloatTest, BlendAllOne)
+    {
+        SetRegisters(basicVec1, basicVec2);
+        const int mask = 0b11111111;
+
+        resultReg = Ops::blend<mask>(reg1, reg2);
+
+        CheckResult(blend<mask>);
+    }
+    TEST_F(SimdAvxFloatTest, BlendHalved1)
+    {
+        SetRegisters(basicVec1, basicVec2);
+        const int mask = 0b00001111;
+
+        resultReg = Ops::blend<mask>(reg1, reg2);
+
+        CheckResult(blend<mask>);
+    }
+    TEST_F(SimdAvxFloatTest, BlendHalved2)
+    {
+        SetRegisters(basicVec1, basicVec2);
+        const int mask = 0b11110000;
+
+        resultReg = Ops::blend<mask>(reg1, reg2);
+
+        CheckResult(blend<mask>);
+    }
+    TEST_F(SimdAvxFloatTest, BlendNonSpecific)
+    {
+        SetRegisters(basicVec1, basicVec2);
+        const int mask = 0b00101011;
+
+        resultReg = Ops::blend<mask>(reg1, reg2);
+
+        CheckResult(blend<mask>);
+    }
+
 } // namespace tests
 
 #endif // HAS_AVX

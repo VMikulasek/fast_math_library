@@ -4,8 +4,6 @@
 #include <simd/simd_common.hpp>
 #include <simd/detail/operations/simd_operations_avx_float.hpp>
 
-#include <cstdlib>
-
 namespace simd
 {
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_vector(
@@ -78,6 +76,13 @@ namespace simd
         AvxReg &vec1, AvxReg &vec2)
     {
         return _mm256_hadd_ps(vec1, vec2);
+    }
+
+    template<int mask>
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::blend(
+        AvxReg &vec1, AvxReg &vec2)
+    {
+        return _mm256_blend_ps(vec1, vec2, mask);
     }
 }
 

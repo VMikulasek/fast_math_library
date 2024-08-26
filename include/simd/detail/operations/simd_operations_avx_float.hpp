@@ -117,6 +117,15 @@ namespace simd
          * @return AvxReg register with 8 result floats
          */
         static AvxReg horizontal_add(AvxReg &vec1, AvxReg &vec2);
+
+        /**
+         * @brief Blends two vector registers based on low 8 bits of mask
+         * - 0 bit = vec1 element, 1 bit = vec2 element
+         * 
+         * @return AvxReg blended vector 
+         */
+        template<int mask>
+        static AvxReg blend(AvxReg &vec1, AvxReg &vec2);
     };
 }
 
