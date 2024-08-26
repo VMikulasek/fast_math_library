@@ -84,6 +84,24 @@ namespace simd
     {
         return _mm256_blend_ps(vec1, vec2, mask);
     }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::rotate_halves_right_32bits(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, _MM_SHUFFLE(2, 1, 0, 3));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::rotate_halves_left_32bits(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, _MM_SHUFFLE(0, 3, 2, 1));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::rotate_halves_64bits(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, _MM_SHUFFLE(1, 0, 3, 2));
+    }
 }
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

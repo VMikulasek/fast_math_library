@@ -30,6 +30,10 @@ namespace tests
         const float *usedVec1;
         const float *usedVec2;
 
+        const int indexHalvesRotatedRight32[8] = { 3, 0, 1, 2, 7, 4, 5, 6 };
+        const int indexHalvesRotatedLeft32[8] = { 1, 2, 3, 0, 5, 6, 7, 4 };
+        const int indexHalvesRotated64[8] = { 2, 3, 0, 1, 6, 7, 4, 5 };
+
         void SetRegisters(const float *vec1, const float *vec2)
         {
             reg1 = Ops::load_vector(vec1);
@@ -86,7 +90,23 @@ namespace tests
 
                 // cast to int to compare bitwise, to dodge NaN non equality
                 int expectedI = *reinterpret_cast<int *>(&expected);
-                int resultI = *reinterpret_cast<const int *>(&(result[i]));
+                int resultI = *reinterpret_cast<int *>(&(result[i]));
+
+                EXPECT_EQ(resultI, expectedI);
+            }
+        }
+
+        void CheckOneOperandOperationResult(const int *indexes)
+        {
+            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            Ops::materialize_register(resultReg, result);
+
+            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            {
+                float expected = usedVec1[indexes[i]];
+
+                int expectedI = *reinterpret_cast<int *>(&expected);
+                int resultI = *reinterpret_cast<int *>(&(result[i]));
 
                 EXPECT_EQ(resultI, expectedI);
             }
@@ -684,6 +704,128 @@ namespace tests
         CheckResult(blend<mask>);
     }
 
+    TEST_F(SimdAvxFloatTest, RotateRight32Homogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::rotate_halves_right_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedRight32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateRight32HomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::rotate_halves_right_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedRight32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateRight32Heterogeneous1)
+    {
+        SetRegisters(decimalVec1, decimalVec1);
+
+        resultReg = Ops::rotate_halves_right_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedRight32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateRight32Heterogeneous2)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::rotate_halves_right_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedRight32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateRight32Heterogeneous3)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::rotate_halves_right_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedRight32);
+    }
+
+    TEST_F(SimdAvxFloatTest, RotateLeft32Homogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::rotate_halves_left_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedLeft32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateLeft32HomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::rotate_halves_left_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedLeft32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateLeft32Heterogeneous1)
+    {
+        SetRegisters(decimalVec1, decimalVec1);
+
+        resultReg = Ops::rotate_halves_left_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedLeft32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateLeft32Heterogeneous2)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::rotate_halves_left_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedLeft32);
+    }
+    TEST_F(SimdAvxFloatTest, RotateLeft32Heterogeneous3)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::rotate_halves_left_32bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotatedLeft32);
+    }
+
+    TEST_F(SimdAvxFloatTest, Rotate64Homogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::rotate_halves_64bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotated64);
+    }
+    TEST_F(SimdAvxFloatTest, Rotate64HomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::rotate_halves_64bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotated64);
+    }
+    TEST_F(SimdAvxFloatTest, Rotate64Heterogeneous1)
+    {
+        SetRegisters(decimalVec1, decimalVec1);
+
+        resultReg = Ops::rotate_halves_64bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotated64);
+    }
+    TEST_F(SimdAvxFloatTest, Rotate64Heterogeneous2)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::rotate_halves_64bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotated64);
+    }
+    TEST_F(SimdAvxFloatTest, Rotate64Heterogeneous3)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::rotate_halves_64bits(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesRotated64);
+    }
 } // namespace tests
 
 #endif // HAS_AVX
