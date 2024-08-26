@@ -146,7 +146,14 @@ namespace simd
          * 
          * @return AvxReg shifted register
          */
-        static AvxReg rotate_halves_64bits(AvxReg &vec);     
+        static AvxReg rotate_halves_64bits(AvxReg &vec);
+
+        /**
+         * @brief Swaps 128 bit lines of register
+         *
+         * @return AvxReg register with swapped halves 
+         */
+        static AvxReg swap_halves(AvxReg &vec);
     };
 }
 
