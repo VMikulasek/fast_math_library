@@ -56,7 +56,40 @@ namespace avx
 
     inline void prefix_sum(const float *arr, size_t size, float *dstArr)
     {
-        //TODO
+        FloatOps::AvxReg zeroVec = FloatOps::load_zero_vector();
+
+        FloatOps::AvxReg lastElemOfCalculatedSequenceDistributed = FloatOps::load_zero_vector();
+
+        while (size >= AVX_FLOAT_VECTOR_SIZE)
+        {
+            FloatOps::AvxReg res = load_reg(arr, size);
+
+            // calculate prefix sum for halves isolated
+            FloatOps::AvxReg shifted = FloatOps::rotate_halves_right_32bits(res);
+            shifted = FloatOps::blend<0b11101110>(zeroVec, shifted);
+            res = FloatOps::add(res, shifted);
+            shifted = FloatOps::rotate_halves_64bits(res);
+            shifted = FloatOps::blend<0b11001100>(zeroVec, shifted);
+            res = FloatOps::add(res, shifted);
+
+            // calculate prefix sum for whole register isolated
+            FloatOps::AvxReg lastElemOfFirstHalf = FloatOps::permute_reg_inside_halves<0b11111111>(res);
+            lastElemOfFirstHalf = FloatOps::blend<0b00001111>(zeroVec, lastElemOfFirstHalf);
+            lastElemOfFirstHalf = FloatOps::swap_halves(lastElemOfFirstHalf);
+            res = FloatOps::add(res, lastElemOfFirstHalf);
+
+            // calculate prefix sum for whole register
+            res = FloatOps::add(res, lastElemOfCalculatedSequenceDistributed);
+
+            // update last elem distribution register
+            lastElemOfCalculatedSequenceDistributed = FloatOps::permute_reg_inside_halves<0b11111111>(res);
+            lastElemOfCalculatedSequenceDistributed = FloatOps::distribute_high_half(lastElemOfCalculatedSequenceDistributed);
+
+            FloatOps::materialize_register(res, dstArr);
+            dstArr += AVX_FLOAT_VECTOR_SIZE;
+        }
+
+        seq::prefix_sum(arr, size, dstArr);
     }
 
 #endif
