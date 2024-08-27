@@ -108,6 +108,13 @@ namespace simd
     {
         return _mm256_permute2f128_ps(vec, vec, 0b00000001);
     }
+
+    template<int pattern>
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::permute_reg_inside_halves(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, pattern);
+    }
 }
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

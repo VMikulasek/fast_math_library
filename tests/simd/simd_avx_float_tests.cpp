@@ -35,6 +35,10 @@ namespace tests
         const int indexHalvesRotated64[8] = { 2, 3, 0, 1, 6, 7, 4, 5 };
         const int indexHalvesSwapped[8] = { 4, 5, 6, 7, 0, 1, 2, 3 };
 
+        const int indexPermuteHalvesBasic[8] = { 3, 2, 1, 0, 7, 6, 5, 4 };
+
+        static const int permuteBasicPattern = 0b00011011;
+
         void SetRegisters(const float *vec1, const float *vec2)
         {
             reg1 = Ops::load_vector(vec1);
@@ -867,6 +871,66 @@ namespace tests
         resultReg = Ops::swap_halves(reg1);
 
         CheckOneOperandOperationResult(indexHalvesSwapped);
+    }
+
+    TEST_F(SimdAvxFloatTest, PermuteBasicHomogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+
+        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+    }
+    TEST_F(SimdAvxFloatTest, PermuteBasicHomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+
+        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+    }
+    TEST_F(SimdAvxFloatTest, PermuteBasicHeterogeneous1)
+    {
+        SetRegisters(decimalVec1, decimalVec1);
+
+        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+
+        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+    }
+    TEST_F(SimdAvxFloatTest, PermuteBasicHeterogeneous2)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+
+        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+    }
+    TEST_F(SimdAvxFloatTest, PermuteBasicHeterogeneous3)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+
+        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+    }
+
+    TEST_F(SimdAvxFloatTest, PermuteSameIndex)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::permute_reg_inside_halves<0b10101010>(reg1);
+
+        const int indexHalves[8] = { 2, 2, 2, 2, 6, 6, 6, 6 };
+        CheckOneOperandOperationResult(indexHalves);
+    }
+    TEST_F(SimdAvxFloatTest, PermuteZigZag)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::permute_reg_inside_halves<0b00110011>(reg1);
+
+        const int indexHalves[8] = { 3, 0, 3, 0, 7, 4, 7, 4 };
+        CheckOneOperandOperationResult(indexHalves);
     }
 } // namespace tests
 

@@ -103,7 +103,7 @@ namespace simd
          * parameter variant and stores into result on each index either all
          * 0 or all 1
          * 
-         * @param variant Variant of comparison {EQ, NEQ, LT, LE, GT, GE}
+         * @tparam variant Variant of comparison {EQ, NEQ, LT, LE, GT, GE}
          */
         template<AvxCmpVariant variant>
         static AvxReg cmp(AvxReg &vec1, AvxReg &vec2);
@@ -154,6 +154,32 @@ namespace simd
          * @return AvxReg register with swapped halves 
          */
         static AvxReg swap_halves(AvxReg &vec);
+
+        /**
+         * @brief Permutes numbers in registers via pseudocode:
+         * DEFINE SELECT4(src, control) {
+	     *      CASE(control[1:0]) OF
+	     *      0:	tmp[31:0] := src[31:0]
+	     *      1:	tmp[31:0] := src[63:32]
+	     *      2:	tmp[31:0] := src[95:64]
+	     *      3:	tmp[31:0] := src[127:96]
+	     *      ESAC
+	     *      RETURN tmp[31:0]
+         * }
+         * dst[31:0] := SELECT4(vec[127:0], pattern[1:0])
+         * dst[63:32] := SELECT4(vec[127:0], pattern[3:2])
+         * dst[95:64] := SELECT4(vec[127:0], pattern[5:4])
+         * dst[127:96] := SELECT4(vec[127:0], pattern[7:6])
+         * dst[159:128] := SELECT4(a[255:128], pattern[1:0])
+         * dst[191:160] := SELECT4(a[255:128], pattern[3:2])
+         * dst[223:192] := SELECT4(a[255:128], pattern[5:4])
+         * dst[255:224] := SELECT4(a[255:128], pattern[7:6])
+         * dst[MAX:256] := 0
+         * 
+         * @return AvxReg permuted register
+         */
+        template<int pattern>
+        static AvxReg permute_reg_inside_halves(AvxReg &vec);
     };
 }
 
