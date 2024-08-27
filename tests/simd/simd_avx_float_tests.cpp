@@ -33,6 +33,7 @@ namespace tests
         const int indexHalvesRotatedRight32[8] = { 3, 0, 1, 2, 7, 4, 5, 6 };
         const int indexHalvesRotatedLeft32[8] = { 1, 2, 3, 0, 5, 6, 7, 4 };
         const int indexHalvesRotated64[8] = { 2, 3, 0, 1, 6, 7, 4, 5 };
+        const int indexHalvesSwapped[8] = { 4, 5, 6, 7, 0, 1, 2, 3 };
 
         void SetRegisters(const float *vec1, const float *vec2)
         {
@@ -825,6 +826,47 @@ namespace tests
         resultReg = Ops::rotate_halves_64bits(reg1);
 
         CheckOneOperandOperationResult(indexHalvesRotated64);
+    }
+
+    TEST_F(SimdAvxFloatTest, SwapHalvesHomogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::swap_halves(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesSwapped);
+    }
+    TEST_F(SimdAvxFloatTest, SwapHalvesHomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::swap_halves(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesSwapped);
+    }
+    TEST_F(SimdAvxFloatTest, SwapHalvesHeterogeneous1)
+    {
+        SetRegisters(decimalVec1, decimalVec1);
+
+        resultReg = Ops::swap_halves(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesSwapped);
+    }
+    TEST_F(SimdAvxFloatTest, SwapHalvesHeterogeneous2)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::swap_halves(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesSwapped);
+    }
+    TEST_F(SimdAvxFloatTest, SwapHalvesHeterogeneous3)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::swap_halves(reg1);
+
+        CheckOneOperandOperationResult(indexHalvesSwapped);
     }
 } // namespace tests
 
