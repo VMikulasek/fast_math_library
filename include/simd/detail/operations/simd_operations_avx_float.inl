@@ -115,6 +115,18 @@ namespace simd
     {
         return _mm256_permute_ps(vec, pattern);
     }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::distribute_low_half(
+        AvxReg &vec)
+    {
+        return _mm256_permute2f128_ps(vec, vec, 0b00000000);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::distribute_high_half(
+        AvxReg &vec)
+    {
+        return _mm256_permute2f128_ps(vec, vec, 0b00010001);
+    }
 }
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

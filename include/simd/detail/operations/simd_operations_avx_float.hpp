@@ -156,7 +156,7 @@ namespace simd
         static AvxReg swap_halves(AvxReg &vec);
 
         /**
-         * @brief Permutes numbers in registers via pseudocode:
+         * @brief Permutes numbers in register via pseudocode:
          * DEFINE SELECT4(src, control) {
 	     *      CASE(control[1:0]) OF
 	     *      0:	tmp[31:0] := src[31:0]
@@ -180,6 +180,18 @@ namespace simd
          */
         template<int pattern>
         static AvxReg permute_reg_inside_halves(AvxReg &vec);
+
+        /**
+         * @brief Copies low half of register
+         * and pastes to the high half
+         */
+        static AvxReg distribute_low_half(AvxReg &vec);
+
+        /**
+         * @brief Copies high half of register
+         * and pastes to the low half
+         */
+        static AvxReg distribute_high_half(AvxReg &vec);
     };
 }
 

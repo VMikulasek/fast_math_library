@@ -34,10 +34,12 @@ namespace tests
         const int indexHalvesRotatedLeft32[8] = { 1, 2, 3, 0, 5, 6, 7, 4 };
         const int indexHalvesRotated64[8] = { 2, 3, 0, 1, 6, 7, 4, 5 };
         const int indexHalvesSwapped[8] = { 4, 5, 6, 7, 0, 1, 2, 3 };
+        const int indexLowHalfDistributed[8] = { 0, 1, 2, 3, 0, 1, 2, 3 };
+        const int indexHighHalfDistributed[8] = { 4, 5, 6, 7, 4, 5, 6, 7 };
 
-        const int indexPermuteHalvesBasic[8] = { 3, 2, 1, 0, 7, 6, 5, 4 };
+        const int indexPermuteInsideHalvesBasic[8] = { 3, 2, 1, 0, 7, 6, 5, 4 };
 
-        static const int permuteBasicPattern = 0b00011011;
+        static const int permuteInsideHalvesBasicPattern = 0b00011011;
 
         void SetRegisters(const float *vec1, const float *vec2)
         {
@@ -873,48 +875,47 @@ namespace tests
         CheckOneOperandOperationResult(indexHalvesSwapped);
     }
 
-    TEST_F(SimdAvxFloatTest, PermuteBasicHomogeneous)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesBasicHomogeneous)
     {
-        SetRegisters(basicVec1, basicVec1);
+        SetRegisters(basicVec1, basicVec2);
 
-        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+        resultReg = Ops::permute_reg_inside_halves<permuteInsideHalvesBasicPattern>(reg1);
 
-        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+        CheckOneOperandOperationResult(indexPermuteInsideHalvesBasic);
     }
-    TEST_F(SimdAvxFloatTest, PermuteBasicHomogeneousZeros)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesBasicHomogeneousZeros)
     {
         SetRegisters(zerosVec, zerosVec);
 
-        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+        resultReg = Ops::permute_reg_inside_halves<permuteInsideHalvesBasicPattern>(reg1);
 
-        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+        CheckOneOperandOperationResult(indexPermuteInsideHalvesBasic);
     }
-    TEST_F(SimdAvxFloatTest, PermuteBasicHeterogeneous1)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesBasicHeterogeneous1)
     {
         SetRegisters(decimalVec1, decimalVec1);
 
-        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+        resultReg = Ops::permute_reg_inside_halves<permuteInsideHalvesBasicPattern>(reg1);
 
-        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+        CheckOneOperandOperationResult(indexPermuteInsideHalvesBasic);
     }
-    TEST_F(SimdAvxFloatTest, PermuteBasicHeterogeneous2)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesBasicHeterogeneous2)
     {
         SetRegisters(negativeVec1, negativeVec1);
 
-        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+        resultReg = Ops::permute_reg_inside_halves<permuteInsideHalvesBasicPattern>(reg1);
 
-        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+        CheckOneOperandOperationResult(indexPermuteInsideHalvesBasic);
     }
-    TEST_F(SimdAvxFloatTest, PermuteBasicHeterogeneous3)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesBasicHeterogeneous3)
     {
         SetRegisters(bigNumsVec1, bigNumsVec1);
 
-        resultReg = Ops::permute_reg_inside_halves<permuteBasicPattern>(reg1);
+        resultReg = Ops::permute_reg_inside_halves<permuteInsideHalvesBasicPattern>(reg1);
 
-        CheckOneOperandOperationResult(indexPermuteHalvesBasic);
+        CheckOneOperandOperationResult(indexPermuteInsideHalvesBasic);
     }
-
-    TEST_F(SimdAvxFloatTest, PermuteSameIndex)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesSameIndex)
     {
         SetRegisters(bigNumsVec1, bigNumsVec1);
 
@@ -923,7 +924,7 @@ namespace tests
         const int indexHalves[8] = { 2, 2, 2, 2, 6, 6, 6, 6 };
         CheckOneOperandOperationResult(indexHalves);
     }
-    TEST_F(SimdAvxFloatTest, PermuteZigZag)
+    TEST_F(SimdAvxFloatTest, PermuteInsideHalvesZigZag)
     {
         SetRegisters(bigNumsVec1, bigNumsVec1);
 
@@ -931,6 +932,72 @@ namespace tests
 
         const int indexHalves[8] = { 3, 0, 3, 0, 7, 4, 7, 4 };
         CheckOneOperandOperationResult(indexHalves);
+    }
+
+    TEST_F(SimdAvxFloatTest, DistributeLowHalfHomogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::distribute_low_half(reg1);
+
+        CheckOneOperandOperationResult(indexLowHalfDistributed);
+    }
+    TEST_F(SimdAvxFloatTest, DistributeLowHalfHomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::distribute_low_half(reg1);
+
+        CheckOneOperandOperationResult(indexLowHalfDistributed);
+    }
+    TEST_F(SimdAvxFloatTest, DistributeLowHalfHeterogeneous1)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::distribute_low_half(reg1);
+
+        CheckOneOperandOperationResult(indexLowHalfDistributed);
+    }
+    TEST_F(SimdAvxFloatTest, DistributeLowHalfHeterogeneous2)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::distribute_low_half(reg1);
+
+        CheckOneOperandOperationResult(indexLowHalfDistributed);
+    }
+
+    TEST_F(SimdAvxFloatTest, DistributeHighHalfHomogeneous)
+    {
+        SetRegisters(basicVec1, basicVec1);
+
+        resultReg = Ops::distribute_high_half(reg1);
+
+        CheckOneOperandOperationResult(indexHighHalfDistributed);
+    }
+    TEST_F(SimdAvxFloatTest, DistributeHighHalfHomogeneousZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::distribute_high_half(reg1);
+
+        CheckOneOperandOperationResult(indexHighHalfDistributed);
+    }
+    TEST_F(SimdAvxFloatTest, DistributeHighHalfHeterogeneous1)
+    {
+        SetRegisters(negativeVec1, negativeVec1);
+
+        resultReg = Ops::distribute_high_half(reg1);
+
+        CheckOneOperandOperationResult(indexHighHalfDistributed);
+    }
+    TEST_F(SimdAvxFloatTest, DistributeHighHalfHeterogeneous2)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec1);
+
+        resultReg = Ops::distribute_high_half(reg1);
+
+        CheckOneOperandOperationResult(indexHighHalfDistributed);
     }
 } // namespace tests
 
