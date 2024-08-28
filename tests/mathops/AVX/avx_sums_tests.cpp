@@ -5,6 +5,11 @@
 
 #include <gtest/gtest.h>
 #include <numeric> // std::reduce
+#include <cstdlib>
+
+#if defined(_MSC_VER)
+#include <malloc.h> // _aligned_malloc
+#endif // _MSC_VER
 
 namespace tests
 {
@@ -88,19 +93,7 @@ namespace tests
     }
     TEST_F(AvxSumsTests, PrefixSumBigArr)
     {
-        float *resultArr = static_cast<float *>(std::aligned_alloc(AVX_ALIGNMENT, BIG_ARR_SIZE * sizeof(float)));
-        float *expectedArr = static_cast<float *>(std::aligned_alloc(AVX_ALIGNMENT, BIG_ARR_SIZE * sizeof(float)));
-
-        mathops::avx::prefix_sum(bigArr, BIG_ARR_SIZE, resultArr);
-        std::inclusive_scan(bigArr, bigArr + BIG_ARR_SIZE, expectedArr);
-
-        for (size_t i = 0; i < BIG_ARR_SIZE; i++)
-        {
-            EXPECT_EQ(resultArr[i], expectedArr[i]);
-        }
-
-        free(resultArr);
-        free(expectedArr);
+        test_prefix_sum_stack(bigArr, BIG_ARR_SIZE);
     }
 } // namespace testing
 

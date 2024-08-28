@@ -11,6 +11,10 @@
 #include <cstddef>
 #include <numeric> // std::inclusive_scan
 
+#if defined(_MSC_VER)
+#include <malloc.h> // _aligned_malloc
+#endif // _MSC_VER
+
 namespace tests
 {
     class SumsTests : public testing::Test
@@ -45,7 +49,11 @@ namespace tests
 
             if (_bigArrTest)
             {
+#if defined(_MSC_VER)
+                bigArr = static_cast<float *>(_aligned_malloc(BIG_ARR_SIZE * sizeof(float), AVX_ALIGNMENT));
+#else // _MSC_VER
                 bigArr = static_cast<float *>(std::aligned_alloc(AVX_ALIGNMENT, BIG_ARR_SIZE * sizeof(float)));
+#endif // _MSC_VER
                 std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1);
             }
         }
@@ -54,15 +62,25 @@ namespace tests
         {
             if (_bigArrTest)
             {
+#if defined(_MSC_VER)
+                _aligned_free(bigArr);
+#else // _MSC_VER
                 std::free(bigArr);
+#endif // _MSC_VER
             }
         }
 
         void test_prefix_sum_stack(std::function<void(const float *, size_t, float *)> testedPrefixSum,
             const float *arr, size_t size)
         {
-            alignas(32) float result[size];
-            alignas(32) float expected[size];
+#if defined(_MSC_VER)
+            float* result = static_cast<float*>(_aligned_malloc(size * sizeof(float), AVX_ALIGNMENT));
+            float* expected = static_cast<float*>(_aligned_malloc(size * sizeof(float), AVX_ALIGNMENT));
+#else // _MSC_VER
+            float* result = static_cast<float*>(std::aligned_alloc(AVX_ALIGNMENT, size * sizeof(float)));
+            float* expected = static_cast<float*>(std::aligned_alloc(AVX_ALIGNMENT, size * sizeof(float)));
+#endif // _MSC_VER
+
             testedPrefixSum(arr, size, result);
             std::inclusive_scan(arr, arr + size, expected);
 
@@ -70,6 +88,14 @@ namespace tests
             {
                 EXPECT_FLOAT_EQ(result[i], expected[i]);
             }
+
+#if defined(_MSC_VER)
+            _aligned_free(result);
+            _aligned_free(expected);
+#else // _MSC_VER
+            std::free(result);
+            std::free(expected);
+#endif // _MSC_VER
         }
     };
 } // namespace tests
