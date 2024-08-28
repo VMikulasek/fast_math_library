@@ -7,6 +7,9 @@
 #include <cstdlib>
 #include <algorithm>
 #include <string>
+#include <functional>
+#include <cstddef>
+#include <numeric> // std::inclusive_scan
 
 namespace tests
 {
@@ -16,13 +19,13 @@ namespace tests
         bool _bigArrTest;
 
     protected:
-        static const unsigned _1_ELEM_ARR_SIZE = 1;
-        static const unsigned _8_ELEM_ARR_SIZE = 8;
-        static const unsigned _9_ELEM_ARR_SIZE = 9;
-        static const unsigned _16_ELEM_ARR_SIZE = 16;
-        static const unsigned _17_ELEM_ARR_SIZE = 17;
-        static const unsigned _24_ELEM_ARR_SIZE = 24;
-        static const unsigned _25_ELEM_ARR_SIZE = 25;
+        static const size_t _1_ELEM_ARR_SIZE = 1;
+        static const size_t _8_ELEM_ARR_SIZE = 8;
+        static const size_t _9_ELEM_ARR_SIZE = 9;
+        static const size_t _16_ELEM_ARR_SIZE = 16;
+        static const size_t _17_ELEM_ARR_SIZE = 17;
+        static const size_t _24_ELEM_ARR_SIZE = 24;
+        static const size_t _25_ELEM_ARR_SIZE = 25;
         const size_t BIG_ARR_SIZE = 15000000;
 
         alignas(AVX_ALIGNMENT) const float _1ElemArr[_1_ELEM_ARR_SIZE] { 2 };
@@ -52,6 +55,20 @@ namespace tests
             if (_bigArrTest)
             {
                 std::free(bigArr);
+            }
+        }
+
+        void test_prefix_sum_stack(std::function<void(const float *, size_t, float *)> testedPrefixSum,
+            const float *arr, size_t size)
+        {
+            alignas(32) float result[size];
+            alignas(32) float expected[size];
+            testedPrefixSum(arr, size, result);
+            std::inclusive_scan(arr, arr + size, expected);
+
+            for (size_t i = 0; i < size; i++)
+            {
+                EXPECT_FLOAT_EQ(result[i], expected[i]);
             }
         }
     };
