@@ -89,7 +89,14 @@ namespace avx
             dstArr += AVX_FLOAT_VECTOR_SIZE;
         }
 
-        seq::prefix_sum(arr, size, dstArr);
+        alignas(AVX_ALIGNMENT) float tmp[8];
+        FloatOps::materialize_register(lastElemOfCalculatedSequenceDistributed, tmp);
+
+        float lastElemOfCalculatedSequence = tmp[0];
+        for (; size > 0; size--, arr++, dstArr++)
+        {
+            lastElemOfCalculatedSequence = *dstArr = *arr + lastElemOfCalculatedSequence;
+        }
     }
 
 #endif
