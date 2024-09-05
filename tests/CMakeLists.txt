@@ -2,8 +2,8 @@ include(FetchContent)
 
 FetchContent_Declare(
     googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG        ff233bdd4cac0a0bf6e5cd45bda3406814cb2796 # version 1.15.2
+    GIT_REPOSITORY ${GOOGLETEST_REPO}
+    GIT_TAG        ${GOOGLETEST_GITTAG}
 )
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
