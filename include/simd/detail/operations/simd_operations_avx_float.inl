@@ -3,22 +3,24 @@
 
 #include <simd/simd_common.hpp>
 #include <simd/detail/operations/simd_operations_avx_float.hpp>
-#include <simd/detail/vector/simd_vector_avx_float.hpp>
 
 namespace simd
 {
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_vector(
-        const SIMDVector<NumType, INS_SET> &vector)
+        const float *arr)
     {
-        return _mm256_load_ps(vector.get_content());
+        return _mm256_load_ps(arr);
     }
 
-    inline SIMDVector<float, InstructionSet::AVX> SIMDOperations<float, InstructionSet::AVX>::materialize_register(
-        AvxReg &reg)
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_zero_vector()
     {
-        SIMDVector<NumType, INS_SET> result;
-        _mm256_store_ps(result.vector, reg);
-        return result;
+        return _mm256_setzero_ps();
+    }
+
+    inline void SIMDOperations<float, InstructionSet::AVX>::materialize_register(
+        AvxReg &reg, float *dst)
+    {
+        _mm256_store_ps(dst, reg);
     }
 
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::add(
@@ -68,6 +70,62 @@ namespace simd
         AvxReg &vec1, AvxReg &vec2)
     {
         return _mm256_cmp_ps(vec1, vec2, static_cast<int>(Variant));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::horizontal_add(
+        AvxReg &vec1, AvxReg &vec2)
+    {
+        return _mm256_hadd_ps(vec1, vec2);
+    }
+
+    template<int mask>
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::blend(
+        AvxReg &vec1, AvxReg &vec2)
+    {
+        return _mm256_blend_ps(vec1, vec2, mask);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::rotate_halves_right_32bits(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, _MM_SHUFFLE(2, 1, 0, 3));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::rotate_halves_left_32bits(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, _MM_SHUFFLE(0, 3, 2, 1));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::rotate_halves_64bits(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, _MM_SHUFFLE(1, 0, 3, 2));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::swap_halves(
+        AvxReg &vec)
+    {
+        return _mm256_permute2f128_ps(vec, vec, 0b00000001);
+    }
+
+    template<int pattern>
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::permute_reg_inside_halves(
+        AvxReg &vec)
+    {
+        return _mm256_permute_ps(vec, pattern);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::distribute_low_half(
+        AvxReg &vec)
+    {
+        return _mm256_permute2f128_ps(vec, vec, 0b00000000);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::distribute_high_half(
+        AvxReg &vec)
+    {
+        return _mm256_permute2f128_ps(vec, vec, 0b00010001);
     }
 }
 

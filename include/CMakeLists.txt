@@ -3,30 +3,42 @@ target_include_directories(${PROJECT_NAME} INTERFACE
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
     "$<INSTALL_INTERFACE:include>")
 
+set(INCLUDE_CMAKELISTS
+CMakeLists.txt)	
+	
 set(SIMD_INCLUDE
 simd/simd_common.hpp
 simd/simd_operations.hpp
-simd/simd_operations_avx.hpp
-simd/simd_vector.hpp
-simd/simd_vector_avx.hpp)
+simd/simd_operations_avx.hpp)
+
+set(MATHOPS_INCLUDE
+mathops/sums.hpp)
 
 set(SIMD_OPERATIONS
 simd/detail/operations/simd_operations_avx_float.hpp
 simd/detail/operations/simd_operations_avx_float.inl
 simd/detail/operations/simd_operations_base.hpp)
 
-set(SIMD_VECTOR
-simd/detail/vector/simd_vector_avx_float.hpp
-simd/detail/vector/simd_vector_avx_float.inl
-simd/detail/vector/simd_vector_base.hpp)
+set(MATHOPS_DETAIL
+mathops/detail/sums.inl)
 
-set(INCLUDE_CMAKELISTS
-CMakeLists.txt)
+set(MATHOPS_AVX
+mathops/detail/AVX/avx_sums.hpp
+mathops/detail/AVX/avx_sums.inl)
 
+set(MATHOPS_SEQ
+mathops/detail/SEQ/seq_sums.hpp
+mathops/detail/SEQ/seq_sums.inl)
+
+
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Include CMake" FILES ${INCLUDE_CMAKELISTS})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd PREFIX "SIMD include" FILES ${SIMD_INCLUDE})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops PREFIX "Math include" FILES ${MATHOPS_INCLUDE})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/operations PREFIX "SIMD operations" FILES ${SIMD_OPERATIONS})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vector PREFIX "SIMD vector" FILES ${SIMD_VECTOR})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Include CMake" FILES ${INCLUDE_CMAKELISTS})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail PREFIX "Math detail" FILES ${MATHOPS_DETAIL})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/AVX PREFIX "Math AVX" FILES ${MATHOPS_AVX})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/SEQ PREFIX "Math SEQ" FILES ${MATHOPS_SEQ})
 
 add_custom_target(LIB_SOURCE SOURCES ${SIMD_INCLUDE} ${SIMD_OPERATIONS} ${SIMD_VECTOR} ${INCLUDE_CMAKELISTS})
 
