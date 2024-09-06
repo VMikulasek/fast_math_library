@@ -14,9 +14,8 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(benchmark googletest)
 
-set(BENCHMARKS_NAME math_lib_benchmarks)
 set(BENCHMARKS_SOURCES
-asd.cpp)
+mathops/AVX/avx_sum_benchmarks.cpp)
 
 add_executable(${BENCHMARKS_NAME} ${BENCHMARKS_SOURCES})
 

@@ -1,4 +1,4 @@
-#include <mathops/sums_fixture.hpp>
+#include <mathops/sums_tests_fixture.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
 
 #include <gtest/gtest.h>
@@ -8,14 +8,16 @@
 #include <malloc.h> // _aligned_malloc
 #endif // _MSC_VER
 
+namespace analysis
+{
 namespace tests
 {
     class SeqSumsTests : public SumsTests
     {
     protected:
-        void test_prefix_sum_stack(const float *arr, size_t size)
+        void test_prefix_sum(const float *arr, size_t size)
         {
-            SumsTests::test_prefix_sum_stack(mathops::seq::prefix_sum, arr, size);
+            SumsTests::test_prefix_sum(mathops::seq::prefix_sum, arr, size);
         }
     };
 
@@ -62,34 +64,35 @@ namespace tests
 
     TEST_F(SeqSumsTests, PrefixSum1ElemArr)
     {
-        test_prefix_sum_stack(_1ElemArr, _1_ELEM_ARR_SIZE);
+        test_prefix_sum(_1ElemArr, _1_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSum8ElemArr)
     {
-        test_prefix_sum_stack(_8ElemArr, _8_ELEM_ARR_SIZE);
+        test_prefix_sum(_8ElemArr, _8_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSum9ElemArr)
     {
-        test_prefix_sum_stack(_9ElemArr, _9_ELEM_ARR_SIZE);
+        test_prefix_sum(_9ElemArr, _9_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSum16ElemArr)
     {
-        test_prefix_sum_stack(_16ElemArr, _16_ELEM_ARR_SIZE);
+        test_prefix_sum(_16ElemArr, _16_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSum17ElemArr)
     {
-        test_prefix_sum_stack(_17ElemArr, _17_ELEM_ARR_SIZE);
+        test_prefix_sum(_17ElemArr, _17_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSum24ElemArr)
     {
-        test_prefix_sum_stack(_24ElemArr, _24_ELEM_ARR_SIZE);
+        test_prefix_sum(_24ElemArr, _24_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSum25ElemArr)
     {
-        test_prefix_sum_stack(_25ElemArr, _25_ELEM_ARR_SIZE);
+        test_prefix_sum(_25ElemArr, _25_ELEM_ARR_SIZE);
     }
     TEST_F(SeqSumsTests, PrefixSumBigArr)
     {
-        test_prefix_sum_stack(bigArr, BIG_ARR_SIZE);
+        test_prefix_sum(bigArr, BIG_ARR_SIZE);
     }
-} // namespace testing
+} // namespace tests
+} // namespace analysis

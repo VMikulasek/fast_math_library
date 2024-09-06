@@ -6,6 +6,8 @@
 #include <tests_common.hpp>
 #include <functional>
 
+namespace analysis
+{
 namespace tests
 {
     class SimdAvxFloatTest : public testing::Test
@@ -1000,5 +1002,6 @@ namespace tests
         CheckOneOperandOperationResult(indexHighHalfDistributed);
     }
 } // namespace tests
+} // namespace analysis
 
 #endif // HAS_AVX

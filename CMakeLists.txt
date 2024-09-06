@@ -36,24 +36,4 @@ if (BUILD_INSTALL)
 	    )
 endif()
 
-option(BUILD_TESTS "Build tests for math_lib")
-option(BUILD_BENCHRMARKS "Build benchmarks for math_lib")
-
-if (CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
-    set(BUILD_TESTS ON)
-    set(BUILD_BENCHRMARKS ON)
-else()
-    set(BUILD_TESTS OFF)
-    set(BUILD_BENCHRMARKS OFF)
-endif()
-
-set(GOOGLETEST_REPO https://github.com/google/googletest.git)
-set(GOOGLETEST_GITTAG ff233bdd4cac0a0bf6e5cd45bda3406814cb2796) # version 1.15.2
-
-if (BUILD_TESTS)
-    add_subdirectory(tests)
-endif()
-
-if (BUILD_BENCHRMARKS)
-    add_subdirectory(benchmarks)
-endif()
+add_subdirectory(analysis)

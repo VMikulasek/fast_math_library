@@ -11,7 +11,6 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-set(TESTS_NAME math_lib_tests)
 set(TESTS_SOURCES
 tests_common.cpp
 simd/simd_avx_float_tests.cpp

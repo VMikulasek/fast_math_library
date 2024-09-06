@@ -5,6 +5,8 @@
 #define F_TO_I_REINTERPRET(F) (*reinterpret_cast<int *>(&F))
 #define I_TO_F_REINTERPRET(I) (*reinterpret_cast<float *>(&I))
 
+namespace analysis
+{
 namespace tests
 {
     float add(float op1, float op2)
@@ -107,4 +109,5 @@ namespace tests
     {
         return cmp(op1, op2, ge);
     }
-}
+} // namespace tests
+} // namespace analysis
