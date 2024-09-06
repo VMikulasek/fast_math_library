@@ -15,7 +15,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(benchmark googletest)
 
 set(BENCHMARKS_SOURCES
-mathops/AVX/avx_sum_benchmarks.cpp)
+mathops/AVX/avx_sums_benchmarks.cpp
+mathops/SEQ/seq_sums_benchmarks.cpp)
 
 add_executable(${BENCHMARKS_NAME} ${BENCHMARKS_SOURCES})
 
@@ -24,3 +25,8 @@ target_link_libraries(
     PRIVATE ${PROJECT_NAME}
     PRIVATE benchmark::benchmark
     PRIVATE benchmark::benchmark_main)
+
+target_include_directories(
+    ${BENCHMARKS_NAME} PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
