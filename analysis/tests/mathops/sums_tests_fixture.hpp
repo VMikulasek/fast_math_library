@@ -20,6 +20,8 @@ namespace tests
         bool _bigArrTest;
 
     protected:
+        float *_bigArr;
+
         SumsTests()
         {
             std::string testName = testing::UnitTest::GetInstance()->current_test_info()->name();
@@ -27,7 +29,7 @@ namespace tests
 
             if (_bigArrTest)
             {
-                AllocBigArr();
+                _bigArr = AllocBigArr();
             }
         }
 
@@ -35,7 +37,7 @@ namespace tests
         {
             if (_bigArrTest)
             {
-                FreeBigArr();
+                FreeBigArr(_bigArr);
             }
         }
 

@@ -18,15 +18,14 @@ namespace benchmarks
 
     static void BM_SeqSumBigArr(benchmark::State &state)
     {
-        AllocBigArr();
+        float *bigArr = AllocBigArr();
 
-        std::cout << bigArr << std::endl;
         for (auto _ : state)
         {
             mathops::seq::sum(bigArr, BIG_ARR_SIZE);
         }
 
-        FreeBigArr();
+        FreeBigArr(bigArr);
     }
 
     BENCHMARK(BM_SeqSum1Elem);

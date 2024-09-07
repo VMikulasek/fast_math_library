@@ -2,6 +2,7 @@
 #include <mathops/detail/AVX/avx_sums.hpp>
 
 #include <benchmark/benchmark.h>
+#include <iostream>
 
 namespace analysis
 {
@@ -17,14 +18,14 @@ namespace benchmarks
 
     static void BM_AvxSumBigArr(benchmark::State &state)
     {
-        AllocBigArr();
+        float *bigArr = AllocBigArr();
 
         for (auto _ : state)
         {
             mathops::avx::sum(bigArr, BIG_ARR_SIZE);
         }
 
-        FreeBigArr();
+        FreeBigArr(bigArr);
     }
 
     BENCHMARK(BM_AvxSum1Elem);

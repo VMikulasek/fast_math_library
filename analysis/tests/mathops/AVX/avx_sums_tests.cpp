@@ -61,8 +61,8 @@ namespace tests
     }
     TEST_F(AvxSumsTests, SumBigArr)
     {
-        EXPECT_FLOAT_EQ(mathops::avx::sum(bigArr, BIG_ARR_SIZE),
-                  std::reduce(bigArr, bigArr + BIG_ARR_SIZE, 0.0f));
+        EXPECT_FLOAT_EQ(mathops::avx::sum(_bigArr, BIG_ARR_SIZE),
+                  std::reduce(_bigArr, _bigArr + BIG_ARR_SIZE, 0.0f));
     }
 
     TEST_F(AvxSumsTests, PrefixSum1ElemArr)
@@ -95,7 +95,7 @@ namespace tests
     }
     TEST_F(AvxSumsTests, PrefixSumBigArr)
     {
-        test_prefix_sum(bigArr, BIG_ARR_SIZE);
+        test_prefix_sum(_bigArr, BIG_ARR_SIZE);
     }
 } // namespace tests
 } // namespace analysis
