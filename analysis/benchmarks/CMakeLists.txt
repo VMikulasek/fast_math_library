@@ -15,10 +15,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(benchmark googletest)
 
 set(BENCHMARKS_SOURCES
-mathops/AVX/avx_sums_benchmarks.cpp
-mathops/SEQ/seq_sums_benchmarks.cpp)
+mathops/SEQ/seq_sums_benchmarks.cpp
+mathops/AVX/avx_sums_benchmarks.cpp)
 
 add_executable(${BENCHMARKS_NAME} ${BENCHMARKS_SOURCES})
+target_compile_options(${BENCHMARKS_NAME} PRIVATE $<$<CONFIG:Release>:-O0>)
 
 target_link_libraries(
     ${BENCHMARKS_NAME}
