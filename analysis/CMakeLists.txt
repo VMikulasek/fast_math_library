@@ -24,10 +24,16 @@ if (BUILD_TESTS)
 endif()
 
 if (BUILD_BENCHRMARKS)
-    set(BENCHMARKS_NAME math_lib_benchmarks)
+    set(AVX_BENCHMARKS avx_math_lib_benchmarks)
+    set(SEQ_BENCHMARKS seq_math_lib_benchmarks)
+    set(BENCHMARKS ${AVX_BENCHMARKS} ${SEQ_BENCHMARKS})
+    
     add_subdirectory(benchmarks)
-    target_include_directories(
-        ${BENCHMARKS_NAME}
-        PRIVATE ${GLOBAL_FIXTURES_DIRECTORY}
-    )
+
+    foreach(BENCHMARK ${BENCHMARKS})
+        target_include_directories(
+            ${BENCHMARK}
+            PRIVATE ${GLOBAL_FIXTURES_DIRECTORY}
+        )
+    endforeach()
 endif()

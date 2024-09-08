@@ -14,20 +14,26 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(benchmark googletest)
 
-set(BENCHMARKS_SOURCES
-mathops/SEQ/seq_sums_benchmarks.cpp
+set(AVX_BENCHMARKS_SOURCE
 mathops/AVX/avx_sums_benchmarks.cpp)
 
-add_executable(${BENCHMARKS_NAME} ${BENCHMARKS_SOURCES})
-target_compile_options(${BENCHMARKS_NAME} PRIVATE $<$<CONFIG:Release>:-O0>)
+set(SEQ_BENCHMARKS_SOURCE
+mathops/SEQ/seq_sums_benchmarks.cpp)
 
-target_link_libraries(
-    ${BENCHMARKS_NAME}
-    PRIVATE ${PROJECT_NAME}
-    PRIVATE benchmark::benchmark
-    PRIVATE benchmark::benchmark_main)
+add_executable(${AVX_BENCHMARKS} ${AVX_BENCHMARKS_SOURCE})
+add_executable(${SEQ_BENCHMARKS} ${SEQ_BENCHMARKS_SOURCE})
 
-target_include_directories(
-    ${BENCHMARKS_NAME} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
-)
+foreach(BENCHMARK ${BENCHMARKS})
+    target_compile_options(${BENCHMARK} PRIVATE $<$<CONFIG:Release>:-O0>)
+
+    target_link_libraries(
+        ${BENCHMARK}
+        PRIVATE ${PROJECT_NAME}
+        PRIVATE benchmark::benchmark
+        PRIVATE benchmark::benchmark_main)
+
+    target_include_directories(
+        ${BENCHMARK} PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+endforeach()
