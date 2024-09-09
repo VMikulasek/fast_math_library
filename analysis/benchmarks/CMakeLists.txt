@@ -14,9 +14,10 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(benchmark googletest)
 
+set(CMAKE_BUILD_TYPE Release)
+
 set(AVX_BENCHMARKS_SOURCE
 mathops/AVX/avx_sums_benchmarks.cpp)
-
 set(SEQ_BENCHMARKS_SOURCE
 mathops/SEQ/seq_sums_benchmarks.cpp)
 
@@ -24,7 +25,9 @@ add_executable(${AVX_BENCHMARKS} ${AVX_BENCHMARKS_SOURCE})
 add_executable(${SEQ_BENCHMARKS} ${SEQ_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
-    target_compile_options(${BENCHMARK} PRIVATE $<$<CONFIG:Release>:-O0>)
+    target_compile_options(${BENCHMARK} PRIVATE
+    $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-O0>
+    $<$<CXX_COMPILER_ID:MSVC>:/Od>)
 
     target_link_libraries(
         ${BENCHMARK}
