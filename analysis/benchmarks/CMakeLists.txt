@@ -1,3 +1,8 @@
+set(CMAKE_BUILD_TYPE Release)
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang") # google benchmark generates warnings for Clang that cannot be influenced
+    add_compile_options(-Wno-c++17-attribute-extensions)
+endif()
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -13,8 +18,6 @@ FetchContent_Declare(
 )
 
 FetchContent_MakeAvailable(benchmark googletest)
-
-set(CMAKE_BUILD_TYPE Release)
 
 set(AVX_BENCHMARKS_SOURCE
 mathops/AVX/avx_sums_benchmarks.cpp)
