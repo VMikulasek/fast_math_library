@@ -1,5 +1,5 @@
 #ifndef SUMS_TESTS_FIXTURE_HPP
-#define SUMS_TESTS_FIXUTRE_HPP
+#define SUMS_TESTS_FIXTURE_HPP
 
 #include <simd/simd_common.hpp>
 #include <sums_shared_fields.hpp>
