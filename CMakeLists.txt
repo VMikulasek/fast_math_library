@@ -36,14 +36,4 @@ if (BUILD_INSTALL)
 	    )
 endif()
 
-option(BUILD_TESTS "Build tests for math_lib")
-
-if (CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
-    set(BUILD_TESTS ON)
-else()
-    set(BUILD_TESTS OFF)
-endif()
-
-if (BUILD_TESTS)
-    add_subdirectory(tests)
-endif()
+add_subdirectory(analysis)

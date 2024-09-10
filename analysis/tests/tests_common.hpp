@@ -1,6 +1,8 @@
 #ifndef TESTS_COMMON_HPP
 #define TESTS_COMMON_HPP
 
+namespace analysis
+{
 namespace tests
 {
     enum OperationDirection
@@ -41,6 +43,7 @@ namespace tests
             return op2;
         }
     }
-}
+} // namespace tests
+} // namespace analysis
 
 #endif // TESTS_COMMON_HPP
