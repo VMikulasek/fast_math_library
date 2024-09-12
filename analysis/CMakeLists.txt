@@ -1,13 +1,13 @@
-option(BUILD_TESTS "Build tests for math_lib")
-option(BUILD_BENCHRMARKS "Build benchmarks for math_lib")
-
 if (CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
-    set(BUILD_TESTS ON)
-    set(BUILD_BENCHRMARKS ON)
+    set(BUILD_TESTS_DEFAULT ON)
+    set(BUILD_BENCHMARKS_DEFAULT ON)
 else()
-    set(BUILD_TESTS OFF)
-    set(BUILD_BENCHRMARKS OFF)
+    set(BUILD_TESTS_DEFAULT OFF)
+    set(BUILD_BENCHMARKS_DEFAULT OFF)
 endif()
+
+option(BUILD_TESTS "Build tests for math_lib" ${BUILD_TESTS_DEFAULT})
+option(BUILD_BENCHMARKS "Build benchmarks for math_lib" ${BUILD_BENCHMARKS_DEFAULT})
 
 set(GOOGLETEST_REPO https://github.com/google/googletest.git)
 set(GOOGLETEST_GITTAG ff233bdd4cac0a0bf6e5cd45bda3406814cb2796) # version 1.15.2
@@ -23,7 +23,7 @@ if (BUILD_TESTS)
     )
 endif()
 
-if (BUILD_BENCHRMARKS)
+if (BUILD_BENCHMARKS)
     set(AVX_BENCHMARKS avx_math_lib_benchmarks)
     set(SEQ_BENCHMARKS seq_math_lib_benchmarks)
     set(BENCHMARKS ${AVX_BENCHMARKS} ${SEQ_BENCHMARKS})

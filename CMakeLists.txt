@@ -28,7 +28,6 @@ check_runtime_program(check_avx512_support AVX512_SUPPORTED)
 add_subdirectory(include)
 
 if (BUILD_INSTALL)
-    install(TARGETS math_lib EXPORT math_lib)
     install(
 		    DIRECTORY include/
 		    DESTINATION "include"
