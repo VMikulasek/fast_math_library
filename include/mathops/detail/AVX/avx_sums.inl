@@ -15,7 +15,7 @@ namespace avx
     using FloatOps = simd::SIMDOperations<float, simd::AVX>;
 
     // private
-    inline FloatOps::AvxReg load_reg(const float *&arr, size_t &size)
+    inline FloatOps::AvxReg _load_reg(const float *&arr, size_t &size)
     {
         auto reg = FloatOps::load_vector(arr);
         arr += AVX_FLOAT_VECTOR_SIZE;
@@ -30,13 +30,13 @@ namespace avx
             return seq::sum(arr, size);
         }
 
-        FloatOps::AvxReg tmpResultReg = load_reg(arr, size);
+        FloatOps::AvxReg tmpResultReg = _load_reg(arr, size);
 
         FloatOps::AvxReg secondOpReg;
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            secondOpReg = load_reg(arr, size);
+            secondOpReg = _load_reg(arr, size);
             tmpResultReg = FloatOps::add(tmpResultReg, secondOpReg);
         }
 
@@ -62,7 +62,7 @@ namespace avx
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg res = load_reg(arr, size);
+            FloatOps::AvxReg res = _load_reg(arr, size);
 
             // calculate prefix sum for halves isolated
             FloatOps::AvxReg shifted = FloatOps::rotate_halves_right_32bits(res);
