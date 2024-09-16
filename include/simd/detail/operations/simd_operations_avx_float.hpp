@@ -55,6 +55,11 @@ namespace simd
         static AvxReg load_zero_vector();
 
         /**
+         * @brief Sets every field of register to num
+         */
+        static AvxReg set_register(float num);
+
+        /**
          * @brief Stores vector from register to float *dst
          * 
          * @param reg register to materialize

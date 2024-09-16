@@ -17,6 +17,12 @@ namespace simd
         return _mm256_setzero_ps();
     }
 
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::set_register(
+        float num)
+    {
+        return _mm256_set1_ps(num);
+    }
+
     inline void SIMDOperations<float, InstructionSet::AVX>::materialize_register(
         AvxReg &reg, float *dst)
     {
