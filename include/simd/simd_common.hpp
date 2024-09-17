@@ -13,6 +13,7 @@ namespace simd
     {
         SSE,
         AVX,
+        AVX2,
         AVX_512
     };
 }
