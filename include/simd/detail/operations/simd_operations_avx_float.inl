@@ -12,7 +12,7 @@ namespace simd
         return _mm256_load_ps(arr);
     }
 
-    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::load_zero_vector()
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::set_register_zero()
     {
         return _mm256_setzero_ps();
     }
@@ -133,6 +133,6 @@ namespace simd
     {
         return _mm256_permute2f128_ps(vec, vec, 0b00010001);
     }
-}
+} // namespace simd
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

@@ -43,7 +43,7 @@ namespace avx
         float tailSum = seq::sum(arr, size);
 
         // merge all sums to the 0th and 4th indexes
-        secondOpReg = FloatOps::load_zero_vector();
+        secondOpReg = FloatOps::set_register_zero();
         tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
         tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
 
@@ -56,9 +56,9 @@ namespace avx
 
     inline void prefix_sum(const float *arr, size_t size, float *dstArr)
     {
-        FloatOps::AvxReg zeroVec = FloatOps::load_zero_vector();
+        FloatOps::AvxReg zeroVec = FloatOps::set_register_zero();
 
-        FloatOps::AvxReg lastElemOfCalculatedSequenceDistributed = FloatOps::load_zero_vector();
+        FloatOps::AvxReg lastElemOfCalculatedSequenceDistributed = FloatOps::set_register_zero();
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {

@@ -40,7 +40,7 @@ namespace simd
          * 
          * @param arr Float array to load to register,
          * 8 floats will be loaded to register, so has to be
-         * at least 8 floats long, also has to be aligned to 32 bytes
+         * at least 8 floats long, also has to be aligned to 32 bits
          * otherwise segmentation fault will be generated
          * 
          * @return Register with loaded vector
@@ -52,7 +52,7 @@ namespace simd
          * 
          * @return Register with zeros
          */
-        static AvxReg load_zero_vector();
+        static AvxReg set_register_zero();
 
         /**
          * @brief Sets every field of register to num
@@ -198,7 +198,7 @@ namespace simd
          */
         static AvxReg distribute_high_half(AvxReg &vec);
     };
-}
+} // namespace simd
 
 #include <simd/detail/operations/simd_operations_avx_float.inl>
 

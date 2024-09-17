@@ -136,9 +136,9 @@ namespace tests
         }
     }
 
-    TEST_F(SimdAvxFloatTest, LoadZeros)
+    TEST_F(SimdAvxFloatTest, SetZeros)
     {
-        Ops::AvxReg reg = Ops::load_zero_vector();
+        Ops::AvxReg reg = Ops::set_register_zero();
 
         alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
         Ops::materialize_register(reg, result);
