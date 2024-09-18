@@ -42,7 +42,7 @@ namespace mathops
 
     inline void fast_sqrt_arr(float *arr, size_t size)
     {
-        FAST_SQRT_ARR(arr, size);
+        //FAST_SQRT_ARR(arr, size); TODO
     }
 }
 

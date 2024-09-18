@@ -7,7 +7,8 @@ namespace mathops
 {
 namespace avx
 {
-    void fast_sqrt_arr(float *arr, size_t size);
+    void fast_sqrt_arr(const float *arr, size_t size, float *dst);
+    void fast_invsqrt_arr(const float *arr, size_t size, float *dst);
 } // namespace avx
 } // namespace mathops
 
