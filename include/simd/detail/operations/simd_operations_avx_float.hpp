@@ -69,6 +69,13 @@ namespace simd
         static void materialize_register(AvxReg &reg, float *dst);
 
         /**
+         * @brief Converts register of ints to register of floats
+         * 
+         * @return AvxReg register of floats
+         */
+        static AvxReg convert_from_int(__m256i &intReg);
+
+        /**
          * @brief Adds vec1 and vec2 and returns result
          */
         static AvxReg add(AvxReg &vec1, AvxReg &vec2);
