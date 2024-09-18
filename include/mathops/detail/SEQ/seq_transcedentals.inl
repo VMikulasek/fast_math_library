@@ -8,11 +8,19 @@ namespace mathops
 {
 namespace seq
 {
-    inline void fast_sqrt_arr(float *arr, size_t size)
+    inline void fast_sqrt_arr(const float *arr, size_t size, float *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
-            arr[i] = fast_sqrt(arr[i]);
+            dst[i] = fast_sqrt(arr[i]);
+        }
+    }
+
+    inline void fast_invsqrt_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = fast_invsqrt(arr[i]);
         }
     }
 } // namespace seq
