@@ -40,7 +40,7 @@ namespace simd
          * 
          * @param arr Float array to load to register,
          * 8 floats will be loaded to register, so has to be
-         * at least 8 floats long, also has to be aligned to 32 bits
+         * at least 8 floats long, also has to be aligned to 32 bytes
          * otherwise segmentation fault will be generated
          * 
          * @return Register with loaded vector
@@ -63,7 +63,7 @@ namespace simd
          * @brief Stores vector from register to float *dst
          * 
          * @param reg register to materialize
-         * @param dst float * aligned to 32 bits with at least 8 floats
+         * @param dst float * aligned to 32 bytes with at least 8 floats
          * of size
          */
         static void materialize_register(AvxReg &reg, float *dst);

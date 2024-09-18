@@ -31,7 +31,7 @@ namespace mathops
      * with paralelisation through biggest SIMD unit available
      * 
      * @param arr Array of floats to calculate square root on,
-     * has to be aligned to 32 bits
+     * has to be aligned to 32 bytes
      * @param size Size of array
      */
     void fast_sqrt_arr(float *arr, size_t size);
