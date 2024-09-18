@@ -133,23 +133,23 @@ namespace simd
         static AvxReg blend(AvxReg &vec1, AvxReg &vec2);
 
         /**
-         * @brief Shifts both 128 bit lanes of vec 32 bits right
+         * @brief Rotates both 128 bit lanes of vec 32 bits right
          * 
-         * @return AvxReg shifted register
+         * @return AvxReg rotated register
          */
         static AvxReg rotate_halves_right_32bits(AvxReg &vec);
 
         /**
-         * @brief Shifts both 128 bit lanes of vec 32 bits left
+         * @brief Rotates both 128 bit lanes of vec 32 bits left
          * 
-         * @return AvxReg shifted register
+         * @return AvxReg rotated register
          */
         static AvxReg rotate_halves_left_32bits(AvxReg &vec);
 
         /**
-         * @brief Shifts both 128 bit lanes of vec 64 bits
+         * @brief Rotates both 128 bit lanes of vec 64 bits
          * 
-         * @return AvxReg shifted register
+         * @return AvxReg rotated register
          */
         static AvxReg rotate_halves_64bits(AvxReg &vec);
 
