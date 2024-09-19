@@ -1,0 +1,25 @@
+#ifndef MEMORY_COMMON_HPP
+#define MEMORY_COMMON_HPP
+
+#include <cstddef>
+#include <cstdlib> // std::aligned_alloc
+
+#if defined(_MSC_VER)
+#include <malloc.h> // _aligned_malloc
+#endif // _MSC_VER
+
+inline void *_alloc_aligned_memory(size_t size, int alignment)
+{
+#if defined(_MSC_VER)
+        float *bigArr = static_cast<float *>(_aligned_malloc(size, alignment));
+#else // _MSC_VER
+        float *bigArr = static_cast<float *>(std::aligned_alloc(alignment, size));
+#endif // _MSC_VER
+}
+
+inline float *_alloc_aligned_memory_float(size_t size, int alignment)
+{
+    return reinterpret_cast<float *>(_alloc_aligned_memory(size, alignment));
+}
+
+#endif // MEMORY_COMMON_HPP
