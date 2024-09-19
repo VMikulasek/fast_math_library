@@ -40,9 +40,14 @@ namespace mathops
         return num;
     }
 
-    inline void fast_sqrt_arr(float *arr, size_t size)
+    inline float *fast_sqrt_arr(const float *arr, size_t size)
     {
         //FAST_SQRT_ARR(arr, size); TODO
+    }
+
+    inline float *fast_invsqrt_arr(const float *arr, size_t size)
+    {
+        //TODO
     }
 }
 
