@@ -7,16 +7,20 @@
 
 #include <cmath>
 
+#include <mathops/detail/common/memory_common.inl>
+
 namespace mathops
 {
 
-#ifdef HAS_AVX
+#if defined(HAS_AVX) && defined(HAS_AVX2)
 
 #define FAST_SQRT_ARR avx::fast_sqrt_arr
+#define FAST_INVSQRT_ARR avx::fast_invsqrt_arr
 
 #else // HAS_AVX
 
 #define FAST_SQRT_ARR seq::fast_sqrt_arr
+#define FAST_INVSQRT_ARR seq::fast_invsqrt_arr
 
 #endif // HAS_AVX
 
@@ -42,12 +46,28 @@ namespace mathops
 
     inline float *fast_sqrt_arr(const float *arr, size_t size)
     {
-        //FAST_SQRT_ARR(arr, size); TODO
+        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        if (dst == nullptr)
+        {
+            return nullptr;
+        }
+
+        FAST_SQRT_ARR(arr, size, dst);
+
+        return dst;
     }
 
     inline float *fast_invsqrt_arr(const float *arr, size_t size)
     {
-        //TODO
+        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        if (dst == nullptr)
+        {
+            return nullptr;
+        }
+
+        FAST_INVSQRT_ARR(arr, size, dst);
+
+        return dst;
     }
 }
 

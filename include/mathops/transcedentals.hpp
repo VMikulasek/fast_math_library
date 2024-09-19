@@ -36,7 +36,8 @@ namespace mathops
      * 
      * @returns Array with results and size of size floats,
      * that has to be freed after use.
-     * If used on windows, then has to be freed with _aligned_free()
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
      */
     float *fast_sqrt_arr(const float *arr, size_t size);
 
@@ -52,7 +53,8 @@ namespace mathops
      * 
      * @returns Array with results and size of size floats,
      * that has to be freed after use.
-     * If used on windows, then has to be freed with _aligned_free()
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
      */
     float *fast_invsqrt_arr(const float *arr, size_t size);
 }
