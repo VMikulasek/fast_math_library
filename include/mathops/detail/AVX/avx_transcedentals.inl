@@ -2,6 +2,7 @@
 #define AVX_TRANSCEDENTALS_INL
 
 #include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/transcedentals.hpp>
 #include <simd/simd_operations.hpp>
 
 namespace mathops
@@ -50,12 +51,41 @@ namespace avx
 
     inline void fast_sqrt_arr(const float *arr, size_t size, float *dst)
     {
-        //TODO
+        FloatOps::AvxReg oneReg = FloatOps::set_register(1.f);
+
+        while (size >= AVX_FLOAT_VECTOR_SIZE)
+        {
+            FloatOps::AvxReg sqrt8 = _fast_invsqrt_arr8(arr);
+            sqrt8 = FloatOps::div(oneReg, sqrt8);
+            FloatOps::materialize_register(sqrt8, dst);
+
+            size -= AVX_FLOAT_VECTOR_SIZE;
+            arr += AVX_FLOAT_VECTOR_SIZE;
+            dst += AVX_FLOAT_VECTOR_SIZE;
+        }
+
+        for (size_t i = 0; i < size; size--, arr++, dst++)
+        {
+            *dst = fast_sqrt(*arr);
+        }
     }
 
     inline void fast_invsqrt_arr(const float *arr, size_t size, float *dst)
     {
-        //TODO
+        while (size >= AVX_FLOAT_VECTOR_SIZE)
+        {
+            FloatOps::AvxReg invSqrt8 = _fast_invsqrt_arr8(arr);
+            FloatOps::materialize_register(invSqrt8, dst);
+
+            size -= AVX_FLOAT_VECTOR_SIZE;
+            arr += AVX_FLOAT_VECTOR_SIZE;
+            dst += AVX_FLOAT_VECTOR_SIZE;
+        }
+
+        for (size_t i = 0; i < size; size--, arr++, dst++)
+        {
+            *dst = fast_invsqrt(*arr);
+        }
     }
 
 #endif // HAS_AVX && HAS_AVX2
