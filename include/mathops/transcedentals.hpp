@@ -8,7 +8,7 @@ namespace mathops
 {
     /**
      * @brief Computes square root of num using
-     * C++ standard library
+     * std::sqrt
      */
     float sqrt(float num);
 
@@ -17,6 +17,12 @@ namespace mathops
      * of num with lower accuracy
      */
     float fast_sqrt(float num);
+
+    /**
+     * @brief Computes square root of num using
+     * 1 / std::sqrt
+     */
+    float invsqrt(float num);
 
     /**
      * @brief Accelerated computation of inverse square root

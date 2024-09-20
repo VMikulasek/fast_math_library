@@ -34,6 +34,11 @@ namespace mathops
         return 1 / fast_invsqrt(num);
     }
 
+    inline float invsqrt(float num)
+    {
+        return 1 / std::sqrt(num);
+    }
+
     inline float fast_invsqrt(float num)
     {
         float numHalf = 0.5f * num;
