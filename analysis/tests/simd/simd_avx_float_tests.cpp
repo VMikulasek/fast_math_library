@@ -59,7 +59,6 @@ namespace tests
             usedVec1 = vec1;
             usedVec2 = vec2;
         }
-
         void SetRegisters(const int *vec)
         {
             intReg = _mm256_load_si256(reinterpret_cast<const __m256i *>(vec));
@@ -161,16 +160,14 @@ namespace tests
     };
 
     TEST_F(SimdAvxFloatTest, LoadStore)
-    {
-        alignas(AVX_ALIGNMENT) const float vec[AVX_FLOAT_VECTOR_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 2 };
-        
-        Ops::AvxReg reg = Ops::load_vector(vec);
+    {        
+        Ops::AvxReg reg = Ops::load_vector(basicVec1);
         alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
         Ops::materialize_register(reg, result);
 
         for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
         {
-            EXPECT_FLOAT_EQ(result[i], 2);
+            EXPECT_FLOAT_EQ(result[i], basicVec1[i]);
         }
     }
 
