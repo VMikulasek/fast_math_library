@@ -1,4 +1,4 @@
-#if HAS_AVX
+#ifdef HAS_AVX
 
 #include <mathops/sums_tests_fixture.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
