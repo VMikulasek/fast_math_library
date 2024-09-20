@@ -33,7 +33,7 @@ namespace tests
         alignas(AVX_ALIGNMENT) const float bigNumsVec1[AVX_FLOAT_VECTOR_SIZE] { 134541516143341341534.1, 35736435.0, 674674763465.0, 145598647.3, 354.2, 12413451.1324, 134134112141.12, 123341.1341 };
         alignas(AVX_ALIGNMENT) const float bigNumsVec2[AVX_FLOAT_VECTOR_SIZE] { 1341431.0, 1344313414.0, 13416463.0, 425245264512341341.0, 56335763424522452.0, 76859757.44, 467365573.245, 1341334124351265685.56535 };
 
-        alignas(AVX_ALIGNMENT) const int basicIntVec[AVX_FLOAT_VECTOR_SIZE]{ 0, -1345, 9087, 3, 4, -1, 1000000, -1000000 };
+        alignas(AVX_ALIGNMENT) const int basicIntVec[AVX_INT_VECTOR_SIZE]{ 0, -1345, 9087, 3, 4, -1, 1000000, -1000000 };
 
         const float *usedVec1;
         const float *usedVec2;
@@ -155,7 +155,7 @@ namespace tests
 
             for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
             {
-                EXPECT_FLOAT_EQ(result[i], expected);
+                ExpectEqFloat(result[i], expected);
             }
         }
     };
@@ -185,7 +185,7 @@ namespace tests
     {
         float testNum = 0;
 
-        for (int i = 0; i < 50; i++, testNum += 1, testNum *= -2)
+        for (unsigned i = 0; i < 50; i++, testNum += 1, testNum *= -2)
         {
             Ops::AvxReg reg = Ops::set_register(testNum);
 
