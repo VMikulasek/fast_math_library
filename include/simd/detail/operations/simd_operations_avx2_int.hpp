@@ -52,13 +52,6 @@ namespace simd
         static void materialize_register(Avx2IReg &reg, int *dst);
 
         /**
-         * @brief Converts register of floats to register of ints
-         * 
-         * @return Avx2IReg register of ints
-         */
-        static Avx2IReg convert_from_float(__m256 &floatReg);
-
-        /**
          * @brief Adds vec2 to vec1 and returns result
          */
         static Avx2IReg add(Avx2IReg &vec1, Avx2IReg &vec2);
@@ -91,5 +84,7 @@ namespace simd
         static Avx2IReg shift_right(Avx2IReg &vec, int count);
     };
 } // namespace simd
+
+#include <simd/detail/operations/simd_operations_avx2_int.inl>
 
 #endif // SIMD_OPERATIONS_AVX2_INT_HPP

@@ -28,12 +28,6 @@ namespace simd
         _mm256_store_si256(reinterpret_cast<Avx2IReg *>(dst), reg);
     }
 
-    inline SIMDOperations<int, InstructionSet::AVX2>::Avx2IReg SIMDOperations<int, InstructionSet::AVX2>::convert_from_float(
-        __m256 &floatReg)
-    {
-        return _mm256_cvtps_epi32(floatReg);
-    }
-
     inline SIMDOperations<int, InstructionSet::AVX2>::Avx2IReg SIMDOperations<int, InstructionSet::AVX2>::add(
         Avx2IReg &vec1, Avx2IReg &vec2)
     {

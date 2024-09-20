@@ -25,6 +25,11 @@ namespace tests
     float cmp_eq(float op1, float op2);
     float cmp_le(float op1, float op2);
     float cmp_ge(float op1, float op2);
+
+    int add_i(int op1, int op2);
+    int sub_i(int op1, int op2);
+    int shift_left(int op, int nBits);
+    int shift_right(int op, int nBits);
     
     template<int mask>
     float blend(float op1, float op2)
@@ -43,8 +48,6 @@ namespace tests
             return op2;
         }
     }
-
-    float int_to_float(int num);
 } // namespace tests
 } // namespace analysis
 

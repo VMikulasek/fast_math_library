@@ -1,6 +1,7 @@
 #include <tests_common.hpp>
 #include <limits>
 #include <functional>
+#include <cmath>
 
 #define F_TO_I_REINTERPRET(F) (*reinterpret_cast<int *>(&F))
 #define I_TO_F_REINTERPRET(I) (*reinterpret_cast<float *>(&I))
@@ -110,9 +111,23 @@ namespace tests
         return cmp(op1, op2, ge);
     }
 
-    float int_to_float(int num)
+    int add_i(int op1, int op2)
     {
-        return static_cast<float>(num);
+        return op1 + op2;
+    }
+    int sub_i(int op1, int op2)
+    {
+        return op1 - op2;
+    }
+    int shift_left(int op, int nBits)
+    {
+        return op << nBits;
+    }
+    int shift_right(int op, int nBits)
+    {
+        unsigned tmp = *reinterpret_cast<unsigned *>(&op);
+        unsigned result = tmp >> nBits;
+        return *reinterpret_cast<int *>(&result);
     }
 } // namespace tests
 } // namespace analysis

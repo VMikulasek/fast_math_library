@@ -190,15 +190,6 @@ namespace tests
         }
     }
 
-    TEST_F(SimdAvxFloatTest, ConvertIntToFloat)
-    {
-        SetRegisters(basicIntVec);
-
-        resultReg = Ops::convert_from_int(intReg);
-
-        CheckResult(int_to_float);
-    }
-
     TEST_F(SimdAvxFloatTest, AddBasic)
     {
         SetRegisters(basicVec1, basicVec2);

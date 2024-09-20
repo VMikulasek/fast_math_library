@@ -14,6 +14,7 @@ enable_testing()
 set(TESTS_SOURCES
 tests_common.cpp
 simd/simd_avx_float_tests.cpp
+simd/simd_avx2_int_tests.cpp
 mathops/AVX/avx_sums_tests.cpp
 mathops/SEQ/seq_sums_tests.cpp)
 
