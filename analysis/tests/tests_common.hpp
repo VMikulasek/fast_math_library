@@ -43,6 +43,8 @@ namespace tests
             return op2;
         }
     }
+
+    float int_to_float(int num);
 } // namespace tests
 } // namespace analysis
 

@@ -109,5 +109,10 @@ namespace tests
     {
         return cmp(op1, op2, ge);
     }
+
+    float int_to_float(int num)
+    {
+        return static_cast<float>(num);
+    }
 } // namespace tests
 } // namespace analysis
