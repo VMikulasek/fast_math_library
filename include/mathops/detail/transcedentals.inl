@@ -57,6 +57,11 @@ namespace mathops
         return dst;
     }
 
+    inline float *fast_sqrt_arr(const std::vector<float> &arr)
+    {
+        return fast_sqrt_arr(arr.data(), arr.size());
+    }
+
     inline float *fast_invsqrt_arr(const float *arr, size_t size)
     {
         float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
@@ -68,6 +73,11 @@ namespace mathops
         FAST_INVSQRT_ARR(arr, size, dst);
 
         return dst;
+    }
+
+    inline float *fast_invsqrt_arr(const std::vector<float> &arr)
+    {
+        return fast_invsqrt_arr(arr.data(), arr.size());
     }
 }
 
