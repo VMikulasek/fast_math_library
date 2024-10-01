@@ -24,13 +24,17 @@ if (BUILD_TESTS)
 endif()
 
 if (BUILD_BENCHMARKS)
-    set(AVX_BENCHMARKS avx_math_lib_benchmarks)
-    set(SEQ_BENCHMARKS seq_math_lib_benchmarks)
+    set(AVX_SUM_BENCHMARKS avx_sum_benchmarks)
+    set(SEQ_SUM_BENCHMARKS seq_sum_benchmarks)
+    set(AVX_PREFIXSUM_BENCHMARKS avx_prefixsum_benchmarks)
+    set(SEQ_PREFIXSUM_BENCHMARKS seq_prefixsum_benchmarks)
     set(AVX_SQRTARR_BENCHMARKS avx_sqrtarr_benchmarks)
     set(SEQ_SQRTARR_BENCHMARKS seq_sqrtarr_benchmarks)
     set(BENCHMARKS
-    ${AVX_BENCHMARKS}
-    ${SEQ_BENCHMARKS}
+    ${AVX_SUM_BENCHMARKS}
+    ${SEQ_SUM_BENCHMARKS}
+    ${AVX_PREFIXSUM_BENCHMARKS}
+    ${SEQ_PREFIXSUM_BENCHMARKS}
     ${AVX_SQRTARR_BENCHMARKS}
     ${SEQ_SQRTARR_BENCHMARKS})
     

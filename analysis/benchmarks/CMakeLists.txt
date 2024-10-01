@@ -19,17 +19,23 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(benchmark googletest)
 
-set(AVX_BENCHMARKS_SOURCE
-mathops/AVX/avx_sums_benchmarks.cpp)
-set(SEQ_BENCHMARKS_SOURCE
-mathops/SEQ/seq_sums_benchmarks.cpp)
+set(AVX_SUM_BENCHMARKS_SOURCE
+mathops/AVX/avx_sum_benchmarks.cpp)
+set(SEQ_SUM_BENCHMARKS_SOURCE
+mathops/SEQ/seq_sum_benchmarks.cpp)
+set(AVX_PREFIXSUM_BENCHMARKS_SOURCE
+mathops/AVX/avx_prefixsum_benchmarks.cpp)
+set(SEQ_PREFIXSUM_BENCHMARKS_SOURCE
+mathops/SEQ/seq_prefixsum_benchmarks.cpp)
 set(AVX_SQRTARR_BENCHMARKS_SOURCE
 mathops/AVX/avx_sqrtarr_benchmarks.cpp)
 set(SEQ_SQRTARR_BENCHMARKS_SOURCE
 mathops/SEQ/seq_sqrtarr_benchmarks.cpp)
 
-add_executable(${AVX_BENCHMARKS} ${AVX_BENCHMARKS_SOURCE})
-add_executable(${SEQ_BENCHMARKS} ${SEQ_BENCHMARKS_SOURCE})
+add_executable(${AVX_SUM_BENCHMARKS} ${AVX_SUM_BENCHMARKS_SOURCE})
+add_executable(${SEQ_SUM_BENCHMARKS} ${SEQ_SUM_BENCHMARKS_SOURCE})
+add_executable(${AVX_PREFIXSUM_BENCHMARKS} ${AVX_PREFIXSUM_BENCHMARKS_SOURCE})
+add_executable(${SEQ_PREFIXSUM_BENCHMARKS} ${SEQ_PREFIXSUM_BENCHMARKS_SOURCE})
 add_executable(${AVX_SQRTARR_BENCHMARKS} ${AVX_SQRTARR_BENCHMARKS_SOURCE})
 add_executable(${SEQ_SQRTARR_BENCHMARKS} ${SEQ_SQRTARR_BENCHMARKS_SOURCE})
 
