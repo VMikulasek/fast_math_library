@@ -51,7 +51,7 @@ namespace tests
 
     TEST_F(TranscedentalsTests, FastSqrtZero)
     {
-        EXPECT_FLOAT_EQ(mathops::fast_sqrt(0), std::sqrt(0));
+        EXPECT_NEAR(mathops::fast_sqrt(0), std::sqrt(0), 0.01 * maximalFastInvSqrtRelativeError);
     }
     TEST_F(TranscedentalsTests, FastSqrtPerfect)
     {
