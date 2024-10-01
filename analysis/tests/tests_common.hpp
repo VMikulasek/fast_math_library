@@ -1,6 +1,8 @@
 #ifndef TESTS_COMMON_HPP
 #define TESTS_COMMON_HPP
 
+#include <cstddef>
+
 namespace analysis
 {
 namespace tests
@@ -48,6 +50,10 @@ namespace tests
             return op2;
         }
     }
+
+    void reference_prefix_sum(const float *src, size_t size, float *dst);
+    void reference_sqrt_arr(const float *src, size_t size, float *dst);
+    void reference_invsqrt_arr(const float *src, size_t size, float *dst);
 } // namespace tests
 } // namespace analysis
 

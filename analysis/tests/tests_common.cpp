@@ -2,6 +2,7 @@
 #include <limits>
 #include <functional>
 #include <cmath>
+#include <numeric> // std::inclusive_scan
 
 #define F_TO_I_REINTERPRET(F) (*reinterpret_cast<int *>(&F))
 #define I_TO_F_REINTERPRET(I) (*reinterpret_cast<float *>(&I))
@@ -128,6 +129,27 @@ namespace tests
         unsigned tmp = *reinterpret_cast<unsigned *>(&op);
         unsigned result = tmp >> nBits;
         return *reinterpret_cast<int *>(&result);
+    }
+
+    void reference_prefix_sum(const float *src, size_t size, float *dst)
+    {
+        std::inclusive_scan(src, src + size, dst);
+    }
+
+    void reference_sqrt_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::sqrt(src[i]);
+        }
+    }
+
+    void reference_invsqrt_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = 1 / std::sqrt(src[i]);
+        }
     }
 } // namespace tests
 } // namespace analysis
