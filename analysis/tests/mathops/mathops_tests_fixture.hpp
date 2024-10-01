@@ -37,7 +37,7 @@ namespace tests
             }
         }
     };
-}
-}
+} // namespace tests
+} // namespace analysis
 
 #endif // MATHOPS_TESTS_FIXTURE_HPP
