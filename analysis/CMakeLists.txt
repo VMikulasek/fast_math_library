@@ -26,7 +26,13 @@ endif()
 if (BUILD_BENCHMARKS)
     set(AVX_BENCHMARKS avx_math_lib_benchmarks)
     set(SEQ_BENCHMARKS seq_math_lib_benchmarks)
-    set(BENCHMARKS ${AVX_BENCHMARKS} ${SEQ_BENCHMARKS})
+    set(AVX_SQRTARR_BENCHMARKS avx_sqrtarr_benchmarks)
+    set(SEQ_SQRTARR_BENCHMARKS seq_sqrtarr_benchmarks)
+    set(BENCHMARKS
+    ${AVX_BENCHMARKS}
+    ${SEQ_BENCHMARKS}
+    ${AVX_SQRTARR_BENCHMARKS}
+    ${SEQ_SQRTARR_BENCHMARKS})
     
     add_subdirectory(benchmarks)
 

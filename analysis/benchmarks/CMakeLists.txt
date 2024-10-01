@@ -23,9 +23,15 @@ set(AVX_BENCHMARKS_SOURCE
 mathops/AVX/avx_sums_benchmarks.cpp)
 set(SEQ_BENCHMARKS_SOURCE
 mathops/SEQ/seq_sums_benchmarks.cpp)
+set(AVX_SQRTARR_BENCHMARKS_SOURCE
+mathops/AVX/avx_sqrtarr_benchmarks.cpp)
+set(SEQ_SQRTARR_BENCHMARKS_SOURCE
+mathops/SEQ/seq_sqrtarr_benchmarks.cpp)
 
 add_executable(${AVX_BENCHMARKS} ${AVX_BENCHMARKS_SOURCE})
 add_executable(${SEQ_BENCHMARKS} ${SEQ_BENCHMARKS_SOURCE})
+add_executable(${AVX_SQRTARR_BENCHMARKS} ${AVX_SQRTARR_BENCHMARKS_SOURCE})
+add_executable(${SEQ_SQRTARR_BENCHMARKS} ${SEQ_SQRTARR_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_compile_options(${BENCHMARK} PRIVATE

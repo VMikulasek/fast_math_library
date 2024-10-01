@@ -64,22 +64,14 @@ namespace benchmarks
 
     static void BM_PrefixSum(benchmark::State &state, const float *srcArr, size_t size)
     {
-        #if defined(_MSC_VER)
-            float* dst = static_cast<float*>(_aligned_malloc(size * sizeof(float), AVX_ALIGNMENT));
-#else // _MSC_VER
-            float* dst = static_cast<float*>(std::aligned_alloc(AVX_ALIGNMENT, size * sizeof(float)));
-#endif // _MSC_VER
+        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
 
         for (auto _ : state)
         {
             mathops::avx::prefix_sum(srcArr, size, dst);
         } 
 
-#if defined(_MSC_VER)
-            _aligned_free(dst);
-#else // _MSC_VER
-            std::free(dst);
-#endif // _MSC_VER
+        _free_aligned_memory(dst);
     }
 
     static void BM_PrefixSum1Elem(benchmark::State &state)
@@ -127,5 +119,5 @@ namespace benchmarks
     BENCHMARK(BM_PrefixSum24Elem);
     BENCHMARK(BM_PrefixSum25Elem);
     BENCHMARK(BM_PrefixSumBigArr);
-}
-}
+} // namespace benchmarks
+} // namespace analysis
