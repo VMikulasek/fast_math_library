@@ -2,7 +2,7 @@
 #define MATHOPS_TESTS_FIXTURE_HPP
 
 #include <mathops_shared_fields.hpp>
-#include <mathops/detail/common/memory_common.inl>
+#include <common/memory_common.inl>
 
 #include <gtest/gtest.h>
 

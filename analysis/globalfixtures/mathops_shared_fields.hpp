@@ -2,7 +2,7 @@
 #define MATHOPS_SHARED_FIELDS_HPP
 
 #include <simd/simd_common.hpp>
-#include <mathops/detail/common/memory_common.inl>
+#include <common/memory_common.inl>
 
 #include <cstddef>
 #include <cstdlib>      // std::aligned_alloc

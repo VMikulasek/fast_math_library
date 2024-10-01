@@ -4,8 +4,7 @@
 #include <mathops/sums.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
-
-#include <mathops/detail/common/memory_common.inl>
+#include <common/memory_common.inl>
 
 namespace mathops
 {

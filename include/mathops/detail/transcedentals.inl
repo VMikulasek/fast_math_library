@@ -4,10 +4,9 @@
 #include <mathops/transcedentals.hpp>
 #include <mathops/detail/AVX/avx_transcedentals.hpp>
 #include <mathops/detail/SEQ/seq_transcedentals.hpp>
+#include <common/memory_common.inl>
 
 #include <cmath>
-
-#include <mathops/detail/common/memory_common.inl>
 
 namespace mathops
 {

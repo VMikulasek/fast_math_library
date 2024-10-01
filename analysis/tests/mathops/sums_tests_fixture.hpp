@@ -3,7 +3,7 @@
 
 #include <simd/simd_common.hpp>
 #include <mathops_shared_fields.hpp>
-#include <mathops/detail/common/memory_common.inl>
+#include <common/memory_common.inl>
 #include <mathops/mathops_tests_fixture.hpp>
 
 #include <gtest/gtest.h>
