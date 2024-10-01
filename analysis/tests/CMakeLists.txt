@@ -18,7 +18,8 @@ simd/simd_avx2_int_tests.cpp
 mathops/AVX/avx_sums_tests.cpp
 mathops/SEQ/seq_sums_tests.cpp
 mathops/transcedentals_tests.cpp
-mathops/SEQ/seq_transcedentals_tests.cpp)
+mathops/SEQ/seq_transcedentals_tests.cpp
+mathops/AVX/avx_transcedentals_tests.cpp)
 
 add_executable(${TESTS_NAME} ${TESTS_SOURCES})
 
