@@ -30,13 +30,18 @@ if (BUILD_BENCHMARKS)
     set(SEQ_PREFIXSUM_BENCHMARKS seq_prefixsum_benchmarks)
     set(AVX_SQRTARR_BENCHMARKS avx_sqrtarr_benchmarks)
     set(SEQ_SQRTARR_BENCHMARKS seq_sqrtarr_benchmarks)
+    set(AVX_INVSQRTARR_BENCHMARKS avx_invsqrtarr_benchmarks)
+    set(SEQ_INVSQRTARR_BENCHMARKS seq_invsqrtarr_benchmarks)
+    
     set(BENCHMARKS
     ${AVX_SUM_BENCHMARKS}
     ${SEQ_SUM_BENCHMARKS}
     ${AVX_PREFIXSUM_BENCHMARKS}
     ${SEQ_PREFIXSUM_BENCHMARKS}
     ${AVX_SQRTARR_BENCHMARKS}
-    ${SEQ_SQRTARR_BENCHMARKS})
+    ${SEQ_SQRTARR_BENCHMARKS}
+    ${AVX_INVSQRTARR_BENCHMARKS}
+    ${SEQ_INVSQRTARR_BENCHMARKS})
     
     add_subdirectory(benchmarks)
 
