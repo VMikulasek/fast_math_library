@@ -1,4 +1,4 @@
-#include <sums_shared_fields.hpp>
+#include <mathops_shared_fields.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
 
 #include <benchmark/benchmark.h>
@@ -49,7 +49,7 @@ namespace benchmarks
 
         BM_Sum(state, bigArr, BIG_ARR_SIZE);
 
-        FreeBigArr(bigArr);
+        _free_aligned_memory(bigArr);
     }
 
     BENCHMARK(BM_Sum1Elem);
@@ -115,7 +115,7 @@ namespace benchmarks
 
         BM_PrefixSum(state, bigArr, BIG_ARR_SIZE);
 
-        FreeBigArr(bigArr);
+        _free_aligned_memory(bigArr);
     }
 
     BENCHMARK(BM_PrefixSum1Elem);

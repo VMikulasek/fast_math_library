@@ -2,8 +2,9 @@
 #define SUMS_TESTS_FIXTURE_HPP
 
 #include <simd/simd_common.hpp>
-#include <sums_shared_fields.hpp>
+#include <mathops_shared_fields.hpp>
 #include <mathops/detail/common/memory_common.inl>
+#include <mathops/mathops_tests_fixture.hpp>
 
 #include <gtest/gtest.h>
 #include <string>
@@ -15,33 +16,9 @@ namespace analysis
 {
 namespace tests
 {
-    class SumsTests : public testing::Test
+    class SumsTests : public MathopsTests
     {
-    private:
-        bool _bigArrTest;
-
     protected:
-        float *_bigArr;
-
-        SumsTests()
-        {
-            std::string testName = testing::UnitTest::GetInstance()->current_test_info()->name();
-            _bigArrTest = testName.find("Big") != std::string::npos;
-
-            if (_bigArrTest)
-            {
-                _bigArr = AllocBigArr();
-            }
-        }
-
-        ~SumsTests()
-        {
-            if (_bigArrTest)
-            {
-                FreeBigArr(_bigArr);
-            }
-        }
-
         void test_prefix_sum(std::function<void(const float *, size_t, float *)> testedPrefixSum,
             const float *arr, size_t size)
         {

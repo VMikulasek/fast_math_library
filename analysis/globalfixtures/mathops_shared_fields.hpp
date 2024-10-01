@@ -1,15 +1,12 @@
-#ifndef SUMS_SHARED_FIELDS_HPP
-#define SUMS_SHARED_FIELDS_HPP
+#ifndef MATHOPS_SHARED_FIELDS_HPP
+#define MATHOPS_SHARED_FIELDS_HPP
 
 #include <simd/simd_common.hpp>
+#include <mathops/detail/common/memory_common.inl>
 
 #include <cstddef>
 #include <cstdlib>      // std::aligned_alloc
 #include <algorithm>    // std::fill
-
-#if defined(_MSC_VER)
-#include <malloc.h> // _aligned_malloc
-#endif // _MSC_VER
 
 namespace analysis
 {
@@ -39,24 +36,12 @@ namespace analysis
 
     inline float *AllocBigArr()
     {
-#if defined(_MSC_VER)
-        float *bigArr = static_cast<float *>(_aligned_malloc(BIG_ARR_SIZE * sizeof(float), AVX_ALIGNMENT));
-#else // _MSC_VER
-        float *bigArr = static_cast<float *>(std::aligned_alloc(AVX_ALIGNMENT, BIG_ARR_SIZE * sizeof(float)));
-#endif // _MSC_VER
+        float *bigArr = _alloc_aligned_memory_float(BIG_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);
+
         std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1);
 
         return bigArr;
     }
-
-    inline void FreeBigArr(float *bigArr)
-    {
-#if defined(_MSC_VER)
-            _aligned_free(bigArr);
-#else // _MSC_VER
-            std::free(bigArr);
-#endif // _MSC_VER
-    }
 } // namespace analysis
 
-#endif // SUMS_SHARED_FIELDS_HPP
+#endif // MATHOPS_SHARED_FIELDS_HPP
