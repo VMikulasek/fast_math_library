@@ -1,13 +1,11 @@
 #ifndef SUMS_TESTS_FIXTURE_HPP
 #define SUMS_TESTS_FIXTURE_HPP
 
-#include <simd/simd_common.hpp>
 #include <mathops_shared_fields.hpp>
 #include <common/memory_common.inl>
 #include <mathops/mathops_tests_fixture.hpp>
 
 #include <gtest/gtest.h>
-#include <string>
 #include <functional>
 #include <cstddef>
 #include <numeric> // std::inclusive_scan
