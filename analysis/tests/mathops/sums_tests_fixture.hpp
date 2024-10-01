@@ -3,6 +3,7 @@
 
 #include <simd/simd_common.hpp>
 #include <sums_shared_fields.hpp>
+#include <mathops/detail/common/memory_common.inl>
 
 #include <gtest/gtest.h>
 #include <string>
@@ -44,13 +45,8 @@ namespace tests
         void test_prefix_sum(std::function<void(const float *, size_t, float *)> testedPrefixSum,
             const float *arr, size_t size)
         {
-#if defined(_MSC_VER)
-            float* result = static_cast<float*>(_aligned_malloc(size * sizeof(float), AVX_ALIGNMENT));
-            float* expected = static_cast<float*>(_aligned_malloc(size * sizeof(float), AVX_ALIGNMENT));
-#else // _MSC_VER
-            float* result = static_cast<float*>(std::aligned_alloc(AVX_ALIGNMENT, size * sizeof(float)));
-            float* expected = static_cast<float*>(std::aligned_alloc(AVX_ALIGNMENT, size * sizeof(float)));
-#endif // _MSC_VER
+            float* result = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+            float* expected = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
 
             testedPrefixSum(arr, size, result);
             std::inclusive_scan(arr, arr + size, expected);
@@ -60,13 +56,8 @@ namespace tests
                 EXPECT_FLOAT_EQ(result[i], expected[i]);
             }
 
-#if defined(_MSC_VER)
-            _aligned_free(result);
-            _aligned_free(expected);
-#else // _MSC_VER
-            std::free(result);
-            std::free(expected);
-#endif // _MSC_VER
+            _free_aligned_memory(result);
+            _free_aligned_memory(expected);
         }
     };
 } // namespace tests
