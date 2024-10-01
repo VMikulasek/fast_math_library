@@ -24,7 +24,7 @@ namespace analysis
     alignas(AVX_ALIGNMENT) static const float _8ElemArr[_8_ELEM_ARR_SIZE]
         { 2, 1, 2.3, 1.3, 1.424, 13, 51341, 132413.1321 };
     alignas(AVX_ALIGNMENT) static const float _9ElemArr[_9_ELEM_ARR_SIZE]
-        { 2, 3114.314, 314134.134, 134.13, 7647.76, 34534.653, 52362.13, 5.67, 1 };
+        { 2, 3114.314, -314134.134, 134.13, 7647.76, 34534.653, 52362.13, 5.67, 1 };
     alignas(AVX_ALIGNMENT) static const float _16ElemArr[_16_ELEM_ARR_SIZE]
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
     alignas(AVX_ALIGNMENT) static const float _17ElemArr[_17_ELEM_ARR_SIZE]
