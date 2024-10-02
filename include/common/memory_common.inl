@@ -1,5 +1,5 @@
-#ifndef MEMORY_COMMON_HPP
-#define MEMORY_COMMON_HPP
+#ifndef MEMORY_COMMON_INL
+#define MEMORY_COMMON_INL
 
 #include <cstddef>
 #include <cstdlib> // std::aligned_alloc

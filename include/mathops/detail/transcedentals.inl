@@ -8,6 +8,16 @@
 
 #include <cmath>
 
+#define FAST_INV_SQRT(num)                          \
+do                                                  \
+{                                                   \
+    float numHalf = 0.5f * num;                     \
+    int i = *(int *)&num;                           \
+    i = 0x5f375a86 - (i >> 1);                      \
+    num = *(float *)&i;                             \
+    num = num * (1.5f - numHalf * num * num);       \
+} while(0)
+
 namespace mathops
 {
 
@@ -30,7 +40,8 @@ namespace mathops
 
     inline float fast_sqrt(float num)
     {
-        return 1 / fast_invsqrt(num);
+        FAST_INV_SQRT(num);
+        return 1 / num;
     }
 
     inline float invsqrt(float num)
@@ -40,11 +51,7 @@ namespace mathops
 
     inline float fast_invsqrt(float num)
     {
-        float numHalf = 0.5f * num;
-        int i = *(int*)&num;
-        i = 0x5f375a86- (i>>1);
-        num = *(float*)&i;
-        num = num * (1.5f - numHalf * num * num);
+        FAST_INV_SQRT(num);
         return num;
     }
 

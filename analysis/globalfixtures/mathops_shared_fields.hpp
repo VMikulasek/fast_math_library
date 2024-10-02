@@ -17,6 +17,7 @@ namespace analysis
     static const size_t _17_ELEM_ARR_SIZE = 17;
     static const size_t _24_ELEM_ARR_SIZE = 24;
     static const size_t _25_ELEM_ARR_SIZE = 25;
+    static const size_t MEDIUM_ARR_SIZE = 10000;
     static const size_t BIG_ARR_SIZE = 15000000;
 
     alignas(AVX_ALIGNMENT) static const float _1ElemArr[_1_ELEM_ARR_SIZE]
@@ -41,6 +42,15 @@ namespace analysis
         std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1);
 
         return bigArr;
+    }
+
+    inline float *AllocMediumArr()
+    {
+        float *mediumArr = _alloc_aligned_memory_float(MEDIUM_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);
+
+        std::fill(mediumArr, mediumArr + MEDIUM_ARR_SIZE, 1);
+
+        return mediumArr;
     }
 } // namespace analysis
 

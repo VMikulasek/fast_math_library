@@ -24,6 +24,8 @@ if (BUILD_TESTS)
 endif()
 
 if (BUILD_BENCHMARKS)
+    set(ACCELERATED_SQRT_BENCHMARKS accelerated_sqrt_benchmarks.cpp)
+    set(BASIC_SQRT_BENCHMARKS basic_sqrt_benchmarks.cpp)
     set(AVX_SUM_BENCHMARKS avx_sum_benchmarks)
     set(SEQ_SUM_BENCHMARKS seq_sum_benchmarks)
     set(AVX_PREFIXSUM_BENCHMARKS avx_prefixsum_benchmarks)
@@ -34,6 +36,8 @@ if (BUILD_BENCHMARKS)
     set(SEQ_INVSQRTARR_BENCHMARKS seq_invsqrtarr_benchmarks)
     
     set(BENCHMARKS
+    ${ACCELERATED_SQRT_BENCHMARKS}
+    ${BASIC_SQRT_BENCHMARKS}
     ${AVX_SUM_BENCHMARKS}
     ${SEQ_SUM_BENCHMARKS}
     ${AVX_PREFIXSUM_BENCHMARKS}

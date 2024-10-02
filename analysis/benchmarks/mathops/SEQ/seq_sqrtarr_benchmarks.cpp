@@ -48,6 +48,14 @@
         {
             BM_Sqrt(state, _25ElemArr, _25_ELEM_ARR_SIZE);
         }
+        static void BM_SqrtMedArr(benchmark::State &state)
+        {
+            float *medArr = AllocMediumArr();
+
+            BM_Sqrt(state, medArr, MEDIUM_ARR_SIZE);
+
+            _free_aligned_memory(medArr);
+        }
         static void BM_SqrtBigArr(benchmark::State &state)
         {
             float *bigArr = AllocBigArr();
@@ -64,6 +72,7 @@
         BENCHMARK(BM_Sqrt17Elem);
         BENCHMARK(BM_Sqrt24Elem);
         BENCHMARK(BM_Sqrt25Elem);
+        BENCHMARK(BM_SqrtMedArr);
         BENCHMARK(BM_SqrtBigArr);
 
     } // namespace benchmarks

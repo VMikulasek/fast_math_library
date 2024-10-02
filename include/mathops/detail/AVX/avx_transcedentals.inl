@@ -5,6 +5,42 @@
 #include <mathops/transcedentals.hpp>
 #include <simd/simd_operations.hpp>
 
+#define FAST_INV_SQRT_ARR(arr, res) \
+    do                                                                                      \
+    {                                                                                       \
+        /* float xhalf = 0.5f * x; */                                                       \
+        FloatOps::AvxReg x = FloatOps::load_vector(arr);                                    \
+        FloatOps::AvxReg xHalf;                                                             \
+        {                                                                                   \
+            FloatOps::AvxReg halfConst = FloatOps::set_register(0.5f);                      \
+            xHalf = FloatOps::mul(x, halfConst);                                            \
+        }                                                                                   \
+                                                                                            \
+        {                                                                                   \
+            /* int i = *(int *)&x; */                                                       \
+            IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);                 \
+                                                                                            \
+            /* i = 0x5f375a86 - (i >> 1); */                                                \
+            i = IntOps::shift_right(i, 1);                                                  \
+            {                                                                               \
+                IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);          \
+                i = IntOps::sub(magicConstant, i);                                          \
+            }                                                                               \
+                                                                                            \
+            /* x = *(float *)&i; */                                                         \
+            x = *reinterpret_cast<FloatOps::AvxReg *>(&i);                                  \
+        }                                                                                   \
+                                                                                            \
+        /* x = x * (1.5f - xhalf * x * x); */                                               \
+        res = FloatOps::mul(x, x);                                                          \
+        res = FloatOps::mul(xHalf, res);                                                    \
+        {                                                                                   \
+            FloatOps::AvxReg constReg = FloatOps::set_register(1.5f);                       \
+            res = FloatOps::sub(constReg, res);                                             \
+        }                                                                                   \
+        res = FloatOps::mul(x, res);                                                        \
+    } while(0)
+
 namespace mathops
 {
 namespace avx
@@ -15,53 +51,16 @@ namespace avx
     using FloatOps = simd::SIMDOperations<float, simd::AVX>;
     using IntOps = simd::SIMDOperations<int, simd::AVX2>;
 
-    inline FloatOps::AvxReg _fast_invsqrt_arr8(const float *arr)
-    {
-        // float xhalf = 0.5f * x;
-        FloatOps::AvxReg x = FloatOps::load_vector(arr);
-        FloatOps::AvxReg xHalf;
-        {
-            FloatOps::AvxReg halfConst = FloatOps::set_register(0.5f);
-            xHalf = FloatOps::mul(x, halfConst);
-        }
-
-        {
-            // int i = *(int *)&x;
-            IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);
-
-            // i = 0x5f375a86 - (i >> 1);
-            i = IntOps::shift_right(i, 1);
-            {
-                IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);
-                i = IntOps::sub(magicConstant, i);
-            }
-            
-            // x = *(float *)&i;
-            x = *reinterpret_cast<FloatOps::AvxReg *>(&i);
-        }
-        
-        // x = x * (1.5f - xhalf * x * x);
-        FloatOps::AvxReg res = FloatOps::mul(x, x);
-        res = FloatOps::mul(xHalf, res);
-        {
-            FloatOps::AvxReg constReg = FloatOps::set_register(1.5f);
-            res = FloatOps::sub(constReg, res);
-        }
-        res = FloatOps::mul(x, res);
-
-        // return x
-        return res;
-    }
-
     inline void fast_sqrt_arr(const float *arr, size_t size, float *dst)
     {
         FloatOps::AvxReg oneReg = FloatOps::set_register(1.f);
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg sqrt8 = _fast_invsqrt_arr8(arr);
-            sqrt8 = FloatOps::div(oneReg, sqrt8);
-            FloatOps::materialize_register(sqrt8, dst);
+            FloatOps::AvxReg res;
+            FAST_INV_SQRT_ARR(arr, res);
+            res = FloatOps::div(oneReg, res);
+            FloatOps::materialize_register(res, dst);
 
             size -= AVX_FLOAT_VECTOR_SIZE;
             arr += AVX_FLOAT_VECTOR_SIZE;
@@ -78,8 +77,9 @@ namespace avx
     {
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg invSqrt8 = _fast_invsqrt_arr8(arr);
-            FloatOps::materialize_register(invSqrt8, dst);
+            FloatOps::AvxReg res;
+            FAST_INV_SQRT_ARR(arr, res);
+            FloatOps::materialize_register(res, dst);
 
             size -= AVX_FLOAT_VECTOR_SIZE;
             arr += AVX_FLOAT_VECTOR_SIZE;

@@ -48,6 +48,14 @@ namespace benchmarks
     {
         BM_PrefixSum(state, _25ElemArr, _25_ELEM_ARR_SIZE);
     }
+    static void BM_PrefixSumMedArr(benchmark::State &state)
+    {
+        float *medArr = AllocMediumArr();
+
+        BM_PrefixSum(state, medArr, MEDIUM_ARR_SIZE);
+
+        _free_aligned_memory(medArr);
+    }
     static void BM_PrefixSumBigArr(benchmark::State &state)
     {
         float *bigArr = AllocBigArr();
@@ -64,6 +72,7 @@ namespace benchmarks
     BENCHMARK(BM_PrefixSum17Elem);
     BENCHMARK(BM_PrefixSum24Elem);
     BENCHMARK(BM_PrefixSum25Elem);
+    BENCHMARK(BM_PrefixSumMedArr);
     BENCHMARK(BM_PrefixSumBigArr);
-}
-}
+} // benchmarks
+} // analysis
