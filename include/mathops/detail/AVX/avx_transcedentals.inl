@@ -25,17 +25,21 @@ namespace avx
             xHalf = FloatOps::mul(x, halfConst);
         }
 
-        // int i = *(int *)&x;
-        IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);
+        {
+            // int i = *(int *)&x;
+            IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);
 
-        // i = 0x5f375a86 - (i >> 1);
-        i = IntOps::shift_right(i, 1);
-        IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);
-        i = IntOps::sub(magicConstant, i);
-
-        // x = *(float *)&i;
-        x = *reinterpret_cast<FloatOps::AvxReg *>(&i);
-
+            // i = 0x5f375a86 - (i >> 1);
+            i = IntOps::shift_right(i, 1);
+            {
+                IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);
+                i = IntOps::sub(magicConstant, i);
+            }
+            
+            // x = *(float *)&i;
+            x = *reinterpret_cast<FloatOps::AvxReg *>(&i);
+        }
+        
         // x = x * (1.5f - xhalf * x * x);
         FloatOps::AvxReg res = FloatOps::mul(x, x);
         res = FloatOps::mul(xHalf, res);
