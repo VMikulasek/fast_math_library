@@ -11,33 +11,25 @@
         /* float xhalf = 0.5f * x; */                                                       \
         FloatOps::AvxReg x = FloatOps::load_vector(arr);                                    \
         FloatOps::AvxReg xHalf;                                                             \
-        {                                                                                   \
-            FloatOps::AvxReg halfConst = FloatOps::set_register(0.5f);                      \
-            xHalf = FloatOps::mul(x, halfConst);                                            \
-        }                                                                                   \
+        FloatOps::AvxReg halfConst = FloatOps::set_register(0.5f);                          \
+        xHalf = FloatOps::mul(x, halfConst);                                                \
                                                                                             \
-        {                                                                                   \
-            /* int i = *(int *)&x; */                                                       \
-            IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);                 \
+        /* int i = *(int *)&x; */                                                           \
+        IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);                     \
                                                                                             \
-            /* i = 0x5f375a86 - (i >> 1); */                                                \
-            i = IntOps::shift_right(i, 1);                                                  \
-            {                                                                               \
-                IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);          \
-                i = IntOps::sub(magicConstant, i);                                          \
-            }                                                                               \
+        /* i = 0x5f375a86 - (i >> 1); */                                                    \
+        i = IntOps::shift_right(i, 1);                                                      \
+        IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);                  \
+        i = IntOps::sub(magicConstant, i);                                                  \
                                                                                             \
-            /* x = *(float *)&i; */                                                         \
-            x = *reinterpret_cast<FloatOps::AvxReg *>(&i);                                  \
-        }                                                                                   \
+        /* x = *(float *)&i; */                                                             \
+        x = *reinterpret_cast<FloatOps::AvxReg *>(&i);                                      \
                                                                                             \
         /* x = x * (1.5f - xhalf * x * x); */                                               \
         res = FloatOps::mul(x, x);                                                          \
         res = FloatOps::mul(xHalf, res);                                                    \
-        {                                                                                   \
-            FloatOps::AvxReg constReg = FloatOps::set_register(1.5f);                       \
-            res = FloatOps::sub(constReg, res);                                             \
-        }                                                                                   \
+        FloatOps::AvxReg constReg = FloatOps::set_register(1.5f);                           \
+        res = FloatOps::sub(constReg, res);                                                 \
         res = FloatOps::mul(x, res);                                                        \
     } while(0)
 
