@@ -31,7 +31,12 @@ namespace mathops
 
     inline float fast_sqrt(float num)
     {
-        fast_invsqrt(num);
+        if (num < 0)
+        {
+            return NAN;
+        }
+
+        num = fast_invsqrt(num);
         return 1 / num;
     }
 
@@ -42,6 +47,15 @@ namespace mathops
 
     inline float fast_invsqrt(float num)
     {
+        if (num < 0)
+        {
+            return NAN;
+        }
+        else if (num == 0)
+        {
+            return INFINITY;
+        }
+        
         float numHalf = 0.5f * num;
         int i = *(int *)&num;
         i = 0x5f375a86 - (i >> 1);

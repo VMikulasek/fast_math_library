@@ -15,7 +15,7 @@ namespace avx
     using FloatOps = simd::SIMDOperations<float, simd::AVX>;
     using IntOps = simd::SIMDOperations<int, simd::AVX2>;
 
-    inline void _fast_invsqrt_arr8(const float *arr, FloatOps::AvxReg res)
+    inline void _fast_invsqrt_arr8(const float *arr, FloatOps::AvxReg &res)
     {
         /* float xhalf = 0.5f * x; */
         FloatOps::AvxReg x = FloatOps::load_vector(arr);

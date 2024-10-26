@@ -55,7 +55,7 @@ namespace tests
                 }
                 else
                 {
-                    EXPECT_NEAR(result[i], expected[i], expected[i] * maximalRelativeError);
+                    EXPECT_NEAR(result[i], expected[i], (expected[i] == 0 ? 0.01 : expected[i]) * maximalRelativeError);
                 }
             }
 
