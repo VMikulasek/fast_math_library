@@ -5,18 +5,9 @@
 #include <mathops/detail/AVX/avx_transcedentals.hpp>
 #include <mathops/detail/SEQ/seq_transcedentals.hpp>
 #include <common/memory_common.inl>
+#include <simd/simd_common.hpp>
 
 #include <cmath>
-
-#define FAST_INV_SQRT(num)                          \
-do                                                  \
-{                                                   \
-    float numHalf = 0.5f * num;                     \
-    int i = *(int *)&num;                           \
-    i = 0x5f375a86 - (i >> 1);                      \
-    num = *(float *)&i;                             \
-    num = num * (1.5f - numHalf * num * num);       \
-} while(0)
 
 namespace mathops
 {
@@ -40,7 +31,7 @@ namespace mathops
 
     inline float fast_sqrt(float num)
     {
-        FAST_INV_SQRT(num);
+        fast_invsqrt(num);
         return 1 / num;
     }
 
@@ -51,7 +42,11 @@ namespace mathops
 
     inline float fast_invsqrt(float num)
     {
-        FAST_INV_SQRT(num);
+        float numHalf = 0.5f * num;
+        int i = *(int *)&num;
+        i = 0x5f375a86 - (i >> 1);
+        num = *(float *)&i;
+        num = num * (1.5f - numHalf * num * num);
         return num;
     }
 

@@ -52,10 +52,6 @@ add_executable(${AVX_INVSQRTARR_BENCHMARKS} ${AVX_INVSQRTARR_BENCHMARKS_SOURCE})
 add_executable(${SEQ_INVSQRTARR_BENCHMARKS} ${SEQ_INVSQRTARR_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
-    target_compile_options(${BENCHMARK} PRIVATE
-    $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-O0>
-    $<$<CXX_COMPILER_ID:MSVC>:/Od>)
-
     target_link_libraries(
         ${BENCHMARK}
         PRIVATE ${PROJECT_NAME}

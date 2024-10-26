@@ -15,40 +15,17 @@
             for (auto _ : state)
             {
                 mathops::avx::fast_sqrt_arr(arr, size, dst);
+                benchmark::DoNotOptimize(dst);
             }
 
             _free_aligned_memory(dst);
         }
 
-        static void BM_Sqrt1Elem(benchmark::State &state)
-        {
-            BM_Sqrt(state, _1ElemArr, _1_ELEM_ARR_SIZE);
-        }
-        static void BM_Sqrt8Elem(benchmark::State &state)
-        {
-            BM_Sqrt(state, _8ElemArr, _8_ELEM_ARR_SIZE);
-        }
         static void BM_Sqrt9Elem(benchmark::State &state)
         {
             BM_Sqrt(state, _9ElemArr, _9_ELEM_ARR_SIZE);
         }
-        static void BM_Sqrt16Elem(benchmark::State &state)
-        {
-            BM_Sqrt(state, _16ElemArr, _16_ELEM_ARR_SIZE);
-        }
-        static void BM_Sqrt17Elem(benchmark::State &state)
-        {
-            BM_Sqrt(state, _17ElemArr, _17_ELEM_ARR_SIZE);
-        }
-        static void BM_Sqrt24Elem(benchmark::State &state)
-        {
-            BM_Sqrt(state, _24ElemArr, _24_ELEM_ARR_SIZE);
-        }
-        static void BM_Sqrt25Elem(benchmark::State &state)
-        {
-            BM_Sqrt(state, _25ElemArr, _25_ELEM_ARR_SIZE);
-        }
-        static void BM_SqrtMedArr(benchmark::State &state)
+        static void BM_Sqrt10kElem(benchmark::State &state)
         {
             float *medArr = AllocMediumArr();
 
@@ -56,7 +33,7 @@
 
             _free_aligned_memory(medArr);
         }
-        static void BM_SqrtBigArr(benchmark::State &state)
+        static void BM_Sqrt15MElem(benchmark::State &state)
         {
             float *bigArr = AllocBigArr();
 
@@ -65,15 +42,8 @@
             _free_aligned_memory(bigArr);
         }
 
-        BENCHMARK(BM_Sqrt1Elem);
-        BENCHMARK(BM_Sqrt8Elem);
         BENCHMARK(BM_Sqrt9Elem);
-        BENCHMARK(BM_Sqrt16Elem);
-        BENCHMARK(BM_Sqrt17Elem);
-        BENCHMARK(BM_Sqrt24Elem);
-        BENCHMARK(BM_Sqrt25Elem);
-        BENCHMARK(BM_SqrtMedArr);
-        BENCHMARK(BM_SqrtBigArr);
-
+        BENCHMARK(BM_Sqrt10kElem);
+        BENCHMARK(BM_Sqrt15MElem);
     } // namespace benchmarks
     } // namespace analysis

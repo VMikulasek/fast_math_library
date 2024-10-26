@@ -10,7 +10,8 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
-            mathops::fast_invsqrt(9.8);
+            float res = mathops::fast_invsqrt(9.8);
+            benchmark::DoNotOptimize(res);
         }
     }
 
@@ -18,7 +19,8 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
-            mathops::fast_sqrt(9.8);
+            float res = mathops::fast_sqrt(9.8);
+            benchmark::DoNotOptimize(res);
         }
     }
 
