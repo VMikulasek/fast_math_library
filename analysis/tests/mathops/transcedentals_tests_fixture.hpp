@@ -2,7 +2,7 @@
 #define SUMS_TESTS_FIXTURE_HPP
 
 #include <mathops_shared_fields.hpp>
-#include <common/memory_common.inl>
+#include <common/detail/memory_common.inl>
 #include <mathops/mathops_tests_fixture.hpp>
 #include <tests_common.hpp>
 
