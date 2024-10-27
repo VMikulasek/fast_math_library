@@ -112,6 +112,15 @@ namespace tests
         return cmp(op1, op2, ge);
     }
 
+    float abs(float num)
+    {
+        return std::abs(num);
+    }
+    float round(float num)
+    {
+        return std::round(num);
+    }
+
     int add_i(int op1, int op2)
     {
         return op1 + op2;

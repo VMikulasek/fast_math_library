@@ -111,6 +111,18 @@ namespace tests
             EXPECT_EQ(resultI, expectedI);
         }
 
+        void CheckResult(const std::function<float(float)> &operation)
+        {
+            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            Ops::materialize_register(resultReg, result);
+
+            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            {
+                float expected = operation(usedVec1[i]);
+
+                ExpectEqFloat(result[i], expected);
+            }
+        }
         void CheckResult(const std::function<float(float, float)> &operation, OperationDirection direction = VERTICAL)
         {
             alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
@@ -1041,6 +1053,88 @@ namespace tests
         resultReg = Ops::distribute_high_half(reg1);
 
         CheckResult(indexHighHalfDistributed);
+    }
+
+    TEST_F(SimdAvxFloatTest, AbsBasic)
+    {
+        SetRegisters(basicVec1, basicVec2);
+
+        resultReg = Ops::abs(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(abs));
+    }
+    TEST_F(SimdAvxFloatTest, AbsDecimal)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::abs(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(abs));
+    }
+    TEST_F(SimdAvxFloatTest, AbsZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::abs(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(abs));
+    }
+    TEST_F(SimdAvxFloatTest, AbsNegative)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::abs(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(abs));
+    }
+    TEST_F(SimdAvxFloatTest, AbsBigNum)
+    {
+        SetRegisters(bigNumsVec2, bigNumsVec2);
+
+        resultReg = Ops::abs(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(abs));
+    }
+
+    TEST_F(SimdAvxFloatTest, RoundBasic)
+    {
+        SetRegisters(basicVec1, basicVec2);
+
+        resultReg = Ops::round(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(round));
+    }
+    TEST_F(SimdAvxFloatTest, RoundDecimal)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::round(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(round));
+    }
+    TEST_F(SimdAvxFloatTest, RoundZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::round(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(round));
+    }
+    TEST_F(SimdAvxFloatTest, RoundNegative)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::round(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(round));
+    }
+    TEST_F(SimdAvxFloatTest, RoundBigNum)
+    {
+        SetRegisters(bigNumsVec1, bigNumsVec2);
+
+        resultReg = Ops::round(reg1);
+
+        CheckResult(static_cast<std::function<float(float)>>(round));
     }
 } // namespace tests
 } // namespace analysis
