@@ -23,31 +23,31 @@ namespace simd
     }
 
     inline void SIMDOperations<int, InstructionSet::AVX2>::materialize_register(
-        Avx2IReg &reg, int *dst)
+        const Avx2IReg &reg, int *dst)
     {
         _mm256_store_si256(reinterpret_cast<Avx2IReg *>(dst), reg);
     }
 
     inline SIMDOperations<int, InstructionSet::AVX2>::Avx2IReg SIMDOperations<int, InstructionSet::AVX2>::add(
-        Avx2IReg &vec1, Avx2IReg &vec2)
+        const Avx2IReg &vec1, const Avx2IReg &vec2)
     {
         return _mm256_add_epi32(vec1, vec2);
     }
 
     inline SIMDOperations<int, InstructionSet::AVX2>::Avx2IReg SIMDOperations<int, InstructionSet::AVX2>::sub(
-        Avx2IReg &vec1, Avx2IReg &vec2)
+        const Avx2IReg &vec1, const Avx2IReg &vec2)
     {
         return _mm256_sub_epi32(vec1, vec2);
     }
 
     inline SIMDOperations<int, InstructionSet::AVX2>::Avx2IReg SIMDOperations<int, InstructionSet::AVX2>::shift_left(
-        Avx2IReg &vec, int count)
+        const Avx2IReg &vec, int count)
     {
         return _mm256_slli_epi32(vec, count);
     }
 
     inline SIMDOperations<int, InstructionSet::AVX2>::Avx2IReg SIMDOperations<int, InstructionSet::AVX2>::shift_right(
-        Avx2IReg &vec, int count)
+        const Avx2IReg &vec, int count)
     {
         return _mm256_srli_epi32(vec, count);
     }

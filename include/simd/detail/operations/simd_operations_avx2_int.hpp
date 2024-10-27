@@ -49,17 +49,17 @@ namespace simd
          * @param dst int * aligned to 32 bytes with at least 8 ints
          * of size
          */
-        static void materialize_register(Avx2IReg &reg, int *dst);
+        static void materialize_register(const Avx2IReg &reg, int *dst);
 
         /**
          * @brief Adds vec2 to vec1 and returns result
          */
-        static Avx2IReg add(Avx2IReg &vec1, Avx2IReg &vec2);
+        static Avx2IReg add(const Avx2IReg &vec1, const Avx2IReg &vec2);
 
         /**
          * @brief Subtracts vec2 from vec1 and returns result
          */
-        static Avx2IReg sub(Avx2IReg &vec1, Avx2IReg &vec2);
+        static Avx2IReg sub(const Avx2IReg &vec1, const Avx2IReg &vec2);
 
         /**
          * @brief Shift every int in reg left by count bits
@@ -70,7 +70,7 @@ namespace simd
          * then undefined behavior
          * @return Avx2IReg shifted result
          */
-        static Avx2IReg shift_left(Avx2IReg &vec, int count);
+        static Avx2IReg shift_left(const Avx2IReg &vec, int count);
 
         /**
          * @brief Shift every int in reg right by count bits
@@ -81,7 +81,7 @@ namespace simd
          * then undefined behavior
          * @return Avx2IReg Shifted result
          */
-        static Avx2IReg shift_right(Avx2IReg &vec, int count);
+        static Avx2IReg shift_right(const Avx2IReg &vec, int count);
     };
 } // namespace simd
 

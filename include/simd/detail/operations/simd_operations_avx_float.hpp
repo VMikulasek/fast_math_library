@@ -66,42 +66,42 @@ namespace simd
          * @param dst float * aligned to 32 bytes with at least 8 floats
          * of size
          */
-        static void materialize_register(AvxReg &reg, float *dst);
+        static void materialize_register(const AvxReg &reg, float *dst);
         
         /**
          * @brief Adds vec1 and vec2 and returns result
          */
-        static AvxReg add(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg add(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Subtracts vec2 from vec1 and returns result
          */
-        static AvxReg sub(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg sub(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Multiplies vec1 with vec1 and returns result
          */
-        static AvxReg mul(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg mul(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Divides vec1 by vec2 and returns result
          */
-        static AvxReg div(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg div(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Computes bitwise and of vec1 and vec2 and returns result
          */
-        static AvxReg bitwise_and(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg bitwise_and(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Computes bitwise or of vec1 and vec2 and returns result
          */
-        static AvxReg bitwise_or(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg bitwise_or(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Computes bitwise xor of vec1 and vec2 and returns result
          */
-        static AvxReg bitwise_xor(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg bitwise_xor(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Compares every float in vector with cmp variant based on
@@ -111,7 +111,7 @@ namespace simd
          * @tparam variant Variant of comparison {EQ, NEQ, LT, LE, GT, GE}
          */
         template<AvxCmpVariant variant>
-        static AvxReg cmp(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg cmp(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Adds horizontal adjacent floats and stores the
@@ -121,7 +121,7 @@ namespace simd
          *  
          * @return AvxReg register with 8 result floats
          */
-        static AvxReg horizontal_add(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg horizontal_add(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Blends two vector registers based on low 8 bits of mask
@@ -130,35 +130,35 @@ namespace simd
          * @return AvxReg blended vector 
          */
         template<int mask>
-        static AvxReg blend(AvxReg &vec1, AvxReg &vec2);
+        static AvxReg blend(const AvxReg &vec1, const AvxReg &vec2);
 
         /**
          * @brief Rotates both 128 bit lanes of vec 32 bits right
          * 
          * @return AvxReg rotated register
          */
-        static AvxReg rotate_halves_right_32bits(AvxReg &vec);
+        static AvxReg rotate_halves_right_32bits(const AvxReg &vec);
 
         /**
          * @brief Rotates both 128 bit lanes of vec 32 bits left
          * 
          * @return AvxReg rotated register
          */
-        static AvxReg rotate_halves_left_32bits(AvxReg &vec);
+        static AvxReg rotate_halves_left_32bits(const AvxReg &vec);
 
         /**
          * @brief Rotates both 128 bit lanes of vec 64 bits
          * 
          * @return AvxReg rotated register
          */
-        static AvxReg rotate_halves_64bits(AvxReg &vec);
+        static AvxReg rotate_halves_64bits(const AvxReg &vec);
 
         /**
          * @brief Swaps 128 bit lines of register
          *
          * @return AvxReg register with swapped halves 
          */
-        static AvxReg swap_halves(AvxReg &vec);
+        static AvxReg swap_halves(const AvxReg &vec);
 
         /**
          * @brief Permutes numbers in register via pseudocode:
@@ -184,19 +184,19 @@ namespace simd
          * @return AvxReg permuted register
          */
         template<int pattern>
-        static AvxReg permute_reg_inside_halves(AvxReg &vec);
+        static AvxReg permute_reg_inside_halves(const AvxReg &vec);
 
         /**
          * @brief Copies low half of register
          * and pastes to the high half
          */
-        static AvxReg distribute_low_half(AvxReg &vec);
+        static AvxReg distribute_low_half(const AvxReg &vec);
 
         /**
          * @brief Copies high half of register
          * and pastes to the low half
          */
-        static AvxReg distribute_high_half(AvxReg &vec);
+        static AvxReg distribute_high_half(const AvxReg &vec);
     };
 } // namespace simd
 
