@@ -32,6 +32,28 @@ namespace mathops
     float fast_invsqrt(float num);
 
     /**
+     * @brief Computes sin of num using std::sin
+     */
+    float sin(float num);
+
+    /**
+     * @brief Accelerated computation of sin of num
+     * with lower accuracy
+     */
+    float fast_sin(float num);
+
+    /**
+     * @brief Computes cos of num using std::cos
+     */
+    float cos(float num);
+
+    /**
+     * @brief Accelerated computation of cos of num
+     * with lower accuracy
+     */
+    float fast_cos(float num);
+
+    /**
      * @brief Calculates fast square root for array,
      * if any supported SIMD unit available,
      * then accelerates the algorithm also

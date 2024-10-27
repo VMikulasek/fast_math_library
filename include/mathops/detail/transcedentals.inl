@@ -64,6 +64,39 @@ namespace mathops
         return num;
     }
 
+    inline float sin(float num)
+    {
+        return std::sin(num);
+    }
+    inline float cos(float num)
+    {
+        return std::cos(num);
+    }
+
+    // source swiftshader
+    inline float _sin5q(float x)
+    {
+        constexpr float A = 6.28230858f;
+        constexpr float B = -41.1693687f;
+        constexpr float C = 74.4388885f;
+        float x2 = x * x;
+        return x * (A + x2 * (B + x2 * C));
+    }
+    inline float fast_sin(float num)
+    {
+        constexpr float pi2 = 1 / (2 * 3.1415926535f);
+        float x_2 = 0.25f - num * pi2;
+        float z = 0.25f - abs(x_2 - round(x_2));
+        return _sin5q(z);
+    }
+    inline float fast_cos(float num)
+    {
+        constexpr float pi2 = 1 / (2 * 3.1415926535f);
+        float x_2 = num * pi2;
+        float z = 0.25f - abs(x_2 - round(x_2));
+        return _sin5q(z);
+    }
+
     inline float *fast_sqrt_arr(const float *arr, size_t size)
     {
         float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
