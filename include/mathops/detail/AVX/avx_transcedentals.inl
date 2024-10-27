@@ -132,14 +132,13 @@ namespace avx
         FloatOps::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
         _init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
         
-
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
             FloatOps::AvxReg num = FloatOps::load_vector(src);
 
             // float x_2 = 0.25f - num * pi2;
             FloatOps::AvxReg x_2 = FloatOps::mul(num, pi2Vec);
-            x_2 = FloatOps::sub(quarter, pi2Vec);
+            x_2 = FloatOps::sub(quarter, x_2);
 
             // float z = 0.25f - abs(x_2 - round(x_2));            
             FloatOps::AvxReg z = _compute_sincos_z(x_2, quarter);
@@ -151,6 +150,11 @@ namespace avx
             size -= AVX_FLOAT_VECTOR_SIZE;
             src += AVX_FLOAT_VECTOR_SIZE;
             dst += AVX_FLOAT_VECTOR_SIZE;
+        }
+
+        for (unsigned i = 0; i < size; i++)
+        {
+            dst[i] = fast_sin(src[i]);
         }
     }
 
@@ -176,6 +180,11 @@ namespace avx
             size -= AVX_FLOAT_VECTOR_SIZE;
             src += AVX_FLOAT_VECTOR_SIZE;
             dst += AVX_FLOAT_VECTOR_SIZE;
+        }
+
+        for (unsigned i = 0; i < size; i++)
+        {
+            dst[i] = fast_cos(src[i]);
         }
     }
 

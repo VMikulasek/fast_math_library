@@ -26,13 +26,25 @@ namespace tests
         void test_sqrt_arr(std::function<void(const float *, size_t, float *)> testedSqrtArr,
             const float *arr, size_t size)
         {
-            test_arr_float_operation(testedSqrtArr, reference_sqrt_arr, arr, size, maximalFastInvSqrtRelativeError);
+            test_arr_float_operation(testedSqrtArr, reference_sqrt_arr, arr, size, maximalFastInvSqrtRelativeError, true);
         }
 
         void test_invsqrt_arr(std::function<void(const float *, size_t, float *)> testedInvSqrtArr,
             const float *arr, size_t size)
         {
-            test_arr_float_operation(testedInvSqrtArr, reference_invsqrt_arr, arr, size, maximalFastInvSqrtRelativeError);
+            test_arr_float_operation(testedInvSqrtArr, reference_invsqrt_arr, arr, size, maximalFastInvSqrtRelativeError, true);
+        }
+
+        void test_sin_arr(std::function<void(const float*, size_t, float *)> testedSinArr,
+            const float *arr, size_t size)
+        {
+            test_arr_float_operation(testedSinArr, reference_sin_arr, arr, size, maximalSinCosAbsoluteError, false);
+        }
+
+        void test_cos_arr(std::function<void(const float*, size_t, float *)> testedCosArr,
+            const float *arr, size_t size)
+        {
+            test_arr_float_operation(testedCosArr, reference_cos_arr, arr, size, maximalSinCosAbsoluteError, false);
         }
     };
 } // namespace tests

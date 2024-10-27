@@ -39,7 +39,7 @@ namespace tests
 
         void test_arr_float_operation(std::function<void(const float *, size_t, float *)> testedArrOperation,
             std::function<void(const float *, size_t, float *)>referenceArrOperation ,
-            const float *arr, size_t size, float maximalRelativeError)
+            const float *arr, size_t size, float maximalError, bool relativeError)
         {
             float* result = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
             float* expected = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
@@ -49,13 +49,18 @@ namespace tests
 
             for (size_t i = 0; i < size; i++)
             {
-                if (maximalRelativeError == 0)
+                if (maximalError == 0)
                 {
                     EXPECT_FLOAT_EQ(result[i], expected[i]);
                 }
                 else
                 {
-                    EXPECT_NEAR(result[i], expected[i], (expected[i] == 0 ? 0.01 : expected[i]) * maximalRelativeError);
+                    float resMaximalError = maximalError;
+                    if (relativeError)
+                    {
+                        resMaximalError = ((expected[i] == 0) ? 0.01f : expected[i]) * maximalError;
+                    }
+                    EXPECT_NEAR(result[i], expected[i], resMaximalError);
                 }
             }
 

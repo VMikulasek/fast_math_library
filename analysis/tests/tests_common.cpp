@@ -160,5 +160,21 @@ namespace tests
             dst[i] = 1 / std::sqrt(src[i]);
         }
     }
+
+    void reference_sin_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::sin(src[i]);
+        }
+    }
+
+    void reference_cos_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::cos(src[i]);
+        }
+    }
 } // namespace tests
 } // namespace analysis

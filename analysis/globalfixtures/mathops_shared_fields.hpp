@@ -35,6 +35,19 @@ namespace analysis
     alignas(AVX_ALIGNMENT) static const float _25ElemArr[_25_ELEM_ARR_SIZE]
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 
+    alignas(AVX_ALIGNMENT) static const float _8ElemArrMinusPiPi[_8_ELEM_ARR_SIZE]
+        { 2, 1, 2.3, 1.3, 1.424, 3.14, -3.14, 2.1341 };
+    alignas(AVX_ALIGNMENT) static const float _9ElemArrMinusPiPi[_9_ELEM_ARR_SIZE]
+        { 2, 2.314, 1.134, 134.13, 1.76, 0.653, -0.13, -1.67, 1 };
+    alignas(AVX_ALIGNMENT) static const float _16ElemArrMinusPiPi[_16_ELEM_ARR_SIZE]
+        { -3.14, -2.84, -2.54, -2.24, -2.04, -1.74, -1.44, -1.14, -0.84, -0.54, -0.24, 0.06, 0.36, 0.66, 0.96, 1.26 };
+    alignas(AVX_ALIGNMENT) static const float _17ElemArrMinusPiPi[_17_ELEM_ARR_SIZE]
+        { -3.14, -2.84, -2.54, -2.24, -2.04, -1.74, -1.44, -1.14, -0.84, -0.54, -0.24, 0.06, 0.36, 0.66, 0.96, 1.26, 1.56 };
+    alignas(AVX_ALIGNMENT) static const float _24ElemArrMinusPiPi[_24_ELEM_ARR_SIZE]
+        { -3.14, -2.84, -2.54, -2.24, -2.04, -1.74, -1.44, -1.14, -0.84, -0.54, -0.24, 0.06, 0.36, 0.66, 0.96, 1.26, 1.56, 1.86, 2.06, 2.36, 2.66, 2.96, 2.99, 3.02 };
+    alignas(AVX_ALIGNMENT) static const float _25ElemArrMinusPiPi[_25_ELEM_ARR_SIZE]
+        { -3.14, -2.84, -2.54, -2.24, -2.04, -1.74, -1.44, -1.14, -0.84, -0.54, -0.24, 0.06, 0.36, 0.66, 0.96, 1.26, 1.56, 1.86, 2.06, 2.36, 2.66, 2.96, 2.99, 3.02, 3.05 };
+
     inline float *AllocBigArr()
     {
         float *bigArr = _alloc_aligned_memory_float(BIG_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);

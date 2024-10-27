@@ -21,7 +21,7 @@ namespace tests
         void test_prefix_sum(std::function<void(const float *, size_t, float *)> testedPrefixSum,
             const float *arr, size_t size)
         {
-            test_arr_float_operation(testedPrefixSum, reference_prefix_sum, arr, size, 0);
+            test_arr_float_operation(testedPrefixSum, reference_prefix_sum, arr, size, 0, false);
         }
     };
 } // namespace tests
