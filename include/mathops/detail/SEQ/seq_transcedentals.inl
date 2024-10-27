@@ -23,6 +23,22 @@ namespace seq
             dst[i] = fast_invsqrt(arr[i]);
         }
     }
+
+    inline void fast_sin_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = fast_sin(arr[i]);
+        }
+    }
+
+    inline void fast_cos_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = fast_cos(arr[i]);
+        }
+    }
 } // namespace seq
 } // namespace mathops
 

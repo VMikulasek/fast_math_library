@@ -8,6 +8,7 @@
 #include <simd/simd_common.hpp>
 
 #include <cmath>
+#include <numbers>
 
 namespace mathops
 {
@@ -17,10 +18,16 @@ namespace mathops
 #define FAST_SQRT_ARR avx::fast_sqrt_arr
 #define FAST_INVSQRT_ARR avx::fast_invsqrt_arr
 
+#define FAST_SIN_ARR avx::fast_sin_arr
+#define FAST_COS_ARR avx::fast_cos_arr
+
 #else // HAS_AVX
 
 #define FAST_SQRT_ARR seq::fast_sqrt_arr
 #define FAST_INVSQRT_ARR seq::fast_invsqrt_arr
+
+#define FAST_SIN_ARR seq::fast_sin_arr
+#define FAST_COS_ARR seq::fast_cos_arr
 
 #endif // HAS_AVX
 
@@ -76,22 +83,17 @@ namespace mathops
     // source swiftshader
     inline float _sin5q(float x)
     {
-        constexpr float A = 6.28230858f;
-        constexpr float B = -41.1693687f;
-        constexpr float C = 74.4388885f;
         float x2 = x * x;
         return x * (A + x2 * (B + x2 * C));
     }
     inline float fast_sin(float num)
     {
-        constexpr float pi2 = 1 / (2 * 3.1415926535f);
         float x_2 = 0.25f - num * pi2;
         float z = 0.25f - abs(x_2 - round(x_2));
         return _sin5q(z);
     }
     inline float fast_cos(float num)
     {
-        constexpr float pi2 = 1 / (2 * 3.1415926535f);
         float x_2 = num * pi2;
         float z = 0.25f - abs(x_2 - round(x_2));
         return _sin5q(z);
@@ -131,6 +133,43 @@ namespace mathops
     inline float *fast_invsqrt_arr(const std::vector<float> &arr)
     {
         return fast_invsqrt_arr(arr.data(), arr.size());
+    }
+
+    inline float *fast_sin_arr(const float *arr, size_t size)
+    {
+        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        if (dst == nullptr)
+        {
+            return nullptr;
+        }
+
+        FAST_SIN_ARR(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *fast_sin_arr(const std::vector<float> &arr)
+    {
+        return fast_sin_arr(arr.data(), arr.size());
+    }
+
+
+    inline float *fast_cos_arr(const float *arr, size_t size)
+    {
+        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        if (dst == nullptr)
+        {
+            return nullptr;
+        }
+
+        FAST_COS_ARR(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *fast_cos_arr(const std::vector<float> &arr)
+    {
+        return fast_cos_arr(arr.data(), arr.size());
     }
 }
 

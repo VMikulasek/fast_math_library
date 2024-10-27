@@ -6,6 +6,11 @@
 
 namespace mathops
 {
+    constexpr float pi2 = 1 / (2 * 3.1415926535f);
+    constexpr float A = 6.28230858f;
+    constexpr float B = -41.1693687f;
+    constexpr float C = 74.4388885f;
+
     /**
      * @brief Computes square root of num using
      * std::sqrt
@@ -56,8 +61,8 @@ namespace mathops
     /**
      * @brief Calculates fast square root for array,
      * if any supported SIMD unit available,
-     * then accelerates the algorithm also
-     * with vectorisation through biggest SIMD unit available
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
      * 
      * @param arr Array of floats to calculate square root on,
      * has to be aligned to 32 bytes
@@ -73,10 +78,10 @@ namespace mathops
     /**
      * @brief Calculates fast square root for array,
      * if any supported SIMD unit available,
-     * then accelerates the algorithm also
-     * with vectorisation through biggest SIMD unit available
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
      * 
-     * @param arr Vector of floats to calculate square root om,
+     * @param arr Vector of floats to calculate square root on,
      * vector.data() has to be aligned to 32 bytes
      * 
      * @return Array with results and size of vector.size() floats,
@@ -89,8 +94,8 @@ namespace mathops
     /**
      * @brief Calculates fast inverse square root for array,
      * if any supported SIMD unit available,
-     * then accelerates the algorithm also
-     * with vectorisation through biggest SIMD unit available
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
      * 
      * @param arr Array of floats to calculate inverse square root on,
      * has to be aligned to 32 bytes
@@ -106,10 +111,10 @@ namespace mathops
     /**
      * @brief Calculates fast inverse square root for array,
      * if any supported SIMD unit available,
-     * then accelerates the algorithm also
-     * with vectorisation through biggest SIMD unit available
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
      * 
-     * @param arr Vector of floats to calculate square root om,
+     * @param arr Vector of floats to calculate square root on,
      * vector.data() has to be aligned to 32 bytes
      * 
      * @returns Array with results and size of vector.size() floats,
@@ -118,6 +123,72 @@ namespace mathops
      * In case of allocation fail returns nullptr.
      */
     float *fast_invsqrt_arr(const std::vector<float> &arr);
+
+    /**
+     * @brief Calculates fast sin for array,
+     * if any supported SIMD unit available,
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
+     * 
+     * @param arr Array of floats to calculate inverse square root on,
+     * has to be aligned to 32 bytes
+     * @param size Size of array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *fast_sin_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates fast sin for array,
+     * if any supported SIMD unit available,
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
+     * 
+     * @param arr Vector of floats to calculate square root on,
+     * vector.data() has to be aligned to 32 bytes
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *fast_sin_arr(const std::vector<float> &arr);
+
+    /**
+     * @brief Calculates fast cos for array,
+     * if any supported SIMD unit available,
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
+     * 
+     * @param arr Array of floats to calculate inverse square root on,
+     * has to be aligned to 32 bytes
+     * @param size Size of array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *fast_cos_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates fast cos for array,
+     * if any supported SIMD unit available,
+     * then will accelerate the algorithm also
+     * with vectorization through biggest SIMD unit available
+     * 
+     * @param arr Vector of floats to calculate square root on,
+     * vector.data() has to be aligned to 32 bytes
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *fast_cos_arr(std::vector<float> &arr);
 }
 
 #include <mathops/detail/transcedentals.inl>

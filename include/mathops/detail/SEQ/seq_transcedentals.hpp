@@ -9,6 +9,9 @@ namespace seq
 {
     void fast_sqrt_arr(const float *arr, size_t size, float *dst);
     void fast_invsqrt_arr(const float *arr, size_t size, float *dst);
+
+    void fast_sin_arr(const float *arr, size_t size, float *dst);
+    void fast_cos_arr(const float *arr, size_t size, float *dst);
 } // namespace seq
 } // namespace mathops
 
