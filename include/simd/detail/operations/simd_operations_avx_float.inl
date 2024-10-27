@@ -133,6 +133,19 @@ namespace simd
     {
         return _mm256_permute2f128_ps(vec, vec, 0b00010001);
     }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::round(
+        const AvxReg &vec)
+    {
+        return _mm256_round_ps(vec, (_MM_FROUND_TO_NEAREST_INT | _MM_FROUND_NO_EXC));
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::abs(
+        const AvxReg &vec)
+    {
+        AvxReg mask = _mm256_castsi256_ps(_mm256_set1_epi32(0x7FFFFFFF));
+        return bitwise_and(vec, mask);
+    }
 } // namespace simd
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

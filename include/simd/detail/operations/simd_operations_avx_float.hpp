@@ -197,6 +197,16 @@ namespace simd
          * and pastes to the low half
          */
         static AvxReg distribute_high_half(const AvxReg &vec);
+
+        /**
+         * @brief Rounds every float in register
+         */
+        static AvxReg round(const AvxReg &vec);
+
+        /**
+         * @brief Performs abs on every float in register
+         */
+        static AvxReg abs(const AvxReg &vec);
     };
 } // namespace simd
 
