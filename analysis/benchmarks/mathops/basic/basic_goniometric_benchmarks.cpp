@@ -6,29 +6,29 @@ namespace analysis
 {
 namespace benchmarks
 {
-    static void BM_InvSqrt(benchmark::State &state)
+    static void BM_Sin(benchmark::State &state)
     {
-        volatile float num = 9.8;
+        volatile float num = 3.14;
 
         for (auto _ : state)
         {
-            float res = mathops::fast_invsqrt(num);
+            float res = mathops::cos(num);
             benchmark::DoNotOptimize(res);
         }
     }
 
-    static void BM_Sqrt(benchmark::State &state)
+    static void BM_Cos(benchmark::State &state)
     {
-        volatile float num = 9.8;
-
+        volatile float num = 3.14;
+        
         for (auto _ : state)
         {
-            float res = mathops::fast_sqrt(num);
+            float res = mathops::cos(num);
             benchmark::DoNotOptimize(res);
         }
     }
 
-    BENCHMARK(BM_InvSqrt);
-    BENCHMARK(BM_Sqrt);
+    BENCHMARK(BM_Sin);
+    BENCHMARK(BM_Cos);
 }
 }

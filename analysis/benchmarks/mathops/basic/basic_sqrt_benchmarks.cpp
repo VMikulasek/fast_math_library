@@ -8,18 +8,22 @@ namespace benchmarks
 {
     static void BM_InvSqrt(benchmark::State &state)
     {
+        volatile float num = 90913408134.8;
+
         for (auto _ : state)
         {
-            float res = mathops::invsqrt(9);
+            float res = mathops::invsqrt(num);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Sqrt(benchmark::State &state)
     {
+        volatile float num = 90913408134.8;
+
         for (auto _ : state)
         {
-            float res = mathops::sqrt(9);
+            float res = mathops::sqrt(num);
             benchmark::DoNotOptimize(res);
         }
     }

@@ -23,6 +23,10 @@ set(ACCELERATED_SQRT_BENCHMARKS_SOURCE
 mathops/accelerated/accelerated_sqrt_benchmarks.cpp)
 set(BASIC_SQRT_BENCHMARKS_SOURCE
 mathops/basic/basic_sqrt_benchmarks.cpp)
+set(ACCELERATED_GONIOMETRIC_BENCHMARKS_SOURCE
+mathops/accelerated/accelerated_goniometric_benchmarks.cpp)
+set(BASIC_GONIOMETRIC_BENCHMARKS_SOURCE
+mathops/basic/basic_goniometric_benchmarks.cpp)
 set(AVX_SUM_BENCHMARKS_SOURCE
 mathops/AVX/avx_sum_benchmarks.cpp)
 set(SEQ_SUM_BENCHMARKS_SOURCE
@@ -42,6 +46,8 @@ mathops/SEQ/seq_invsqrtarr_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
+add_executable(${ACCELERATED_GONIOMETRIC_BENCHMARKS} ${ACCELERATED_GONIOMETRIC_BENCHMARKS_SOURCE})
+add_executable(${BASIC_GONIOMETRIC_BENCHMARKS} ${BASIC_GONIOMETRIC_BENCHMARKS_SOURCE})
 add_executable(${AVX_SUM_BENCHMARKS} ${AVX_SUM_BENCHMARKS_SOURCE})
 add_executable(${SEQ_SUM_BENCHMARKS} ${SEQ_SUM_BENCHMARKS_SOURCE})
 add_executable(${AVX_PREFIXSUM_BENCHMARKS} ${AVX_PREFIXSUM_BENCHMARKS_SOURCE})

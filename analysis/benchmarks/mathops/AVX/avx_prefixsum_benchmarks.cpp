@@ -1,6 +1,6 @@
 #include <mathops_shared_fields.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
-#include <common/memory_common.inl>
+#include <common/detail/memory_common.inl>
 
 #include <benchmark/benchmark.h>
 
