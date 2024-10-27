@@ -20,6 +20,8 @@ namespace tests
         static constexpr float realNumber = 123456789.12;
         static constexpr float smallNumber = 0.25;
         static constexpr float maximalFastInvSqrtRelativeError = 0.00175124;
+        static constexpr float maximalSinCosAbsoluteError = 0.00048828128;
+        static constexpr float smallRealNegNumber = -2.13454;
 
         void test_sqrt_arr(std::function<void(const float *, size_t, float *)> testedSqrtArr,
             const float *arr, size_t size)

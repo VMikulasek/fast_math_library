@@ -102,5 +102,73 @@ namespace tests
     {
         EXPECT_TRUE(isnanf(mathops::fast_invsqrt(-1)));
     }
+
+    TEST_F(TranscedentalsTests, SinZero)
+    {
+        EXPECT_FLOAT_EQ(mathops::sin(0), std::sin(0));
+    }
+    TEST_F(TranscedentalsTests, SinReal)
+    {
+        EXPECT_FLOAT_EQ(mathops::sin(realNumber), std::sin(realNumber));
+    }
+    TEST_F(TranscedentalsTests, SinSmall)
+    {
+        EXPECT_FLOAT_EQ(mathops::sin(smallNumber), std::sin(smallNumber));
+    }
+    TEST_F(TranscedentalsTests, SinNegative)
+    {
+        EXPECT_FLOAT_EQ(mathops::sin(-1), std::sin(-1));
+    }
+
+    TEST_F(TranscedentalsTests, CosZero)
+    {
+        EXPECT_FLOAT_EQ(mathops::cos(0), std::cos(0));
+    }
+    TEST_F(TranscedentalsTests, CosReal)
+    {
+        EXPECT_FLOAT_EQ(mathops::cos(realNumber), std::cos(realNumber));
+    }
+    TEST_F(TranscedentalsTests, CosSmall)
+    {
+        EXPECT_FLOAT_EQ(mathops::cos(smallNumber), std::cos(smallNumber));
+    }
+    TEST_F(TranscedentalsTests, CosNegative)
+    {
+        EXPECT_FLOAT_EQ(mathops::cos(-1), std::cos(-1));
+    }
+
+    TEST_F(TranscedentalsTests, FastSinZero)
+    {
+        EXPECT_NEAR(mathops::fast_sin(0), std::sin(0), maximalSinCosAbsoluteError);
+    }
+    TEST_F(TranscedentalsTests, FastSinReal)
+    {
+        EXPECT_NEAR(mathops::fast_sin(smallRealNegNumber), std::sin(smallRealNegNumber), maximalSinCosAbsoluteError);
+    }
+    TEST_F(TranscedentalsTests, FastSinSmall)
+    {
+        EXPECT_NEAR(mathops::fast_sin(smallNumber), std::sin(smallNumber), maximalSinCosAbsoluteError);
+    }
+    TEST_F(TranscedentalsTests, FastSinNegative)
+    {
+        EXPECT_NEAR(mathops::fast_sin(-1), std::sin(-1), maximalSinCosAbsoluteError);
+    }
+
+    TEST_F(TranscedentalsTests, FastCosZero)
+    {
+        EXPECT_NEAR(mathops::fast_cos(0), std::cos(0), maximalSinCosAbsoluteError);
+    }
+    TEST_F(TranscedentalsTests, FastCosReal)
+    {
+        EXPECT_NEAR(mathops::fast_cos(smallRealNegNumber), std::cos(smallRealNegNumber), maximalSinCosAbsoluteError);
+    }
+    TEST_F(TranscedentalsTests, FastCosSmall)
+    {
+        EXPECT_NEAR(mathops::fast_cos(smallNumber), std::cos(smallNumber), maximalSinCosAbsoluteError);
+    }
+    TEST_F(TranscedentalsTests, FastCosNegative)
+    {
+        EXPECT_NEAR(mathops::fast_cos(-1), std::cos(-1), maximalSinCosAbsoluteError);
+    }
 } // tests
 } // analysis

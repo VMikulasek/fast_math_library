@@ -43,7 +43,7 @@ namespace mathops
 
     /**
      * @brief Accelerated computation of sin of num
-     * with lower accuracy
+     * with lower accuracy (<-pi, pi> maximum error 2^-11)
      */
     float fast_sin(float num);
 
@@ -54,7 +54,7 @@ namespace mathops
 
     /**
      * @brief Accelerated computation of cos of num
-     * with lower accuracy
+     * with lower accuracy (<-pi, pi> maximum error 2^-11)
      */
     float fast_cos(float num);
 
