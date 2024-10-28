@@ -77,7 +77,7 @@ namespace mathops
 
     /**
      * @brief Accelerated computation of tan of num
-     * with lower accuracy (<-pi, pi> maximal error 2^-11)
+     * with lower accuracy (<-pi, pi> maximal relative error 2^-11)
      * 
      * Can be actually slower than accurate standard variant
      * if hardware acceleration is present
@@ -91,7 +91,7 @@ namespace mathops
 
     /**
      * @brief Accelerated computation of cot of num
-     * with lower accuracy (<-pi, pi> maximal error 2^-11)
+     * with lower accuracy (<-pi, pi> maximal relative error 2^-11)
      * 
      * Can be actually slower than accurate standard variant
      * if hardware acceleration is present

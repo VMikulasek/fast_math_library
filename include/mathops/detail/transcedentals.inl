@@ -82,19 +82,11 @@ namespace mathops
     }
     inline float tan(float num)
     {
-        double cos_x = std::cos(num);
-        if (cos_x == 0.0) {
-            throw std::domain_error("tan(x) is undefined for x = k * pi (where k is an integer)");
-        }
-        return std::sin(num) / cos_x;
+        return std::sin(num) / std::cos(num);
     }
     inline float cot(float num)
     {
-        double sin_x = std::sin(num);
-        if (sin_x == 0.0) {
-            throw std::domain_error("cot(x) is undefined for x = k * pi (where k is an integer)");
-        }
-        return std::cos(num) / sin_x;
+        return std::cos(num) / std::sin(num);
     }
 
     // source swiftshader
