@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 #include <numbers>
+#include <cmath>
 
 namespace analysis
 {
@@ -26,7 +27,7 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, SqrtNegative)
     {
-        EXPECT_TRUE(isnanf(mathops::sqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::sqrt(-1)));
     }
 
     TEST_F(TranscedentalsTests, InvSqrtZero)
@@ -47,7 +48,7 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, InvSqrtNegative)
     {
-        EXPECT_TRUE(isnanf(mathops::invsqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::invsqrt(-1)));
     }
 
     TEST_F(TranscedentalsTests, FastSqrtZero)
@@ -74,7 +75,7 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, FastSqrtNegative)
     {
-        EXPECT_TRUE(isnanf(mathops::fast_sqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::fast_sqrt(-1)));
     }
 
     TEST_F(TranscedentalsTests, FastInvSqrtZero)
@@ -101,7 +102,7 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, FastInvSqrtNegative)
     {
-        EXPECT_TRUE(isnanf(mathops::fast_invsqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::fast_invsqrt(-1)));
     }
 
     TEST_F(TranscedentalsTests, SinZero)
