@@ -176,5 +176,21 @@ namespace tests
             dst[i] = std::cos(src[i]);
         }
     }
+
+    void reference_tan_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::tan(src[i]);
+        }
+    }
+
+    void reference_cot_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = 1 / std::tan(src[i]);
+        }
+    }
 } // namespace tests
 } // namespace analysis

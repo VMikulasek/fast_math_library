@@ -46,6 +46,18 @@ namespace tests
         {
             test_arr_float_operation(testedCosArr, reference_cos_arr, arr, size, maximalSinCosAbsoluteError, false);
         }
+
+        void test_tan_arr(std::function<void(const float*, size_t, float *)> testedCosArr,
+            const float *arr, size_t size)
+        {
+            test_arr_float_operation(testedCosArr, reference_tan_arr, arr, size, maximalSinCosAbsoluteError, false);
+        }
+
+        void test_cot_arr(std::function<void(const float*, size_t, float *)> testedCosArr,
+            const float *arr, size_t size)
+        {
+            test_arr_float_operation(testedCosArr, reference_cot_arr, arr, size, maximalSinCosAbsoluteError, false);
+        }
     };
 } // namespace tests
 } // namespace analysis

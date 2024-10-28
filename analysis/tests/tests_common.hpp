@@ -58,6 +58,8 @@ namespace tests
     void reference_invsqrt_arr(const float *src, size_t size, float *dst);
     void reference_sin_arr(const float *src, size_t size, float *dst);
     void reference_cos_arr(const float *src, size_t size, float *dst);
+    void reference_tan_arr(const float *src, size_t size, float *dst);
+    void reference_cot_arr(const float *src, size_t size, float *dst);
 } // namespace tests
 } // namespace analysis
 
