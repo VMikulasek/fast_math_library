@@ -160,11 +160,11 @@ namespace tests
     {
         test_cos_arr(_24ElemArrMinusPiPi, _24_ELEM_ARR_SIZE);
     }
-    TEST_F(SeqTranscedentalsTests, CosArr25ElemArr)
+    TEST_F(SeqTranscedentalsTests, FastCosArr25ElemArr)
     {
         test_cos_arr(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE);
     }
-    TEST_F(SeqTranscedentalsTests, CosArrBigArr)
+    TEST_F(SeqTranscedentalsTests, FastCosArrBigArr)
     {
         test_cos_arr(_bigArr, BIG_ARR_SIZE);
     }

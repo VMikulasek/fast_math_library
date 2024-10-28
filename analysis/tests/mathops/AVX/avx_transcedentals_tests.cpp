@@ -37,134 +37,134 @@ namespace tests
         }
     };
 
-    TEST_F(AvxTranscedentalsTests, SqrtArr1ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr1ElemArr)
     {
         test_sqrt_arr(_1ElemArr, _1_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArr8ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr8ElemArr)
     {
         test_sqrt_arr(_8ElemArr, _8_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArr9ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr9ElemArr)
     {
         test_sqrt_arr(_9ElemArr, _9_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArr16ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr16ElemArr)
     {
         test_sqrt_arr(_16ElemArr, _16_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArr17ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr17ElemArr)
     {
         test_sqrt_arr(_17ElemArr, _17_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArr24ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr24ElemArr)
     {
         test_sqrt_arr(_24ElemArr, _24_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArr25ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArr25ElemArr)
     {
         test_sqrt_arr(_25ElemArr, _25_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SqrtArrBigArr)
+    TEST_F(AvxTranscedentalsTests, FastSqrtArrBigArr)
     {
         test_sqrt_arr(_bigArr, BIG_ARR_SIZE);
     }
 
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr1ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr1ElemArr)
     {
         test_invsqrt_arr(_1ElemArr, _1_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr8ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr8ElemArr)
     {
         test_invsqrt_arr(_8ElemArr, _8_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr9ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr9ElemArr)
     {
         test_invsqrt_arr(_9ElemArr, _9_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr16ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr16ElemArr)
     {
         test_invsqrt_arr(_16ElemArr, _16_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr17ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr17ElemArr)
     {
         test_invsqrt_arr(_17ElemArr, _17_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr24ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr24ElemArr)
     {
         test_invsqrt_arr(_24ElemArr, _24_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArr25ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArr25ElemArr)
     {
         test_invsqrt_arr(_25ElemArr, _25_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, InvSqrtArrBigArr)
+    TEST_F(AvxTranscedentalsTests, FastInvSqrtArrBigArr)
     {
         test_invsqrt_arr(_bigArr, BIG_ARR_SIZE);
     }
 
-    TEST_F(AvxTranscedentalsTests, SinArr1ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr1ElemArr)
     {
         test_sin_arr(_1ElemArr, _1_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArr8ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr8ElemArr)
     {
         test_sin_arr(_8ElemArrMinusPiPi, _8_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArr9ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr9ElemArr)
     {
         test_sin_arr(_9ElemArrMinusPiPi, _9_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArr16ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr16ElemArr)
     {
         test_sin_arr(_16ElemArrMinusPiPi, _16_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArr17ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr17ElemArr)
     {
         test_sin_arr(_17ElemArrMinusPiPi, _17_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArr24ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr24ElemArr)
     {
         test_sin_arr(_24ElemArrMinusPiPi, _24_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArr25ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArr25ElemArr)
     {
         test_sin_arr(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, SinArrBigArr)
+    TEST_F(AvxTranscedentalsTests, FastSinArrBigArr)
     {
         test_sin_arr(_bigArr, BIG_ARR_SIZE);
     }
 
-    TEST_F(AvxTranscedentalsTests, CosArr1ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr1ElemArr)
     {
         test_cos_arr(_1ElemArr, _1_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArr8ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr8ElemArr)
     {
         test_cos_arr(_8ElemArrMinusPiPi, _8_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArr9ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr9ElemArr)
     {
         test_cos_arr(_9ElemArrMinusPiPi, _9_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArr16ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr16ElemArr)
     {
         test_cos_arr(_16ElemArrMinusPiPi, _16_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArr17ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr17ElemArr)
     {
         test_cos_arr(_17ElemArrMinusPiPi, _17_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArr24ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr24ElemArr)
     {
         test_cos_arr(_24ElemArrMinusPiPi, _24_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArr25ElemArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArr25ElemArr)
     {
         test_cos_arr(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE);
     }
-    TEST_F(AvxTranscedentalsTests, CosArrBigArr)
+    TEST_F(AvxTranscedentalsTests, FastCosArrBigArr)
     {
         test_cos_arr(_bigArr, BIG_ARR_SIZE);
     }
