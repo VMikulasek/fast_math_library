@@ -4,7 +4,7 @@
 #include <mathops/sums.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
-#include <common/memory_common.inl>
+#include <common/detail/memory_common.inl>
 
 namespace mathops
 {
@@ -28,13 +28,11 @@ namespace mathops
 
     inline float *prefix_sum(const float *arr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
-        if (dst == nullptr)
-        {
-            return nullptr;
-        }
+        ALLOC_DST;
 
         PREFIX_SUM(arr, size, dst);
+
+        return dst;
     }
 
     inline float *prefix_sum(const std::vector<float> &arr)

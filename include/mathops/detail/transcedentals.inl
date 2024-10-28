@@ -110,11 +110,7 @@ namespace mathops
 
     inline float *fast_sqrt_arr(const float *arr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
-        if (dst == nullptr)
-        {
-            return nullptr;
-        }
+        ALLOC_DST;
 
         FAST_SQRT_ARR(arr, size, dst);
 
@@ -128,11 +124,7 @@ namespace mathops
 
     inline float *fast_invsqrt_arr(const float *arr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
-        if (dst == nullptr)
-        {
-            return nullptr;
-        }
+        ALLOC_DST;
 
         FAST_INVSQRT_ARR(arr, size, dst);
 
@@ -146,11 +138,7 @@ namespace mathops
 
     inline float *fast_sin_arr(const float *arr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
-        if (dst == nullptr)
-        {
-            return nullptr;
-        }
+        ALLOC_DST;
 
         FAST_SIN_ARR(arr, size, dst);
 
@@ -165,11 +153,7 @@ namespace mathops
 
     inline float *fast_cos_arr(const float *arr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
-        if (dst == nullptr)
-        {
-            return nullptr;
-        }
+        ALLOC_DST;
 
         FAST_COS_ARR(arr, size, dst);
 
@@ -179,6 +163,90 @@ namespace mathops
     inline float *fast_cos_arr(const std::vector<float> &arr)
     {
         return fast_cos_arr(arr.data(), arr.size());
+    }
+
+    inline float *invsqrt_arr(const float *arr, size_t size)
+    {
+        ALLOC_DST;
+
+        seq::invsqrt_arr(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *invsqrt_arr(const std::vector<float> &arr)
+    {
+        return invsqrt_arr(arr.data(), arr.size());
+    }
+
+    inline float *sqrt_arr(const float *arr, size_t size)
+    {
+        ALLOC_DST;
+
+        seq::sqrt_arr(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *sqrt_arr(const std::vector<float> &arr)
+    {
+        return sqrt_arr(arr.data(), arr.size());
+    }
+
+    inline float *sin_arr(const float *arr, size_t size)
+    {
+        ALLOC_DST;
+
+        seq::sin_arr(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *sin_arr(const std::vector<float> &arr)
+    {
+        return sin_arr(arr.data(), arr.size());
+    }
+
+    inline float *cos_arr(const float *arr, size_t size)
+    {
+        ALLOC_DST;
+
+        seq::cos_arr(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *cos_arr(const std::vector<float> &arr)
+    {
+        return cos_arr(arr.data(), arr.size());
+    }
+
+    inline float *tan_arr(const float *arr, size_t size)
+    {
+        ALLOC_DST;
+
+        seq::tan_arr(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *tan_arr(const std::vector<float> &arr)
+    {
+        return tan_arr(arr.data(), arr.size());
+    }
+
+    inline float *cot_arr(const float *arr, size_t size)
+    {
+        ALLOC_DST;
+
+        seq::cot_arr(arr, size, dst);
+
+        return dst;
+    }
+
+    inline float *cot_arr(const std::vector<float> &arr)
+    {
+        return cot_arr(arr.data(), arr.size());
     }
 }
 

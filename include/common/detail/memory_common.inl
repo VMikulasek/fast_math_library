@@ -8,6 +8,14 @@
 #include <malloc.h> // _aligned_malloc
 #endif // _MSC_VER
 
+#define ALLOC_DST                                                                     \
+    float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);      \
+    if (dst == nullptr)                                                                 \
+    {                                                                                   \
+        return nullptr;                                                                 \
+    }                                                                                   \
+    do; while (false)
+
 inline void *_alloc_aligned_memory(size_t size, int alignment)
 {
 #if defined(_MSC_VER)

@@ -210,7 +210,127 @@ namespace mathops
      * If used on windows, then has to be freed with _aligned_free().
      * In case of allocation fail returns nullptr.
      */
-    float *fast_cos_arr(std::vector<float> &arr);
+    float *fast_cos_arr(const std::vector<float> &arr);
+
+    /**
+     * @brief Calculates sqrt for array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *sqrt_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates sqrt for vector
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *sqrt_arr(const std::vector<float> &arr);
+
+    /**
+     * @brief Calculates invsqrt for array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *invsqrt_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates invsqrt for vector
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *invsqrt_arr(const std::vector<float> &arr);
+    
+    /**
+     * @brief Calculates sin for array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *sin_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates sin for vector
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *sin_arr(const std::vector<float> &arr);
+    
+    /**
+     * @brief Calculates cos for array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *cos_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates cos for vector
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *cos_arr(const std::vector<float> &arr);
+
+    /**
+     * @brief Calculates tan for array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *tan_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates tan for vector
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *tan_arr(const std::vector<float> &arr);
+
+    /**
+     * @brief Calculates cot for array
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *cot_arr(const float *arr, size_t size);
+
+    /**
+     * @brief Calculates cot for vector
+     * 
+     * @returns Array with results and size of vector.size() floats,
+     * that has to be freed after use.
+     * If used on windows, then has to be freed with _aligned_free().
+     * In case of allocation fail returns nullptr.
+     */
+    float *cot_arr(const std::vector<float> &arr);
 }
 
 #include <mathops/detail/transcedentals.inl>

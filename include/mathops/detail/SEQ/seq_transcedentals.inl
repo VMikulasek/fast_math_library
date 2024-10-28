@@ -39,6 +39,54 @@ namespace seq
             dst[i] = fast_cos(arr[i]);
         }
     }
+
+    inline void sqrt_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = sqrt(arr[i]);
+        }
+    }
+
+    inline void invsqrt_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = invsqrt(arr[i]);
+        }
+    }
+
+    inline void sin_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = sin(arr[i]);
+        }
+    }
+
+    inline void cos_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = cos(arr[i]);
+        }
+    }
+
+    inline void tan_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = tan(arr[i]);
+        }
+    }
+
+    inline void cot_arr(const float *arr, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = cot(arr[i]);
+        }
+    }
 } // namespace seq
 } // namespace mathops
 
