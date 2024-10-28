@@ -4,20 +4,24 @@ Library with support for summation and transcedental <!--TOADD types of function
 
 Library also wraps some Intel SIMD intrinsics into templated API.
 
-## Supported functions
+## Supported math functions
 
 | Summation | Acceleration | Transcedental | Acceleration |
 |-----------|--------------|---------------|--------------|
-| Sum        | <span style="color: green;">SIMD Accelerated</span> | Sin | TODO |
-| Prefix sum (Inclusive scan) | <span style="color: green;">SIMD Accelerated</span> | Cos | TODO |
+| Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated |
+| Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated |
+| | | Tan | None |
+| | | Cot | None |
+| | | Sqrt | Approximation + SIMD Accelerated |
+| | | InvSqrt | Approsimation + SIMD Accelerated |
 
 ## SIMD support
 
 | Type of unit | Support |
 |--------------|---------|
-| SSE          | <span style="color: red;">Not yet</span> |
-| AVX          | <span style="color: green;">Yes</span> |
-| AVX-512      | <span style="color: red;">Not yet</span> |
+| SSE          | Not yet |
+| AVX          | Yes |
+| AVX-512      | Not yet |
 
 ## Wrapped Intel SIMD intrinsics
 
