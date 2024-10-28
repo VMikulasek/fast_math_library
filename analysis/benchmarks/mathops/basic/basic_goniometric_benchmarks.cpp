@@ -28,31 +28,7 @@ namespace benchmarks
         }
     }
 
-    static void BM_Tan(benchmark::State &state)
-    {
-        volatile float num = 3.14;
-        
-        for (auto _ : state)
-        {
-            float res = mathops::tan(num);
-            benchmark::DoNotOptimize(res);
-        }
-    }
-
-    static void BM_Cot(benchmark::State &state)
-    {
-        volatile float num = 3.14;
-        
-        for (auto _ : state)
-        {
-            float res = mathops::cot(num);
-            benchmark::DoNotOptimize(res);
-        }
-    }
-
     BENCHMARK(BM_Sin);
     BENCHMARK(BM_Cos);
-    BENCHMARK(BM_Tan);
-    BENCHMARK(BM_Cot);
 }
 }

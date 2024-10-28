@@ -95,37 +95,17 @@ namespace mathops
         float x2 = x * x;
         return x * (A + x2 * (B + x2 * C));
     }
-    inline float _calculateZ(float x_2)
-    {
-        return 0.25f - abs(x_2 - round(x_2));
-    }
     inline float fast_sin(float num)
     {
         float x_2 = 0.25f - num * pi2;
-        float z = _calculateZ(x_2);
+        float z = 0.25f - abs(x_2 - round(x_2));
         return _sin5q(z);
     }
     inline float fast_cos(float num)
     {
         float x_2 = num * pi2;
-        float z = _calculateZ(x_2);
+        float z = 0.25f - abs(x_2 - round(x_2));
         return _sin5q(z);
-    }
-    inline float fast_tan(float num)
-    {
-        float x_2Cos = num * pi2;
-        float x_2Sin = 0.25f - x_2Cos;
-        float zSin = _calculateZ(x_2Sin);
-        float zCos = _calculateZ(x_2Cos);
-        return _sin5q(zSin) / _sin5q(zCos);
-    }
-    inline float fast_cot(float num)
-    {
-        float x_2Cos = num * pi2;
-        float x_2Sin = 0.25f - x_2Cos;
-        float zSin = _calculateZ(x_2Sin);
-        float zCos = _calculateZ(x_2Cos);
-        return _sin5q(zCos) / _sin5q(zSin);
     }
 
     inline float *fast_sqrt_arr(const float *arr, size_t size)

@@ -76,27 +76,9 @@ namespace mathops
     float tan(float num);
 
     /**
-     * @brief Accelerated computation of tan of num
-     * with lower accuracy (<-pi, pi> maximal relative error 2^-11)
-     * 
-     * Can be actually slower than accurate standard variant
-     * if hardware acceleration is present
-     */
-    float fast_tan(float num);
-
-    /**
      * @brief Computes cot using std::cos and std::sin
      */
     float cot(float num);
-
-    /**
-     * @brief Accelerated computation of cot of num
-     * with lower accuracy (<-pi, pi> maximal relative error 2^-11)
-     * 
-     * Can be actually slower than accurate standard variant
-     * if hardware acceleration is present
-     */
-    float fast_cot(float num);
 
     /**
      * @brief Calculates fast square root for array,

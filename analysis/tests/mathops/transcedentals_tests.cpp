@@ -196,74 +196,24 @@ namespace tests
     
     TEST_F(TranscedentalsTests, CotZero)
     {
-        EXPECT_FLOAT_EQ(mathops::cot(0), std::cos(0) / std::sin(0));
+        EXPECT_FLOAT_EQ(mathops::cot(0), 1 / std::tan(0));
     }
     TEST_F(TranscedentalsTests, CotPi2)
     {
         float num = std::numbers::pi / 2.f;
-        EXPECT_FLOAT_EQ(mathops::cot(num), std::cos(num) / std::sin(num));
+        EXPECT_FLOAT_EQ(mathops::cot(num), 1 / std::tan(num));
     }
     TEST_F(TranscedentalsTests, CotReal)
     {
-        EXPECT_FLOAT_EQ(mathops::cot(realNumber), std::cos(realNumber) / std::sin(realNumber));
+        EXPECT_FLOAT_EQ(mathops::cot(realNumber), 1 / std::tan(realNumber));
     }
     TEST_F(TranscedentalsTests, CotSmall)
     {
-        EXPECT_FLOAT_EQ(mathops::cot(smallNumber), std::cos(smallNumber) / std::sin(smallNumber));
+        EXPECT_FLOAT_EQ(mathops::cot(smallNumber), 1 / std::tan(smallNumber));
     }
     TEST_F(TranscedentalsTests, CotNegative)
     {
-        EXPECT_FLOAT_EQ(mathops::cot(-1), std::cos(-1) / std::sin(-1));
-    }
-
-    TEST_F(TranscedentalsTests, FastTanZero)
-    {
-        float expected = std::tan(0);
-        EXPECT_NEAR(mathops::fast_tan(0), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-    TEST_F(TranscedentalsTests, FastTanPi2)
-    {
-        EXPECT_TRUE(std::isinf(mathops::fast_tan(std::numbers::pi / 2)));
-    }
-    TEST_F(TranscedentalsTests, FastTanReal)
-    {
-        float expected = std::tan(smallRealNegNumber);
-        EXPECT_NEAR(mathops::fast_tan(smallRealNegNumber), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-    TEST_F(TranscedentalsTests, FastTanSmall)
-    {
-        float expected = std::tan(smallNumber);
-        EXPECT_NEAR(mathops::fast_tan(smallNumber), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-    TEST_F(TranscedentalsTests, FastTanNegative)
-    {
-        float expected = std::tan(-1);
-        EXPECT_NEAR(mathops::fast_tan(-1), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-
-    TEST_F(TranscedentalsTests, FastCotZero)
-    {
-        EXPECT_TRUE(std::isinf(mathops::fast_cot(0)));
-    }
-    TEST_F(TranscedentalsTests, FastCotPi2)
-    {
-        float expected = 0;
-        EXPECT_NEAR(mathops::fast_cot(std::numbers::pi / 2), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-    TEST_F(TranscedentalsTests, FastCotReal)
-    {
-        float expected = std::cos(smallRealNegNumber) / std::sin(smallRealNegNumber);
-        EXPECT_NEAR(mathops::fast_cot(smallRealNegNumber), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-    TEST_F(TranscedentalsTests, FastCotSmall)
-    {
-        float expected = std::cos(smallNumber) / std::sin(smallNumber);
-        EXPECT_NEAR(mathops::fast_cot(smallNumber), expected, maximalSinCosAbsoluteError * abs(expected));
-    }
-    TEST_F(TranscedentalsTests, FastCotNegative)
-    {
-        float expected = std::cos(-1) / std::sin(-1);
-        EXPECT_NEAR(mathops::fast_cot(-1), expected, maximalSinCosAbsoluteError * abs(expected));
+        EXPECT_FLOAT_EQ(mathops::cot(-1), 1 / std::tan(-1));
     }
 } // tests
 } // analysis
