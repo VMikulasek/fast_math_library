@@ -24,9 +24,40 @@ if (BUILD_TESTS)
 endif()
 
 if (BUILD_BENCHMARKS)
-    set(AVX_BENCHMARKS avx_math_lib_benchmarks)
-    set(SEQ_BENCHMARKS seq_math_lib_benchmarks)
-    set(BENCHMARKS ${AVX_BENCHMARKS} ${SEQ_BENCHMARKS})
+    set(ACCELERATED_SQRT_BENCHMARKS accelerated_sqrt_benchmarks)
+    set(BASIC_SQRT_BENCHMARKS basic_sqrt_benchmarks)
+    set(ACCELERATED_GONIOMETRIC_BENCHMARKS accelerated_goniometric_benchmarks)
+    set(BASIC_GONIOMETRIC_BENCHMARKS basic_goniometric_benchmarks)
+    set(AVX_SUM_BENCHMARKS avx_sum_benchmarks)
+    set(SEQ_SUM_BENCHMARKS seq_sum_benchmarks)
+    set(AVX_PREFIXSUM_BENCHMARKS avx_prefixsum_benchmarks)
+    set(SEQ_PREFIXSUM_BENCHMARKS seq_prefixsum_benchmarks)
+    set(AVX_SQRTARR_BENCHMARKS avx_sqrtarr_benchmarks)
+    set(SEQ_SQRTARR_BENCHMARKS seq_sqrtarr_benchmarks)
+    set(AVX_INVSQRTARR_BENCHMARKS avx_invsqrtarr_benchmarks)
+    set(SEQ_INVSQRTARR_BENCHMARKS seq_invsqrtarr_benchmarks)
+    set(AVX_SINARR_BENCHMARKS avx_sinarr_benchmarks)
+    set(SEQ_SINARR_BENCHMARKS seq_sinarr_benchmarks)
+    set(AVX_COSARR_BENCHMARKS avx_cosarr_benchmarks)
+    set(SEQ_COSARR_BENCHMARKS seq_cosarr_benchmarks)
+    
+    set(BENCHMARKS
+    ${ACCELERATED_SQRT_BENCHMARKS}
+    ${BASIC_SQRT_BENCHMARKS}
+    ${ACCELERATED_GONIOMETRIC_BENCHMARKS}
+    ${BASIC_GONIOMETRIC_BENCHMARKS}
+    ${AVX_SUM_BENCHMARKS}
+    ${SEQ_SUM_BENCHMARKS}
+    ${AVX_PREFIXSUM_BENCHMARKS}
+    ${SEQ_PREFIXSUM_BENCHMARKS}
+    ${AVX_SQRTARR_BENCHMARKS}
+    ${SEQ_SQRTARR_BENCHMARKS}
+    ${AVX_INVSQRTARR_BENCHMARKS}
+    ${SEQ_INVSQRTARR_BENCHMARKS}
+    ${AVX_SINARR_BENCHMARKS}
+    ${SEQ_SINARR_BENCHMARKS}
+    ${AVX_COSARR_BENCHMARKS}
+    ${SEQ_COSARR_BENCHMARKS})
     
     add_subdirectory(benchmarks)
 

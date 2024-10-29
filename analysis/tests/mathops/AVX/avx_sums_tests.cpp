@@ -1,15 +1,10 @@
-#if HAS_AVX
+#ifdef HAS_AVX
 
 #include <mathops/sums_tests_fixture.hpp>
 #include <mathops/detail/AVX/avx_sums.hpp>
 
 #include <gtest/gtest.h>
 #include <numeric> // std::reduce
-#include <cstdlib>
-
-#if defined(_MSC_VER)
-#include <malloc.h> // _aligned_malloc
-#endif // _MSC_VER
 
 namespace analysis
 {

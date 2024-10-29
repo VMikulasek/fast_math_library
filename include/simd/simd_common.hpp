@@ -2,6 +2,8 @@
 #define SIMD_COMMON_HPP
 
 #define AVX_FLOAT_VECTOR_SIZE 8
+#define AVX_INT_VECTOR_SIZE 8
+
 #define AVX_ALIGNMENT 32
 
 namespace simd
@@ -13,6 +15,7 @@ namespace simd
     {
         SSE,
         AVX,
+        AVX2,
         AVX_512
     };
 }

@@ -1,6 +1,8 @@
 #include <tests_common.hpp>
 #include <limits>
 #include <functional>
+#include <cmath>
+#include <numeric> // std::inclusive_scan
 
 #define F_TO_I_REINTERPRET(F) (*reinterpret_cast<int *>(&F))
 #define I_TO_F_REINTERPRET(I) (*reinterpret_cast<float *>(&I))
@@ -108,6 +110,87 @@ namespace tests
     float cmp_ge(float op1, float op2)
     {
         return cmp(op1, op2, ge);
+    }
+
+    float abs(float num)
+    {
+        return std::abs(num);
+    }
+    float round(float num)
+    {
+        return std::round(num);
+    }
+
+    int add_i(int op1, int op2)
+    {
+        return op1 + op2;
+    }
+    int sub_i(int op1, int op2)
+    {
+        return op1 - op2;
+    }
+    int shift_left(int op, int nBits)
+    {
+        return op << nBits;
+    }
+    int shift_right(int op, int nBits)
+    {
+        unsigned tmp = *reinterpret_cast<unsigned *>(&op);
+        unsigned result = tmp >> nBits;
+        return *reinterpret_cast<int *>(&result);
+    }
+
+    void reference_prefix_sum(const float *src, size_t size, float *dst)
+    {
+        std::inclusive_scan(src, src + size, dst);
+    }
+
+    void reference_sqrt_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::sqrt(src[i]);
+        }
+    }
+
+    void reference_invsqrt_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = 1 / std::sqrt(src[i]);
+        }
+    }
+
+    void reference_sin_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::sin(src[i]);
+        }
+    }
+
+    void reference_cos_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::cos(src[i]);
+        }
+    }
+
+    void reference_tan_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = std::tan(src[i]);
+        }
+    }
+
+    void reference_cot_arr(const float *src, size_t size, float *dst)
+    {
+        for (size_t i = 0; i < size; i++)
+        {
+            dst[i] = 1 / std::tan(src[i]);
+        }
     }
 } // namespace tests
 } // namespace analysis

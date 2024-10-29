@@ -4,20 +4,24 @@ Library with support for summation and transcedental <!--TOADD types of function
 
 Library also wraps some Intel SIMD intrinsics into templated API.
 
-## Supported functions
+## Supported math functions
 
 | Summation | Acceleration | Transcedental | Acceleration |
 |-----------|--------------|---------------|--------------|
-| Sum        | <span style="color: green;">SIMD Accelerated</span> | Sin | TODO |
-| Prefix sum (Inclusive scan) | <span style="color: green;">SIMD Accelerated</span> | Cos | TODO |
+| Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated |
+| Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated |
+| | | Tan | None |
+| | | Cot | None |
+| | | Sqrt | Approximation + SIMD Accelerated |
+| | | InvSqrt | Approsimation + SIMD Accelerated |
 
 ## SIMD support
 
 | Type of unit | Support |
 |--------------|---------|
-| SSE          | <span style="color: red;">Not yet</span> |
-| AVX          | <span style="color: green;">Yes</span> |
-| AVX-512      | <span style="color: red;">Not yet</span> |
+| SSE          | Not yet |
+| AVX          | Yes |
+| AVX-512      | Not yet |
 
 ## Wrapped Intel SIMD intrinsics
 
@@ -105,8 +109,7 @@ Ubuntu:
 cd build/analysis/benchmarks
 make
 sudo cpupower frequency-set --governor performance > /dev/null 2>&1
-./seq_math_lib_benchmarks
-./avx_math_lib_benchmarks
+./{benchmark binaries}
 ...
 sudo cpupower frequency-set --governor powersave > /dev/null 2>&1
 ```
@@ -120,92 +123,183 @@ Open solution in Visual Studio, build targets `seq_math_lib_benchmarks`, `avx_ma
 
 ### Benchmarks example results
 
-Note: BigArr is array with 15 000 000 elements.
-
 Example machine specifications:
 - CPU: 12th Gen Intel® Core™ i5-1240P × 16
 - Memory: DDR4 SDRAM 16GB 3200 MT/s
+- Compiler: GCC (optimizations O3)
 
-SEQ variant benchmarks:
+#### Classic sum
 
+* SEQ variant
 ```
-Run on (16 X 399.906 MHz CPU s)
-CPU Caches:
-  L1 Data 48 KiB (x8)
-  L1 Instruction 32 KiB (x8)
-  L2 Unified 1280 KiB (x8)
-  L3 Unified 12288 KiB (x1)
-Load Average: 0.56, 0.53, 0.55
--------------------------------------------------------------
-Benchmark                   Time             CPU   Iterations
--------------------------------------------------------------
-BM_Sum1Elem              4.65 ns         4.65 ns    111321905
-BM_Sum8Elem              16.0 ns         16.0 ns     40761902
-BM_Sum9Elem              17.0 ns         17.0 ns     39209635
-BM_Sum16Elem             28.5 ns         28.5 ns     24300963
-BM_Sum17Elem             29.9 ns         29.9 ns     23995941
-BM_Sum24Elem             43.8 ns         43.8 ns     13501744
-BM_Sum25Elem             48.7 ns         48.7 ns     11679415
-BM_SumBigArr         41002047 ns     41001495 ns           17
-BM_PrefixSum1Elem        8.06 ns         8.06 ns     76598028
-BM_PrefixSum8Elem        43.5 ns         43.5 ns     13224711
-BM_PrefixSum9Elem        47.7 ns         47.7 ns     11021302
-BM_PrefixSum16Elem       85.0 ns         85.0 ns      7404701
-BM_PrefixSum17Elem       86.1 ns         86.1 ns      7087142
-BM_PrefixSum24Elem        122 ns          122 ns      5365408
-BM_PrefixSum25Elem        128 ns          128 ns      4624743
-BM_PrefixSumBigArr   89506467 ns     89506529 ns            6
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Sum9Elem        0.114 ns        0.114 ns   6056030219
+BM_Sum10kElem       4520 ns         4518 ns       154891
+BM_Sum15MElem    7489348 ns      7486537 ns           93
 ```
 
-AVX variant benchmarks:
+* AVX variant
 ```
-Run on (16 X 429.564 MHz CPU s)
-CPU Caches:
-  L1 Data 48 KiB (x8)
-  L1 Instruction 32 KiB (x8)
-  L2 Unified 1280 KiB (x8)
-  L3 Unified 12288 KiB (x1)
-Load Average: 0.62, 0.54, 0.55
--------------------------------------------------------------
-Benchmark                   Time             CPU   Iterations
--------------------------------------------------------------
-BM_Sum1Elem              7.76 ns         7.76 ns     76160339
-BM_Sum8Elem              19.9 ns         19.9 ns     34446003
-BM_Sum9Elem              21.0 ns         21.0 ns     32964084
-BM_Sum16Elem             28.3 ns         28.3 ns     24501203
-BM_Sum17Elem             28.2 ns         28.2 ns     24287702
-BM_Sum24Elem             33.7 ns         33.7 ns     20707784
-BM_Sum25Elem             35.5 ns         35.5 ns     19984736
-BM_SumBigArr         13922567 ns     13921868 ns           52
-BM_PrefixSum1Elem        6.13 ns         6.13 ns     96893672
-BM_PrefixSum8Elem        43.7 ns         43.7 ns     13020772
-BM_PrefixSum9Elem        43.7 ns         43.7 ns     13103114
-BM_PrefixSum16Elem       75.0 ns         75.0 ns      8351937
-BM_PrefixSum17Elem       78.6 ns         78.6 ns      7995868
-BM_PrefixSum24Elem        110 ns          110 ns      5511200
-BM_PrefixSum25Elem        115 ns          115 ns      5560749
-BM_PrefixSumBigArr   71857144 ns     71854350 ns            7
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Sum9Elem        0.116 ns        0.116 ns   5969257709
+BM_Sum10kElem        535 ns          534 ns      1311620
+BM_Sum15MElem    2472825 ns      2472624 ns          283
 ```
 
-Comparison SEQ vs AVX:
+#### Prefix sum
+
+* SEQ variant
 ```
-Benchmark                            Time             CPU      Time Old      Time New       CPU Old       CPU New
------------------------------------------------------------------------------------------------------------------
-BM_Sum1Elem                       +0.6688         +0.6690             5             8             5             8
-BM_Sum8Elem                       +0.2459         +0.2464            16            20            16            20
-BM_Sum9Elem                       +0.2376         +0.2381            17            21            17            21
-BM_Sum16Elem                      -0.0069         -0.0069            28            28            28            28
-BM_Sum17Elem                      -0.0551         -0.0545            30            28            30            28
-BM_Sum24Elem                      -0.2318         -0.2319            44            34            44            34
-BM_Sum25Elem                      -0.2725         -0.2725            49            35            49            35
-BM_SumBigArr                      -0.6604         -0.6605      41002047      13922567      41001495      13921868
-BM_PrefixSum1Elem                 -0.2393         -0.2389             8             6             8             6
-BM_PrefixSum8Elem                 +0.0039         +0.0042            44            44            44            44
-BM_PrefixSum9Elem                 -0.0822         -0.0822            48            44            48            44
-BM_PrefixSum16Elem                -0.1180         -0.1177            85            75            85            75
-BM_PrefixSum17Elem                -0.0874         -0.0871            86            79            86            79
-BM_PrefixSum24Elem                -0.0962         -0.0962           122           110           122           110
-BM_PrefixSum25Elem                -0.1039         -0.1039           128           115           128           115
-BM_PrefixSumBigArr                -0.1972         -0.1972      89506467      71857144      89506529      71854350
-OVERALL_GEOMEAN                   -0.1055         -0.1053             0             0             0             0
+--------------------------------------------------------------
+Benchmark                    Time             CPU   Iterations
+--------------------------------------------------------------
+BM_PrefixSum9Elem        0.229 ns        0.229 ns   3035709879
+BM_PrefixSum10kElem       4554 ns         4553 ns       153452
+BM_PrefixSum15MElem    8137949 ns      8134959 ns           76
+```
+
+* AVX variant
+```
+--------------------------------------------------------------
+Benchmark                    Time             CPU   Iterations
+--------------------------------------------------------------
+BM_PrefixSum9Elem        0.228 ns        0.228 ns   3067050881
+BM_PrefixSum10kElem       2290 ns         2290 ns       305769
+BM_PrefixSum15MElem    6592298 ns      6590846 ns           93
+```
+
+#### Sqrt and inverse sqrt of single number
+
+* Std variant
+
+```
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_InvSqrt       1.38 ns         1.38 ns    510940939
+BM_Sqrt         0.748 ns        0.748 ns    936036432
+```
+
+* SW accelerated variant
+
+```
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_InvSqrt       1.03 ns         1.03 ns    682728778
+BM_Sqrt          1.15 ns         1.15 ns    607345544
+```
+Note: As you can see here, the std variant is overall pretty even with the software accelerated one. It could be because the compiler generates some hardware accelerated instruction for std::sqrt on example machine. Still for some CPUs with no such hardware acceleration the software one can be useful. 
+
+#### Sin and cos of single number
+
+* Std variant
+```
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Sin           2.25 ns         2.25 ns    311946997
+BM_Cos           2.25 ns         2.25 ns    311502174
+```
+
+* SW accelerated variant
+```
+-----------------------------------------------------
+Benchmark           Time             CPU   Iterations
+-----------------------------------------------------
+BM_Sin           2.38 ns         2.38 ns    294400478
+BM_Cos           2.19 ns         2.19 ns    319676165
+```
+Note: Same effect as above can be seen here.
+
+#### Sequential and vectorized variant of SW accelerated sqrt
+
+* SEQ variant
+```
+---------------------------------------------------------
+Benchmark               Time             CPU   Iterations
+---------------------------------------------------------
+BM_Sqrt9Elem        0.228 ns        0.228 ns   3066448171
+BM_Sqrt10kElem      10651 ns        10649 ns        65710
+BM_Sqrt15MElem   16999889 ns     16979607 ns           39
+```
+
+* AVX variant
+```
+---------------------------------------------------------
+Benchmark               Time             CPU   Iterations
+---------------------------------------------------------
+BM_Sqrt9Elem        0.229 ns        0.228 ns   3066857825
+BM_Sqrt10kElem       1427 ns         1426 ns       490675
+BM_Sqrt15MElem    6546102 ns      6540871 ns           94
+```
+
+#### Sequential and vectorized variant of SW accelerated inverse sqrt
+
+* SEQ variant
+```
+------------------------------------------------------------
+Benchmark                  Time             CPU   Iterations
+------------------------------------------------------------
+BM_InvSqrt9Elem        0.229 ns        0.229 ns   3064980646
+BM_InvSqrt10kElem      10101 ns        10095 ns        69195
+BM_InvSqrt15MElem   16358004 ns     16351044 ns           41
+```
+
+* AVX variant
+```
+------------------------------------------------------------
+Benchmark                  Time             CPU   Iterations
+------------------------------------------------------------
+BM_InvSqrt9Elem        0.229 ns        0.229 ns   3062259083
+BM_InvSqrt10kElem        769 ns          769 ns       909799
+BM_InvSqrt15MElem    6510188 ns      6509565 ns           94
+```
+
+#### Sequential and vectorized variant of SW accelerated sin
+
+* SEQ variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Sin9Elem        0.231 ns        0.231 ns   3061087941
+BM_Sin10kElem      22657 ns        22654 ns        30722
+BM_Sin15MElem   35023796 ns     35021230 ns           20
+```
+
+* AVX variant
+```
+---------------------------------------------------------
+Benchmark               Time             CPU   Iterations
+---------------------------------------------------------
+BM_Sqrt9Elem        0.228 ns        0.228 ns   3051461401
+BM_Sqrt10kElem       1695 ns         1695 ns       413045
+BM_Sqrt15MElem    7074127 ns      7073352 ns           87
+```
+
+#### Sequential and vectorized variant of SW accelerated cos
+
+* SEQ variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Cos9Elem        0.228 ns        0.228 ns   3064457336
+BM_Cos10kElem      20730 ns        20728 ns        33650
+BM_Cos15MElem   31969216 ns     31951642 ns           21
+```
+
+* AVX variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Cos9Elem        0.228 ns        0.228 ns   3067976534
+BM_Cos10kElem       1393 ns         1393 ns       513323
+BM_Cos15MElem    6911133 ns      6909529 ns           93
 ```

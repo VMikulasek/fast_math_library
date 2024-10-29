@@ -1,6 +1,8 @@
 #ifndef TESTS_COMMON_HPP
 #define TESTS_COMMON_HPP
 
+#include <cstddef>
+
 namespace analysis
 {
 namespace tests
@@ -25,6 +27,13 @@ namespace tests
     float cmp_eq(float op1, float op2);
     float cmp_le(float op1, float op2);
     float cmp_ge(float op1, float op2);
+    float abs(float num);
+    float round(float num);
+
+    int add_i(int op1, int op2);
+    int sub_i(int op1, int op2);
+    int shift_left(int op, int nBits);
+    int shift_right(int op, int nBits);
     
     template<int mask>
     float blend(float op1, float op2)
@@ -43,6 +52,14 @@ namespace tests
             return op2;
         }
     }
+
+    void reference_prefix_sum(const float *src, size_t size, float *dst);
+    void reference_sqrt_arr(const float *src, size_t size, float *dst);
+    void reference_invsqrt_arr(const float *src, size_t size, float *dst);
+    void reference_sin_arr(const float *src, size_t size, float *dst);
+    void reference_cos_arr(const float *src, size_t size, float *dst);
+    void reference_tan_arr(const float *src, size_t size, float *dst);
+    void reference_cot_arr(const float *src, size_t size, float *dst);
 } // namespace tests
 } // namespace analysis
 
