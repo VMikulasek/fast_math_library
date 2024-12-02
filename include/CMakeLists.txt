@@ -11,7 +11,7 @@ simd/simd_common.hpp
 simd/simd_operations.hpp
 simd/simd_operations_avx.hpp
 simd/simd_operations_avx2.hpp
-simd/vec/simd_vec.hpp)
+simd/simd_vec.hpp)
 
 set(MATHOPS_INCLUDE
 mathops/sums.hpp
@@ -24,9 +24,15 @@ simd/detail/operations/simd_operations_avx2_int.hpp
 simd/detail/operations/simd_operations_avx2_int.inl
 simd/detail/operations/simd_operations_base.hpp)
 
-set(SIMD_VECTOR
-simd/vec/detail/simd_vec_t.hpp
-simd/vec/detail/simd_vec_t.inl)
+set(SIMD_VECTOR_DETAIL
+simd/detail/vec/simd_vec_t.hpp
+simd/detail/vec/simd_vec_t.inl
+simd/detail/vec/simd_vec_float.hpp
+simd/detail/vec/simd_vec_float.inl)
+
+set(SIMD_VECTOR_DETAIL_SEQ
+simd/detail/vec/SEQ/simd_vec_seq.hpp
+simd/detail/vec/SEQ/simd_vec_seq.inl)
 
 set(MATHOPS_DETAIL
 mathops/detail/sums.inl
@@ -51,22 +57,24 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Include CMake" FILES ${INC
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd PREFIX "SIMD include" FILES ${SIMD_INCLUDE})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops PREFIX "Math include" FILES ${MATHOPS_INCLUDE})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/operations PREFIX "SIMD operations" FILES ${SIMD_OPERATIONS})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/vec PREFIX "SIMD vector" FILES ${SIMD_VECTOR})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec PREFIX "SIMD vector detail" FILES ${SIMD_VECTOR_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail PREFIX "Math detail" FILES ${MATHOPS_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/AVX PREFIX "Math AVX" FILES ${MATHOPS_AVX})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/SEQ PREFIX "Math SEQ" FILES ${MATHOPS_SEQ})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/common/detail PREFIX "Common detail" FILES ${COMMON_DETAIL})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec/SEQ PREFIX "SIMD vector detail seq" FILES ${SIMD_VECTOR_DETAIL_SEQ})
 
 add_custom_target(LIB_SOURCE SOURCES
 ${SIMD_INCLUDE}
 ${SIMD_OPERATIONS}
-${SIMD_VECTOR}
+${SIMD_VECTOR_DETAIL}
 ${INCLUDE_CMAKELISTS}
 ${MATHOPS_INCLUDE}
 ${MATHOPS_DETAIL}
 ${MATHOPS_AVX}
 ${MATHOPS_SEQ}
-${COMMON_DETAIL})
+${COMMON_DETAIL}
+${SIMD_VECTOR_DETAIL_SEQ})
 
 if (AVX_SUPPORTED)
 	message(STATUS "AVX supported")
