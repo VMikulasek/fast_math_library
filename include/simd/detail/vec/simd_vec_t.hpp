@@ -3,17 +3,16 @@
 
 #include <type_traits>
 #include <cstddef>
-#include <array>
 
 namespace simd
 {
-    template <size_t L, typename T>
+    template<size_t L, typename T>
     class Vec
     {
         static_assert(std::is_arithmetic_v<T>);
 
     public:
-        std::array<T, L> data;
+        T data[L];
 
         template<typename... Ts>
         inline Vec(Ts... args);
@@ -23,7 +22,7 @@ namespace simd
         inline Vec operator-(const Vec &other) const;
         inline Vec operator*(const Vec &other) const;
         inline Vec operator/(const Vec &other) const;
-        inline T dot(const Vec &vec1, const Vec &vec2);
+        inline static T dot(const Vec &vec1, const Vec &vec2);
     };
 } // namespace simd
 

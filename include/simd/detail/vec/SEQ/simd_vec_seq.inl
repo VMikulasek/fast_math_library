@@ -57,7 +57,7 @@ namespace seq
     }
 
     template<size_t L, typename T>
-    inline Vec<L, T> dotv(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
+    inline T dotv(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
         T result;
 

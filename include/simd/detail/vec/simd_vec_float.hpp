@@ -2,10 +2,10 @@
 #define SIMDVECFLOAT_HPP
 
 #include <simd/detail/vec/simd_vec_t.hpp>
+#include <simd/simd_common.hpp>
 
 #include <cstddef>
 #include <type_traits>
-#include <array>
 
 namespace simd
 {
@@ -15,19 +15,17 @@ namespace simd
         using NumType = float;
 
     public:
-        std::array<NumType, L> data;
+        alignas(AVX_ALIGNMENT) NumType data[L];
 
         template<typename... Ts>
         inline Vec(Ts... args);
+        Vec();
 
         inline Vec operator+(const Vec &other) const;
         inline Vec operator-(const Vec &other) const;
         inline Vec operator*(const Vec &other) const;
         inline Vec operator/(const Vec &other) const;
-        inline NumType dot(const Vec &vec1, const Vec &vec2);
-
-    private:
-        Vec() = default;
+        inline static NumType dot(const Vec &vec1, const Vec &vec2);
     };
 } // namespace simd
 

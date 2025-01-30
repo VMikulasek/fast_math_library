@@ -3,9 +3,15 @@
 
 #include <simd/detail/vec/simd_vec_float.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
+#include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
 
-#ifndef HAS_AVX
+#ifdef HAS_AVX
 
+#define addv(vec1, vec2) avx::addv(vec1, vec2);
+#define subv(vec1, vec2) avx::subv(vec1, vec2);
+#define mulv(vec1, vec2) avx::mulv(vec1, vec2);
+#define divv(vec1, vec2) avx::divv(vec1, vec2);
+#define dotv(vec1, vec2) avx::dotv(vec1, vec2);
 
 #else // HAS_AVX
 
@@ -26,6 +32,9 @@ namespace simd
         static_assert((std::is_same_v<NumType, Ts> && ...), "All arguments must be of type float");
         static_assert(sizeof...(args) == L, "Number of arguments must match the templatesize L");
     }
+    template<size_t L>
+    inline Vec<L, float>::Vec() : data{}
+    {}
 
     template<size_t L>
     inline Vec<L, float> Vec<L, float>::operator+(const Vec &other) const
