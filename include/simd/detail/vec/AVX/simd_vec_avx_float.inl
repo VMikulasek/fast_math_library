@@ -112,7 +112,7 @@ namespace avx
     template<size_t L>
     inline float dotv(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
-        float result;
+        float result = 0;
 
         size_t i = 0;
 
