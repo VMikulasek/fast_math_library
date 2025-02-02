@@ -1,13 +1,13 @@
-#include <simd/detail/vec/simd_vec_float.hpp>
+#include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
 
 #include <gtest/gtest.h>
 
-#undef addv
-#undef subv
-#undef mulv
-#undef divv
-#undef dotv
+#undef addvf
+#undef subvf
+#undef mulvf
+#undef divvf
+#undef dotvf
 
 namespace analysis
 {
@@ -22,7 +22,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::addv(vec1, vec2);
+        auto res = simd::avx::addvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -40,7 +40,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::addv(vec1, vec2);
+        auto res = simd::avx::addvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -56,7 +56,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::subv(vec1, vec2);
+        auto res = simd::avx::subvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -74,7 +74,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::subv(vec1, vec2);
+        auto res = simd::avx::subvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -90,7 +90,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::mulv(vec1, vec2);
+        auto res = simd::avx::mulvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -108,7 +108,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::mulv(vec1, vec2);
+        auto res = simd::avx::mulvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -124,7 +124,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::divv(vec1, vec2);
+        auto res = simd::avx::divvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -142,7 +142,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::divv(vec1, vec2);
+        auto res = simd::avx::divvf(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -158,7 +158,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        float res = simd::avx::dotv(vec1, vec2);
+        float res = simd::avx::dotvf(vec1, vec2);
 
         float expected = 0;
         for (size_t i = 0; i < vecLen; i++)
@@ -179,7 +179,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        float res = simd::avx::dotv(vec1, vec2);
+        float res = simd::avx::dotvf(vec1, vec2);
 
         float expected = 0;
         for (size_t i = 0; i < vecLen; i++)

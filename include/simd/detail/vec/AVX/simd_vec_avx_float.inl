@@ -13,7 +13,7 @@ namespace avx
 #ifdef HAS_AVX
 
     template<size_t L>
-    inline Vec<L, float> addv(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    inline Vec<L, float> addvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         Vec<L, float> result;
 
@@ -37,7 +37,7 @@ namespace avx
         return result;
     }
     template<size_t L>
-    inline Vec<L, float> subv(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    inline Vec<L, float> subvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         Vec<L, float> result;
 
@@ -61,7 +61,7 @@ namespace avx
         return result;
     }
     template<size_t L>
-    inline Vec<L, float> mulv(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    inline Vec<L, float> mulvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         Vec<L, float> result;
 
@@ -85,7 +85,7 @@ namespace avx
         return result;
     }
     template<size_t L>
-    inline Vec<L, float> divv(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    inline Vec<L, float> divvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         Vec<L, float> result;
 
@@ -110,7 +110,7 @@ namespace avx
     }
 
     template<size_t L>
-    inline float dotv(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         float result = 0;
 

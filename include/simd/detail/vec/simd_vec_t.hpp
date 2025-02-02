@@ -1,6 +1,8 @@
 #ifndef SIMDVECT_HPP
 #define SIMDVECT_HPP
 
+#include <simd/simd_common.hpp>
+
 #include <type_traits>
 #include <cstddef>
 
@@ -12,7 +14,7 @@ namespace simd
         static_assert(std::is_arithmetic_v<T>);
 
     public:
-        T data[L];
+        alignas(AVX_ALIGNMENT) T data[L];
 
         template<typename... Ts>
         inline Vec(Ts... args);

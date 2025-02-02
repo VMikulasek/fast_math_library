@@ -1,4 +1,4 @@
-#include <simd/detail/vec/simd_vec_float.hpp>
+#include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
 
 #include <gtest/gtest.h>
