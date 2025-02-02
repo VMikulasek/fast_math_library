@@ -73,7 +73,15 @@ namespace simd
          * of size
          */
         static void materialize_register(const AvxReg &reg, float *dst);
-        
+
+        /**
+         * @brief Returns float from register at given index.
+         * 
+         * @param reg register to materialize from
+         * @param index index of float to materialize
+         */
+        static float materialize_register_at_index(const AvxReg &reg, unsigned index);
+
         /**
          * @brief Adds vec1 and vec2 and returns result
          */

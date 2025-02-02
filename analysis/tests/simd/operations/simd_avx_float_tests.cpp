@@ -212,6 +212,16 @@ namespace tests
         CheckResult(testNum, reg);
     }
 
+    TEST_F(SimdAvxFloatTest, MaterializeRegisterAtIndex)
+    {
+        Ops::AvxReg reg = Ops::load_vector(decimalVec1);
+
+        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        {
+            EXPECT_FLOAT_EQ(Ops::materialize_register_at_index(reg, i), decimalVec1[i]);
+        }
+    }
+
     TEST_F(SimdAvxFloatTest, AddBasic)
     {
         SetRegisters(basicVec1, basicVec2);
