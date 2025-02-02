@@ -202,6 +202,16 @@ namespace tests
         }
     }
 
+    TEST_F(SimdAvxFloatTest, SetRegisterEach)
+    {
+        float testNum = 1;
+
+        Ops::AvxReg reg = Ops::set_register_each(testNum, testNum, testNum,
+            testNum, testNum, testNum, testNum, testNum);
+
+        CheckResult(testNum, reg);
+    }
+
     TEST_F(SimdAvxFloatTest, AddBasic)
     {
         SetRegisters(basicVec1, basicVec2);

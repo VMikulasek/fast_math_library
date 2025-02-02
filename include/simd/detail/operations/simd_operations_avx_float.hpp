@@ -60,6 +60,12 @@ namespace simd
         static AvxReg set_register(float num);
 
         /**
+         * @brief Sets each field of register to corresponding number
+         */
+        static AvxReg set_register_each(float num1, float num2, float num3,
+            float num4, float num5, float num6, float num7, float num8);
+
+        /**
          * @brief Stores vector from register to float *dst
          * 
          * @param reg register to materialize

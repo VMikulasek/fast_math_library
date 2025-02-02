@@ -23,6 +23,12 @@ namespace simd
         return _mm256_set1_ps(num);
     }
 
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::set_register_each(
+        float num1, float num2, float num3, float num4, float num5, float num6, float num7, float num8)
+    {
+        return _mm256_set_ps(num1, num2, num3, num4, num5, num6, num7, num8);   
+    }
+
     inline void SIMDOperations<float, InstructionSet::AVX>::materialize_register(
         const AvxReg &reg, float *dst)
     {
