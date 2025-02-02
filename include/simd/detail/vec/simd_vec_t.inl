@@ -21,7 +21,7 @@
 #define divvf(vec1, vec2) seq::divv(vec1, vec2);
 #define dotvf(vec1, vec2) seq::dotv(vec1, vec2);
 
-#endif // HAS_AVXs
+#endif // HAS_AVX
 
 namespace simd
 {

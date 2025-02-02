@@ -15,8 +15,6 @@ namespace simd
             T data[2];
         };
         
-        float data[2];
-
         inline Vec(T x, T y);
         inline Vec();
 
@@ -24,7 +22,7 @@ namespace simd
         inline Vec operator-(const Vec &other) const;
         inline Vec operator*(const Vec &other) const;
         inline Vec operator/(const Vec &other) const;
-        inline static float dot(const Vec &vec1, const Vec &vec2);
+        inline static T dot(const Vec &vec1, const Vec &vec2);
     };
 
     using Vec2f = Vec<2, float>;
@@ -33,4 +31,4 @@ namespace simd
 
 #include <simd/detail/vec/simd_vec2.inl>
 
-#endif
+#endif // SIMD_VEC2_HPP
