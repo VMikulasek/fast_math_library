@@ -79,7 +79,7 @@ namespace avx
 
         return Ops::materialize_register_at_index(resReg, 0);
     }
-}
+} // namespace avx
 } // namespace simd
 
 #endif // SIMD_VEC2_AVX_FLOAT_INL
