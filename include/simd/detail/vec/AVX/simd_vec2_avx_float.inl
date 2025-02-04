@@ -7,7 +7,7 @@ namespace simd
 {
 namespace avx
 {
-    Vec2f addv2f(const Vec2f &vec1, const Vec2f &vec2)
+    inline Vec2f addv2f(const Vec2f &vec1, const Vec2f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -22,7 +22,7 @@ namespace avx
         );
     }
 
-    Vec2f subv2f(const Vec2f &vec1, const Vec2f &vec2)
+    inline Vec2f subv2f(const Vec2f &vec1, const Vec2f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -37,7 +37,7 @@ namespace avx
         );
     }
 
-    Vec2f mulv2f(const Vec2f &vec1, const Vec2f &vec2)
+    inline Vec2f mulv2f(const Vec2f &vec1, const Vec2f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -52,7 +52,7 @@ namespace avx
         );
     }
 
-    Vec2f divv2f(const Vec2f &vec1, const Vec2f &vec2)
+    inline Vec2f divv2f(const Vec2f &vec1, const Vec2f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -67,7 +67,7 @@ namespace avx
         );
     }
 
-    float dotv2f(const Vec2f &vec1, const Vec2f &vec2)
+    inline float dotv2f(const Vec2f &vec1, const Vec2f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 

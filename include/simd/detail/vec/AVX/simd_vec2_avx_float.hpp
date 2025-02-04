@@ -13,12 +13,12 @@ namespace simd
 {
 namespace avx
 {
-    Vec2f addv2f(const Vec2f &vec1, const Vec2f &vec2);
-    Vec2f subv2f(const Vec2f &vec1, const Vec2f &vec2);
-    Vec2f mulv2f(const Vec2f &vec1, const Vec2f &vec2);
-    Vec2f divv2f(const Vec2f &vec1, const Vec2f &vec2);
+    inline Vec2f addv2f(const Vec2f &vec1, const Vec2f &vec2);
+    inline Vec2f subv2f(const Vec2f &vec1, const Vec2f &vec2);
+    inline Vec2f mulv2f(const Vec2f &vec1, const Vec2f &vec2);
+    inline Vec2f divv2f(const Vec2f &vec1, const Vec2f &vec2);
     
-    float dotv2f(const Vec2f &vec1, const Vec2f &vec2);
+    inline float dotv2f(const Vec2f &vec1, const Vec2f &vec2);
 } // namespace avx
 } // namespace simd
 
