@@ -26,14 +26,14 @@
 namespace simd
 {
     template<typename T>
-    Vec<2, T>::Vec(T x, T y) : data{x, y}
+    inline Vec<2, T>::Vec(T x, T y) : data{x, y}
     {}
     template<typename T>
-    Vec<2, T>::Vec() : data{}
+    inline Vec<2, T>::Vec() : data{}
     {}
 
     template<typename T>
-    Vec<2, T> Vec<2, T>::operator+(const Vec &other) const
+    inline Vec<2, T> Vec<2, T>::operator+(const Vec &other) const
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -45,7 +45,7 @@ namespace simd
         }
     }
     template<typename T>
-    Vec<2, T> Vec<2, T>::operator-(const Vec &other) const
+    inline Vec<2, T> Vec<2, T>::operator-(const Vec &other) const
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -57,7 +57,7 @@ namespace simd
         }
     }
     template<typename T>
-    Vec<2, T> Vec<2, T>::operator*(const Vec &other) const
+    inline Vec<2, T> Vec<2, T>::operator*(const Vec &other) const
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -69,7 +69,7 @@ namespace simd
         }
     }
     template<typename T>
-    Vec<2, T> Vec<2, T>::operator/(const Vec &other) const
+    inline Vec<2, T> Vec<2, T>::operator/(const Vec &other) const
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -81,7 +81,7 @@ namespace simd
         }
     }
     template<typename T>
-    T Vec<2, T>::dot(const Vec &vec1, const Vec &vec2)
+    inline T Vec<2, T>::dot(const Vec &vec1, const Vec &vec2)
     {
         if constexpr (std::is_same_v<T, float>)
         {

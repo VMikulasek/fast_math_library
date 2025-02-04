@@ -2,6 +2,7 @@
 #define SIMD_VEC3_HPP
 
 #include <simd/detail/vec/simd_vec_t.hpp>
+#include <simd/detail/vec/simd_vec2.hpp>
 
 namespace simd
 {
@@ -23,6 +24,8 @@ namespace simd
         inline Vec operator*(const Vec &other) const;
         inline Vec operator/(const Vec &other) const;
         inline static T dot(const Vec &vec1, const Vec &vec2);
+
+        inline Vec<2, T> xy();
     };
 
     using Vec3f = Vec<3, float>;
