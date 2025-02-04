@@ -83,11 +83,11 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float>)
         {
-            return dotv4f(*this, other);
+            return dotv4f(vec1, vec2);
         }
         else
         {
-            return seq::dotv(*this, other);
+            return seq::dotv(vec1, vec2);
         }
     }
 
