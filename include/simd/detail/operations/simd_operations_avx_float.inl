@@ -168,6 +168,18 @@ namespace simd
         AvxReg mask = _mm256_castsi256_ps(_mm256_set1_epi32(0x7FFFFFFF));
         return bitwise_and(vec, mask);
     }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::min(
+        const AvxReg &vec1, const AvxReg &vec2)
+    {
+        return _mm256_min_ps(vec1, vec2);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::max(
+        const AvxReg &vec1, const AvxReg &vec2)
+    {
+        return _mm256_max_ps(vec1, vec2);
+    }
 } // namespace simd
 
 #endif // SIMD_OPERATIONS_AVX_FLOAT_INL

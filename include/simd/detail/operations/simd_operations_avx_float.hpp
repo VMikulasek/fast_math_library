@@ -221,6 +221,16 @@ namespace simd
          * @brief Performs abs on every float in register
          */
         static AvxReg abs(const AvxReg &vec);
+
+        /**
+         * @brief Performs min between corresponding floats in registers
+         */
+        static AvxReg min(const AvxReg &vec1, const AvxReg &vec2);
+
+        /**
+         * @brief Performs max between corresponding floats in registers
+         */
+        static AvxReg max(const AvxReg &vec1, const AvxReg &vec2);
     };
 } // namespace simd
 

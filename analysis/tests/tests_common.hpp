@@ -27,6 +27,8 @@ namespace tests
     float cmp_eq(float op1, float op2);
     float cmp_le(float op1, float op2);
     float cmp_ge(float op1, float op2);
+    float min(float op1, float op2);
+    float max(float op1, float op2);
     float abs(float num);
     float round(float num);
 
