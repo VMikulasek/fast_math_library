@@ -11,8 +11,8 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::add(reg1, reg2);
 
@@ -28,8 +28,8 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::sub(reg1, reg2);
 
@@ -37,7 +37,7 @@ namespace avx
             Ops::materialize_register_at_index(resReg, 0),
             Ops::materialize_register_at_index(resReg, 1),
             Ops::materialize_register_at_index(resReg, 2),
-            Ops::materialize_register_at_index(resReg, 4)
+            Ops::materialize_register_at_index(resReg, 3)
         );
     }
 
@@ -45,8 +45,8 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::mul(reg1, reg2);
 
@@ -54,7 +54,7 @@ namespace avx
             Ops::materialize_register_at_index(resReg, 0),
             Ops::materialize_register_at_index(resReg, 1),
             Ops::materialize_register_at_index(resReg, 2),
-            Ops::materialize_register_at_index(resReg, 4)
+            Ops::materialize_register_at_index(resReg, 3)
         );
     }
 
@@ -62,8 +62,8 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::div(reg1, reg2);
 
@@ -71,7 +71,7 @@ namespace avx
             Ops::materialize_register_at_index(resReg, 0),
             Ops::materialize_register_at_index(resReg, 1),
             Ops::materialize_register_at_index(resReg, 2),
-            Ops::materialize_register_at_index(resReg, 4)
+            Ops::materialize_register_at_index(resReg, 3)
         );
     }
 
@@ -79,8 +79,8 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::mul(reg1, reg2);
         resReg = Ops::horizontal_add(resReg, resReg);
