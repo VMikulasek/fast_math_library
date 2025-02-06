@@ -16,6 +16,9 @@
 #define minv3f(vec1, vec2) avx::minv3f(vec1, vec2)
 #define maxv3f(vec1, vec2) avx::maxv3f(vec1, vec2)
 
+#define fast_sqrtv3f(vec) avx::fast_sqrtv3f(vec)
+#define fast_invsqrtv3f(vec) avx::fast_invsqrtv3f(vec)
+
 #define dotv3f(vec1, vec2) avx::dotv3f(vec1, vec2)
 
 #else // HAS_AVX
@@ -28,6 +31,9 @@
 #define absv3f(vec) seq::absv(vec)
 #define minv3f(vec1, vec2) seq::minv(vec1, vec2)
 #define maxv3f(vec1, vec2) seq::maxv(vec1, vec2)
+
+#define fast_sqrtv3f(vec) seq::fast_sqrtv(vec)
+#define fast_invsqrtv3f(vec) seq::fast_invsqrtv(vec)
 
 #define dotv3f(vec1, vec2) seq::dotv(vec1, vec2)
 
@@ -125,6 +131,41 @@ namespace simd
         else
         {
             return seq::maxv(vec1, vec2);
+        }
+    }
+
+    template<typename T>
+    inline Vec<3, T> Vec<3, T>::sqrt() const
+    {
+        return seq::sqrtv(*this);
+    }
+    template<typename T>
+    inline Vec<3, T> Vec<3, T>::fast_sqrt() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_sqrtv3f(*this);
+        }
+        else
+        {
+            return seq::fast_sqrtv(*this);
+        }
+    }
+    template<typename T>
+    inline Vec<3, T> Vec<3, T>::invsqrt() const
+    {
+        return seq::invsqrtv(*this);
+    }
+    template<typename T>
+    inline Vec<3, T> Vec<3, T>::fast_invsqrt() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_invsqrtv3f(*this);
+        }
+        else
+        {
+            return seq::fast_invsqrtv(*this);
         }
     }
 

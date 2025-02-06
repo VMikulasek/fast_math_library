@@ -2,6 +2,7 @@
 #define SIMDVECSEQ_INL
 
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
+#include <mathops/transcedentals.hpp>
 
 #include <cmath>
 
@@ -90,6 +91,55 @@ namespace seq
         for (size_t i = 0; i < L; i++)
         {
             result.data[i] = std::max(vec1.data[i], vec2.data[i]);
+        }
+
+        return result;
+    }
+
+    template<size_t L, typename T>
+    inline Vec<L, T> sqrtv(const Vec<L, T> &vec)
+    {
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = mathops::sqrt(vec.data[i]);
+        }
+
+        return result;
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> fast_sqrtv(const Vec<L, T> &vec)
+    {
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = mathops::fast_sqrt(vec.data[i]);
+        }
+
+        return result;
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> invsqrtv(const Vec<L, T> &vec)
+    {
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = mathops::invsqrt(vec.data[i]);
+        }
+
+        return result;
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> fast_invsqrtv(const Vec<L, T> &vec)
+    {
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = mathops::fast_invsqrt(vec.data[i]);
         }
 
         return result;

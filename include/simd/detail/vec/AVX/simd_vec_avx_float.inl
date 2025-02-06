@@ -4,6 +4,7 @@
 #include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
 #include <simd/simd_operations_avx.hpp>
 #include <simd/simd_common.hpp>
+#include <mathops/detail/AVX/avx_transcedentals.hpp>
 
 #include <cmath>
 
@@ -178,6 +179,45 @@ namespace avx
         for (; i < L; i++)
         {
             result.data[i] = std::max(vec1.data[i], vec2.data[i]);
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
+    inline Vec<L, float> fast_sqrtvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_sqrt_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_sqrt(vec.data[i]);
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> fast_invsqrtvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_invsqrt_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_invsqrt(vec.data[i]);
         }
         
         return result;

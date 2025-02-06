@@ -123,6 +123,41 @@ namespace avx
         );
     }
 
+    inline Vec4f fast_sqrtv4f(const Vec4f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, vec.w, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg;
+        mathops::avx::_fast_invsqrt_arr8(vec.data, resReg);
+        Ops::AvxReg oneReg = Ops::set_register(1.f);
+        resReg = Ops::div(oneReg, resReg);
+
+        return Vec4f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2),
+            Ops::materialize_register_at_index(resReg, 3)
+        );
+    }
+    inline Vec4f fast_invsqrtv4f(const Vec4f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, vec.w, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg;
+        mathops::avx::_fast_invsqrt_arr8(vec.data, resReg);
+
+        return Vec4f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2),
+            Ops::materialize_register_at_index(resReg, 3)
+        );
+    }
+
     inline float dotv4f(const Vec4f &vec1, const Vec4f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;

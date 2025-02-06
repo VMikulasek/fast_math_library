@@ -24,6 +24,11 @@ namespace avx
     inline Vec<L, float> maxvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2);
 
     template<size_t L>
+    inline Vec<L, float> fast_sqrtvf(const Vec<L, float> &vec);
+    template<size_t L>
+    inline Vec<L, float> fast_invsqrtvf(const Vec<L, float> &vec);
+
+    template<size_t L>
     inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2);
 } // namespace avx
 } // namespace simd

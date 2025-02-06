@@ -16,6 +16,9 @@ namespace avx
     inline Vec2f minv2f(const Vec2f &vec1, const Vec2f &vec2);
     inline Vec2f maxv2f(const Vec2f &vec1, const Vec2f &vec2);
 
+    inline Vec2f fast_sqrtv2f(const Vec2f &vec);
+    inline Vec2f fast_invsqrtv2f(const Vec2f &vec);
+
     inline float dotv2f(const Vec2f &vec1, const Vec2f &vec2);
 } // namespace avx
 } // namespace simd

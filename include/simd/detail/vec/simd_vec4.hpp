@@ -30,6 +30,11 @@ namespace simd
         inline static Vec min(const Vec &vec1, const Vec &vec2);
         inline static Vec max(const Vec &vec1, const Vec &vec2);
 
+        inline Vec sqrt() const;
+        inline Vec fast_sqrt() const;
+        inline Vec invsqrt() const;
+        inline Vec fast_invsqrt() const;
+
         inline static T dot(const Vec &vec1, const Vec &vec2);
 
         inline Vec<2, T> xy();
