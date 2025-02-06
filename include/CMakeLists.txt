@@ -27,12 +27,26 @@ simd/detail/operations/simd_operations_base.hpp)
 set(SIMD_VECTOR_DETAIL
 simd/detail/vec/simd_vec_t.hpp
 simd/detail/vec/simd_vec_t.inl
-simd/detail/vec/simd_vec_float.hpp
-simd/detail/vec/simd_vec_float.inl)
+simd/detail/vec/simd_vec2.hpp
+simd/detail/vec/simd_vec2.inl
+simd/detail/vec/simd_vec3.hpp
+simd/detail/vec/simd_vec3.inl
+simd/detail/vec/simd_vec4.hpp
+simd/detail/vec/simd_vec4.inl)
 
 set(SIMD_VECTOR_DETAIL_SEQ
 simd/detail/vec/SEQ/simd_vec_seq.hpp
 simd/detail/vec/SEQ/simd_vec_seq.inl)
+
+set(SIMD_VECTOR_DETAIL_AVX
+simd/detail/vec/AVX/simd_vec_avx_float.hpp
+simd/detail/vec/AVX/simd_vec_avx_float.inl
+simd/detail/vec/AVX/simd_vec2_avx_float.hpp
+simd/detail/vec/AVX/simd_vec2_avx_float.inl
+simd/detail/vec/AVX/simd_vec3_avx_float.hpp
+simd/detail/vec/AVX/simd_vec3_avx_float.inl
+simd/detail/vec/AVX/simd_vec4_avx_float.hpp
+simd/detail/vec/AVX/simd_vec4_avx_float.inl)
 
 set(MATHOPS_DETAIL
 mathops/detail/sums.inl
@@ -74,7 +88,8 @@ ${MATHOPS_DETAIL}
 ${MATHOPS_AVX}
 ${MATHOPS_SEQ}
 ${COMMON_DETAIL}
-${SIMD_VECTOR_DETAIL_SEQ})
+${SIMD_VECTOR_DETAIL_SEQ}
+${SIMD_VECTOR_DETAIL_AVX})
 
 if (AVX_SUPPORTED)
 	message(STATUS "AVX supported")
