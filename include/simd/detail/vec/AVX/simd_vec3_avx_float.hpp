@@ -18,6 +18,8 @@ namespace avx
     inline Vec3f mulv3f(const Vec3f &vec1, const Vec3f &vec2);
     inline Vec3f divv3f(const Vec3f &vec1, const Vec3f &vec2);
     
+    inline Vec3f absv3f(const Vec3f &vec);
+
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2);
 } // namespace avx
 } // namespace simd

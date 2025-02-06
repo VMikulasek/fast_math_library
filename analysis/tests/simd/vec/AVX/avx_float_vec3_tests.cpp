@@ -1,12 +1,17 @@
 #include <simd/detail/vec/simd_vec3.hpp>
 #include <simd/detail/vec/AVX/simd_vec3_avx_float.hpp>
 
+#include <cmath>
+
 #include <gtest/gtest.h>
 
 #undef addv3f
 #undef subv3f
 #undef mulv3f
 #undef divv3f
+
+#undef absv3f
+
 #undef dotv3f
 
 namespace analysis
@@ -141,6 +146,37 @@ namespace tests
             EXPECT_FLOAT_EQ(res.data[i], vec1Data[i] / vec2Data[i]);
         }
     }
+
+    TEST(FloatAvxVector3, VecAbsPositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vecData[] = {4.1f, 4.2f, 4.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2]);
+
+        auto res = simd::avx::absv3f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::abs(vecData[i]));
+        }
+    }
+    TEST(FloatAvxVector3, VecAbsNegative)
+    {
+        constexpr size_t vecLen = 3;
+        float vecData[] = {-123413.134f, -4591.13f, -1.f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1],
+            vecData[2]);
+
+        auto res = simd::avx::absv3f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], abs(vecData[i]));
+        }
+    }
+
     TEST(FloatAvxVector3, VecDotPositive)
     {
         constexpr size_t vecLen = 3;

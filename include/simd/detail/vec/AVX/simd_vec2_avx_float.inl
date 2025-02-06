@@ -72,6 +72,20 @@ namespace avx
         );
     }
 
+    inline Vec2f absv2f(const Vec2f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, 0, 0, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg = Ops::abs(reg);
+
+        return Vec2f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1)
+        );
+    }
+
     inline float dotv2f(const Vec2f &vec1, const Vec2f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;

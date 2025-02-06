@@ -25,6 +25,9 @@ namespace simd
         inline Vec operator-(const Vec &other) const;
         inline Vec operator*(const Vec &other) const;
         inline Vec operator/(const Vec &other) const;
+
+        inline Vec abs() const;
+
         inline static T dot(const Vec &vec1, const Vec &vec2);
 
         inline Vec<2, T> xy();

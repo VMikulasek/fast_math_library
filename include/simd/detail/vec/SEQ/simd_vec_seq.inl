@@ -3,6 +3,8 @@
 
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
 
+#include <cmath>
+
 namespace simd
 {
 namespace seq
@@ -53,6 +55,19 @@ namespace seq
             result.data[i] = vec1.data[i] / vec2.data[i];
         }
         
+        return result;
+    }
+
+    template<size_t L, typename T>
+    inline Vec<L, T> absv(const Vec<L, T> &vec)
+    {
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = std::abs(vec.data[i]);
+        }
+
         return result;
     }
 

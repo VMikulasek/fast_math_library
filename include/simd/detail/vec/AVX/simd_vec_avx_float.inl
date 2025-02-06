@@ -5,6 +5,8 @@
 #include <simd/simd_operations_avx.hpp>
 #include <simd/simd_common.hpp>
 
+#include <cmath>
+
 namespace simd
 {
 namespace avx
@@ -19,7 +21,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + 8 < L; i += 8)
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -43,7 +45,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + 8 < L; i += 8)
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -67,7 +69,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + 8 < L; i += 8)
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -91,7 +93,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + 8 < L; i += 8)
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -110,13 +112,37 @@ namespace avx
     }
 
     template<size_t L>
+    inline Vec<L, float> absvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg = SIMDOperations<float, AVX>::load_vector(&(vec.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::abs(reg);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = std::abs(vec.data[i]);
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
     inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         float result = 0;
 
         size_t i = 0;
 
-        for(; i + 8 < L; i += 8)
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));

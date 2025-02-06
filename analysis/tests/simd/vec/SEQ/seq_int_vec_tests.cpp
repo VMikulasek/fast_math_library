@@ -1,6 +1,8 @@
 #include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
 
+#include <cmath>
+
 #include <gtest/gtest.h>
 
 namespace analysis
@@ -143,6 +145,37 @@ namespace tests
             EXPECT_EQ(res.data[i], vec1Data[i] / vec2Data[i]);
         }
     }
+
+    TEST(IntSeqVector, Vec4AbsPositive)
+    {
+        constexpr size_t vecLen = 4;
+        int vecData[] = {4, 4, 4, 2};
+
+        auto vec = simd::Vec<vecLen, int>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::absv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_EQ(res.data[i], std::abs(vecData[i]));
+        }
+    }
+    TEST(IntSeqVector, Vec9AbsNegative)
+    {
+        constexpr size_t vecLen = 9;
+        int vecData[] = {-123413, -4591, -1, -3, -131, -111, -1, -1, -1213};
+
+        auto vec = simd::Vec<vecLen, int>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
+            vecData[5], vecData[6], vecData[7], vecData[8]);
+
+        auto res = simd::seq::absv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_EQ(res.data[i], std::abs(vecData[i]));
+        }
+    }
+
     TEST(IntSeqVector, Vec4DotPositive)
     {
         constexpr size_t vecLen = 4;

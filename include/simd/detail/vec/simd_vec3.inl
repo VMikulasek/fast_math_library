@@ -7,19 +7,25 @@
 
 #ifdef HAS_AVX
 
-#define addv3f(vec1, vec2) avx::addv3f(vec1, vec2);
-#define subv3f(vec1, vec2) avx::subv3f(vec1, vec2);
-#define mulv3f(vec1, vec2) avx::mulv3f(vec1, vec2);
-#define divv3f(vec1, vec2) avx::divv3f(vec1, vec2);
-#define dotv3f(vec1, vec2) avx::dotv3f(vec1, vec2);
+#define addv3f(vec1, vec2) avx::addv3f(vec1, vec2)
+#define subv3f(vec1, vec2) avx::subv3f(vec1, vec2)
+#define mulv3f(vec1, vec2) avx::mulv3f(vec1, vec2)
+#define divv3f(vec1, vec2) avx::divv3f(vec1, vec2)
+
+#define absv3f(vec) avx::absv3f(vec)
+
+#define dotv3f(vec1, vec2) avx::dotv3f(vec1, vec2)
 
 #else // HAS_AVX
 
-#define addv3f(vec1, vec2) seq::addv(vec1, vec2);
-#define subv3f(vec1, vec2) seq::subv(vec1, vec2);
-#define mulv3f(vec1, vec2) seq::mulv(vec1, vec2);
-#define divv3f(vec1, vec2) seq::divv(vec1, vec2);
-#define dotv3f(vec1, vec2) seq::dotv(vec1, vec2);
+#define addv3f(vec1, vec2) seq::addv(vec1, vec2)
+#define subv3f(vec1, vec2) seq::subv(vec1, vec2)
+#define mulv3f(vec1, vec2) seq::mulv(vec1, vec2)
+#define divv3f(vec1, vec2) seq::divv(vec1, vec2)
+
+#define absv3f(vec) seq::absv(vec)
+
+#define dotv3f(vec1, vec2) seq::dotv(vec1, vec2)
 
 #endif // HAS_AVX
 
@@ -80,6 +86,20 @@ namespace simd
             return seq::divv(*this, other);
         }
     }
+
+    template<typename T>
+    inline Vec<3, T> Vec<3, T>::abs() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return absv3f(*this);
+        }
+        else
+        {
+            return seq::absv(*this);
+        }
+    }
+
     template<typename T>
     inline T Vec<3, T>::dot(const Vec &vec1, const Vec &vec2)
     {

@@ -1,13 +1,9 @@
 #include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
 
-#include <gtest/gtest.h>
+#include <cmath>
 
-#undef addv
-#undef subv
-#undef mulv
-#undef divv
-#undef dotv
+#include <gtest/gtest.h>
 
 namespace analysis
 {
@@ -149,6 +145,37 @@ namespace tests
             EXPECT_FLOAT_EQ(res.data[i], vec1Data[i] / vec2Data[i]);
         }
     }
+    
+    TEST(FloatSeqVector, Vec4AbsPositive)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {4.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::absv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::abs(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec9AbsNegative)
+    {
+        constexpr size_t vecLen = 9;
+        float vecData[] = {-123413.134f, -4591.13f, -1.f, -3.f, -131.13f, -111.111f, -1.f, -1.f, -1213.f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
+            vecData[5], vecData[6], vecData[7], vecData[8]);
+
+        auto res = simd::seq::absv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::abs(vecData[i]));
+        }
+    }
+
     TEST(FloatSeqVector, Vec4DotPositive)
     {
         constexpr size_t vecLen = 4;
