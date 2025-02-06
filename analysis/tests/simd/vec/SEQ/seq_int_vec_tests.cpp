@@ -175,6 +175,74 @@ namespace tests
             EXPECT_EQ(res.data[i], std::abs(vecData[i]));
         }
     }
+    TEST(IntSeqVector, Vec4MinPositive)
+    {
+        constexpr size_t vecLen = 4;
+        int vec1Data[] = {4, 4, 4, 2};
+        int vec2Data[] = {1, 4000000, 4, 2};
+
+        auto vec1 = simd::Vec<vecLen, int>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
+        auto vec2 = simd::Vec<vecLen, int>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
+
+        auto res = simd::seq::minv(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_EQ(res.data[i], std::min(vec1Data[i], vec2Data[i]));
+        }
+    }
+    TEST(IntSeqVector, Vec9MinNegative)
+    {
+        constexpr size_t vecLen = 9;
+        int vec1Data[] = {-123413, -4591, -1, -3, -131, -111, -1, -1, -1213};
+        int vec2Data[] = {-111, -4562431, -1, -13531, -1, -1, -1, -1, -1};
+
+        auto vec1 = simd::Vec<vecLen, int>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3], vec1Data[4],
+            vec1Data[5], vec1Data[6], vec1Data[7], vec1Data[8]);
+        auto vec2 = simd::Vec<vecLen, int>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
+            vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
+
+        auto res = simd::seq::minv(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_EQ(res.data[i], std::min(vec1Data[i], vec2Data[i]));
+        }
+    }
+    TEST(IntSeqVector, Vec4MaxPositive)
+    {
+        constexpr size_t vecLen = 4;
+        int vec1Data[] = {4, 4, 4, 2};
+        int vec2Data[] = {1, 4000000, 4, 2};
+
+        auto vec1 = simd::Vec<vecLen, int>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
+        auto vec2 = simd::Vec<vecLen, int>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
+
+        auto res = simd::seq::maxv(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
+        }
+    }
+    TEST(IntSeqVector, Vec9MaxNegative)
+    {
+        constexpr size_t vecLen = 9;
+        int vec1Data[] = {-123413, -4591, -1, -3, -131, -111, -1, -1, -1213};
+        int vec2Data[] = {-111, -4562431, -1, -13531, -1, -1, -1, -1, -1};
+
+        auto vec1 = simd::Vec<vecLen, int>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3], vec1Data[4],
+            vec1Data[5], vec1Data[6], vec1Data[7], vec1Data[8]);
+        auto vec2 = simd::Vec<vecLen, int>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
+            vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
+
+        auto res = simd::seq::maxv(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
+        }
+    }
 
     TEST(IntSeqVector, Vec4DotPositive)
     {

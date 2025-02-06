@@ -19,6 +19,8 @@ namespace avx
     inline Vec4f divv4f(const Vec4f &vec1, const Vec4f &vec2);
     
     inline Vec4f absv4f(const Vec4f &vec);
+    inline Vec4f minv4f(const Vec4f &vec1, const Vec4f &vec2);
+    inline Vec4f maxv4f(const Vec4f &vec1, const Vec4f &vec2);
 
     inline float dotv4f(const Vec4f &vec1, const Vec4f &vec2);
 } // namespace avx

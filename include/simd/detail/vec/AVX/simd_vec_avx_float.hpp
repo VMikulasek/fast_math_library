@@ -3,12 +3,6 @@
 
 #include <simd/detail/vec/simd_vec_t.hpp>
 
-#undef addvf
-#undef subvf
-#undef mulvf
-#undef divvf
-#undef dotvf
-
 namespace simd
 {
 namespace avx
@@ -24,6 +18,10 @@ namespace avx
     
     template<size_t L>
     inline Vec<L, float> absvf(const Vec<L, float> &vec);
+    template<size_t L>
+    inline Vec<L, float> minvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2);
+    template<size_t L>
+    inline Vec<L, float> maxvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2);
 
     template<size_t L>
     inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2);

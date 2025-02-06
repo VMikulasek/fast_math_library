@@ -3,12 +3,6 @@
 
 #include <simd/detail/vec/simd_vec3.hpp>
 
-#undef addv3f
-#undef subv3f
-#undef mulv3f
-#undef divv3f
-#undef dotv3f
-
 namespace simd
 {
 namespace avx
@@ -19,6 +13,8 @@ namespace avx
     inline Vec3f divv3f(const Vec3f &vec1, const Vec3f &vec2);
     
     inline Vec3f absv3f(const Vec3f &vec);
+    inline Vec3f minv3f(const Vec3f &vec1, const Vec3f &vec2);
+    inline Vec3f maxv3f(const Vec3f &vec1, const Vec3f &vec2);
 
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2);
 } // namespace avx

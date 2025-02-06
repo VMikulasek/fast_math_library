@@ -11,6 +11,8 @@
 #undef divv3f
 
 #undef absv3f
+#undef minv3f
+#undef maxv3f
 
 #undef dotv3f
 
@@ -174,6 +176,70 @@ namespace tests
         for (size_t i = 0; i < vecLen; i++)
         {
             EXPECT_FLOAT_EQ(res.data[i], abs(vecData[i]));
+        }
+    }
+    TEST(FloatAvxVector3, VecMinPositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vec1Data[] = {4.1f, 4.2f, 4.3f};
+        float vec2Data[] = {1.f, 4000000.1f, 4.4f};
+
+        auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::avx::minv3f(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::min(vec1Data[i], vec2Data[i]));
+        }
+    }
+    TEST(FloatAvxVector3, VecMinNegative)
+    {
+        constexpr size_t vecLen = 3;
+        float vec1Data[] = {-123413.134f, -4591.13f, -1.f};
+        float vec2Data[] = {-111.f, -4562431.13f, -1.f};
+
+        auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::avx::minv3f(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::min(vec1Data[i], vec2Data[i]));
+        }
+    }
+    TEST(FloatAvxVector3, VecMaxPositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vec1Data[] = {4.1f, 4.2f, 4.3f};
+        float vec2Data[] = {1.f, 4000000.1f, 4.4f};
+
+        auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::avx::maxv3f(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
+        }
+    }
+    TEST(FloatAvxVector3, VecMaxNegative)
+    {
+        constexpr size_t vecLen = 3;
+        float vec1Data[] = {-123413.134f, -4591.13f, -1.f};
+        float vec2Data[] = {-111.f, -4562431.13f, -1.f};
+
+        auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::avx::maxv3f(vec1, vec2);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
         }
     }
 

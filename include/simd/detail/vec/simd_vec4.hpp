@@ -27,6 +27,8 @@ namespace simd
         inline Vec operator/(const Vec &other) const;
 
         inline Vec abs() const;
+        inline static Vec min(const Vec &vec1, const Vec &vec2);
+        inline static Vec max(const Vec &vec1, const Vec &vec2);
 
         inline static T dot(const Vec &vec1, const Vec &vec2);
 

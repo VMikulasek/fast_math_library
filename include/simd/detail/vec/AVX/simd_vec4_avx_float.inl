@@ -90,6 +90,38 @@ namespace avx
             Ops::materialize_register_at_index(resReg, 3)
         );
     }
+    inline Vec4f minv4f(const Vec4f &vec1, const Vec4f &vec2)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg = Ops::min(reg1, reg2);
+
+        return Vec4f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2),
+            Ops::materialize_register_at_index(resReg, 3)
+        );
+    }
+    inline Vec4f maxv4f(const Vec4f &vec1, const Vec4f &vec2)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, vec1.w, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, vec2.w, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg = Ops::max(reg1, reg2);
+
+        return Vec4f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2),
+            Ops::materialize_register_at_index(resReg, 3)
+        );
+    }
 
     inline float dotv4f(const Vec4f &vec1, const Vec4f &vec2)
     {

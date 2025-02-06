@@ -85,6 +85,36 @@ namespace avx
             Ops::materialize_register_at_index(resReg, 2)
         );
     }
+    inline Vec3f minv3f(const Vec3f &vec1, const Vec3f &vec2)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg = Ops::min(reg1, reg2);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2)
+        );
+    }
+    inline Vec3f maxv3f(const Vec3f &vec1, const Vec3f &vec2)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+
+        Ops::AvxReg resReg = Ops::max(reg1, reg2);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2)
+        );
+    }
 
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2)
     {

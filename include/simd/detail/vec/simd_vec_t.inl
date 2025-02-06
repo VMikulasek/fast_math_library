@@ -13,6 +13,8 @@
 #define divvf(vec1, vec2) avx::divvf(vec1, vec2)
 
 #define absvf(vec) avx::absvf(vec)
+#define minvf(vec1, vec2) avx::minvf(vec1, vec2)
+#define maxvf(vec1, vec2) avx::maxvf(vec1, vec2)
 
 #define dotvf(vec1, vec2) avx::dotvf(vec1, vec2)
 
@@ -24,6 +26,8 @@
 #define divvf(vec1, vec2) seq::divv(vec1, vec2)
 
 #define absvf(vec) seq::absv(vec)
+#define minvf(vec1, vec2) seq::minv(vec1, vec2)
+#define maxvf(vec1, vec2) seq::maxv(vec1, vec2)
 
 #define dotvf(vec1, vec2) seq::dotv(vec1, vec2)
 
@@ -101,6 +105,30 @@ namespace simd
         else
         {
             return seq::absv(*this);
+        }
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::min(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return minvf(vec1, vec2);
+        }
+        else
+        {
+            return seq::minv(vec1, vec2);
+        }
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::max(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return maxvf(vec1, vec2);
+        }
+        else
+        {
+            return seq::maxv(vec1, vec2);
         }
     }
 
