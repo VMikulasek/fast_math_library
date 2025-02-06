@@ -83,8 +83,8 @@ namespace avx
         Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::mul(reg1, reg2);
-        Ops::AvxReg resReg = Ops::horizontal_add(resReg, resReg);
-        Ops::AvxReg resReg = Ops::horizontal_add(resReg, resReg);
+        resReg = Ops::horizontal_add(resReg, resReg);
+        resReg = Ops::horizontal_add(resReg, resReg);
 
         return Ops::materialize_register_at_index(resReg, 0);
     }

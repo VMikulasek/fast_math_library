@@ -2,6 +2,7 @@
 #define SIMD_VEC2_AVX_FLOAT_INL
 
 #include <simd/detail/vec/AVX/simd_vec2_avx_float.hpp>
+#include <iostream>
 
 namespace simd
 {
@@ -15,6 +16,10 @@ namespace avx
         Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, 0, 0, 0, 0, 0, 0);
 
         Ops::AvxReg resReg = Ops::add(reg1, reg2);
+
+        std::cout << "reg1 " << Ops::materialize_register_at_index(reg1, 0) << std::endl;
+        std::cout << "reg2 " << Ops::materialize_register_at_index(reg2, 0) << std::endl;
+        std::cout << "resReg " << Ops::materialize_register_at_index(resReg, 0) << std::endl;
 
         return Vec2f(
             Ops::materialize_register_at_index(resReg, 0),

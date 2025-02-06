@@ -2,6 +2,7 @@
 #define SIMD_VEC2_HPP
 
 #include <simd/detail/vec/simd_vec_t.hpp>
+#include <simd/simd_common.hpp>
 
 namespace simd
 {
@@ -9,7 +10,7 @@ namespace simd
     class Vec<2, T>
     {
     public:
-        union
+        union alignas(AVX_ALIGNMENT) 
         {
             struct{ T x, y; };
             T data[2];

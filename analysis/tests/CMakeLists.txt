@@ -16,6 +16,7 @@ tests_common.cpp
 simd/operations/simd_avx_float_tests.cpp
 simd/operations/simd_avx2_int_tests.cpp
 simd/vec/AVX/avx_float_vec_tests.cpp
+simd/vec/AVX/avx_float_vec2_tests.cpp
 simd/vec/SEQ/seq_float_vec_tests.cpp
 simd/vec/SEQ/seq_int_vec_tests.cpp
 mathops/AVX/avx_sums_tests.cpp

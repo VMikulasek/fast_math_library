@@ -204,12 +204,18 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, SetRegisterEach)
     {
-        float testNum = 1;
+        float testNums[] = {1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f};
 
-        Ops::AvxReg reg = Ops::set_register_each(testNum, testNum, testNum,
-            testNum, testNum, testNum, testNum, testNum);
+        Ops::AvxReg reg = Ops::set_register_each(testNums[0], testNums[1], testNums[2],
+            testNums[3], testNums[4], testNums[5], testNums[6], testNums[7]);
 
-        CheckResult(testNum, reg);
+        alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+        Ops::materialize_register(reg, result);
+        
+        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        {
+            EXPECT_FLOAT_EQ(result[i], testNums[i]);
+        }
     }
 
     TEST_F(SimdAvxFloatTest, MaterializeRegisterAtIndex)

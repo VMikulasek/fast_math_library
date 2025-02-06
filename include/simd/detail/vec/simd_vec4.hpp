@@ -4,6 +4,7 @@
 #include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/simd_vec2.hpp>
 #include <simd/detail/vec/simd_vec3.hpp>
+#include <simd/simd_common.hpp>
 
 namespace simd
 {
@@ -11,7 +12,7 @@ namespace simd
     class Vec<4, T>
     {
     public:
-        union
+        union alignas(AVX_ALIGNMENT)
         {
             struct{ T x, y, z, w; };
             T data[4];
