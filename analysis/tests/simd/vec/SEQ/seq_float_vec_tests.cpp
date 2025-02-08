@@ -9,6 +9,8 @@ namespace analysis
 {
 namespace tests
 {
+    static constexpr float maximalFastInvSqrtRelativeError = 0.00175124;
+
     TEST(FloatSeqVector, Vec4AddPositive)
     {
         constexpr size_t vecLen = 4;
@@ -241,6 +243,65 @@ namespace tests
         for (size_t i = 0; i < vecLen; i++)
         {
             EXPECT_FLOAT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
+        }
+    }
+    
+    TEST(FloatSeqVector, Vec4Sqrt)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {0.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::sqrtv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::sqrtf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec4InvSqrt)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {0.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::invsqrtv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], 1 / std::sqrtf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec4FastSqrt)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {0.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::fast_sqrtv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = std::sqrtf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * expected);
+        }
+    }
+    TEST(FloatSeqVector, Vec4FastInvSqrt)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {0.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::invsqrtv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = 1 / std::sqrtf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * expected == 0 ? 0.1 : expected);
         }
     }
 
