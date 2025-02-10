@@ -5,6 +5,8 @@
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
 #include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
 
+#include <type_traits>
+
 #ifdef HAS_AVX
 
 #define addvf(vec1, vec2) avx::addvf(vec1, vec2)

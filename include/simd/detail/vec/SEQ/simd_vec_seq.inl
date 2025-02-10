@@ -99,6 +99,8 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> sqrtv(const Vec<L, T> &vec)
     {
+        static_assert(std::is_floating_point_v<T>, "Square root only supported for floating point data types.");
+
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -111,6 +113,8 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> fast_sqrtv(const Vec<L, T> &vec)
     {
+        static_assert(std::is_floating_point_v<T>, "Fast square root only supported for floating point data types.");
+
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -123,6 +127,8 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> invsqrtv(const Vec<L, T> &vec)
     {
+        static_assert(std::is_floating_point_v<T>, "Inverse square root only supported for floating point data types.");
+
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -135,6 +141,8 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> fast_invsqrtv(const Vec<L, T> &vec)
     {
+        static_assert(std::is_floating_point_v<T>, "Fast inverse square root only supported for floating point data types.");
+
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
