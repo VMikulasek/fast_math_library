@@ -21,6 +21,9 @@
 #define fast_sqrtvf(vec) avx::fast_sqrtvf(vec)
 #define fast_invsqrtvf(vec) avx::fast_invsqrtvf(vec)
 
+#define fast_sinvf(vec) avx::fast_sinvf(vec)
+#define fast_cosvf(vec) avx::fast_cosvf(vec)
+
 #define dotvf(vec1, vec2) avx::dotvf(vec1, vec2)
 
 #else // HAS_AVX
@@ -36,6 +39,9 @@
 
 #define fast_sqrtvf(vec) seq::fast_sqrtv(vec)
 #define fast_invsqrtvf(vec) seq::fast_invsqrtv(vec)
+
+#define fast_sinvf(vec) seq::fast_sinv(vec)
+#define fast_cosvf(vec) seq::fast_cosv(vec)
 
 #define dotvf(vec1, vec2) seq::dotv(vec1, vec2)
 
@@ -194,6 +200,30 @@ namespace simd
     inline Vec<L, T> Vec<L, T>::cot() const
     {
         return seq::cotv(*this);
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::fast_sin() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_sinvf(*this);
+        }
+        else
+        {
+            return seq::fast_sinv(*this);
+        }
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::fast_cos() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_cosvf(*this);
+        }
+        else
+        {
+            return seq::fast_cosv(*this);
+        }
     }
 
     template<size_t L, typename T>
