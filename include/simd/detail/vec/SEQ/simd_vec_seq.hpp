@@ -33,6 +33,19 @@ namespace seq
     inline Vec<L, T> fast_invsqrtv(const Vec<L, T> &vec);
 
     template<size_t L, typename T>
+    inline Vec<L, T> sinv(const Vec<L, T> &vec);
+    template<size_t L, typename T>
+    inline Vec<L, T> cosv(const Vec<L, T> &vec);
+    template<size_t L, typename T>
+    inline Vec<L, T> tanv(const Vec<L, T> &vec);
+    template<size_t L, typename T>
+    inline Vec<L, T> cotv(const Vec<L, T> &vec);
+    template<size_t L, typename T>
+    inline Vec<L, T> fast_sinv(const Vec<L, T> &vec);
+    template<size_t L, typename T>
+    inline Vec<L, T> fast_cosv(const Vec<L, T> &vec);
+
+    template<size_t L, typename T>
     inline T dotv(const Vec<L, T> &vec1, const Vec<L, T> &vec2);
 } // namespace seq
 } // namespace simd

@@ -176,6 +176,27 @@ namespace simd
     }
 
     template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::sin() const
+    {
+        return seq::sinv(*this);
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::cos() const
+    {
+        return seq::cosv(*this);
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::tan() const
+    {
+        return seq::tanv(*this);
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::cot() const
+    {
+        return seq::cotv(*this);
+    }
+
+    template<size_t L, typename T>
     inline T Vec<L, T>::dot(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
         if constexpr (std::is_same_v<T, float>)

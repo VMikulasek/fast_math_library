@@ -305,6 +305,123 @@ namespace tests
         }
     }
 
+    TEST(FloatSeqVector, Vec4SinPositive)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {4.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::sinv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::sinf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec9SinNegative)
+    {
+        constexpr size_t vecLen = 9;
+        float vecData[] = {-123413.134f, -4591.13f, -1.f, -3.f, -131.13f, -111.111f, -1.f, -1.f, -1213.f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
+            vecData[5], vecData[6], vecData[7], vecData[8]);
+
+        auto res = simd::seq::sinv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::sinf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec4CosPositive)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {4.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::cosv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::cosf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec9CosNegative)
+    {
+        constexpr size_t vecLen = 9;
+        float vecData[] = {-123413.134f, -4591.13f, -1.f, -3.f, -131.13f, -111.111f, -1.f, -1.f, -1213.f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
+            vecData[5], vecData[6], vecData[7], vecData[8]);
+
+        auto res = simd::seq::cosv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::cosf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec4TanPositive)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {4.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::tanv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::tanf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec9TanNegative)
+    {
+        constexpr size_t vecLen = 9;
+        float vecData[] = {-123413.134f, -4591.13f, -1.f, -3.f, -131.13f, -111.111f, -1.f, -1.f, -1213.f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
+            vecData[5], vecData[6], vecData[7], vecData[8]);
+
+        auto res = simd::seq::tanv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], std::tanf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec4CotPositive)
+    {
+        constexpr size_t vecLen = 4;
+        float vecData[] = {4.1f, 4.2f, 4.3f, 2.3f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
+
+        auto res = simd::seq::cotv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], 1 / std::tanf(vecData[i]));
+        }
+    }
+    TEST(FloatSeqVector, Vec9CotNegative)
+    {
+        constexpr size_t vecLen = 9;
+        float vecData[] = {-123413.134f, -4591.13f, -1.f, -3.f, -131.13f, -111.111f, -1.f, -1.f, -1213.f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
+            vecData[5], vecData[6], vecData[7], vecData[8]);
+
+        auto res = simd::seq::cotv(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            EXPECT_FLOAT_EQ(res.data[i], 1 / std::tanf(vecData[i]));
+        }
+    }
+
     TEST(FloatSeqVector, Vec4DotPositive)
     {
         constexpr size_t vecLen = 4;

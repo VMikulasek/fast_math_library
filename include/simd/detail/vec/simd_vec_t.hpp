@@ -34,6 +34,11 @@ namespace simd
         inline Vec invsqrt() const;
         inline Vec fast_invsqrt() const;
 
+        inline Vec sin() const;
+        inline Vec cos() const;
+        inline Vec tan() const;
+        inline Vec cot() const;
+
         inline static T dot(const Vec &vec1, const Vec &vec2);
     };
 } // namespace simd
