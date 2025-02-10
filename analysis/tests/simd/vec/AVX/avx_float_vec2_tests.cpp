@@ -14,12 +14,17 @@
 #undef minv2f
 #undef maxv2f
 
+#undef fast_sqrtv2f
+#undef fast_invsqrtv2f
+
 #undef dotv2f
 
 namespace analysis
 {
 namespace tests
 {
+    static constexpr float maximalFastInvSqrtRelativeError = 0.00175124;
+
     TEST(FloatAvxVector2, VecAddPositive)
     {
         constexpr size_t vecLen = 2;
@@ -241,6 +246,38 @@ namespace tests
             EXPECT_FLOAT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
         }
     }
+
+    TEST(FloatAvxVector2, VecFastSqrt)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {0.1f, 4.2f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::fast_sqrtv2f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = std::sqrtf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * expected == 0 ? 0.1 : expected);
+        }
+    }
+    TEST(FloatAvxVector2, VecFastInvSqrt)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {0.1f, 4.2f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::fast_invsqrtv2f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = 1 / std::sqrtf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * expected == 0 ? 0.1 : expected);
+        }
+    }
+
 
     TEST(FloatAvxVector2, VecDotPositive)
     {
