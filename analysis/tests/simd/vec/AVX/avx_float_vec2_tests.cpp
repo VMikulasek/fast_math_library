@@ -17,6 +17,9 @@
 #undef fast_sqrtv2f
 #undef fast_invsqrtv2f
 
+#undef fast_sinv2f
+#undef fast_cosv2f
+
 #undef dotv2f
 
 namespace analysis
@@ -24,6 +27,7 @@ namespace analysis
 namespace tests
 {
     static constexpr float maximalFastInvSqrtRelativeError = 0.00175124;
+    static constexpr float maximalSinCosAbsoluteError = 0.00048828128;
 
     TEST(FloatAvxVector2, VecAddPositive)
     {
@@ -259,7 +263,7 @@ namespace tests
         for (size_t i = 0; i < vecLen; i++)
         {
             float expected = std::sqrtf(vecData[i]);
-            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * expected == 0 ? 0.1 : expected);
+            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
     TEST(FloatAvxVector2, VecFastInvSqrt)
@@ -274,10 +278,70 @@ namespace tests
         for (size_t i = 0; i < vecLen; i++)
         {
             float expected = 1 / std::sqrtf(vecData[i]);
-            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * expected == 0 ? 0.1 : expected);
+            EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
 
+    TEST(FloatAvxVector2, VecFastSinPositive)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {0.1f, 3.1f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::fast_sinv2f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = std::sinf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
+        }
+    }
+    TEST(FloatAvxVector2, VecFastSinNegative)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {-1.134f, -3.13f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::fast_sinv2f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = std::sinf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
+        }
+    }
+    TEST(FloatAvxVector2, VecFastCosPositive)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {0.1f, 3.1f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::fast_cosv2f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = std::cosf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
+        }
+    }
+    TEST(FloatAvxVector2, VecFastCosNegative)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {-1.134f, -3.13f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::fast_cosv2f(vec);
+
+        for (size_t i = 0; i < vecLen; i++)
+        {
+            float expected = std::cosf(vecData[i]);
+            EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
+        }
+    }
 
     TEST(FloatAvxVector2, VecDotPositive)
     {
