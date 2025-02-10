@@ -209,6 +209,34 @@ namespace seq
 
         return result;
     }
+    template<size_t L, typename T>
+    inline Vec<L, T> fast_sinv(const Vec<L, T> &vec)
+    {
+        static_assert(std::is_floating_point_v<T>, "Fast sin only supported for floating point data types.");
+
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = mathops::fast_sin(vec.data[i]);
+        }
+
+        return result;
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> fast_cosv(const Vec<L, T> &vec)
+    {
+        static_assert(std::is_floating_point_v<T>, "Fast cos only supported for floating point data types.");
+
+        Vec<L, T> result;
+
+        for (size_t i = 0; i < L; i++)
+        {
+            result.data[i] = mathops::fast_cos(vec.data[i]);
+        }
+
+        return result;
+    }
 
     template<size_t L, typename T>
     inline T dotv(const Vec<L, T> &vec1, const Vec<L, T> &vec2)

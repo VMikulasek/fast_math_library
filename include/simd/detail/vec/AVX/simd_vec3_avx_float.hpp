@@ -19,6 +19,9 @@ namespace avx
     inline Vec3f fast_sqrtv3f(const Vec3f &vec);
     inline Vec3f fast_invsqrtv3f(const Vec3f &vec);
 
+    inline Vec3f fast_sinv3f(const Vec2f &vec);
+    inline Vec3f fast_cosv3f(const Vec2f &vec);
+
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2);
 } // namespace avx
 } // namespace simd

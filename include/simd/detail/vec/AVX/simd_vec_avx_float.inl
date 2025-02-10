@@ -224,6 +224,45 @@ namespace avx
     }
 
     template<size_t L>
+    inline Vec<L, float> fast_sinvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_sin_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_sin(vec.data[i]);
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> fast_cosvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_cos_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_cos(vec.data[i]);
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
     inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
     {
         float result = 0;

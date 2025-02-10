@@ -123,7 +123,7 @@ namespace avx
         Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
 
         Ops::AvxReg resReg;
-        mathops::avx::_fast_invsqrt_arr8(vec.data, resReg);
+        mathops::avx::_fast_invsqrt_arr8(reg, resReg);
         Ops::AvxReg oneReg = Ops::set_register(1.f);
         resReg = Ops::div(oneReg, resReg);
 
@@ -140,7 +140,42 @@ namespace avx
         Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
 
         Ops::AvxReg resReg;
-        mathops::avx::_fast_invsqrt_arr8(vec.data, resReg);
+        mathops::avx::_fast_invsqrt_arr8(reg, resReg);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2)
+        );
+    }
+
+    inline Vec3f fast_sinv3f(const Vec3f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        
+        Ops::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
+        mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
+        Ops::AvxReg resReg = mathops::avx::_fast_sin_arr8(reg, pi2Vec,
+            quarter, AVec, BVec, CVec);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2)
+        );
+    }
+    inline Vec3f fast_cosv3f(const Vec3f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        
+        Ops::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
+        mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
+        Ops::AvxReg resReg = mathops::avx::_fast_cos_arr8(reg, pi2Vec,
+            quarter, AVec, BVec, CVec);
 
         return Vec3f(
             Ops::materialize_register_at_index(resReg, 0),

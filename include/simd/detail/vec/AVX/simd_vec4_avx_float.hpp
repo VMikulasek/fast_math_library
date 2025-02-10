@@ -3,12 +3,6 @@
 
 #include <simd/detail/vec/simd_vec4.hpp>
 
-#undef addv4f
-#undef subv4f
-#undef mulv4f
-#undef divv4f
-#undef dotv4f
-
 namespace simd
 {
 namespace avx
@@ -24,6 +18,9 @@ namespace avx
 
     inline Vec4f fast_sqrtv4f(const Vec4f &vec);
     inline Vec4f fast_invsqrtv4f(const Vec4f &vec);
+
+    inline Vec4f fast_sinv4f(const Vec2f &vec);
+    inline Vec4f fast_cosv4f(const Vec2f &vec);
 
     inline float dotv4f(const Vec4f &vec1, const Vec4f &vec2);
 } // namespace avx
