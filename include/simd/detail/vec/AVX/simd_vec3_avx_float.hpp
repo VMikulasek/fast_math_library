@@ -22,7 +22,10 @@ namespace avx
     inline Vec3f fast_sinv3f(const Vec2f &vec);
     inline Vec3f fast_cosv3f(const Vec2f &vec);
 
+    inline Vec3f crossv3f(const Vec3f &vec1, const Vec3f &vec2);
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2);
+    inline float lengthv3f(const Vec3f &vec);
+    inline Vec3f normalizev3f(const Vec3f &vec);
 } // namespace avx
 } // namespace simd
 

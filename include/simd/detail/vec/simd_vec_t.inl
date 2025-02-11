@@ -25,6 +25,8 @@
 #define fast_cosvf(vec) avx::fast_cosvf(vec)
 
 #define dotvf(vec1, vec2) avx::dotvf(vec1, vec2)
+#define lengthvf(vec) avx::lengthvf(vec)
+#define normalizevf(vec) avx::normalizevf(vec)
 
 #else // HAS_AVX
 
@@ -44,6 +46,8 @@
 #define fast_cosvf(vec) seq::fast_cosv(vec)
 
 #define dotvf(vec1, vec2) seq::dotv(vec1, vec2)
+#define lengthvf(vec) seq::lengthv(vec)
+#define normalizevf(vec) seq::normalizev(vec)
 
 #endif // HAS_AVX
 
@@ -236,6 +240,29 @@ namespace simd
         else
         {
             return seq::dotv(vec1, vec2);
+        }
+    }
+    template<size_t L, typename T>
+    inline T Vec<L, T>::length() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return lengthvf(*this);
+        }
+        else
+        {
+            return seq::lengthv(*this);
+        }
+    }template<size_t L, typename T>
+    inline Vec<L, T> Vec<L, T>::normalize() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return normalizevf(*this);
+        }
+        else
+        {
+            return seq::normalizev(*this);
         }
     }
 } // namespace simd

@@ -184,6 +184,25 @@ namespace avx
         );
     }
 
+    inline Vec3f crossv3f(const Vec3f &vec1, const Vec3f &vec2)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg refReg = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg firstProductHelpReg = Ops::set_register_each(vec2.y, vec2.z, vec2.x, 0, 0, 0, 0, 0);
+        Ops::AvxReg secondProductHelpReg = Ops::set_register_each(vec2.z, vec2.x, vec2.y, 0, 0, 0, 0, 0);
+
+        Ops::AvxReg firstProduct = Ops::mul(refReg, firstProductHelpReg);
+        Ops::AvxReg secondProduct = Ops::mul(refReg, secondProductHelpReg);
+
+        Ops::AvxReg resReg = Ops::sub(firstProduct, secondProduct);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(resReg, 0),
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2)
+        );
+    }
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
@@ -196,6 +215,32 @@ namespace avx
         resReg = Ops::horizontal_add(resReg, resReg);
 
         return Ops::materialize_register_at_index(resReg, 0);
+    }
+    inline float lengthv3f(const Vec3f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+
+        reg = Ops::mul(reg, reg);
+        reg = Ops::horizontal_add(reg, reg);
+        reg = Ops::horizontal_add(reg, reg);
+
+        return mathops::sqrt(Ops::materialize_register_at_index(reg, 0));
+    }
+    inline Vec3f normalizev3f(const Vec3f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        auto lengthReg = Ops::set_register(lengthv3f(vec));
+        auto inputReg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        auto result = Ops::div(inputReg, lengthReg);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(result, 0),
+            Ops::materialize_register_at_index(result, 1),
+            Ops::materialize_register_at_index(result, 2)
+        );
     }
 } // namespace avx
 } // namespace simd

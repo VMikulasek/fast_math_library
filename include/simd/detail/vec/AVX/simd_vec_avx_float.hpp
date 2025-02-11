@@ -35,6 +35,14 @@ namespace avx
 
     template<size_t L>
     inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2);
+    template<size_t L>
+    inline float lengthvf(const Vec<L, float> &vec);
+    template<size_t L>
+    inline Vec<L, float> normalizevf(const Vec<L, float> &vec);
+    template<size_t L>
+    inline float fast_lengthvf(const Vec<L, float> &vec);
+    template<size_t L>
+    inline Vec<L, float> fast_normalizevf(const Vec<L, float> &vec);
 } // namespace avx
 } // namespace simd
 

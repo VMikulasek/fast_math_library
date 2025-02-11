@@ -23,6 +23,8 @@ namespace avx
     inline Vec4f fast_cosv4f(const Vec2f &vec);
 
     inline float dotv4f(const Vec4f &vec1, const Vec4f &vec2);
+    inline float lengthv4f(const Vec4f &vec);
+    inline Vec4f normalizev4f(const Vec4f &vec);
 } // namespace avx
 } // namespace simd
 

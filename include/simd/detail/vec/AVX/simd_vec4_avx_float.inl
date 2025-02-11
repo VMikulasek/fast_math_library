@@ -209,6 +209,33 @@ namespace avx
 
         return Ops::materialize_register_at_index(resReg, 0);
     }
+    inline float lengthv4f(const Vec4f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, vec.w, 0, 0, 0, 0);
+
+        reg = Ops::mul(reg, reg);
+        reg = Ops::horizontal_add(reg, reg);
+        reg = Ops::horizontal_add(reg, reg);
+
+        return mathops::sqrt(Ops::materialize_register_at_index(reg, 0));
+    }
+    inline Vec4f normalizev4f(const Vec4f &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        auto lengthReg = Ops::set_register(lengthv4f(vec));
+        auto inputReg = Ops::set_register_each(vec.x, vec.y, vec.z, vec.w, 0, 0, 0, 0);
+        auto result = Ops::div(inputReg, lengthReg);
+
+        return Vec4f(
+            Ops::materialize_register_at_index(result, 0),
+            Ops::materialize_register_at_index(result, 1),
+            Ops::materialize_register_at_index(result, 2),
+            Ops::materialize_register_at_index(result, 3)
+        );
+    }
 } // namespace avx
 } // namespace simd
 

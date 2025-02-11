@@ -43,6 +43,8 @@ namespace simd
         inline Vec fast_cos() const;
 
         inline static T dot(const Vec &vec1, const Vec &vec2);
+        inline T length() const;
+        inline Vec normalize() const;
 
         inline Vec<2, T> xy();
         inline Vec<3, T> xyz();

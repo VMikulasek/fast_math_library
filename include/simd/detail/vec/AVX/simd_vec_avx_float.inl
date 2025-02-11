@@ -22,7 +22,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -46,7 +46,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -70,7 +70,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -94,7 +94,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -119,7 +119,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg = SIMDOperations<float, AVX>::load_vector(&(vec.data[i]));
 
@@ -142,7 +142,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -166,7 +166,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -191,7 +191,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             mathops::avx::fast_sqrt_arr(&(vec.data[i]), L, &(result.data[i]));
         }
@@ -210,7 +210,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             mathops::avx::fast_invsqrt_arr(&(vec.data[i]), L, &(result.data[i]));
         }
@@ -230,7 +230,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             mathops::avx::fast_sin_arr(&(vec.data[i]), L, &(result.data[i]));
         }
@@ -249,7 +249,7 @@ namespace avx
 
         size_t i = 0;
 
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             mathops::avx::fast_cos_arr(&(vec.data[i]), L, &(result.data[i]));
         }
@@ -268,8 +268,7 @@ namespace avx
         float result = 0;
 
         size_t i = 0;
-
-        for(; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
         {
             auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
             auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
@@ -291,6 +290,58 @@ namespace avx
         }
 
         return result;
+    }
+    template<size_t L>
+    inline float lengthvf(const Vec<L, float> vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+        
+        float lenght = 0;
+        Ops::AvxReg tmpResult = Ops::set_register_zero();
+
+        size_t i = 0;
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto loaded = Ops::load_vector(&(vec.data[i]));
+            loaded = Ops::mul(loaded, loaded);
+            tmpResult = Ops::add(tmpResult, loaded);
+        }
+
+        for (; i < L; i++)
+        {
+            length += vec.data[i] * vec.data[i];
+        }
+
+        tmpResult = Ops::horizontal_add(tmpResult, tmpResult);
+        tmpResult = Ops::horizontal_add(tmpResult, tmpResult);
+        length += Ops::materialize_register_at_index(tmpResult, 0) + Ops::materialize_register_at_index(tmpResult, 4);
+
+        return mathops::sqrt(lenght);
+    }
+    template<size_t L>
+    inline Vec<L, float> normalizevf(const Vec<L, float> vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        float length = lengthvf(vec);
+        auto lengthReg = Ops::set_register(length);
+
+        Vec<L, float> normalized;
+
+        size_t i = 0;
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto loaded = Ops::load_vector(&(vec.data[i]));
+            auto normalizedReg = Ops::div(loaded, lengthReg);
+            Ops::materialize_register(normalizedReg, &(normalized.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            normalized.data[i] = vec.data[i] / length;
+        }
+
+        return normalized;
     }
 
 #endif // HAS_AVX

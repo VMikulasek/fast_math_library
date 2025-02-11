@@ -238,6 +238,15 @@ namespace seq
         return result;
     }
 
+    template<typename T>
+    inline Vec<3, T> crossv3(const Vec<3, T> &vec1, const Vec<3, T> &vec2)
+    {
+        return Vec<3, T>(
+            vec1.y * vec2.z - vec1.z * vec1.y,
+            vec1.z * vec2.x - vec1.x * vec2.z,
+            vec1.x * vec2.y - vec1.y * vec2.x,
+        );
+    }
     template<size_t L, typename T>
     inline T dotv(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
@@ -246,6 +255,36 @@ namespace seq
         for(size_t i = 0; i < L; i++)
         {
             result += vec1.data[i] * vec2.data[i];
+        }
+
+        return result;
+    }
+    template<size_t L, typename T>
+    inline T lengthv(const Vec<L, T> &vec)
+    {
+        static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
+
+        T result = 0;
+
+        for(size_t i = 0; i < L; i++)
+        {
+            result += vec.data[i] * vec.data[i];
+        }
+
+        return mathops::sqrt(result);
+    }
+    template<size_t L, typename T>
+    inline Vec<L, T> normalizev(const Vec<L, T> &vec)
+    {
+        static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
+
+        Vec<L, T> result = 0;
+
+        T length = lengthv(vec);
+
+        for(size_t i = 0; i < L; i++)
+        {
+            result.data[i] = vec.data[i] / length;
         }
 
         return result;

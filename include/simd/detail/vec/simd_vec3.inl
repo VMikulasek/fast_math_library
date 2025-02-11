@@ -22,7 +22,10 @@
 #define fast_sinv3f(vec) avx::fast_sinv3f(vec)
 #define fast_cosv3f(vec) avx::fast_cosv3f(vec)
 
+#define crossv3f(vec1, vec2) avx::crossv3f(vec1, vec2)
 #define dotv3f(vec1, vec2) avx::dotv3f(vec1, vec2)
+#define lengthv3f(vec) avx::lengthv3f(vec)
+#define normalizev3f(vec) avx::normalizev3f(vec)
 
 #else // HAS_AVX
 
@@ -41,7 +44,10 @@
 #define fast_sinv3f(vec) seq::fast_sinv(vec)
 #define fast_cosv3f(vec) seq::fast_cosv(vec)
 
+#define crossv3f(vec1, vec2) seq::crossv3(vec1, vec2)
 #define dotv3f(vec1, vec2) seq::dotv(vec1, vec2)
+#define lengthv3f(vec) seq::lengthv(vec)
+#define normalizev3f(vec) seq::normalizev(vec)
 
 #endif // HAS_AVX
 
@@ -221,6 +227,18 @@ namespace simd
     }
 
     template<typename T>
+    inline Vec<3, T> Vec<3, T>::cross(const Vec &vec1, const Vec &vec2)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return crossv3f(vec2, vec1);
+        }
+        else
+        {
+            return seq::crossv3(vec1, vec2);
+        }
+    }
+    template<typename T>
     inline T Vec<3, T>::dot(const Vec &vec1, const Vec &vec2)
     {
         if constexpr (std::is_same_v<T, float>)
@@ -230,6 +248,30 @@ namespace simd
         else
         {
             return seq::dotv(vec1, vec2);
+        }
+    }
+    template<typename T>
+    inline T Vec<3, T>::length() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return lengthv3f(*this);
+        }
+        else
+        {
+            return seq::lengthv(*this);
+        }
+    }
+    template<typename T>
+    inline Vec<3, T> Vec<3, T>::normalize() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return normalizev3f(*this);
+        }
+        else
+        {
+            return seq::normalizev(*this);
         }
     }
 
