@@ -19,6 +19,7 @@
 
 #undef fast_sinv3f
 #undef fast_cosv3f
+#undef crossv3f
 
 #undef dotv3f
 
@@ -344,6 +345,21 @@ namespace tests
         }
     }
 
+    TEST(FloatAvxVector3, VecCrossPositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vec1Data[] = {4.1f, 4.2f, 4.3f};
+        float vec2Data[] = {1.f, 4000000.1f, 4.4f};
+
+        auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::avx::crossv3f(vec1, vec2);
+
+        EXPECT_FLOAT_EQ(res.x, -17199981.95);
+        EXPECT_FLOAT_EQ(res.y, -13.74);
+        EXPECT_FLOAT_EQ(res.z, 16399996.21);
+    }
     TEST(FloatAvxVector3, VecDotPositive)
     {
         constexpr size_t vecLen = 3;

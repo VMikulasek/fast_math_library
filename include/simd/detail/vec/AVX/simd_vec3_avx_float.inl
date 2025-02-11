@@ -188,19 +188,20 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg refReg = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg firstProductHelpReg = Ops::set_register_each(vec2.y, vec2.z, vec2.x, 0, 0, 0, 0, 0);
-        Ops::AvxReg secondProductHelpReg = Ops::set_register_each(vec2.z, vec2.x, vec2.y, 0, 0, 0, 0, 0);
+        Ops::AvxReg vec1Mul1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg vec2Mul1 = Ops::set_register_each(vec2.y, vec2.z, vec2.x, 0, 0, 0, 0, 0);
+        Ops::AvxReg vec1Mul2 = Ops::set_register_each(vec1.y, vec1.z, vec1.x, 0, 0, 0, 0, 0);
+        Ops::AvxReg vec2Mul2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
 
-        Ops::AvxReg firstProduct = Ops::mul(refReg, firstProductHelpReg);
-        Ops::AvxReg secondProduct = Ops::mul(refReg, secondProductHelpReg);
+        Ops::AvxReg firstProduct = Ops::mul(vec1Mul1, vec2Mul1);
+        Ops::AvxReg secondProduct = Ops::mul(vec1Mul2, vec2Mul2);
 
         Ops::AvxReg resReg = Ops::sub(firstProduct, secondProduct);
 
         return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
             Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
+            Ops::materialize_register_at_index(resReg, 2),
+            Ops::materialize_register_at_index(resReg, 0)
         );
     }
     inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2)

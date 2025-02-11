@@ -485,6 +485,21 @@ namespace tests
         }
     }
 
+    TEST(FloatSeqVector, Vec3CrossPositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vec1Data[] = {4.1f, 4.2f, 4.3f};
+        float vec2Data[] = {1.f, 4000000.1f, 4.4f};
+
+        auto vec1 = simd::Vec<3, float>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<3, float>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::seq::crossv3(vec1, vec2);
+
+        EXPECT_FLOAT_EQ(res.data[0], -17199981.95);
+        EXPECT_FLOAT_EQ(res.data[1], -13.74);
+        EXPECT_FLOAT_EQ(res.data[2], 16399996.21);
+    }
     TEST(FloatSeqVector, Vec4DotPositive)
     {
         constexpr size_t vecLen = 4;

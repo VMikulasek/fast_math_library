@@ -296,7 +296,7 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
         
-        float lenght = 0;
+        float length = 0;
         Ops::AvxReg tmpResult = Ops::set_register_zero();
 
         size_t i = 0;
@@ -316,7 +316,7 @@ namespace avx
         tmpResult = Ops::horizontal_add(tmpResult, tmpResult);
         length += Ops::materialize_register_at_index(tmpResult, 0) + Ops::materialize_register_at_index(tmpResult, 4);
 
-        return mathops::sqrt(lenght);
+        return mathops::sqrt(length);
     }
     template<size_t L>
     inline Vec<L, float> normalizevf(const Vec<L, float> vec)

@@ -244,6 +244,21 @@ namespace tests
         }
     }
 
+    TEST(IntSeqVector, Vec3CrossPositive)
+    {
+        constexpr size_t vecLen = 3;
+        int vec1Data[] = {4, 4, 4};
+        int vec2Data[] = {1, 4000000, 4};
+
+        auto vec1 = simd::Vec<3, int>(vec1Data[0], vec1Data[1], vec1Data[2]);
+        auto vec2 = simd::Vec<3, int>(vec2Data[0], vec2Data[1], vec2Data[2]);
+
+        auto res = simd::seq::crossv3(vec1, vec2);
+
+        EXPECT_EQ(res.data[0], -15999984);
+        EXPECT_EQ(res.data[1], -12);
+        EXPECT_EQ(res.data[2], 15999996);
+    }
     TEST(IntSeqVector, Vec4DotPositive)
     {
         constexpr size_t vecLen = 4;

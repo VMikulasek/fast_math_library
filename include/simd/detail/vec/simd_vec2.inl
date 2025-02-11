@@ -24,7 +24,7 @@
 
 #define dotv2f(vec1, vec2) avx::dotv2f(vec1, vec2)
 #define lengthv2f(vec) avx::lengthv2f(vec)
-#define normalizev2f(vec) avx::normalize2f(vec)
+#define normalizev2f(vec) avx::normalizev2f(vec)
 
 #else // HAS_AVX
 

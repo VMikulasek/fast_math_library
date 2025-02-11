@@ -241,11 +241,10 @@ namespace seq
     template<typename T>
     inline Vec<3, T> crossv3(const Vec<3, T> &vec1, const Vec<3, T> &vec2)
     {
-        return Vec<3, T>(
-            vec1.y * vec2.z - vec1.z * vec1.y,
-            vec1.z * vec2.x - vec1.x * vec2.z,
-            vec1.x * vec2.y - vec1.y * vec2.x,
-        );
+        T x = vec1.data[1] * vec2.data[2] - vec1.data[2] * vec2.data[1];
+        T y = vec1.data[2] * vec2.data[0] - vec1.data[0] * vec2.data[2];
+        T z = vec1.data[0] * vec2.data[1] - vec1.data[1] * vec2.data[0];
+        return Vec<3, T>(x, y, z);
     }
     template<size_t L, typename T>
     inline T dotv(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
