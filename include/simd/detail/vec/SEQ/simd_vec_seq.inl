@@ -277,7 +277,7 @@ namespace seq
     {
         static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
 
-        Vec<L, T> result = 0;
+        Vec<L, T> result;
 
         T length = lengthv(vec);
 

@@ -21,6 +21,8 @@
 #undef fast_cosv2f
 
 #undef dotv2f
+#undef lengthv2f
+#undef normalizev2f
 
 namespace analysis
 {
@@ -380,6 +382,29 @@ namespace tests
         }
 
         EXPECT_FLOAT_EQ(res, expected);
+    }
+    TEST(FloatAvxVector2, VecLengthPositive)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {0.1f, 3.1f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        float res = simd::avx::lengthv2f(vec);
+
+        EXPECT_FLOAT_EQ(res, 3.101612483854165);
+    }
+    TEST(FloatAvxVector2, VecNormalizePositive)
+    {
+        constexpr size_t vecLen = 2;
+        float vecData[] = {0.1f, 3.1f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1]);
+
+        auto res = simd::avx::normalizev2f(vec);
+
+        EXPECT_FLOAT_EQ(res.data[0], 0.032241294010958);
+        EXPECT_FLOAT_EQ(res.data[1], 0.9994801143397);
     }
 }
 }

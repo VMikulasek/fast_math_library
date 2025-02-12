@@ -22,6 +22,8 @@
 #undef crossv3f
 
 #undef dotv3f
+#undef lengthv3f
+#undef normalizev3f
 
 namespace analysis
 {
@@ -397,6 +399,30 @@ namespace tests
         }
 
         EXPECT_FLOAT_EQ(res, expected);
+    }
+    TEST(FloatAvxVector3, VecLengthPositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vecData[] = {0.1f, 3.1f, 3.1f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2]);
+
+        float res = simd::avx::lengthv3f(vec);
+
+        EXPECT_FLOAT_EQ(res, 4.38520238985614);
+    }
+    TEST(FloatAvxVector3, VecNormalizePositive)
+    {
+        constexpr size_t vecLen = 3;
+        float vecData[] = {0.1f, 3.1f, 3.1f};
+
+        auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2]);
+
+        auto res = simd::avx::normalizev3f(vec);
+
+        EXPECT_FLOAT_EQ(res.data[0], 0.022803964585835);
+        EXPECT_FLOAT_EQ(res.data[1], 0.706922902160896);
+        EXPECT_FLOAT_EQ(res.data[2], 0.706922902160896);
     }
 }
 }

@@ -292,7 +292,7 @@ namespace avx
         return result;
     }
     template<size_t L>
-    inline float lengthvf(const Vec<L, float> vec)
+    inline float lengthvf(const Vec<L, float> &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
         
@@ -319,7 +319,7 @@ namespace avx
         return mathops::sqrt(length);
     }
     template<size_t L>
-    inline Vec<L, float> normalizevf(const Vec<L, float> vec)
+    inline Vec<L, float> normalizevf(const Vec<L, float> &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
