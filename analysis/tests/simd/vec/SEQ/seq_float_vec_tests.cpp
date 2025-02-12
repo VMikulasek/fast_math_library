@@ -375,7 +375,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            EXPECT_FLOAT_EQ(res.data[i], std::tanf(vecData[i]));
+            EXPECT_FLOAT_EQ(res.data[i], std::tan(vecData[i]));
         }
     }
     TEST(FloatSeqVector, Vec9TanNegative)
@@ -390,7 +390,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            EXPECT_FLOAT_EQ(res.data[i], std::tanf(vecData[i]));
+            EXPECT_FLOAT_EQ(res.data[i], std::tan(vecData[i]));
         }
     }
     TEST(FloatSeqVector, Vec4CotPositive)
@@ -404,7 +404,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            EXPECT_FLOAT_EQ(res.data[i], 1 / std::tanf(vecData[i]));
+            EXPECT_FLOAT_EQ(res.data[i], 1 / std::tan(vecData[i]));
         }
     }
     TEST(FloatSeqVector, Vec9CotNegative)
@@ -419,7 +419,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            EXPECT_FLOAT_EQ(res.data[i], 1 / std::tanf(vecData[i]));
+            EXPECT_FLOAT_EQ(res.data[i], 1 / std::tan(vecData[i]));
         }
     }
     TEST(FloatSeqVector, Vec4FastSinPositive)
