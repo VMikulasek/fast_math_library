@@ -258,7 +258,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            EXPECT_FLOAT_EQ(res.data[i], std::sqrtf(vecData[i]));
+            EXPECT_FLOAT_EQ(res.data[i], std::sqrt(vecData[i]));
         }
     }
     TEST(FloatSeqVector, Vec4InvSqrt)
@@ -272,7 +272,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            EXPECT_FLOAT_EQ(res.data[i], 1 / std::sqrtf(vecData[i]));
+            EXPECT_FLOAT_EQ(res.data[i], 1 / std::sqrt(vecData[i]));
         }
     }
     TEST(FloatSeqVector, Vec4FastSqrt)
@@ -286,7 +286,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            float expected = std::sqrtf(vecData[i]);
+            float expected = std::sqrt(vecData[i]);
             EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
@@ -301,7 +301,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            float expected = 1 / std::sqrtf(vecData[i]);
+            float expected = 1 / std::sqrt(vecData[i]);
             EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
