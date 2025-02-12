@@ -9,38 +9,87 @@ CMakeLists.txt)
 set(SIMD_INCLUDE
 simd/simd_common.hpp
 simd/simd_operations.hpp
-simd/simd_operations_avx.hpp)
+simd/simd_operations_avx.hpp
+simd/simd_operations_avx2.hpp
+simd/simd_vec.hpp)
 
 set(MATHOPS_INCLUDE
-mathops/sums.hpp)
+mathops/sums.hpp
+mathops/transcedentals.hpp)
 
 set(SIMD_OPERATIONS
 simd/detail/operations/simd_operations_avx_float.hpp
 simd/detail/operations/simd_operations_avx_float.inl
+simd/detail/operations/simd_operations_avx2_int.hpp
+simd/detail/operations/simd_operations_avx2_int.inl
 simd/detail/operations/simd_operations_base.hpp)
 
+set(SIMD_VECTOR_DETAIL
+simd/detail/vec/simd_vec_t.hpp
+simd/detail/vec/simd_vec_t.inl
+simd/detail/vec/simd_vec2.hpp
+simd/detail/vec/simd_vec2.inl
+simd/detail/vec/simd_vec3.hpp
+simd/detail/vec/simd_vec3.inl
+simd/detail/vec/simd_vec4.hpp
+simd/detail/vec/simd_vec4.inl)
+
+set(SIMD_VECTOR_DETAIL_SEQ
+simd/detail/vec/SEQ/simd_vec_seq.hpp
+simd/detail/vec/SEQ/simd_vec_seq.inl)
+
+set(SIMD_VECTOR_DETAIL_AVX
+simd/detail/vec/AVX/simd_vec_avx_float.hpp
+simd/detail/vec/AVX/simd_vec_avx_float.inl
+simd/detail/vec/AVX/simd_vec2_avx_float.hpp
+simd/detail/vec/AVX/simd_vec2_avx_float.inl
+simd/detail/vec/AVX/simd_vec3_avx_float.hpp
+simd/detail/vec/AVX/simd_vec3_avx_float.inl
+simd/detail/vec/AVX/simd_vec4_avx_float.hpp
+simd/detail/vec/AVX/simd_vec4_avx_float.inl)
+
 set(MATHOPS_DETAIL
-mathops/detail/sums.inl)
+mathops/detail/sums.inl
+mathops/detail/transcedentals.inl)
 
 set(MATHOPS_AVX
 mathops/detail/AVX/avx_sums.hpp
-mathops/detail/AVX/avx_sums.inl)
+mathops/detail/AVX/avx_sums.inl
+mathops/detail/AVX/avx_transcedentals.hpp
+mathops/detail/AVX/avx_transcedentals.inl)
 
 set(MATHOPS_SEQ
 mathops/detail/SEQ/seq_sums.hpp
-mathops/detail/SEQ/seq_sums.inl)
+mathops/detail/SEQ/seq_sums.inl
+mathops/detail/SEQ/seq_transcedentals.hpp
+mathops/detail/SEQ/seq_transcedentals.inl)
 
+set(COMMON_DETAIL
+common/detail/memory_common.inl)
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Include CMake" FILES ${INCLUDE_CMAKELISTS})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd PREFIX "SIMD include" FILES ${SIMD_INCLUDE})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops PREFIX "Math include" FILES ${MATHOPS_INCLUDE})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/operations PREFIX "SIMD operations" FILES ${SIMD_OPERATIONS})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vector PREFIX "SIMD vector" FILES ${SIMD_VECTOR})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec PREFIX "SIMD vector detail" FILES ${SIMD_VECTOR_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail PREFIX "Math detail" FILES ${MATHOPS_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/AVX PREFIX "Math AVX" FILES ${MATHOPS_AVX})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/SEQ PREFIX "Math SEQ" FILES ${MATHOPS_SEQ})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/common/detail PREFIX "Common detail" FILES ${COMMON_DETAIL})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec/SEQ PREFIX "SIMD vector detail seq" FILES ${SIMD_VECTOR_DETAIL_SEQ})
 
-add_custom_target(LIB_SOURCE SOURCES ${SIMD_INCLUDE} ${SIMD_OPERATIONS} ${SIMD_VECTOR} ${INCLUDE_CMAKELISTS})
+add_custom_target(LIB_SOURCE SOURCES
+${SIMD_INCLUDE}
+${SIMD_OPERATIONS}
+${SIMD_VECTOR_DETAIL}
+${INCLUDE_CMAKELISTS}
+${MATHOPS_INCLUDE}
+${MATHOPS_DETAIL}
+${MATHOPS_AVX}
+${MATHOPS_SEQ}
+${COMMON_DETAIL}
+${SIMD_VECTOR_DETAIL_SEQ}
+${SIMD_VECTOR_DETAIL_AVX})
 
 if (AVX_SUPPORTED)
 	message(STATUS "AVX supported")

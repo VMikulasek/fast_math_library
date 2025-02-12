@@ -23,10 +23,32 @@ namespace simd
         return _mm256_set1_ps(num);
     }
 
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::set_register_each(
+        float num1, float num2, float num3, float num4, float num5, float num6, float num7, float num8)
+    {
+        return _mm256_set_ps(num8, num7, num6, num5, num4, num3, num2, num1);   
+    }
+
     inline void SIMDOperations<float, InstructionSet::AVX>::materialize_register(
         const AvxReg &reg, float *dst)
     {
         _mm256_store_ps(dst, reg);
+    }
+
+    inline float SIMDOperations<float, InstructionSet::AVX>::materialize_register_at_index(
+        const AvxReg &reg, unsigned index)
+    {
+        switch (index) {
+            case 0: return _mm_cvtss_f32(_mm256_castps256_ps128(reg));
+            case 1: return _mm_cvtss_f32(_mm_shuffle_ps(_mm256_castps256_ps128(reg), _mm256_castps256_ps128(reg), _MM_SHUFFLE(1, 1, 1, 1)));
+            case 2: return _mm_cvtss_f32(_mm_shuffle_ps(_mm256_castps256_ps128(reg), _mm256_castps256_ps128(reg), _MM_SHUFFLE(2, 2, 2, 2)));
+            case 3: return _mm_cvtss_f32(_mm_shuffle_ps(_mm256_castps256_ps128(reg), _mm256_castps256_ps128(reg), _MM_SHUFFLE(3, 3, 3, 3)));
+            case 4: return _mm_cvtss_f32(_mm256_extractf128_ps(reg, 1));
+            case 5: return _mm_cvtss_f32(_mm_shuffle_ps(_mm256_extractf128_ps(reg, 1), _mm256_extractf128_ps(reg, 1), _MM_SHUFFLE(1, 1, 1, 1)));
+            case 6: return _mm_cvtss_f32(_mm_shuffle_ps(_mm256_extractf128_ps(reg, 1), _mm256_extractf128_ps(reg, 1), _MM_SHUFFLE(2, 2, 2, 2)));
+            case 7: return _mm_cvtss_f32(_mm_shuffle_ps(_mm256_extractf128_ps(reg, 1), _mm256_extractf128_ps(reg, 1), _MM_SHUFFLE(3, 3, 3, 3)));
+            default: return 0.0f;
+        }
     }
 
     inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::add(
@@ -145,6 +167,18 @@ namespace simd
     {
         AvxReg mask = _mm256_castsi256_ps(_mm256_set1_epi32(0x7FFFFFFF));
         return bitwise_and(vec, mask);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::min(
+        const AvxReg &vec1, const AvxReg &vec2)
+    {
+        return _mm256_min_ps(vec1, vec2);
+    }
+
+    inline SIMDOperations<float, InstructionSet::AVX>::AvxReg SIMDOperations<float, InstructionSet::AVX>::max(
+        const AvxReg &vec1, const AvxReg &vec2)
+    {
+        return _mm256_max_ps(vec1, vec2);
     }
 } // namespace simd
 

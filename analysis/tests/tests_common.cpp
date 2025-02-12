@@ -112,6 +112,15 @@ namespace tests
         return cmp(op1, op2, ge);
     }
 
+    float min(float op1, float op2)
+    {
+        return std::min(op1, op2);
+    }
+    float max(float op1, float op2)
+    {
+        return std::max(op1, op2);
+    }
+
     float abs(float num)
     {
         return std::abs(num);

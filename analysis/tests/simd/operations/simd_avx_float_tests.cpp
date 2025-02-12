@@ -202,6 +202,32 @@ namespace tests
         }
     }
 
+    TEST_F(SimdAvxFloatTest, SetRegisterEach)
+    {
+        float testNums[] = {1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f};
+
+        Ops::AvxReg reg = Ops::set_register_each(testNums[0], testNums[1], testNums[2],
+            testNums[3], testNums[4], testNums[5], testNums[6], testNums[7]);
+
+        alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+        Ops::materialize_register(reg, result);
+        
+        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        {
+            EXPECT_FLOAT_EQ(result[i], testNums[i]);
+        }
+    }
+
+    TEST_F(SimdAvxFloatTest, MaterializeRegisterAtIndex)
+    {
+        Ops::AvxReg reg = Ops::load_vector(decimalVec1);
+
+        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        {
+            EXPECT_FLOAT_EQ(Ops::materialize_register_at_index(reg, i), decimalVec1[i]);
+        }
+    }
+
     TEST_F(SimdAvxFloatTest, AddBasic)
     {
         SetRegisters(basicVec1, basicVec2);
@@ -1053,6 +1079,88 @@ namespace tests
         resultReg = Ops::distribute_high_half(reg1);
 
         CheckResult(indexHighHalfDistributed);
+    }
+
+    TEST_F(SimdAvxFloatTest, MinBasic)
+    {
+        SetRegisters(basicVec1, basicVec2);
+
+        resultReg = Ops::min(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(min));
+    }
+    TEST_F(SimdAvxFloatTest, MinDecimal)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::min(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(min));
+    }
+    TEST_F(SimdAvxFloatTest, MinZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::min(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(min));
+    }
+    TEST_F(SimdAvxFloatTest, MinNegative)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::min(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(min));
+    }
+    TEST_F(SimdAvxFloatTest, MinBigNum)
+    {
+        SetRegisters(bigNumsVec2, bigNumsVec2);
+
+        resultReg = Ops::min(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(min));
+    }
+
+    TEST_F(SimdAvxFloatTest, MaxBasic)
+    {
+        SetRegisters(basicVec1, basicVec2);
+
+        resultReg = Ops::max(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(max));
+    }
+    TEST_F(SimdAvxFloatTest, MaxDecimal)
+    {
+        SetRegisters(decimalVec1, decimalVec2);
+
+        resultReg = Ops::max(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(max));
+    }
+    TEST_F(SimdAvxFloatTest, MaxZeros)
+    {
+        SetRegisters(zerosVec, zerosVec);
+
+        resultReg = Ops::max(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(max));
+    }
+    TEST_F(SimdAvxFloatTest, MaxNegative)
+    {
+        SetRegisters(negativeVec1, negativeVec2);
+
+        resultReg = Ops::max(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(max));
+    }
+    TEST_F(SimdAvxFloatTest, MaxBigNum)
+    {
+        SetRegisters(bigNumsVec2, bigNumsVec2);
+
+        resultReg = Ops::max(reg1, reg2);
+
+        CheckResult(static_cast<std::function<float(float, float)>>(max));
     }
 
     TEST_F(SimdAvxFloatTest, AbsBasic)

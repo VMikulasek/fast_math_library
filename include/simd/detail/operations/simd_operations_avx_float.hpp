@@ -60,6 +60,12 @@ namespace simd
         static AvxReg set_register(float num);
 
         /**
+         * @brief Sets each field of register to corresponding number
+         */
+        static AvxReg set_register_each(float num1, float num2, float num3,
+            float num4, float num5, float num6, float num7, float num8);
+
+        /**
          * @brief Stores vector from register to float *dst
          * 
          * @param reg register to materialize
@@ -67,7 +73,15 @@ namespace simd
          * of size
          */
         static void materialize_register(const AvxReg &reg, float *dst);
-        
+
+        /**
+         * @brief Returns float from register at given index.
+         * 
+         * @param reg register to materialize from
+         * @param index index of float to materialize
+         */
+        static float materialize_register_at_index(const AvxReg &reg, unsigned index);
+
         /**
          * @brief Adds vec1 and vec2 and returns result
          */
@@ -207,6 +221,16 @@ namespace simd
          * @brief Performs abs on every float in register
          */
         static AvxReg abs(const AvxReg &vec);
+
+        /**
+         * @brief Performs min between corresponding floats in registers
+         */
+        static AvxReg min(const AvxReg &vec1, const AvxReg &vec2);
+
+        /**
+         * @brief Performs max between corresponding floats in registers
+         */
+        static AvxReg max(const AvxReg &vec1, const AvxReg &vec2);
     };
 } // namespace simd
 

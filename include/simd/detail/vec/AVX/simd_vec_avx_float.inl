@@ -1,0 +1,352 @@
+#ifndef SIMD_VEC_AVX_FLOAT_INL
+#define SIMD_VEC_AVX_FLOAT_INL
+
+#include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
+#include <simd/simd_operations_avx.hpp>
+#include <simd/simd_common.hpp>
+#include <mathops/detail/AVX/avx_transcedentals.hpp>
+
+#include <cmath>
+
+namespace simd
+{
+namespace avx
+{
+
+#ifdef HAS_AVX
+
+    template<size_t L>
+    inline Vec<L, float> addvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::add(reg1, reg2);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = vec1.data[i] + vec2.data[i];
+        }
+
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> subvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::sub(reg1, reg2);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = vec1.data[i] - vec2.data[i];
+        }
+
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> mulvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::mul(reg1, reg2);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = vec1.data[i] * vec2.data[i];
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> divvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::div(reg1, reg2);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = vec1.data[i] / vec2.data[i];
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
+    inline Vec<L, float> absvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg = SIMDOperations<float, AVX>::load_vector(&(vec.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::abs(reg);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = std::abs(vec.data[i]);
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> minvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::min(reg1, reg2);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = std::min(vec1.data[i], vec2.data[i]);
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> maxvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto resReg = SIMDOperations<float, AVX>::max(reg1, reg2);
+
+            SIMDOperations<float, AVX>::materialize_register(resReg, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = std::max(vec1.data[i], vec2.data[i]);
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
+    inline Vec<L, float> fast_sqrtvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_sqrt_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_sqrt(vec.data[i]);
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> fast_invsqrtvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_invsqrt_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_invsqrt(vec.data[i]);
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
+    inline Vec<L, float> fast_sinvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_sin_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_sin(vec.data[i]);
+        }
+        
+        return result;
+    }
+    template<size_t L>
+    inline Vec<L, float> fast_cosvf(const Vec<L, float> &vec)
+    {
+        Vec<L, float> result;
+
+        size_t i = 0;
+
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            mathops::avx::fast_cos_arr(&(vec.data[i]), L, &(result.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            result.data[i] = mathops::fast_cos(vec.data[i]);
+        }
+        
+        return result;
+    }
+
+    template<size_t L>
+    inline float dotvf(const Vec<L, float> &vec1, const Vec<L, float> &vec2)
+    {
+        float result = 0;
+
+        size_t i = 0;
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto reg1 = SIMDOperations<float, AVX>::load_vector(&(vec1.data[i]));
+            auto reg2 = SIMDOperations<float, AVX>::load_vector(&(vec2.data[i]));
+
+            auto tmpResReg = SIMDOperations<float, AVX>::mul(reg1, reg2);
+            auto zeroReg = SIMDOperations<float, AVX>::set_register_zero();
+            tmpResReg = SIMDOperations<float, AVX>::horizontal_add(tmpResReg, zeroReg);
+            tmpResReg = SIMDOperations<float, AVX>::horizontal_add(tmpResReg, zeroReg);
+
+            alignas(AVX_ALIGNMENT) float tmpRes[AVX_FLOAT_VECTOR_SIZE];
+            SIMDOperations<float, AVX>::materialize_register(tmpResReg, tmpRes);
+
+            result += tmpRes[0] + tmpRes[4];
+        }
+
+        for (; i < L; i++)
+        {
+            result += vec1.data[i] * vec2.data[i];
+        }
+
+        return result;
+    }
+    template<size_t L>
+    inline float lengthvf(const Vec<L, float> &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+        
+        float length = 0;
+        Ops::AvxReg tmpResult = Ops::set_register_zero();
+
+        size_t i = 0;
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto loaded = Ops::load_vector(&(vec.data[i]));
+            loaded = Ops::mul(loaded, loaded);
+            tmpResult = Ops::add(tmpResult, loaded);
+        }
+
+        for (; i < L; i++)
+        {
+            length += vec.data[i] * vec.data[i];
+        }
+
+        tmpResult = Ops::horizontal_add(tmpResult, tmpResult);
+        tmpResult = Ops::horizontal_add(tmpResult, tmpResult);
+        length += Ops::materialize_register_at_index(tmpResult, 0) + Ops::materialize_register_at_index(tmpResult, 4);
+
+        return mathops::sqrt(length);
+    }
+    template<size_t L>
+    inline Vec<L, float> normalizevf(const Vec<L, float> &vec)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        float length = lengthvf(vec);
+        auto lengthReg = Ops::set_register(length);
+
+        Vec<L, float> normalized;
+
+        size_t i = 0;
+        for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)
+        {
+            auto loaded = Ops::load_vector(&(vec.data[i]));
+            auto normalizedReg = Ops::div(loaded, lengthReg);
+            Ops::materialize_register(normalizedReg, &(normalized.data[i]));
+        }
+
+        for (; i < L; i++)
+        {
+            normalized.data[i] = vec.data[i] / length;
+        }
+
+        return normalized;
+    }
+
+#endif // HAS_AVX
+
+} // namespace avx
+} // namespace simd
+
+#endif // SIMD_VEC_AVX_FLOAT_INL

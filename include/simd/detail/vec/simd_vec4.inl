@@ -1,0 +1,275 @@
+#ifndef SIMD_VEC4_INL
+#define SIMD_VEC4_INL
+
+#include <simd/detail/vec/simd_vec4.hpp>
+#include <simd/detail/vec/AVX/simd_vec4_avx_float.hpp>
+
+#ifdef HAS_AVX
+
+#define addv4f(vec1, vec2) avx::addv4f(vec1, vec2)
+#define subv4f(vec1, vec2) avx::subv4f(vec1, vec2)
+#define mulv4f(vec1, vec2) avx::mulv4f(vec1, vec2)
+#define divv4f(vec1, vec2) avx::divv4f(vec1, vec2)
+
+#define absv4f(vec) avx::absv4f(vec)
+#define minv4f(vec1, vec2) avx::minv4f(vec1, vec2)
+#define maxv4f(vec1, vec2) avx::maxv4f(vec1, vec2)
+
+#define fast_sqrtv4f(vec) avx::fast_sqrtv4f(vec)
+#define fast_invsqrtv4f(vec) avx::fast_invsqrtv4f(vec)
+
+#define fast_sinv4f(vec) avx::fast_sinv4f(vec)
+#define fast_cosv4f(vec) avx::fast_cosv4f(vec)
+
+#define dotv4f(vec1, vec2) avx::dotv4f(vec1, vec2)
+#define lengthv4f(vec) avx::lengthv4f(vec)
+#define normalizev4f(vec) avx::normalizev4f(vec)
+
+#else // HAS_AVX
+
+#define addv4f(vec1, vec2) seq::addv(vec1, vec2)
+#define subv4f(vec1, vec2) seq::subv(vec1, vec2)
+#define mulv4f(vec1, vec2) seq::mulv(vec1, vec2)
+#define divv4f(vec1, vec2) seq::divv(vec1, vec2)
+
+#define absv4f(vec) seq::absv(vec)
+#define minv4f(vec1, vec2) seq::minv(vec1, vec2)
+#define maxv4f(vec1, vec2) seq::maxv(vec1, vec2)
+
+#define fast_sqrtv4f(vec) seq::fast_sqrtv(vec)
+#define fast_invsqrtv4f(vec) seq::fast_invsqrtv(vec)
+
+#define fast_sinv4f(vec) seq::fast_sinv(vec)
+#define fast_cosv4f(vec) seq::fast_cosv(vec)
+
+#define dotv4f(vec1, vec2) seq::dotv(vec1, vec2)
+#define lengthv4f(vec) seq::lengthv(vec)
+#define normalizev4f(vec) seq::normalizev(vec)
+
+#endif // HAS_AVX
+
+namespace simd
+{
+    template<typename T>
+    inline Vec<4, T>::Vec(T x, T y, T z, T w) : data{x, y, z, w}
+    {}
+    template<typename T>
+    inline Vec<4, T>::Vec() : data{}
+    {}
+
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::operator+(const Vec &other) const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return addv4f(*this, other);
+        }
+        else
+        {
+            return seq::addv(*this, other);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::operator-(const Vec &other) const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return subv4f(*this, other);
+        }
+        else
+        {
+            return seq::subv(*this, other);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::operator*(const Vec &other) const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return mulv4f(*this, other);
+        }
+        else
+        {
+            return seq::mulv(*this, other);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::operator/(const Vec &other) const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return divv4f(*this, other);
+        }
+        else
+        {
+            return seq::divv(*this, other);
+        }
+    }
+
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::abs() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return absv4f(*this);
+        }
+        else
+        {
+            return seq::absv(*this);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::min(const Vec &vec1, const Vec &vec2)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return minv4f(vec1, vec2);
+        }
+        else
+        {
+            return seq::minv(vec1, vec2);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::max(const Vec &vec1, const Vec &vec2)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return maxv4f(vec1, vec2);
+        }
+        else
+        {
+            return seq::maxv(vec1, vec2);
+        }
+    }
+
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::sqrt() const
+    {
+        return seq::sqrtv(*this);
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::fast_sqrt() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_sqrtv4f(*this);
+        }
+        else
+        {
+            return seq::fast_sqrtv(*this);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::invsqrt() const
+    {
+        return seq::invsqrtv(*this);
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::fast_invsqrt() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_invsqrtv4f(*this);
+        }
+        else
+        {
+            return seq::fast_invsqrtv(*this);
+        }
+    }
+
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::sin() const
+    {
+        return seq::sinv(*this);
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::cos() const
+    {
+        return seq::cosv(*this);
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::tan() const
+    {
+        return seq::tanv(*this);
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::cot() const
+    {
+        return seq::cotv(*this);
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::fast_sin() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_sinv4f(*this);
+        }
+        else
+        {
+            return seq::fast_sinv(*this);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::fast_cos() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return fast_cosv4f(*this);
+        }
+        else
+        {
+            return seq::fast_cosv(*this);
+        }
+    }
+
+    template<typename T>
+    inline T Vec<4, T>::dot(const Vec &vec1, const Vec &vec2)
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return dotv4f(vec1, vec2);
+        }
+        else
+        {
+            return seq::dotv(vec1, vec2);
+        }
+    }
+    template<typename T>
+    inline T Vec<4, T>::length() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return lengthv4f(*this);
+        }
+        else
+        {
+            return seq::lengthv(*this);
+        }
+    }
+    template<typename T>
+    inline Vec<4, T> Vec<4, T>::normalize() const
+    {
+        if constexpr (std::is_same_v<T, float>)
+        {
+            return normalizev4f(*this);
+        }
+        else
+        {
+            return seq::normalizev(*this);
+        }
+    }
+
+    template<typename T>
+    inline Vec<2, T> Vec<4, T>::xy()
+    {
+        return Vec<2, T>(this->x, this->y);
+    }
+    template<typename T>
+    inline Vec<3, T> Vec<4, T>::xyz()
+    {
+        return Vec<3, T>(this->x, this->y, this->z);
+    }
+} // namespace simd
+
+#endif // SIMD_VEC4_INL

@@ -99,7 +99,7 @@ namespace avx
         }
     }
 
-#endif
+#endif // HAS_AVX
 
 } // namespace avx
 } // namespace math

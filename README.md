@@ -1,8 +1,6 @@
 # Fast math library
 
-Library with support for summation and transcedental <!--TOADD types of functions-->functions, where some of them are accelerated (see table with supported functions below).
-
-Library also wraps some Intel SIMD intrinsics into templated API.
+Library with support for summation and transcedental <!--TOADD types of functions-->functions, where some of them are accelerated (see table with supported functions below), wrapped SIMD instructions into templated interface and vector type with vectorized operations with SIMD instructions.
 
 ## Supported math functions
 
@@ -15,6 +13,32 @@ Library also wraps some Intel SIMD intrinsics into templated API.
 | | | Sqrt | Approximation + SIMD Accelerated |
 | | | InvSqrt | Approsimation + SIMD Accelerated |
 
+## Supported vector data type operations
+
+- Operator +
+- Operator -
+- Operator *
+- Operator /
+- Absolute value
+- Minimum
+- Maximum
+- Square root (only floating point vector)
+- Approximated square root (only floating point vector)
+- Inverse square root (only floating point vector)
+- Approximated inverse square root (only floating point vector)
+- Sine (only floating point vector)
+- Cosine (only floating point vector)
+- Tangent (only floating point vector)
+- Cotangent (only floating point vector)
+- Approximated sine (only floating point vector)
+- Approximated cosine (only floating point vector)
+- Cross product (only for 3 dimensional vector)
+- Dot product
+- Length (only floating point vector)
+- Normalize (only floating point vector)
+- xy - Creates 2 dimensional vector (only for 3 and 4 dimensional vector)
+- xyz - Creates 3 dimensional vector (only for 4 dimensional vector)
+
 ## SIMD support
 
 | Type of unit | Support |
@@ -26,6 +50,7 @@ Library also wraps some Intel SIMD intrinsics into templated API.
 ## Wrapped Intel SIMD intrinsics
 
 - some AVX float intrinsics <!--TOADD types of intrinsics-->
+- some AVX2 int intrinsics
 
 For more details see API.
 
