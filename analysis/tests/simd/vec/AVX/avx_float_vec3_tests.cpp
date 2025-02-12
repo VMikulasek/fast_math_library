@@ -297,7 +297,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            float expected = std::sinf(vecData[i]);
+            float expected = std::sin(vecData[i]);
             EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
@@ -312,7 +312,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            float expected = std::sinf(vecData[i]);
+            float expected = std::sin(vecData[i]);
             EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
@@ -327,7 +327,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            float expected = std::cosf(vecData[i]);
+            float expected = std::cos(vecData[i]);
             EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
@@ -342,7 +342,7 @@ namespace tests
 
         for (size_t i = 0; i < vecLen; i++)
         {
-            float expected = std::cosf(vecData[i]);
+            float expected = std::cos(vecData[i]);
             EXPECT_NEAR(res.data[i], expected, maximalSinCosAbsoluteError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
