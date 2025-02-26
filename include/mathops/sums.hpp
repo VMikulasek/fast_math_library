@@ -64,7 +64,7 @@ namespace mathops
      * In case of allocation fail returns nullptr.
      */
     float *prefix_sum(const std::vector<float> &arr);
-} // namespace math
+} // namespace mathops
 
 #include <mathops/detail/sums.inl>
 
