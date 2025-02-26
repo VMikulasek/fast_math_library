@@ -26,6 +26,11 @@ namespace mathops
         return SUM(arr, size);
     }
 
+    inline float sum(const std::vector<float> &arr)
+    {
+        return sum(arr.data(), arr.size());
+    }
+
     inline float *prefix_sum(const float *arr, size_t size)
     {
         ALLOC_DST;

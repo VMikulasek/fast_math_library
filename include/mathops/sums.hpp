@@ -19,6 +19,18 @@ namespace mathops
      * @returns float Sum of arr
      */
     float sum(const float *arr, size_t size);
+    /**
+     * @brief Computes sum of arr accelerated with
+     * biggest SIMD unit supported and available on
+     * PC, in case of no SIMD unit available, computes
+     * sequentially
+     * 
+     * @param arr Vector to perform prefix sum on,
+     * vector.data() has to be aligned to 32 bytes
+     * 
+     * @returns float Sum of arr
+     */
+    float sum(const std::vector<float> &arr);
     
     /**
      * @brief Computes prefix sum of arr accelerated
