@@ -146,10 +146,10 @@ namespace seq
         float variance = 0;
         for (size_t i = 0; i < size; i++)
         {
-            variance += std::pow(arr[i] - mean, 2);
+            variance += std::pow(arr[i], 2);
         }
 
-        return variance / size;
+        return (variance / size) - std::pow(mean, 2);
     }
     
     inline float variance(const float *arr, const float *probabilities, size_t size)
@@ -159,10 +159,10 @@ namespace seq
         float variance = 0;
         for (size_t i = 0; i < size; i++)
         {
-            variance += std::pow(arr[i] - mean, 2) * probabilities[i];
+            variance += std::pow(arr[i], 2) * probabilities[i];
         }
 
-        return variance;
+        return variance - std::pow(mean, 2);
     }
 
     inline float std_deviation(const float *arr, size_t size)
@@ -177,10 +177,10 @@ namespace seq
         float variance = 0;
         for (size_t i = 0; i < size; i++)
         {
-            variance += std::pow(arr[i] - mean, 2);
+            variance += std::pow(arr[i], 2);
         }
 
-        return std::sqrt(variance / (size - 1));
+        return std::sqrt((variance / (size - 1)) - std::pow(mean, 2));
     }
 } // namespace seq
 } // namespace mathops
