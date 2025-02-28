@@ -42,30 +42,34 @@ namespace avx
         {
             min = std::min(min, *arr);
         }
+
+        return min;
     }
 
     inline float max(const float *arr, size_t size)
     {
-        FloatOps::AvxReg minReg = FloatOps::set_register(std::numeric_limits<float>::min());
+        FloatOps::AvxReg maxReg = FloatOps::set_register(std::numeric_limits<float>::min());
 
         for ( ; size >= AVX_FLOAT_VECTOR_SIZE; size -= AVX_FLOAT_VECTOR_SIZE, arr += AVX_FLOAT_VECTOR_SIZE)
         {
-            minReg = FloatOps::max(minReg, FloatOps::load_vector(arr));
+            maxReg = FloatOps::max(maxReg, FloatOps::load_vector(arr));
         }
 
-        alignas(AVX_ALIGNMENT) float minVec[AVX_FLOAT_VECTOR_SIZE];
-        FloatOps::materialize_register(minReg, minVec);
+        alignas(AVX_ALIGNMENT) float maxVec[AVX_FLOAT_VECTOR_SIZE];
+        FloatOps::materialize_register(maxReg, maxVec);
         
-        float min = minVec[0];
+        float max = maxVec[0];
         for (unsigned i = 1; i < AVX_FLOAT_VECTOR_SIZE; i++)
         {
-            min = std::max(min, minVec[i]);
+            max = std::max(max, maxVec[i]);
         }
 
         for ( ; size > 0; size--, arr++)
         {
-            min = std::max(min, *arr);
+            max = std::max(max, *arr);
         }
+
+        return max;
     }
 
     inline float arithmetic_mean(const float *arr, size_t size)
