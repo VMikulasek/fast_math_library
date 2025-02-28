@@ -43,15 +43,12 @@ namespace avx
         float tailSum = seq::sum(arr, size);
 
         // merge all sums to the 0th and 4th indexes
-        secondOpReg = FloatOps::set_register_zero();
-        tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
-        tmpResultReg = FloatOps::horizontal_add(tmpResultReg, secondOpReg);
+        tmpResultReg = FloatOps::horizontal_add(tmpResultReg, tmpResultReg);
+        tmpResultReg = FloatOps::horizontal_add(tmpResultReg, tmpResultReg);
 
-        // materialize and return final sum
-        alignas(AVX_ALIGNMENT) float resultArr[AVX_FLOAT_VECTOR_SIZE];
-        FloatOps::materialize_register(tmpResultReg, resultArr);
-
-        return resultArr[0] + resultArr[4] + tailSum;
+        return FloatOps::materialize_register_at_index(tmpResultReg, 0)
+             + FloatOps::materialize_register_at_index(tmpResultReg, 4)
+             + tailSum;
     }
 
     inline void prefix_sum(const float *arr, size_t size, float *dstArr)
