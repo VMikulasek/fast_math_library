@@ -55,6 +55,8 @@ namespace analysis
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, INFINITY };
     alignas(AVX_ALIGNMENT) static const float _arrContainingMinusInf[_25_ELEM_ARR_SIZE]
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, -INFINITY };
+    alignas(AVX_ALIGNMENT) static const float _16ElemZeroArr[_16_ELEM_ARR_SIZE]
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     inline float *AllocBigArr()
     {

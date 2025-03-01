@@ -48,5 +48,63 @@ namespace tests
 
         EXPECT_FLOAT_EQ(mathops::avx::max(_bigArr, BIG_ARR_SIZE), 3.4f);
     }
+
+    TEST_F(AvxStatisticalsTests, ArithmeticMeanZeroLength)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::arithmetic_mean(analysis::_16ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, ArithmeticMeanArrWithNegativeAndPositiveNumbers)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::arithmetic_mean(analysis::_16ElemArrMinusPiPi, _16_ELEM_ARR_SIZE), -0.965f);
+    }
+    TEST_F(AvxStatisticalsTests, ArithmeticMeanBigArr)
+    {
+        _bigArr[0] = 0.f;
+        _bigArr[BIG_ARR_SIZE - 1] = 2.f;
+        EXPECT_FLOAT_EQ(mathops::avx::arithmetic_mean(_bigArr, BIG_ARR_SIZE), 1.f);
+    }
+    TEST_F(AvxStatisticalsTests, GeometricMeanZeroLength)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::geometric_mean(analysis::_16ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, GeometricMeanArrContainingZero)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::geometric_mean(analysis::_arrContainingZero, _9_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, GeometricMean16ElemArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::geometric_mean(analysis::_16ElemArr, _16_ELEM_ARR_SIZE), 6.800466798268f);
+    }
+    TEST_F(AvxStatisticalsTests, GeometricMeanBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::geometric_mean(_bigArr, BIG_ARR_SIZE), 1.f);
+    }
+    TEST_F(AvxStatisticalsTests, WeightedMeanZeroLength)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::weighted_mean(analysis::_16ElemArr, _16ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, WeightedMeanZeroWeights)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::weighted_mean(analysis::_16ElemArr, analysis::_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, WeightedMean9ElemArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::weighted_mean(analysis::_9ElemArr, analysis::_9ElemArr, _9_ELEM_ARR_SIZE), 249269.1737791f);
+    }
+    TEST_F(AvxStatisticalsTests, WeightedMeanBigArr)
+    {
+        float *bigArr2 = AllocBigArr();
+        _bigArr[0] = 0;
+        _bigArr[BIG_ARR_SIZE - 1] = 2;
+        bigArr2[1] = 0;
+        bigArr2[BIG_ARR_SIZE - 2] = 2;
+        EXPECT_FLOAT_EQ(mathops::avx::weighted_mean(_bigArr, bigArr2, BIG_ARR_SIZE), 1.f);
+    }
+    TEST_F(AvxStatisticalsTests, WeightedMeanBigArr1)
+    {
+        alignas(32) float arr[8] {1, 1, 1, 1, 1, 1, 1, 1};
+        EXPECT_FLOAT_EQ(mathops::avx::weighted_mean(arr, arr, 8), 1.f);
+    }
+
 } // namespace tests
 } // namespace analysis
