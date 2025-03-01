@@ -102,5 +102,49 @@ namespace tests
         EXPECT_FLOAT_EQ(mathops::seq::weighted_mean(_bigArr, bigArr2, BIG_ARR_SIZE), 1.f);
     }
 
+    TEST_F(SeqStatisticalsTests, ModeArrWithNegativeAndPositiveValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::mode(_16ElemPositiveAndNegativeValues, _16_ELEM_ARR_SIZE), 1);
+    }
+    TEST_F(SeqStatisticalsTests, Mode9ElemArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::mode(_9ElemIntArr, _9_ELEM_ARR_SIZE), 314134);
+    }
+    TEST_F(SeqStatisticalsTests, ModeBigArr)
+    {
+        int *bigArr = AllocBigIntArr();
+        bigArr[0] = 0;
+        bigArr[BIG_ARR_SIZE - 1] = 2;
+        EXPECT_FLOAT_EQ(mathops::seq::mode(bigArr, BIG_ARR_SIZE), 1);
+    }
+    TEST_F(SeqStatisticalsTests, MedianArrWithNegativeAndPositiveValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::median(_16ElemPositiveAndNegativeValues, _16_ELEM_ARR_SIZE), -3.f);
+    }
+    TEST_F(SeqStatisticalsTests, Median9ElemArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::median(_9ElemIntArr, _9_ELEM_ARR_SIZE), 7647.f);
+    }
+    TEST_F(SeqStatisticalsTests, MedianBigArr)
+    {
+        int *bigArr = AllocBigIntArr();
+        bigArr[0] = 0;
+        bigArr[BIG_ARR_SIZE - 1] = 2;
+        EXPECT_FLOAT_EQ(mathops::seq::median(bigArr, BIG_ARR_SIZE), 1.f);
+    }
+    TEST_F(SeqStatisticalsTests, MedianFloatArrWithNegativeAndPositiveValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::median(_16ElemArrMinusPiPi, _16_ELEM_ARR_SIZE), -0.99f);
+    }
+    TEST_F(SeqStatisticalsTests, MedianFloat9ElemArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::median(_9ElemArr, _9_ELEM_ARR_SIZE), 3114.314f);
+    }
+    TEST_F(SeqStatisticalsTests, MedianFloatBigArr)
+    {
+        _bigArr[0] = 0;
+        _bigArr[BIG_ARR_SIZE - 1] = 2;
+        EXPECT_FLOAT_EQ(mathops::seq::median(_bigArr, BIG_ARR_SIZE), 1.f);
+    }
 } // namespace tests
 } // namespace analysis

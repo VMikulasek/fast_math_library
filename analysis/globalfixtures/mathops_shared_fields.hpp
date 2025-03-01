@@ -58,12 +58,27 @@ namespace analysis
     alignas(AVX_ALIGNMENT) static const float _16ElemZeroArr[_16_ELEM_ARR_SIZE]
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+    alignas(AVX_ALIGNMENT) static const int _16ElemPositiveAndNegativeValues[_16_ELEM_ARR_SIZE]
+        { -25, -10, 134, 33, -66, 0, 1, 1, -74, 5, -9, -8, -7, -6, 11, 22 };
+    alignas(AVX_ALIGNMENT) static const int _9ElemIntArr[_9_ELEM_ARR_SIZE]
+        { 2, 3114, 314134, 314134, 7647, 34534, 52362, 5, 1 };
+    
+
     inline float *AllocBigArr()
     {
         float *bigArr = _alloc_aligned_memory_float(BIG_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);
 
         std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1);
 
+        return bigArr;
+    }
+
+    inline int *AllocBigIntArr()
+    {
+        int *bigArr = reinterpret_cast<int *>(_alloc_aligned_memory(BIG_ARR_SIZE * sizeof(int), AVX_ALIGNMENT));
+        
+        std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1);
+    
         return bigArr;
     }
 
