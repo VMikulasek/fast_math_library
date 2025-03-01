@@ -72,6 +72,8 @@ namespace seq
             weightSum += weights[i];
         }
 
+        if (weightSum == 0) return 0.f;
+
         return sum / weightSum;
     }
 
@@ -141,6 +143,8 @@ namespace seq
 
     inline float variance(const float *arr, size_t size)
     {
+        if (size == 0) return 0.f;
+
         float mean = arithmetic_mean(arr, size);
 
         float variance = 0;
@@ -172,6 +176,8 @@ namespace seq
 
     inline float sample_std_deviation(const float *arr, size_t size)
     {
+        if (size <= 1) return 0.f;
+
         float mean = arithmetic_mean(arr, size);
 
         float variance = 0;

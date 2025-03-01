@@ -74,14 +74,21 @@ namespace avx
 
     inline float arithmetic_mean(const float *arr, size_t size)
     {
+        if (size == 0) return 0.f;
+
         return mathops::avx::sum(arr, size) / size;
     }
 
-    inline float geomteric_mean(const float *arr, size_t size)
+    inline float geometric_mean(const float *arr, size_t size)
     {
+        if (size == 0) return 0.f;
+
+        float elementsToProcess = size;
         FloatOps::AvxReg productReg = FloatOps::set_register(1.f);
 
-        for ( ; size >= AVX_FLOAT_VECTOR_SIZE; size -= AVX_FLOAT_VECTOR_SIZE, arr += AVX_FLOAT_VECTOR_SIZE)
+        for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
+                elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
+                arr += AVX_FLOAT_VECTOR_SIZE)
         {
             productReg = FloatOps::mul(productReg, FloatOps::load_vector(arr));
         }
@@ -95,18 +102,18 @@ namespace avx
             product *= productVec[i];
         }
         
-        for ( ; size > 0; size--, arr++)
+        for ( ; elementsToProcess > 0; elementsToProcess--, arr++)
         {
             product *= *arr;
         }
 
-        return std::pow(product, 1.f / 2.f);
+        return std::pow(product, 1.f / size);
     }
 
     inline float weighted_mean(const float *values, const float *weights, size_t size)
     {
-        FloatOps::AvxReg sumReg = FloatOps::set_register(0.f);
-        FloatOps::AvxReg weightSumReg = FloatOps::set_register(0.f);
+        FloatOps::AvxReg sumReg = FloatOps::set_register_zero();
+        FloatOps::AvxReg weightSumReg = FloatOps::set_register_zero();
 
         for ( ; size >= AVX_FLOAT_VECTOR_SIZE;
             size -= AVX_FLOAT_VECTOR_SIZE,
@@ -115,16 +122,16 @@ namespace avx
         {
             FloatOps::AvxReg weightReg = FloatOps::load_vector(weights);
             FloatOps::AvxReg valueReg = FloatOps::load_vector(values);
-            sumReg = FloatOps::add(sumReg, FloatOps::mul(weightReg, valueReg));
             weightSumReg = FloatOps::add(weightSumReg, weightReg);
+            sumReg = FloatOps::add(sumReg, FloatOps::mul(weightReg, valueReg));
         }
 
         sumReg = FloatOps::horizontal_add(sumReg, sumReg);
         sumReg = FloatOps::horizontal_add(sumReg, sumReg);
         weightSumReg = FloatOps::horizontal_add(weightSumReg, weightSumReg);
         weightSumReg = FloatOps::horizontal_add(weightSumReg, weightSumReg);
-        
-        float sum = FloatOps::materialize_register_at_index(sumReg, 0);
+
+        float sum = FloatOps::materialize_register_at_index(sumReg, 0)
             + FloatOps::materialize_register_at_index(sumReg, 4);
         float weightSum = FloatOps::materialize_register_at_index(weightSumReg, 0)
             + FloatOps::materialize_register_at_index(weightSumReg, 4);
@@ -135,15 +142,23 @@ namespace avx
             weightSum += *weights;
         }
 
+        if (weightSum == 0) return 0.f;
+
         return sum / weightSum;
     }
 
     inline float variance(const float *arr, size_t size)
     {
+        if (size == 0) return 0.f;
+
+        float elementsToProcess = size;
+
         float mean = arithmetic_mean(arr, size);
 
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
-        for ( ; size -= AVX_FLOAT_VECTOR_SIZE; size -= AVX_FLOAT_VECTOR_SIZE, arr += AVX_FLOAT_VECTOR_SIZE)
+        for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
+                elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
+                arr += AVX_FLOAT_VECTOR_SIZE)
         {
             // (x_i)^2
             FloatOps::AvxReg tmp = FloatOps::load_vector(arr);
@@ -158,7 +173,7 @@ namespace avx
         float variance = FloatOps::materialize_register_at_index(varianceReg, 0)
             + FloatOps::materialize_register_at_index(varianceReg, 4);
 
-        for ( ; size > 0; size--, arr++)
+        for ( ; elementsToProcess > 0; elementsToProcess--, arr++)
         {
             variance += std::pow((*arr), 2);
         }
@@ -168,11 +183,15 @@ namespace avx
 
     inline float variance(const float *values, const float *probabilities, size_t size)
     {
+        if (size == 0) return 0.f;
+
+        float elementsToProcess = size;
+
         float mean = weighted_mean(values, probabilities, size);
 
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
-        for ( ; size -= AVX_FLOAT_VECTOR_SIZE;
-            size -= AVX_FLOAT_VECTOR_SIZE,
+        for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
+            elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
             values += AVX_FLOAT_VECTOR_SIZE,
             probabilities += AVX_FLOAT_VECTOR_SIZE)
         {
@@ -190,7 +209,8 @@ namespace avx
         float variance = FloatOps::materialize_register_at_index(varianceReg, 0)
             + FloatOps::materialize_register_at_index(varianceReg, 4);
 
-        for ( ; size > 0; size--, values++, probabilities++)
+        for ( ; elementsToProcess > 0;
+                elementsToProcess--, values++, probabilities++)
         {
             variance += std::pow((*values), 2) * (*probabilities);
         }
@@ -205,10 +225,15 @@ namespace avx
 
     inline float sample_std_deviation(const float *arr, size_t size)
     {
+        if (size <= 1) return 0.f;
+
+        float elementsToProcess = size;
         float mean = arithmetic_mean(arr, size);
 
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
-        for ( ; size -= AVX_FLOAT_VECTOR_SIZE; size -= AVX_FLOAT_VECTOR_SIZE, arr += AVX_FLOAT_VECTOR_SIZE)
+        for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
+                elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
+                arr += AVX_FLOAT_VECTOR_SIZE)
         {
             // (x_i)^2
             FloatOps::AvxReg tmp = FloatOps::load_vector(arr);
@@ -223,12 +248,12 @@ namespace avx
         float variance = FloatOps::materialize_register_at_index(varianceReg, 0)
             + FloatOps::materialize_register_at_index(varianceReg, 4);
 
-        for ( ; size > 0; size--, arr++)
+        for ( ; elementsToProcess > 0; elementsToProcess--, arr++)
         {
             variance += std::pow((*arr), 2);
         }
 
-        return std::sqrt((variance / size) - std::pow(mean, 2));
+        return std::sqrt((variance / (size - 1)) - std::pow(mean, 2));
     }
 
 #endif // HAS_AVX
