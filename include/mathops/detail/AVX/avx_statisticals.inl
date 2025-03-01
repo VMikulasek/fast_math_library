@@ -181,22 +181,22 @@ namespace avx
         return (variance / size) - std::pow(mean, 2);
     }
 
-    inline float variance(const float *values, const float *probabilities, size_t size)
+    inline float variance(const float *arr, const float *probabilities, size_t size)
     {
         if (size == 0) return 0.f;
 
         float elementsToProcess = size;
 
-        float mean = weighted_mean(values, probabilities, size);
+        float mean = weighted_mean(arr, probabilities, size);
 
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
             elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
-            values += AVX_FLOAT_VECTOR_SIZE,
+            arr += AVX_FLOAT_VECTOR_SIZE,
             probabilities += AVX_FLOAT_VECTOR_SIZE)
         {
             // (x_i)^2 * p(x)
-            FloatOps::AvxReg tmp = FloatOps::load_vector(values);
+            FloatOps::AvxReg tmp = FloatOps::load_vector(arr);
             tmp = FloatOps::mul(tmp, tmp);
             tmp = FloatOps::mul(tmp, FloatOps::load_vector(probabilities));
 
@@ -210,20 +210,15 @@ namespace avx
             + FloatOps::materialize_register_at_index(varianceReg, 4);
 
         for ( ; elementsToProcess > 0;
-                elementsToProcess--, values++, probabilities++)
+                elementsToProcess--, arr++, probabilities++)
         {
-            variance += std::pow((*values), 2) * (*probabilities);
+            variance += std::pow((*arr), 2) * (*probabilities);
         }
 
-        return (variance / size) - std::pow(mean, 2);
+        return variance - std::pow(mean, 2);
     }
 
-    inline float std_deviation(const float *arr, size_t size)
-    {
-        return std::sqrt(variance(arr, size));
-    }
-
-    inline float sample_std_deviation(const float *arr, size_t size)
+    inline float sample_variance(const float *arr, size_t size)
     {
         if (size <= 1) return 0.f;
 
@@ -253,7 +248,22 @@ namespace avx
             variance += std::pow((*arr), 2);
         }
 
-        return std::sqrt((variance / (size - 1)) - std::pow(mean, 2));
+        return (variance - (std::pow(mean, 2) * size)) / (size - 1);
+    }
+
+    inline float std_deviation(const float *arr, size_t size)
+    {
+        return std::sqrt(variance(arr, size));
+    }
+
+    float std_deviation(const float *arr, const float *probabilities, size_t size)
+    {
+        return std::sqrt(variance(arr, probabilities, size));
+    }
+
+    inline float sample_std_deviation(const float *arr, size_t size)
+    {
+        return std::sqrt(sample_variance(arr, size));
     }
 
 #endif // HAS_AVX

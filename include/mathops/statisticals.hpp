@@ -136,6 +136,18 @@ namespace mathops
      */
     float variance(const std::vector<float> &values, const std::vector<float> &probabilities);
     /**
+     * @brief Computes sample variance of values in arr, each value same probability 
+     * 
+     * @param arr Has to be aligned to 32 bytes
+     */
+    float sample_variance(const float *arr, size_t size);
+    /**
+     * @brief Computes sample variance of values in arr, each value same probability 
+     * 
+     * @param arr arr.data has to be aligned to 32 bytes
+     */
+    float sample_variance(const std::vector<float> &arr);
+    /**
      * @brief Computes standard deviation of values in arr
      * 
      * @param arr Has to be aligned to 32 bytes
@@ -147,6 +159,22 @@ namespace mathops
      * @param arr arr.data has to be aligned to 32 bytes
      */
     float std_deviation(const std::vector<float> &arr);
+    /**
+     * @brief Computes std deviation of values in arr, according to given probabilities
+     * 
+     * @param values Has to be aligned to 32 bytes
+     * @param probabilities Has to be aligned to 32 bytes
+     */
+    float std_deviation(const float *values, const float *probabilities, size_t size);
+    /**
+     * @brief Computes std deviation of values in arr, according to given probabilities
+     * 
+     * @param values values.data has to be aligned to 32 bytes
+     * @param probabilities has to be at least as long as values
+     * and probabilities.data has to be aligned to 32 bytes
+     */
+    float std_deviation(const std::vector<float> &values, const std::vector<float> &probabilities);
+
     /**
      * @brief Computes sample standard deviation of values in arr (with Bessels correction)
      * 

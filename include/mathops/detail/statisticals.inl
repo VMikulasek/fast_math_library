@@ -17,6 +17,7 @@ namespace mathops
 #define WEIGHTED_MEAN avx::weighted_mean
 
 #define VARIANCE avx::variance
+#define SAMPLE_VARIANCE avx::sample_variance
 #define STD_DEVIATION avx::std_deviation
 #define SAMPLE_STD_DEVIATION avx::sample_std_deviation
 
@@ -30,6 +31,7 @@ namespace mathops
 #define WEIGHTED_MEAN seq::weighted_mean
 
 #define VARIANCE seq::variance
+#define SAMPLE_VARIANCE seq::sample_variance
 #define STD_DEVIATION seq::std_deviation
 #define SAMPLE_STD_DEVIATION seq::sample_std_deviation
 
@@ -118,6 +120,14 @@ namespace mathops
     {
         return VARIANCE(values.data(), probabilities.data(), values.size());
     }
+    inline float sample_variance(const float *arr, size_t size)
+    {
+        return SAMPLE_VARIANCE(arr, size);
+    }
+    inline float sample_variance(const std::vector<float> &arr)
+    {
+        return SAMPLE_VARIANCE(arr.data(), arr.size());
+    }
     inline float std_deviation(const float *arr, size_t size)
     {
         return STD_DEVIATION(arr, size);
@@ -125,6 +135,14 @@ namespace mathops
     inline float std_deviation(const std::vector<float> &arr)
     {
         return STD_DEVIATION(arr.data(), arr.size());
+    }
+    inline float std_deviation(const float *values, const float *probabilities, size_t size)
+    {
+        return STD_DEVIATION(values, probabilities, size);
+    }
+    inline float std_deviation(const std::vector<float> &values, const std::vector<float> &probabilities)
+    {
+        return STD_DEVIATION(values.data(), probabilities.data(), values.size());
     }
     inline float sample_std_deviation(const float *arr, size_t size)
     {

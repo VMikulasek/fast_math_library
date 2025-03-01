@@ -160,7 +160,7 @@ namespace seq
     {
         float mean = weighted_mean(arr, probabilities, size);
 
-        float variance = 0;
+        float variance = 0.f;
         for (size_t i = 0; i < size; i++)
         {
             variance += std::pow(arr[i], 2) * probabilities[i];
@@ -169,12 +169,7 @@ namespace seq
         return variance - std::pow(mean, 2);
     }
 
-    inline float std_deviation(const float *arr, size_t size)
-    {
-        return std::sqrt(variance(arr, size));
-    }
-
-    inline float sample_std_deviation(const float *arr, size_t size)
+    inline float sample_variance(const float *arr, size_t size)
     {
         if (size <= 1) return 0.f;
 
@@ -186,7 +181,22 @@ namespace seq
             variance += std::pow(arr[i], 2);
         }
 
-        return std::sqrt((variance / (size - 1)) - std::pow(mean, 2));
+        return (variance - (std::pow(mean, 2) * size)) / (size - 1);
+    }
+
+    inline float std_deviation(const float *arr, size_t size)
+    {
+        return std::sqrt(variance(arr, size));
+    }
+
+    float std_deviation(const float *arr, const float *probabilities, size_t size)
+    {
+        return std::sqrt(variance(arr, probabilities, size));
+    }
+
+    inline float sample_std_deviation(const float *arr, size_t size)
+    {
+        return std::sqrt(sample_variance(arr, size));
     }
 } // namespace seq
 } // namespace mathops

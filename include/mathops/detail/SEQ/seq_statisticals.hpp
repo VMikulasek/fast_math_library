@@ -20,7 +20,9 @@ namespace seq
 
     float variance(const float *arr, size_t size);
     float variance(const float *arr, const float *probabilities, size_t size);
+    float sample_variance(const float *arr, size_t size);
     float std_deviation(const float *arr, size_t size);
+    float std_deviation(const float *arr, const float *probabilities, size_t size);
     float sample_std_deviation(const float *arr, size_t size);
 } // namespace seq
 } // namespace mathops
