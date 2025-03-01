@@ -57,6 +57,10 @@ namespace analysis
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, -INFINITY };
     alignas(AVX_ALIGNMENT) static const float _16ElemZeroArr[_16_ELEM_ARR_SIZE]
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    alignas(AVX_ALIGNMENT) static const float _25ProbabilitiesArr[_25_ELEM_ARR_SIZE]
+        { 0.01, 0.05, 0.05, 0.03, 0.02, 0.06, 0.05, 0.04, 0.01, 0.08,
+        0.03, 0.02, 0.10, 0.05, 0.06, 0.02, 0.07, 0.01, 0.06, 0.03,  
+        0.04, 0.02, 0.02, 0.02, 0.05 };
 
     alignas(AVX_ALIGNMENT) static const int _16ElemPositiveAndNegativeValues[_16_ELEM_ARR_SIZE]
         { -25, -10, 134, 33, -66, 0, 1, 1, -74, 5, -9, -8, -7, -6, 11, 22 };

@@ -106,5 +106,110 @@ namespace tests
         EXPECT_FLOAT_EQ(mathops::avx::weighted_mean(arr, arr, 8), 1.f);
     }
 
+    TEST_F(AvxStatisticalsTests, VarianceZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, VarianceArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, VarianceArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 4.0396458f);
+    }
+    TEST_F(AvxStatisticalsTests, VarianceBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(AvxStatisticalsTests, VarianceWithProbabilitiesZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_9ElemArr, _9ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, VarianceWithProbabilitiesArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_16ElemZeroArr, _16ElemArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, VarianceWithProbabilitiesArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_25ElemArrMinusPiPi, _25ProbabilitiesArr, _25_ELEM_ARR_SIZE), 3.41044051f);
+    }
+    TEST_F(AvxStatisticalsTests, VarianceWithProbabilitiesBigArrZeroProbabilities)
+    {
+        float *bigArr2 = AllocBigArr();
+        std::fill(bigArr2, bigArr2 + BIG_ARR_SIZE, 0.f);
+        EXPECT_FLOAT_EQ(mathops::avx::variance(_bigArr, bigArr2, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(AvxStatisticalsTests, SampleVarianceZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_variance(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, SampleVarianceArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_variance(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, SampleVarianceArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_variance(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 4.2079643f);
+    }
+    TEST_F(AvxStatisticalsTests, SampleVarianceBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_variance(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(AvxStatisticalsTests, StdDeviationZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, StdDeviationArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, StdDeviationArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 2.009887f);
+    }
+    TEST_F(AvxStatisticalsTests, StdDeviationBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(AvxStatisticalsTests, StdDeviationWithProbabilitiesZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_9ElemArr, _9ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, StdDeviationWithProbabilitiesArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_16ElemZeroArr, _16ElemArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, StdDeviationWithProbabilitiesArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_25ElemArrMinusPiPi, _25ProbabilitiesArr, _25_ELEM_ARR_SIZE), 1.846737802179833f);
+    }
+    TEST_F(AvxStatisticalsTests, StdDeviationWithProbabilitiesBigArrZeroProbabilities)
+    {
+        float *bigArr2 = AllocBigArr();
+        std::fill(bigArr2, bigArr2 + BIG_ARR_SIZE, 0.f);
+        EXPECT_FLOAT_EQ(mathops::avx::std_deviation(_bigArr, bigArr2, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(AvxStatisticalsTests, SampleStdDeviationZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_std_deviation(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, SampleStdDeviationArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_std_deviation(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(AvxStatisticalsTests, SampleStdDeviationArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_std_deviation(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 2.0513323f);
+    }
+    TEST_F(AvxStatisticalsTests, SampleStdDeviationBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::avx::sample_std_deviation(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
 } // namespace tests
 } // namespace analysis

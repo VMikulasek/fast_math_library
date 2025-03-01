@@ -146,5 +146,111 @@ namespace tests
         _bigArr[BIG_ARR_SIZE - 1] = 2;
         EXPECT_FLOAT_EQ(mathops::seq::median(_bigArr, BIG_ARR_SIZE), 1.f);
     }
+
+    TEST_F(SeqStatisticalsTests, VarianceZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, VarianceArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, VarianceArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 4.0396458f);
+    }
+    TEST_F(SeqStatisticalsTests, VarianceBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(SeqStatisticalsTests, VarianceWithProbabilitiesZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_9ElemArr, _9ElemArr, 0), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, VarianceWithProbabilitiesArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_16ElemZeroArr, _16ElemArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, VarianceWithProbabilitiesArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_25ElemArrMinusPiPi, _25ProbabilitiesArr, _25_ELEM_ARR_SIZE), 3.41044051f);
+    }
+    TEST_F(SeqStatisticalsTests, VarianceWithProbabilitiesBigArrZeroProbabilities)
+    {
+        float *bigArr2 = AllocBigArr();
+        std::fill(bigArr2, bigArr2 + BIG_ARR_SIZE, 0.f);
+        EXPECT_FLOAT_EQ(mathops::seq::variance(_bigArr, bigArr2, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(SeqStatisticalsTests, SampleVarianceZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_variance(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, SampleVarianceArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_variance(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, SampleVarianceArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_variance(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 4.2079643f);
+    }
+    TEST_F(SeqStatisticalsTests, SampleVarianceBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_variance(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(SeqStatisticalsTests, StdDeviationZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, StdDeviationArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, StdDeviationArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 2.009887f);
+    }
+    TEST_F(SeqStatisticalsTests, StdDeviationBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(SeqStatisticalsTests, StdDeviationWithProbabilitiesZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_9ElemArr, _9ElemArr, 0), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, StdDeviationWithProbabilitiesArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_16ElemZeroArr, _16ElemArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, StdDeviationWithProbabilitiesArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_25ElemArrMinusPiPi, _25ProbabilitiesArr, _25_ELEM_ARR_SIZE), 1.846737802179833f);
+    }
+    TEST_F(SeqStatisticalsTests, StdDeviationWithProbabilitiesBigArrZeroProbabilities)
+    {
+        float *bigArr2 = AllocBigArr();
+        std::fill(bigArr2, bigArr2 + BIG_ARR_SIZE, 0.f);
+        EXPECT_FLOAT_EQ(mathops::seq::std_deviation(_bigArr, bigArr2, BIG_ARR_SIZE), 0.f);
+    }
+
+    TEST_F(SeqStatisticalsTests, SampleStdDeviationZeroLengthArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_std_deviation(_9ElemArr, 0), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, SampleStdDeviationArrWithAllSameValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_std_deviation(_16ElemZeroArr, _16_ELEM_ARR_SIZE), 0.f);
+    }
+    TEST_F(SeqStatisticalsTests, SampleStdDeviationArrWithPositiveAndNegativeValues)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_std_deviation(_25ElemArrMinusPiPi, _25_ELEM_ARR_SIZE), 2.0513323f);
+    }
+    TEST_F(SeqStatisticalsTests, SampleStdDeviationBigArr)
+    {
+        EXPECT_FLOAT_EQ(mathops::seq::sample_std_deviation(_bigArr, BIG_ARR_SIZE), 0.f);
+    }
 } // namespace tests
 } // namespace analysis
