@@ -44,6 +44,10 @@ if (BUILD_BENCHMARKS)
     set(SEQ_MIN_BENCHMARKS seq_min_benchmarks)
     set(AVX_MAX_BENCHMARKS avx_max_benchmarks)
     set(SEQ_MAX_BENCHMARKS seq_max_benchmarks)
+    set(AVX_ARITHMETICMEAN_BENCHMARKS avx_arithmeticmean_benchmarks)
+    set(SEQ_ARITHMETICMEAN_BENCHMARKS seq_arithmeticmean_benchmarks)
+    set(AVX_GEOMETRICMEAN_BENCHMARKS avx_geometricmean_benchmarks)
+    set(SEQ_GEOMETRICMEAN_BENCHMARKS seq_geometricmean_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -65,7 +69,11 @@ if (BUILD_BENCHMARKS)
     ${AVX_MIN_BENCHMARKS}
     ${SEQ_MIN_BENCHMARKS}
     ${AVX_MAX_BENCHMARKS}
-    ${SEQ_MAX_BENCHMARKS})
+    ${SEQ_MAX_BENCHMARKS}
+    ${AVX_ARITHMETICMEAN_BENCHMARKS}
+    ${SEQ_ARITHMETICMEAN_BENCHMARKS}
+    ${AVX_GEOMETRICMEAN_BENCHMARKS}
+    ${SEQ_GEOMETRICMEAN_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 
