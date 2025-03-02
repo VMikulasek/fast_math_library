@@ -1,17 +1,25 @@
 # Fast math library
 
-Library with support for summation and transcedental <!--TOADD types of functions-->functions, where some of them are accelerated (see table with supported functions below), wrapped SIMD instructions into templated interface and vector type with vectorized operations with SIMD instructions.
+Library with support for summation, transcedental and statistical functions, where some of them are accelerated (see table with supported functions below), wrapped SIMD instructions into templated interface and vector type with vectorized operations with SIMD instructions.
 
 ## Supported math functions
 
-| Summation | Acceleration | Transcedental | Acceleration |
+| Summation | Acceleration | Transcedental | Acceleration | Statistical | Acceleration |
 |-----------|--------------|---------------|--------------|
-| Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated |
-| Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated |
-| | | Tan | None |
-| | | Cot | None |
-| | | Sqrt | Approximation + SIMD Accelerated |
-| | | InvSqrt | Approsimation + SIMD Accelerated |
+| Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated | Min | SIMD Accelerated |
+| Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated | Max | SIMD Accelerated |
+| | | Tan | None | Mode (int[]) | None |
+| | | Cot | None | Median (int[]) | None |
+| | | Sqrt | Approximation + SIMD Accelerated | Median (float[]) | None |
+| | | InvSqrt | Approsimation + SIMD Accelerated | Arithmetic mean | SIMD Accelerated |
+| | | | | Geometric mean | SIMD Accelerated |
+| | | | | Weighted mean | SIMD Accelerated |
+| | | | | Variance | SIMD Accelerated |
+| | | | | Variance with specifiable probabilities | SIMD Accelerated |
+| | | | | Sample variance | SIMD Accelerated |
+| | | | | Standard deviation | SIMD Accelerated |
+| | | | | Standard deviation with specifiable probabilities | SIMD Accelerated |
+| | | | | Sample standard deviation | SIMD Accelerated |
 
 ## Supported vector data type operations
 
@@ -49,7 +57,7 @@ Library with support for summation and transcedental <!--TOADD types of function
 
 ## Wrapped Intel SIMD intrinsics
 
-- some AVX float intrinsics <!--TOADD types of intrinsics-->
+- some AVX float intrinsics
 - some AVX2 int intrinsics
 
 For more details see API.
@@ -327,4 +335,182 @@ Benchmark              Time             CPU   Iterations
 BM_Cos9Elem        0.228 ns        0.228 ns   3067976534
 BM_Cos10kElem       1393 ns         1393 ns       513323
 BM_Cos15MElem    6911133 ns      6909529 ns           93
+```
+
+#### Min
+
+* SEQ variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Min9Elem        0.114 ns        0.114 ns   6108640282
+BM_Min10kElem       9074 ns         9074 ns        76977
+BM_Min15MElem   14285038 ns     14285889 ns           49
+```
+
+* AVX variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Min9Elem        0.114 ns        0.114 ns   6123226897
+BM_Min10kElem       1063 ns         1063 ns       658679
+BM_Min15MElem    2453943 ns      2452630 ns          284
+```
+
+#### Max
+
+* SEQ variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Max9Elem        0.117 ns        0.117 ns   6110606962
+BM_Max10kElem       9049 ns         9049 ns        77438
+BM_Max15MElem   14202415 ns     14202311 ns           49
+```
+
+* AVX variant
+```
+--------------------------------------------------------
+Benchmark              Time             CPU   Iterations
+--------------------------------------------------------
+BM_Max9Elem        0.114 ns        0.114 ns   6081638314
+BM_Max10kElem       1063 ns         1063 ns       658598
+BM_Max15MElem    2457387 ns      2457274 ns          282
+```
+
+#### Arithmetic mean
+
+* SEQ variant
+```
+-------------------------------------------------------------------
+Benchmark                         Time             CPU   Iterations
+-------------------------------------------------------------------
+BM_ArithmeticMean9Elem        0.114 ns        0.114 ns   6128642428
+BM_ArithmeticMean10kElem       4520 ns         4520 ns       154866
+BM_ArithmeticMean15MElem    7467186 ns      7466658 ns           94
+```
+
+* AVX variant
+```
+-------------------------------------------------------------------
+Benchmark                         Time             CPU   Iterations
+-------------------------------------------------------------------
+BM_ArithmeticMean9Elem        0.116 ns        0.116 ns   6106151714
+BM_ArithmeticMean10kElem        538 ns          538 ns      1302477
+BM_ArithmeticMean15MElem    2502701 ns      2502678 ns          277
+```
+
+#### Geometric mean
+
+* SEQ variant
+```
+------------------------------------------------------------------
+Benchmark                        Time             CPU   Iterations
+------------------------------------------------------------------
+BM_GeometricMean9Elem        0.114 ns        0.114 ns   6069220044
+BM_GeometricMean10kElem       9078 ns         9079 ns        76702
+BM_GeometricMean15MElem   14286131 ns     14285502 ns           49
+```
+
+* AVX variant
+```
+------------------------------------------------------------------
+Benchmark                        Time             CPU   Iterations
+------------------------------------------------------------------
+BM_GeometricMean9Elem        0.121 ns        0.121 ns   6103966046
+BM_GeometricMean10kElem       1122 ns         1122 ns       623661
+BM_GeometricMean15MElem    2534616 ns      2533730 ns          272
+```
+
+#### Weighted mean
+
+* SEQ variant
+```
+-----------------------------------------------------------------
+Benchmark                       Time             CPU   Iterations
+-----------------------------------------------------------------
+BM_WeightedMean9Elem        0.114 ns        0.114 ns   6127502311
+BM_WeightedMean10kElem       4560 ns         4560 ns       153388
+BM_WeightedMean15MElem    8163582 ns      8163953 ns           79
+```
+
+* AVX variant
+```
+-----------------------------------------------------------------
+Benchmark                       Time             CPU   Iterations
+-----------------------------------------------------------------
+BM_WeightedMean9Elem        0.114 ns        0.114 ns   5820184566
+BM_WeightedMean10kElem        568 ns          568 ns      1230526
+BM_WeightedMean15MElem    2762926 ns      2762795 ns          254
+```
+
+#### Variance
+
+* SEQ variant
+```
+------------------------------------------------------------------------------
+Benchmark                                    Time             CPU   Iterations
+------------------------------------------------------------------------------
+BM_Variance9Elem                         0.114 ns        0.114 ns   6105457332
+BM_Variance10kElem                       31899 ns        31887 ns        21960
+BM_Variance15MElem                    48120211 ns     48078056 ns           15
+BM_VarianceWithProbabilities9Elem         9.78 ns         9.78 ns     71897849
+BM_VarianceWithProbabilities10kElem      31937 ns        31922 ns        21927
+BM_VarianceWithProbabilities15MElem   48217724 ns     48194142 ns           15
+BM_SampleVariance9Elem                   0.114 ns        0.114 ns   6124469751
+BM_SampleVariance10kElem                 31897 ns        31895 ns        21953
+BM_SampleVariance15MElem              48091631 ns     48091186 ns           15
+```
+
+* AVX variant
+```
+------------------------------------------------------------------------------
+Benchmark                                    Time             CPU   Iterations
+------------------------------------------------------------------------------
+BM_Variance9Elem                         0.114 ns        0.114 ns   6128562265
+BM_Variance10kElem                         611 ns          611 ns      1150006
+BM_Variance15MElem                     2698875 ns      2690181 ns          262
+BM_VarianceWithProbabilities9Elem         2.98 ns         2.98 ns    235585412
+BM_VarianceWithProbabilities10kElem        743 ns          743 ns       940400
+BM_VarianceWithProbabilities15MElem    4417311 ns      4415557 ns          159
+BM_SampleVariance9Elem                   0.114 ns        0.114 ns   6132457705
+BM_SampleVariance10kElem                   603 ns          603 ns      1154015
+BM_SampleVariance15MElem               2684586 ns      2684190 ns          260
+```
+
+#### Standard deviation
+
+* SEQ variant
+```
+----------------------------------------------------------------------------------
+Benchmark                                        Time             CPU   Iterations
+----------------------------------------------------------------------------------
+BM_StdDeviation9Elem                         0.115 ns        0.115 ns   6091710599
+BM_StdDeviation10kElem                       31918 ns        31919 ns        21932
+BM_StdDeviation15MElem                    48132419 ns     48134073 ns           14
+BM_StdDeviationWithProbabilities9Elem         10.6 ns         10.6 ns     66045375
+BM_StdDeviationWithProbabilities10kElem      32012 ns        32013 ns        21884
+BM_StdDeviationWithProbabilities15MElem   48293311 ns     48296485 ns           14
+BM_SampleStdDeviation9Elem                   0.114 ns        0.114 ns   6126675224
+BM_SampleStdDeviation10kElem                 31902 ns        31900 ns        21934
+BM_SampleStdDeviation15MElem              48249314 ns     48251520 ns           14
+```
+
+* AVX variant
+```
+----------------------------------------------------------------------------------
+Benchmark                                        Time             CPU   Iterations
+----------------------------------------------------------------------------------
+BM_StdDeviation9Elem                         0.114 ns        0.114 ns   6127946999
+BM_StdDeviation10kElem                         599 ns          599 ns      1168140
+BM_StdDeviation15MElem                     2779932 ns      2779993 ns          249
+BM_StdDeviationWithProbabilities9Elem         3.19 ns         3.19 ns    219557989
+BM_StdDeviationWithProbabilities10kElem        745 ns          745 ns       937726
+BM_StdDeviationWithProbabilities15MElem    4448080 ns      4447677 ns          157
+BM_SampleStdDeviation9Elem                   0.114 ns        0.114 ns   6119784322
+BM_SampleStdDeviation10kElem                   603 ns          603 ns      1147687
+BM_SampleStdDeviation15MElem               2795080 ns      2795008 ns          251
 ```

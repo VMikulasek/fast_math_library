@@ -248,6 +248,6 @@ namespace mathops
     {
         return cot_arr(arr.data(), arr.size());
     }
-}
+} // namespace mathops
 
 #endif // TRANSCEDENTALS_INL

@@ -40,6 +40,20 @@ if (BUILD_BENCHMARKS)
     set(SEQ_SINARR_BENCHMARKS seq_sinarr_benchmarks)
     set(AVX_COSARR_BENCHMARKS avx_cosarr_benchmarks)
     set(SEQ_COSARR_BENCHMARKS seq_cosarr_benchmarks)
+    set(AVX_MIN_BENCHMARKS avx_min_benchmarks)
+    set(SEQ_MIN_BENCHMARKS seq_min_benchmarks)
+    set(AVX_MAX_BENCHMARKS avx_max_benchmarks)
+    set(SEQ_MAX_BENCHMARKS seq_max_benchmarks)
+    set(AVX_ARITHMETICMEAN_BENCHMARKS avx_arithmeticmean_benchmarks)
+    set(SEQ_ARITHMETICMEAN_BENCHMARKS seq_arithmeticmean_benchmarks)
+    set(AVX_GEOMETRICMEAN_BENCHMARKS avx_geometricmean_benchmarks)
+    set(SEQ_GEOMETRICMEAN_BENCHMARKS seq_geometricmean_benchmarks)
+    set(AVX_WEIGHTEDMEAN_BENCHMARKS avx_weightedmean_benchmarks)
+    set(SEQ_WEIGHTEDMEAN_BENCHMARKS seq_weightedmean_benchmarks)
+    set(AVX_VARIANCE_BENCHMARKS avx_variance_benchmarks)
+    set(SEQ_VARIANCE_BENCHMARKS seq_variance_benchmarks)
+    set(AVX_STDDEVIATION_BENCHMARKS avx_stddeviation_benchmarks)
+    set(SEQ_STDDEVIATION_BENCHMARKS seq_stddeviation_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -57,8 +71,22 @@ if (BUILD_BENCHMARKS)
     ${AVX_SINARR_BENCHMARKS}
     ${SEQ_SINARR_BENCHMARKS}
     ${AVX_COSARR_BENCHMARKS}
-    ${SEQ_COSARR_BENCHMARKS})
-    
+    ${SEQ_COSARR_BENCHMARKS}
+    ${AVX_MIN_BENCHMARKS}
+    ${SEQ_MIN_BENCHMARKS}
+    ${AVX_MAX_BENCHMARKS}
+    ${SEQ_MAX_BENCHMARKS}
+    ${AVX_ARITHMETICMEAN_BENCHMARKS}
+    ${SEQ_ARITHMETICMEAN_BENCHMARKS}
+    ${AVX_GEOMETRICMEAN_BENCHMARKS}
+    ${SEQ_GEOMETRICMEAN_BENCHMARKS}
+    ${AVX_WEIGHTEDMEAN_BENCHMARKS}
+    ${SEQ_WEIGHTEDMEAN_BENCHMARKS}
+    ${AVX_VARIANCE_BENCHMARKS}
+    ${SEQ_VARIANCE_BENCHMARKS}
+    ${AVX_STDDEVIATION_BENCHMARKS}
+    ${SEQ_STDDEVIATION_BENCHMARKS})
+
     add_subdirectory(benchmarks)
 
     foreach(BENCHMARK ${BENCHMARKS})

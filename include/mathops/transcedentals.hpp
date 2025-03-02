@@ -331,7 +331,7 @@ namespace mathops
      * In case of allocation fail returns nullptr.
      */
     float *cot_arr(const std::vector<float> &arr);
-}
+} // namespace mathops
 
 #include <mathops/detail/transcedentals.inl>
 

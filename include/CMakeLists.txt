@@ -15,7 +15,8 @@ simd/simd_vec.hpp)
 
 set(MATHOPS_INCLUDE
 mathops/sums.hpp
-mathops/transcedentals.hpp)
+mathops/transcedentals.hpp
+mathops/statisticals.hpp)
 
 set(SIMD_OPERATIONS
 simd/detail/operations/simd_operations_avx_float.hpp
@@ -50,19 +51,24 @@ simd/detail/vec/AVX/simd_vec4_avx_float.inl)
 
 set(MATHOPS_DETAIL
 mathops/detail/sums.inl
-mathops/detail/transcedentals.inl)
+mathops/detail/transcedentals.inl
+mathops/detail/statisticals.inl)
 
 set(MATHOPS_AVX
 mathops/detail/AVX/avx_sums.hpp
 mathops/detail/AVX/avx_sums.inl
 mathops/detail/AVX/avx_transcedentals.hpp
-mathops/detail/AVX/avx_transcedentals.inl)
+mathops/detail/AVX/avx_transcedentals.inl
+mathops/detail/AVX/avx_statisticals.hpp
+mathops/detail/AVX/avx_statisticals.inl)
 
 set(MATHOPS_SEQ
 mathops/detail/SEQ/seq_sums.hpp
 mathops/detail/SEQ/seq_sums.inl
 mathops/detail/SEQ/seq_transcedentals.hpp
-mathops/detail/SEQ/seq_transcedentals.inl)
+mathops/detail/SEQ/seq_transcedentals.inl
+mathops/detail/SEQ/seq_statisticals.hpp
+mathops/detail/SEQ/seq_statisticals.inl)
 
 set(COMMON_DETAIL
 common/detail/memory_common.inl)
