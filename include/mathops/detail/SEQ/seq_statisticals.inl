@@ -145,24 +145,24 @@ namespace seq
     {
         if (size == 0) return 0.f;
 
-        float mean = arithmetic_mean(arr, size);
-
-        float variance = 0;
+        float mean = 0.f;
+        float variance = 0.f;
         for (size_t i = 0; i < size; i++)
         {
+            mean += arr[i];
             variance += std::pow(arr[i], 2);
         }
 
-        return (variance / size) - std::pow(mean, 2);
+        return (variance / size) - std::pow(mean / size, 2);
     }
     
     inline float variance(const float *arr, const float *probabilities, size_t size)
     {
-        float mean = weighted_mean(arr, probabilities, size);
-
+        float mean = 0.f;
         float variance = 0.f;
         for (size_t i = 0; i < size; i++)
         {
+            mean += arr[i] * probabilities[i];
             variance += std::pow(arr[i], 2) * probabilities[i];
         }
 
@@ -173,15 +173,15 @@ namespace seq
     {
         if (size <= 1) return 0.f;
 
-        float mean = arithmetic_mean(arr, size);
-
+        float mean = 0.f;
         float variance = 0;
         for (size_t i = 0; i < size; i++)
         {
+            mean += arr[i];
             variance += std::pow(arr[i], 2);
         }
 
-        return (variance - (std::pow(mean, 2) * size)) / (size - 1);
+        return (variance - (std::pow(mean / size, 2) * size)) / (size - 1);
     }
 
     inline float std_deviation(const float *arr, size_t size)
