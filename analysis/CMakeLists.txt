@@ -48,6 +48,8 @@ if (BUILD_BENCHMARKS)
     set(SEQ_ARITHMETICMEAN_BENCHMARKS seq_arithmeticmean_benchmarks)
     set(AVX_GEOMETRICMEAN_BENCHMARKS avx_geometricmean_benchmarks)
     set(SEQ_GEOMETRICMEAN_BENCHMARKS seq_geometricmean_benchmarks)
+    set(AVX_WEIGHTEDMEAN_BENCHMARKS avx_weightedmean_benchmarks)
+    set(SEQ_WEIGHTEDMEAN_BENCHMARKS seq_weightedmean_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -73,7 +75,9 @@ if (BUILD_BENCHMARKS)
     ${AVX_ARITHMETICMEAN_BENCHMARKS}
     ${SEQ_ARITHMETICMEAN_BENCHMARKS}
     ${AVX_GEOMETRICMEAN_BENCHMARKS}
-    ${SEQ_GEOMETRICMEAN_BENCHMARKS})
+    ${SEQ_GEOMETRICMEAN_BENCHMARKS}
+    ${AVX_WEIGHTEDMEAN_BENCHMARKS}
+    ${SEQ_WEIGHTEDMEAN_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 
