@@ -153,32 +153,36 @@ namespace avx
 
         float elementsToProcess = size;
 
-        float mean = arithmetic_mean(arr, size);
-
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
+        FloatOps::AvxReg meanReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
                 elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
                 arr += AVX_FLOAT_VECTOR_SIZE)
         {
-            // (x_i)^2
-            FloatOps::AvxReg tmp = FloatOps::load_vector(arr);
-            tmp = FloatOps::mul(tmp, tmp);
+            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            meanReg = FloatOps::add(meanReg, x);
 
-            varianceReg = FloatOps::add(varianceReg, tmp);
+            FloatOps::AvxReg x2 = FloatOps::mul(x, x);
+            varianceReg = FloatOps::add(varianceReg, x2);
         }
 
         varianceReg = FloatOps::horizontal_add(varianceReg, varianceReg);
         varianceReg = FloatOps::horizontal_add(varianceReg, varianceReg);
+        meanReg = FloatOps::horizontal_add(meanReg, meanReg);
+        meanReg = FloatOps::horizontal_add(meanReg, meanReg);
 
         float variance = FloatOps::materialize_register_at_index(varianceReg, 0)
             + FloatOps::materialize_register_at_index(varianceReg, 4);
+        float mean = FloatOps::materialize_register_at_index(meanReg, 0)
+            + FloatOps::materialize_register_at_index(meanReg, 4);
 
         for ( ; elementsToProcess > 0; elementsToProcess--, arr++)
         {
+            mean += *arr;
             variance += std::pow((*arr), 2);
         }
 
-        return (variance / size) - std::pow(mean, 2);
+        return (variance / size) - std::pow(mean / size, 2);
     }
 
     inline float variance(const float *arr, const float *probabilities, size_t size)
@@ -187,31 +191,38 @@ namespace avx
 
         float elementsToProcess = size;
 
-        float mean = weighted_mean(arr, probabilities, size);
-
+        FloatOps::AvxReg meanReg = FloatOps::set_register_zero();
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
             elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
             arr += AVX_FLOAT_VECTOR_SIZE,
             probabilities += AVX_FLOAT_VECTOR_SIZE)
         {
-            // (x_i)^2 * p(x)
-            FloatOps::AvxReg tmp = FloatOps::load_vector(arr);
-            tmp = FloatOps::mul(tmp, tmp);
-            tmp = FloatOps::mul(tmp, FloatOps::load_vector(probabilities));
+            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            FloatOps::AvxReg x2 = FloatOps::mul(x, x);
 
-            varianceReg = FloatOps::add(varianceReg, tmp);
+            FloatOps::AvxReg p = FloatOps::load_vector(probabilities);
+            FloatOps::AvxReg xp = FloatOps::mul(x, p);
+            meanReg = FloatOps::add(meanReg, xp);
+
+            FloatOps::AvxReg x2p = FloatOps::mul(x2, p);
+            varianceReg = FloatOps::add(varianceReg, x2p);
         }
 
         varianceReg = FloatOps::horizontal_add(varianceReg, varianceReg);
         varianceReg = FloatOps::horizontal_add(varianceReg, varianceReg);
+        meanReg = FloatOps::horizontal_add(meanReg, meanReg);
+        meanReg = FloatOps::horizontal_add(meanReg, meanReg);
 
         float variance = FloatOps::materialize_register_at_index(varianceReg, 0)
             + FloatOps::materialize_register_at_index(varianceReg, 4);
+        float mean = FloatOps::materialize_register_at_index(meanReg, 0)
+            + FloatOps::materialize_register_at_index(meanReg, 4);
 
         for ( ; elementsToProcess > 0;
                 elementsToProcess--, arr++, probabilities++)
         {
+            mean += (*arr) * (*probabilities);
             variance += std::pow((*arr), 2) * (*probabilities);
         }
 
@@ -223,32 +234,37 @@ namespace avx
         if (size <= 1) return 0.f;
 
         float elementsToProcess = size;
-        float mean = arithmetic_mean(arr, size);
 
+        FloatOps::AvxReg meanReg = FloatOps::set_register_zero();
         FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
                 elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
                 arr += AVX_FLOAT_VECTOR_SIZE)
         {
-            // (x_i)^2
-            FloatOps::AvxReg tmp = FloatOps::load_vector(arr);
-            tmp = FloatOps::mul(tmp, tmp);
+            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            meanReg = FloatOps::add(meanReg, x);
 
-            varianceReg = FloatOps::add(varianceReg, tmp);
+            FloatOps::AvxReg x2 = FloatOps::mul(x, x);
+            varianceReg = FloatOps::add(varianceReg, x2);
         }
 
         varianceReg = FloatOps::horizontal_add(varianceReg, varianceReg);
         varianceReg = FloatOps::horizontal_add(varianceReg, varianceReg);
+        meanReg = FloatOps::horizontal_add(meanReg, meanReg);
+        meanReg = FloatOps::horizontal_add(meanReg, meanReg);
 
         float variance = FloatOps::materialize_register_at_index(varianceReg, 0)
             + FloatOps::materialize_register_at_index(varianceReg, 4);
+        float mean = FloatOps::materialize_register_at_index(meanReg, 0)
+            + FloatOps::materialize_register_at_index(meanReg, 4);
 
         for ( ; elementsToProcess > 0; elementsToProcess--, arr++)
         {
+            mean += *arr;
             variance += std::pow((*arr), 2);
         }
 
-        return (variance - (std::pow(mean, 2) * size)) / (size - 1);
+        return (variance - (std::pow(mean / size, 2) * size)) / (size - 1);
     }
 
     inline float std_deviation(const float *arr, size_t size)
