@@ -40,6 +40,7 @@ if (BUILD_BENCHMARKS)
     set(SEQ_SINARR_BENCHMARKS seq_sinarr_benchmarks)
     set(AVX_COSARR_BENCHMARKS avx_cosarr_benchmarks)
     set(SEQ_COSARR_BENCHMARKS seq_cosarr_benchmarks)
+    set(SEQ_MIN_BENCHMARKS seq_min_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -57,7 +58,8 @@ if (BUILD_BENCHMARKS)
     ${AVX_SINARR_BENCHMARKS}
     ${SEQ_SINARR_BENCHMARKS}
     ${AVX_COSARR_BENCHMARKS}
-    ${SEQ_COSARR_BENCHMARKS})
+    ${SEQ_COSARR_BENCHMARKS}
+    ${SEQ_MIN_BENCHMARKS})
     
     add_subdirectory(benchmarks)
 
