@@ -51,8 +51,14 @@ set(AVX_COSARR_BENCHMARKS_SOURCE
 mathops/AVX/avx_cosarr_benchmarks.cpp)
 set(SEQ_COSARR_BENCHMARKS_SOURCE
 mathops/SEQ/seq_cosarr_benchmarks.cpp)
+set(AVX_MIN_BENCHMARKS_SOURCE
+mathops/AVX/avx_min_benchmarks.cpp)
 set(SEQ_MIN_BENCHMARKS_SOURCE
 mathops/SEQ/seq_min_benchmarks.cpp)
+set(AVX_MAX_BENCHMARKS_SOURCE
+mathops/AVX/avx_max_benchmarks.cpp)
+set(SEQ_MAX_BENCHMARKS_SOURCE
+mathops/SEQ/seq_max_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -70,7 +76,10 @@ add_executable(${AVX_SINARR_BENCHMARKS} ${AVX_SINARR_BENCHMARKS_SOURCE})
 add_executable(${SEQ_SINARR_BENCHMARKS} ${SEQ_SINARR_BENCHMARKS_SOURCE})
 add_executable(${AVX_COSARR_BENCHMARKS} ${AVX_COSARR_BENCHMARKS_SOURCE})
 add_executable(${SEQ_COSARR_BENCHMARKS} ${SEQ_COSARR_BENCHMARKS_SOURCE})
+add_executable(${AVX_MIN_BENCHMARKS} ${AVX_MIN_BENCHMARKS_SOURCE})
 add_executable(${SEQ_MIN_BENCHMARKS} ${SEQ_MIN_BENCHMARKS_SOURCE})
+add_executable(${AVX_MAX_BENCHMARKS} ${AVX_MAX_BENCHMARKS_SOURCE})
+add_executable(${SEQ_MAX_BENCHMARKS} ${SEQ_MAX_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
