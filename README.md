@@ -5,7 +5,7 @@ Library with support for summation, transcedental and statistical functions, whe
 ## Supported math functions
 
 | Summation | Acceleration | Transcedental | Acceleration | Statistical | Acceleration |
-|-----------|--------------|---------------|--------------|
+|-----------|--------------|---------------|--------------|-------------|--------------|
 | Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated | Min | SIMD Accelerated |
 | Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated | Max | SIMD Accelerated |
 | | | Tan | None | Mode (int[]) | None |
