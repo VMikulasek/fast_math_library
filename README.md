@@ -1,17 +1,25 @@
 # Fast math library
 
-Library with support for summation and transcedental <!--TOADD types of functions-->functions, where some of them are accelerated (see table with supported functions below), wrapped SIMD instructions into templated interface and vector type with vectorized operations with SIMD instructions.
+Library with support for summation, transcedental and statistical functions, where some of them are accelerated (see table with supported functions below), wrapped SIMD instructions into templated interface and vector type with vectorized operations with SIMD instructions.
 
 ## Supported math functions
 
-| Summation | Acceleration | Transcedental | Acceleration |
+| Summation | Acceleration | Transcedental | Acceleration | Statistical | Acceleration |
 |-----------|--------------|---------------|--------------|
-| Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated |
-| Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated |
-| | | Tan | None |
-| | | Cot | None |
-| | | Sqrt | Approximation + SIMD Accelerated |
-| | | InvSqrt | Approsimation + SIMD Accelerated |
+| Sum        | SIMD Accelerated | Sin | Approximation + SIMD Accelerated | Min | SIMD Accelerated |
+| Prefix sum (Inclusive scan) | SIMD Accelerated | Cos | Approximation + SIMD Accelerated | Max | SIMD Accelerated |
+| | | Tan | None | Mode (int[]) | None |
+| | | Cot | None | Median (int[]) | None |
+| | | Sqrt | Approximation + SIMD Accelerated | Median (float[]) | None |
+| | | InvSqrt | Approsimation + SIMD Accelerated | Arithmetic mean | SIMD Accelerated |
+| | | | | Geometric mean | SIMD Accelerated |
+| | | | | Weighted mean | SIMD Accelerated |
+| | | | | Variance | SIMD Accelerated |
+| | | | | Variance with specifiable probabilities | SIMD Accelerated |
+| | | | | Sample variance | SIMD Accelerated |
+| | | | | Standard deviation | SIMD Accelerated |
+| | | | | Standard deviation with specifiable probabilities | SIMD Accelerated |
+| | | | | Sample standard deviation | SIMD Accelerated |
 
 ## Supported vector data type operations
 
@@ -49,7 +57,7 @@ Library with support for summation and transcedental <!--TOADD types of function
 
 ## Wrapped Intel SIMD intrinsics
 
-- some AVX float intrinsics <!--TOADD types of intrinsics-->
+- some AVX float intrinsics
 - some AVX2 int intrinsics
 
 For more details see API.
