@@ -54,6 +54,12 @@ if (BUILD_BENCHMARKS)
     set(SEQ_VARIANCE_BENCHMARKS seq_variance_benchmarks)
     set(AVX_STDDEVIATION_BENCHMARKS avx_stddeviation_benchmarks)
     set(SEQ_STDDEVIATION_BENCHMARKS seq_stddeviation_benchmarks)
+    set(GLM_SEQ_VEC4_BENCHMARKS glm_seq_vec4_benchmarks)
+    set(GLM_SIMD_VEC4_BENCHMARKS glm_simd_vec4_benchmarks)
+    set(GLM_SEQ_VEC3_BENCHMARKS glm_seq_vec3_benchmarks)
+    set(GLM_SIMD_VEC3_BENCHMARKS glm_simd_vec3_benchmarks)
+    set(GLM_SEQ_VEC2_BENCHMARKS glm_seq_vec2_benchmarks)
+    set(GLM_SIMD_VEC2_BENCHMARKS glm_simd_vec2_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -85,7 +91,13 @@ if (BUILD_BENCHMARKS)
     ${AVX_VARIANCE_BENCHMARKS}
     ${SEQ_VARIANCE_BENCHMARKS}
     ${AVX_STDDEVIATION_BENCHMARKS}
-    ${SEQ_STDDEVIATION_BENCHMARKS})
+    ${SEQ_STDDEVIATION_BENCHMARKS}
+    ${GLM_SEQ_VEC4_BENCHMARKS}
+    ${GLM_SIMD_VEC4_BENCHMARKS}
+    ${GLM_SEQ_VEC3_BENCHMARKS}
+    ${GLM_SIMD_VEC3_BENCHMARKS}
+    ${GLM_SEQ_VEC2_BENCHMARKS}
+    ${GLM_SIMD_VEC2_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 

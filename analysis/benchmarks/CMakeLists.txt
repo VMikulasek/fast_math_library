@@ -17,7 +17,13 @@ FetchContent_Declare(
     GIT_TAG        12235e24652fc7f809373e7c11a5f73c5763fc4c # version 1.9.0
 )
 
-FetchContent_MakeAvailable(googletest benchmark)
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG        0af55ccecd98d4e5a8d1fad7de25ba429d60e863 # version 1.0.1
+)
+
+FetchContent_MakeAvailable(googletest benchmark glm)
 
 set(ACCELERATED_SQRT_BENCHMARKS_SOURCE
 mathops/accelerated/accelerated_sqrt_benchmarks.cpp)
@@ -79,6 +85,18 @@ set(AVX_STDDEVIATION_BENCHMARKS_SOURCE
 mathops/AVX/avx_stddeviation_benchmarks.cpp)
 set(SEQ_STDDEVIATION_BENCHMARKS_SOURCE
 mathops/SEQ/seq_stddeviation_benchmarks.cpp)
+set(GLM_SEQ_VEC4_BENCHMARKS_SOURCE
+vec/glm/SEQ/glm_seq_vec4_benchmarks.cpp)
+set(GLM_SIMD_VEC4_BENCHMARKS_SOURCE
+vec/glm/SIMD/glm_simd_vec4_benchmarks.cpp)
+set(GLM_SEQ_VEC3_BENCHMARKS_SOURCE
+vec/glm/SEQ/glm_seq_vec3_benchmarks.cpp)
+set(GLM_SIMD_VEC3_BENCHMARKS_SOURCE
+vec/glm/SIMD/glm_simd_vec3_benchmarks.cpp)
+set(GLM_SEQ_VEC2_BENCHMARKS_SOURCE
+vec/glm/SEQ/glm_seq_vec2_benchmarks.cpp)
+set(GLM_SIMD_VEC2_BENCHMARKS_SOURCE
+vec/glm/SIMD/glm_simd_vec2_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -110,13 +128,20 @@ add_executable(${AVX_VARIANCE_BENCHMARKS} ${AVX_VARIANCE_BENCHMARKS_SOURCE})
 add_executable(${SEQ_VARIANCE_BENCHMARKS} ${SEQ_VARIANCE_BENCHMARKS_SOURCE})
 add_executable(${AVX_STDDEVIATION_BENCHMARKS} ${AVX_STDDEVIATION_BENCHMARKS_SOURCE})
 add_executable(${SEQ_STDDEVIATION_BENCHMARKS} ${SEQ_STDDEVIATION_BENCHMARKS_SOURCE})
+add_executable(${GLM_SEQ_VEC4_BENCHMARKS} ${GLM_SEQ_VEC4_BENCHMARKS_SOURCE})
+add_executable(${GLM_SIMD_VEC4_BENCHMARKS} ${GLM_SIMD_VEC4_BENCHMARKS_SOURCE})
+add_executable(${GLM_SEQ_VEC3_BENCHMARKS} ${GLM_SEQ_VEC3_BENCHMARKS_SOURCE})
+add_executable(${GLM_SIMD_VEC3_BENCHMARKS} ${GLM_SIMD_VEC3_BENCHMARKS_SOURCE})
+add_executable(${GLM_SEQ_VEC2_BENCHMARKS} ${GLM_SEQ_VEC2_BENCHMARKS_SOURCE})
+add_executable(${GLM_SIMD_VEC2_BENCHMARKS} ${GLM_SIMD_VEC2_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
         ${BENCHMARK}
         PRIVATE ${PROJECT_NAME}
         PRIVATE benchmark::benchmark
-        PRIVATE benchmark::benchmark_main)
+        PRIVATE benchmark::benchmark_main
+        PRIVATE glm)
 
     target_include_directories(
         ${BENCHMARK} PRIVATE
