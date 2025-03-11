@@ -1,4 +1,5 @@
 #define GLM_FORCE_INTRINSICS
+#define GLM_FORCE_ALIGNED_GENTYPES
 
 #include <glm/glm.hpp>
 
@@ -10,181 +11,181 @@ namespace benchmarks
 {
     static void BM_Vec3Add(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = vec + vec;
+            glm::vec<3, float, glm::aligned_highp> res = vec + vec;
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Sub(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = vec - vec;
+            glm::vec<3, float, glm::aligned_highp> res = vec - vec;
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Mul(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = vec * vec;
+            glm::vec<3, float, glm::aligned_highp> res = vec * vec;
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Div(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = vec / vec;
+            glm::vec<3, float, glm::aligned_highp> res = vec / vec;
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec3Abs(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::abs(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::abs(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Min(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::min(vec, vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::min(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Max(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::max(vec, vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::max(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec3Sqrt(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::sqrt(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::sqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3SqrtLowp(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::sqrt(vec);
+            glm::vec<3, float, glm::aligned_lowp> res = glm::sqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3InvSqrt(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::inversesqrt(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::inversesqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3InvSqrtLowp(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::inversesqrt(vec);
+            glm::vec<3, float, glm::aligned_lowp> res = glm::inversesqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec3Sin(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::sin(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::sin(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3SinLowp(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::sin(vec);
+            glm::vec<3, float, glm::aligned_lowp> res = glm::sin(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Cos(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::cos(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::cos(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3CosLowp(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::cos(vec);
+            glm::vec<3, float, glm::aligned_lowp> res = glm::cos(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Tan(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::tan(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::tan(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Cot(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::cos(vec) / glm::sin(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::vec<3, float, glm::aligned_highp>(1.f, 1.f, 1.f) / glm::tan(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec3Dot(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
@@ -194,7 +195,7 @@ namespace benchmarks
     }
     static void BM_Vec3Length(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
@@ -204,11 +205,11 @@ namespace benchmarks
     }
     static void BM_Vec3Normalize(benchmark::State &state)
     {
-        glm::vec3 vec(1.f, 1.f, 1.f);
+        glm::vec<3, float, glm::aligned_highp> vec(1.f, 1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec3 res = glm::normalize(vec);
+            glm::vec<3, float, glm::aligned_highp> res = glm::normalize(vec);
             benchmark::DoNotOptimize(res);
         }
     }

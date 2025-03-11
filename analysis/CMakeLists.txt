@@ -54,12 +54,15 @@ if (BUILD_BENCHMARKS)
     set(SEQ_VARIANCE_BENCHMARKS seq_variance_benchmarks)
     set(AVX_STDDEVIATION_BENCHMARKS avx_stddeviation_benchmarks)
     set(SEQ_STDDEVIATION_BENCHMARKS seq_stddeviation_benchmarks)
-    set(GLM_SEQ_VEC4_BENCHMARKS glm_seq_vec4_benchmarks)
-    set(GLM_SIMD_VEC4_BENCHMARKS glm_simd_vec4_benchmarks)
-    set(GLM_SEQ_VEC3_BENCHMARKS glm_seq_vec3_benchmarks)
-    set(GLM_SIMD_VEC3_BENCHMARKS glm_simd_vec3_benchmarks)
-    set(GLM_SEQ_VEC2_BENCHMARKS glm_seq_vec2_benchmarks)
-    set(GLM_SIMD_VEC2_BENCHMARKS glm_simd_vec2_benchmarks)
+    set(GLM_VEC4_BENCHMARKS glm_vec4_benchmarks)
+    set(GLM_VEC3_BENCHMARKS glm_vec3_benchmarks)
+    set(GLM_VEC2_BENCHMARKS glm_vec2_benchmarks)
+    set(AVX_VEC4_BENCHMARKS avx_vec4_benchmarks)
+    set(AVX_VEC3_BENCHMARKS avx_vec3_benchmarks)
+    set(AVX_VEC2_BENCHMARKS avx_vec2_benchmarks)
+    set(SEQ_VEC4_BENCHMARKS seq_vec4_benchmarks)
+    set(SEQ_VEC3_BENCHMARKS seq_vec3_benchmarks)
+    set(SEQ_VEC2_BENCHMARKS seq_vec2_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -92,12 +95,15 @@ if (BUILD_BENCHMARKS)
     ${SEQ_VARIANCE_BENCHMARKS}
     ${AVX_STDDEVIATION_BENCHMARKS}
     ${SEQ_STDDEVIATION_BENCHMARKS}
-    ${GLM_SEQ_VEC4_BENCHMARKS}
-    ${GLM_SIMD_VEC4_BENCHMARKS}
-    ${GLM_SEQ_VEC3_BENCHMARKS}
-    ${GLM_SIMD_VEC3_BENCHMARKS}
-    ${GLM_SEQ_VEC2_BENCHMARKS}
-    ${GLM_SIMD_VEC2_BENCHMARKS})
+    ${GLM_VEC4_BENCHMARKS}
+    ${GLM_VEC3_BENCHMARKS}
+    ${GLM_VEC2_BENCHMARKS}
+    ${AVX_VEC4_BENCHMARKS}
+    ${AVX_VEC3_BENCHMARKS}
+    ${AVX_VEC2_BENCHMARKS}
+    ${SEQ_VEC4_BENCHMARKS}
+    ${SEQ_VEC3_BENCHMARKS}
+    ${SEQ_VEC2_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 

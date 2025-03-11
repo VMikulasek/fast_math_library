@@ -85,18 +85,24 @@ set(AVX_STDDEVIATION_BENCHMARKS_SOURCE
 mathops/AVX/avx_stddeviation_benchmarks.cpp)
 set(SEQ_STDDEVIATION_BENCHMARKS_SOURCE
 mathops/SEQ/seq_stddeviation_benchmarks.cpp)
-set(GLM_SEQ_VEC4_BENCHMARKS_SOURCE
-vec/glm/SEQ/glm_seq_vec4_benchmarks.cpp)
-set(GLM_SIMD_VEC4_BENCHMARKS_SOURCE
-vec/glm/SIMD/glm_simd_vec4_benchmarks.cpp)
-set(GLM_SEQ_VEC3_BENCHMARKS_SOURCE
-vec/glm/SEQ/glm_seq_vec3_benchmarks.cpp)
-set(GLM_SIMD_VEC3_BENCHMARKS_SOURCE
-vec/glm/SIMD/glm_simd_vec3_benchmarks.cpp)
-set(GLM_SEQ_VEC2_BENCHMARKS_SOURCE
-vec/glm/SEQ/glm_seq_vec2_benchmarks.cpp)
-set(GLM_SIMD_VEC2_BENCHMARKS_SOURCE
-vec/glm/SIMD/glm_simd_vec2_benchmarks.cpp)
+set(GLM_VEC4_BENCHMARKS_SOURCE
+vec/glm/glm_vec4_benchmarks.cpp)
+set(GLM_VEC3_BENCHMARKS_SOURCE
+vec/glm/glm_vec3_benchmarks.cpp)
+set(GLM_VEC2_BENCHMARKS_SOURCE
+vec/glm/glm_vec2_benchmarks.cpp)
+set(AVX_VEC4_BENCHMARKS_SOURCE
+vec/local/AVX/avx_vec4_benchmarks.cpp)
+set(AVX_VEC3_BENCHMARKS_SOURCE
+vec/local/AVX/avx_vec3_benchmarks.cpp)
+set(AVX_VEC2_BENCHMARKS_SOURCE
+vec/local/AVX/avx_vec2_benchmarks.cpp)
+set(SEQ_VEC4_BENCHMARKS_SOURCE
+vec/local/SEQ/seq_vec4_benchmarks.cpp)
+set(SEQ_VEC3_BENCHMARKS_SOURCE
+vec/local/SEQ/seq_vec3_benchmarks.cpp)
+set(SEQ_VEC2_BENCHMARKS_SOURCE
+vec/local/SEQ/seq_vec2_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -128,23 +134,29 @@ add_executable(${AVX_VARIANCE_BENCHMARKS} ${AVX_VARIANCE_BENCHMARKS_SOURCE})
 add_executable(${SEQ_VARIANCE_BENCHMARKS} ${SEQ_VARIANCE_BENCHMARKS_SOURCE})
 add_executable(${AVX_STDDEVIATION_BENCHMARKS} ${AVX_STDDEVIATION_BENCHMARKS_SOURCE})
 add_executable(${SEQ_STDDEVIATION_BENCHMARKS} ${SEQ_STDDEVIATION_BENCHMARKS_SOURCE})
-add_executable(${GLM_SEQ_VEC4_BENCHMARKS} ${GLM_SEQ_VEC4_BENCHMARKS_SOURCE})
-add_executable(${GLM_SIMD_VEC4_BENCHMARKS} ${GLM_SIMD_VEC4_BENCHMARKS_SOURCE})
-add_executable(${GLM_SEQ_VEC3_BENCHMARKS} ${GLM_SEQ_VEC3_BENCHMARKS_SOURCE})
-add_executable(${GLM_SIMD_VEC3_BENCHMARKS} ${GLM_SIMD_VEC3_BENCHMARKS_SOURCE})
-add_executable(${GLM_SEQ_VEC2_BENCHMARKS} ${GLM_SEQ_VEC2_BENCHMARKS_SOURCE})
-add_executable(${GLM_SIMD_VEC2_BENCHMARKS} ${GLM_SIMD_VEC2_BENCHMARKS_SOURCE})
+add_executable(${GLM_VEC4_BENCHMARKS} ${GLM_VEC4_BENCHMARKS_SOURCE})
+add_executable(${GLM_VEC3_BENCHMARKS} ${GLM_VEC3_BENCHMARKS_SOURCE})
+add_executable(${GLM_VEC2_BENCHMARKS} ${GLM_VEC2_BENCHMARKS_SOURCE})
+add_executable(${AVX_VEC4_BENCHMARKS} ${AVX_VEC4_BENCHMARKS_SOURCE})
+add_executable(${AVX_VEC3_BENCHMARKS} ${AVX_VEC3_BENCHMARKS_SOURCE})
+add_executable(${AVX_VEC2_BENCHMARKS} ${AVX_VEC2_BENCHMARKS_SOURCE})
+add_executable(${SEQ_VEC4_BENCHMARKS} ${SEQ_VEC4_BENCHMARKS_SOURCE})
+add_executable(${SEQ_VEC3_BENCHMARKS} ${SEQ_VEC3_BENCHMARKS_SOURCE})
+add_executable(${SEQ_VEC2_BENCHMARKS} ${SEQ_VEC2_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
         ${BENCHMARK}
         PRIVATE ${PROJECT_NAME}
         PRIVATE benchmark::benchmark
-        PRIVATE benchmark::benchmark_main
-        PRIVATE glm)
+        PRIVATE benchmark::benchmark_main)
 
     target_include_directories(
         ${BENCHMARK} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
     )
 endforeach()
+
+target_link_libraries(${GLM_VEC4_BENCHMARKS} PRIVATE glm)
+target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm)
+target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm)

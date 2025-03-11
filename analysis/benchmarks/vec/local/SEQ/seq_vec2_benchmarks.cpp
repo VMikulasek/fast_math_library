@@ -1,6 +1,5 @@
-#define GLM_FORCE_INTRINSICS
-
-#include <glm/glm.hpp>
+#include <simd/detail/vec/simd_vec2.hpp>
+#include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -8,207 +7,209 @@ namespace analysis
 {
 namespace benchmarks
 {
+#ifdef HAS_AVX
+
     static void BM_Vec2Add(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = vec + vec;
+            simd::Vec2f res = simd::seq::addv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Sub(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = vec - vec;
+            simd::Vec2f res = simd::seq::subv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Mul(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = vec * vec;
+            simd::Vec2f res = simd::seq::mulv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Div(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = vec / vec;
+            simd::Vec2f res = simd::seq::divv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Abs(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::abs(vec);
+            simd::Vec2f res = simd::seq::absv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Min(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::min(vec, vec);
+            simd::Vec2f res = simd::seq::minv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Max(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::max(vec, vec);
+            simd::Vec2f res = simd::seq::maxv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Sqrt(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::sqrt(vec);
+            simd::Vec2f res = simd::seq::sqrtv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2SqrtLowp(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::sqrt(vec);
+            simd::Vec2f res = simd::seq::fast_sqrtv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2InvSqrt(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::inversesqrt(vec);
+            simd::Vec2f res = simd::seq::invsqrtv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2InvSqrtLowp(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::inversesqrt(vec);
+            simd::Vec2f res = simd::seq::fast_invsqrtv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Sin(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::sin(vec);
+            simd::Vec2f res = simd::seq::sinv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2SinLowp(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::sin(vec);
+            simd::Vec2f res = simd::seq::fast_sinv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Cos(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::cos(vec);
+            simd::Vec2f res = simd::seq::cosv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2CosLowp(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::cos(vec);
+            simd::Vec2f res = simd::seq::fast_cosv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Tan(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::tan(vec);
+            simd::Vec2f res = simd::seq::tanv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Cot(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::cos(vec) / glm::sin(vec);
+            simd::Vec2f res = simd::seq::cotv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec2Dot(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            float res = glm::dot(vec, vec);
+            float res = simd::seq::dotv(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Length(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            float res = vec.length();
+            float res = simd::seq::lengthv(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Normalize(benchmark::State &state)
     {
-        glm::vec2 vec(1.f, 1.f);
+        simd::Vec2f vec(1.f, 1.f);
 
         for (auto _ : state)
         {
-            glm::vec2 res = glm::normalize(vec);
+            simd::Vec2f res = simd::seq::normalizev(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -233,5 +234,7 @@ namespace benchmarks
     BENCHMARK(BM_Vec2Dot);
     BENCHMARK(BM_Vec2Length);
     BENCHMARK(BM_Vec2Normalize);
+
+#endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis
