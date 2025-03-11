@@ -8,6 +8,8 @@ namespace analysis
 {
 namespace benchmarks
 {
+#ifdef HAS_AVX
+
     static void BM_StdDeviation(benchmark::State &state, const float *arr, size_t size)
     {
         for (auto _ : state)
@@ -118,5 +120,7 @@ namespace benchmarks
     BENCHMARK(BM_SampleStdDeviation9Elem);
     BENCHMARK(BM_SampleStdDeviation10kElem);
     BENCHMARK(BM_SampleStdDeviation15MElem);
+
+#endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis

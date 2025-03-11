@@ -1,49 +1,53 @@
-    #include <mathops_shared_fields.hpp>
-    #include <common/detail/memory_common.inl>
-    #include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops_shared_fields.hpp>
+#include <common/detail/memory_common.inl>
+#include <mathops/detail/AVX/avx_transcedentals.hpp>
 
-    #include <benchmark/benchmark.h>
+#include <benchmark/benchmark.h>
 
-    namespace analysis
+namespace analysis
+{
+namespace benchmarks
+{
+#ifdef HAS_AVX
+
+    static void BM_InvSqrt(benchmark::State &state, const float *arr, size_t size)
     {
-    namespace benchmarks
+        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+
+        for (auto _ : state)
+        {
+            mathops::avx::fast_invsqrt_arr(arr, size, dst);
+            benchmark::DoNotOptimize(dst);
+        }
+
+        _free_aligned_memory(dst);
+    }
+
+    static void BM_InvSqrt9Elem(benchmark::State &state)
     {
-        static void BM_InvSqrt(benchmark::State &state, const float *arr, size_t size)
-        {
-            float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        BM_InvSqrt(state, _9ElemArr, _9_ELEM_ARR_SIZE);
+    }
+    static void BM_InvSqrt10kElem(benchmark::State &state)
+    {
+        float *medArr = AllocMediumArr();
 
-            for (auto _ : state)
-            {
-                mathops::avx::fast_invsqrt_arr(arr, size, dst);
-                benchmark::DoNotOptimize(dst);
-            }
+        BM_InvSqrt(state, medArr, MEDIUM_ARR_SIZE);
 
-            _free_aligned_memory(dst);
-        }
+        _free_aligned_memory(medArr);
+    }
+    static void BM_InvSqrt15MElem(benchmark::State &state)
+    {
+        float *bigArr = AllocBigArr();
 
-        static void BM_InvSqrt9Elem(benchmark::State &state)
-        {
-            BM_InvSqrt(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-        }
-        static void BM_InvSqrt10kElem(benchmark::State &state)
-        {
-            float *medArr = AllocMediumArr();
+        BM_InvSqrt(state, bigArr, BIG_ARR_SIZE);
 
-            BM_InvSqrt(state, medArr, MEDIUM_ARR_SIZE);
+        _free_aligned_memory(bigArr);
+    }
 
-            _free_aligned_memory(medArr);
-        }
-        static void BM_InvSqrt15MElem(benchmark::State &state)
-        {
-            float *bigArr = AllocBigArr();
+    BENCHMARK(BM_InvSqrt9Elem);
+    BENCHMARK(BM_InvSqrt10kElem);
+    BENCHMARK(BM_InvSqrt15MElem);
 
-            BM_InvSqrt(state, bigArr, BIG_ARR_SIZE);
-
-            _free_aligned_memory(bigArr);
-        }
-
-        BENCHMARK(BM_InvSqrt9Elem);
-        BENCHMARK(BM_InvSqrt10kElem);
-        BENCHMARK(BM_InvSqrt15MElem);
-    } // namespace benchmarks
-    } // namespace analysis
+#endif // HAS_AVX
+} // namespace benchmarks
+} // namespace analysis

@@ -8,6 +8,8 @@ namespace analysis
 {
 namespace benchmarks
 {
+#ifdef HAS_AVX
+
     static void BM_GeometricMean(benchmark::State &state, const float *arr, size_t size)
     {
         for (auto _ : state)
@@ -41,5 +43,7 @@ namespace benchmarks
     BENCHMARK(BM_GeometricMean9Elem);
     BENCHMARK(BM_GeometricMean10kElem);
     BENCHMARK(BM_GeometricMean15MElem);
+
+#endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis
