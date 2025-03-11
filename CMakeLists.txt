@@ -21,6 +21,11 @@ endfunction()
 
 message(STATUS "Checking for SIMD units")
 
+check_runtime_program(check_sse_support SSE_SUPPORTED)
+check_runtime_program(check_sse2_support SSE2_SUPPORTED)
+check_runtime_program(check_sse3_support SSE3_SUPPORTED)
+check_runtime_program(check_sse41_support SSE41_SUPPORTED)
+check_runtime_program(check_sse42_support SSE42_SUPPORTED)
 check_runtime_program(check_avx_support AVX_SUPPORTED)
 check_runtime_program(check_avx2_support AVX2_SUPPORTED)
 check_runtime_program(check_avx512_support AVX512_SUPPORTED)

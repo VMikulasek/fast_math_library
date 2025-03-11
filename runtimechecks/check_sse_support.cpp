@@ -28,16 +28,16 @@ int main()
 {
     int cpuInfo[4];
 
-    cpuidex(cpuInfo, 7, 0);
-    int ebx = cpuInfo[1];
-    int avx2Bit = 1 << 5;
+    cpuid(cpuInfo, 1);
+    int edx = cpuInfo[3];
+    int bitSSE = 1 << 25;
 
-    if ((ebx & avx2Bit) != 0)
+    if ((edx & bitSSE) != 0)
     {
-        // supports AVX2
+        // supports SSE
         return 1;
     }
 
-    // does not support AVX2
+    // does not support SSE
     return 0;
 }

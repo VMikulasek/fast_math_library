@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #if defined(_MSC_VER)
 #include <intrin.h>
 
@@ -28,16 +30,16 @@ int main()
 {
     int cpuInfo[4];
 
-    cpuidex(cpuInfo, 7, 0);
-    int ebx = cpuInfo[1];
-    int avx2Bit = 1 << 5;
+    cpuid(cpuInfo, 1);
+    int ecx = cpuInfo[2];
+    int bitSSE42 = 1 << 20;
 
-    if ((ebx & avx2Bit) != 0)
+    if ((ecx & bitSSE42) != 0)
     {
-        // supports AVX2
+        // supports SSE42
         return 1;
     }
 
-    // does not support AVX2
+    // does not support SSE42
     return 0;
 }
