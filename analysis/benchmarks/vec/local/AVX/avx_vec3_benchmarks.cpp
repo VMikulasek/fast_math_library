@@ -17,6 +17,7 @@
 #undef dotv3f
 #undef lengthv3f
 #undef normalizev3f
+#undef crossv3f
 
 namespace analysis
 {
@@ -26,225 +27,257 @@ namespace benchmarks
 
     static void BM_Vec3Add(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::addv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Sub(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::subv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Mul(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::mulv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Div(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::divv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec3Abs(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::absv3f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Min(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::minv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Max(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::maxv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec3Sqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::seq::sqrtv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3SqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::fast_sqrtv3f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3InvSqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::seq::invsqrtv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3InvSqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::fast_invsqrtv3f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec3Sin(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::seq::sinv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3SinLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::fast_sinv3f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Cos(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::seq::cosv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3CosLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::fast_cosv3f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Tan(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::seq::tanv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Cot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::seq::cotv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec3Dot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             float res = simd::avx::dotv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Length(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             float res = simd::avx::lengthv3f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec3Normalize(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec3f vec(num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec3f res = simd::avx::normalizev3f(vec);
+            benchmark::DoNotOptimize(vec);
+            benchmark::DoNotOptimize(res);
+        }
+    }
+    static void BM_Vec3Cross(benchmark::State &state)
+    {
+        volatile float num = std::rand();
+        simd::Vec3f vec(num, num, num);
+
+        for (auto _ : state)
+        {
+            simd::Vec3f res = simd::avx::crossv3f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -269,6 +302,7 @@ namespace benchmarks
     BENCHMARK(BM_Vec3Dot);
     BENCHMARK(BM_Vec3Length);
     BENCHMARK(BM_Vec3Normalize);
+    BENCHMARK(BM_Vec3Cross);
 
 #endif // HAS_AVX
 } // namespace benchmarks

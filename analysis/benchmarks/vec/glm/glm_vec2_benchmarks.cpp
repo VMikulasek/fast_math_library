@@ -11,225 +11,245 @@ namespace benchmarks
 {
     static void BM_Vec2Add(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = vec + vec;
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Sub(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = vec - vec;
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Mul(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = vec * vec;
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Div(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = vec / vec;
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Abs(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::abs(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Min(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::min(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Max(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::max(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Sqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::sqrt(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2SqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_lowp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_lowp> res = glm::sqrt(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2InvSqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::inversesqrt(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2InvSqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_lowp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_lowp> res = glm::inversesqrt(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Sin(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::sin(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2SinLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_lowp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_lowp> res = glm::sin(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Cos(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::cos(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2CosLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_lowp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_lowp> res = glm::cos(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Tan(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::tan(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Cot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::vec<2, float, glm::aligned_highp>(num, num) / glm::tan(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec2Dot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             float res = glm::dot(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Length(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             float res = vec.length();
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Normalize(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         glm::vec<2, float, glm::aligned_highp> vec(num, num);
 
         for (auto _ : state)
         {
             glm::vec<2, float, glm::aligned_highp> res = glm::normalize(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }

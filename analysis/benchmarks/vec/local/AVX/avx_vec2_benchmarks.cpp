@@ -26,225 +26,245 @@ namespace benchmarks
 
     static void BM_Vec2Add(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::addv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Sub(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::subv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Mul(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::mulv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Div(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::divv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Abs(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::absv2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Min(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::minv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Max(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::maxv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Sqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::seq::sqrtv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2SqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::fast_sqrtv2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2InvSqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::seq::invsqrtv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2InvSqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::fast_invsqrtv2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec2Sin(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::seq::sinv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2SinLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::fast_sinv2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Cos(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::seq::cosv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2CosLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::fast_cosv2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Tan(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::seq::tanv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Cot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::seq::cotv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec2Dot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             float res = simd::avx::dotv2f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Length(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             float res = simd::avx::lengthv2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec2Normalize(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
             simd::Vec2f res = simd::avx::normalizev2f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }

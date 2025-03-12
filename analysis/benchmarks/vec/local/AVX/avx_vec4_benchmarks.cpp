@@ -26,225 +26,245 @@ namespace benchmarks
 
     static void BM_Vec4Add(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::addv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Sub(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::subv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Mul(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::mulv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Div(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::divv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec4Abs(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::absv4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Min(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::minv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Max(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::maxv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec4Sqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::seq::sqrtv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4SqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::fast_sqrtv4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4InvSqrt(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::seq::invsqrtv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4InvSqrtLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::fast_invsqrtv4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Vec4Sin(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::seq::sinv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4SinLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::fast_sinv4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Cos(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::seq::cosv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4CosLowp(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::fast_cosv4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Tan(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::seq::tanv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Cot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::seq::cotv(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec4Dot(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             float res = simd::avx::dotv4f(vec, vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Length(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             float res = simd::avx::lengthv4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     static void BM_Vec4Normalize(benchmark::State &state)
     {
-        volatile float num = 1.f;
+        volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
             simd::Vec4f res = simd::avx::normalizev4f(vec);
+            benchmark::DoNotOptimize(vec);
             benchmark::DoNotOptimize(res);
         }
     }
