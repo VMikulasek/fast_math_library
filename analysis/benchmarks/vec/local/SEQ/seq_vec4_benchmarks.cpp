@@ -11,7 +11,8 @@ namespace benchmarks
 
     static void BM_Vec4Add(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -21,7 +22,8 @@ namespace benchmarks
     }
     static void BM_Vec4Sub(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -31,7 +33,8 @@ namespace benchmarks
     }
     static void BM_Vec4Mul(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -41,7 +44,8 @@ namespace benchmarks
     }
     static void BM_Vec4Div(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -52,7 +56,8 @@ namespace benchmarks
 
     static void BM_Vec4Abs(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -62,7 +67,8 @@ namespace benchmarks
     }
     static void BM_Vec4Min(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -72,7 +78,8 @@ namespace benchmarks
     }
     static void BM_Vec4Max(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -83,7 +90,8 @@ namespace benchmarks
 
     static void BM_Vec4Sqrt(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -93,7 +101,8 @@ namespace benchmarks
     }
     static void BM_Vec4SqrtLowp(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -103,7 +112,8 @@ namespace benchmarks
     }
     static void BM_Vec4InvSqrt(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -113,7 +123,8 @@ namespace benchmarks
     }
     static void BM_Vec4InvSqrtLowp(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -124,7 +135,8 @@ namespace benchmarks
 
     static void BM_Vec4Sin(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -134,7 +146,8 @@ namespace benchmarks
     }
     static void BM_Vec4SinLowp(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -144,7 +157,8 @@ namespace benchmarks
     }
     static void BM_Vec4Cos(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -154,7 +168,8 @@ namespace benchmarks
     }
     static void BM_Vec4CosLowp(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -164,7 +179,8 @@ namespace benchmarks
     }
     static void BM_Vec4Tan(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -174,7 +190,8 @@ namespace benchmarks
     }
     static void BM_Vec4Cot(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -185,7 +202,8 @@ namespace benchmarks
     
     static void BM_Vec4Dot(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -195,7 +213,8 @@ namespace benchmarks
     }
     static void BM_Vec4Length(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -205,7 +224,8 @@ namespace benchmarks
     }
     static void BM_Vec4Normalize(benchmark::State &state)
     {
-        simd::Vec4f vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec4f vec(num, num, num, num);
 
         for (auto _ : state)
         {

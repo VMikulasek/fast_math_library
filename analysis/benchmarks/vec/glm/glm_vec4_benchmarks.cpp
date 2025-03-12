@@ -12,7 +12,8 @@ namespace benchmarks
 {
     static void BM_Vec4Add(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -22,7 +23,8 @@ namespace benchmarks
     }
     static void BM_Vec4Sub(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -32,7 +34,8 @@ namespace benchmarks
     }
     static void BM_Vec4Mul(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -42,7 +45,8 @@ namespace benchmarks
     }
     static void BM_Vec4Div(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -53,7 +57,8 @@ namespace benchmarks
 
     static void BM_Vec4Abs(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -63,7 +68,8 @@ namespace benchmarks
     }
     static void BM_Vec4Min(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -73,7 +79,8 @@ namespace benchmarks
     }
     static void BM_Vec4Max(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -84,7 +91,8 @@ namespace benchmarks
 
     static void BM_Vec4Sqrt(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -94,7 +102,8 @@ namespace benchmarks
     }
     static void BM_Vec4SqrtLowp(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_lowp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -104,7 +113,8 @@ namespace benchmarks
     }
     static void BM_Vec4InvSqrt(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -114,7 +124,8 @@ namespace benchmarks
     }
     static void BM_Vec4InvSqrtLowp(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_lowp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -125,7 +136,8 @@ namespace benchmarks
 
     static void BM_Vec4Sin(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -135,7 +147,8 @@ namespace benchmarks
     }
     static void BM_Vec4SinLowp(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_lowp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -145,7 +158,8 @@ namespace benchmarks
     }
     static void BM_Vec4Cos(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -155,7 +169,8 @@ namespace benchmarks
     }
     static void BM_Vec4CosLowp(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_lowp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_lowp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -165,7 +180,8 @@ namespace benchmarks
     }
     static void BM_Vec4Tan(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -175,18 +191,20 @@ namespace benchmarks
     }
     static void BM_Vec4Cot(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::vec<4, float, glm::aligned_highp>(1.f, 1.f, 1.f, 1.f) / glm::tan(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::vec<4, float, glm::aligned_highp>(num, num, num, num) / glm::tan(vec);
             benchmark::DoNotOptimize(res);
         }
     }
     
     static void BM_Vec4Dot(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -196,7 +214,8 @@ namespace benchmarks
     }
     static void BM_Vec4Length(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {
@@ -206,7 +225,8 @@ namespace benchmarks
     }
     static void BM_Vec4Normalize(benchmark::State &state)
     {
-        glm::vec<4, float, glm::aligned_highp> vec(1.f, 1.f, 1.f, 1.f);
+        volatile float num = 1.f;
+        glm::vec<4, float, glm::aligned_highp> vec(num, num, num, num);
 
         for (auto _ : state)
         {

@@ -26,7 +26,8 @@ namespace benchmarks
 
     static void BM_Vec2Add(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -36,7 +37,8 @@ namespace benchmarks
     }
     static void BM_Vec2Sub(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -46,7 +48,8 @@ namespace benchmarks
     }
     static void BM_Vec2Mul(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -56,7 +59,8 @@ namespace benchmarks
     }
     static void BM_Vec2Div(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -67,7 +71,8 @@ namespace benchmarks
 
     static void BM_Vec2Abs(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -77,7 +82,8 @@ namespace benchmarks
     }
     static void BM_Vec2Min(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -87,7 +93,8 @@ namespace benchmarks
     }
     static void BM_Vec2Max(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -98,7 +105,8 @@ namespace benchmarks
 
     static void BM_Vec2Sqrt(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -108,7 +116,8 @@ namespace benchmarks
     }
     static void BM_Vec2SqrtLowp(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -118,7 +127,8 @@ namespace benchmarks
     }
     static void BM_Vec2InvSqrt(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -128,7 +138,8 @@ namespace benchmarks
     }
     static void BM_Vec2InvSqrtLowp(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -139,7 +150,8 @@ namespace benchmarks
 
     static void BM_Vec2Sin(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -149,7 +161,8 @@ namespace benchmarks
     }
     static void BM_Vec2SinLowp(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -159,7 +172,8 @@ namespace benchmarks
     }
     static void BM_Vec2Cos(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -169,7 +183,8 @@ namespace benchmarks
     }
     static void BM_Vec2CosLowp(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -179,7 +194,8 @@ namespace benchmarks
     }
     static void BM_Vec2Tan(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -189,7 +205,8 @@ namespace benchmarks
     }
     static void BM_Vec2Cot(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -200,7 +217,8 @@ namespace benchmarks
     
     static void BM_Vec2Dot(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -210,7 +228,8 @@ namespace benchmarks
     }
     static void BM_Vec2Length(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
@@ -220,7 +239,8 @@ namespace benchmarks
     }
     static void BM_Vec2Normalize(benchmark::State &state)
     {
-        simd::Vec2f vec(1.f, 1.f);
+        volatile float num = 1.f;
+        simd::Vec2f vec(num, num);
 
         for (auto _ : state)
         {
