@@ -8,7 +8,7 @@ namespace benchmarks
 {
     static void BM_InvSqrt(benchmark::State &state)
     {
-        volatile float num = 90913408134.8;
+        volatile float num = std::rand();
 
         for (auto _ : state)
         {
@@ -19,7 +19,7 @@ namespace benchmarks
 
     static void BM_Sqrt(benchmark::State &state)
     {
-        volatile float num = 90913408134.8;
+        volatile float num = std::rand();
 
         for (auto _ : state)
         {
