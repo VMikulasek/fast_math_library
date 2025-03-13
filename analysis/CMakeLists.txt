@@ -65,6 +65,8 @@ if (BUILD_BENCHMARKS)
     set(SEQ_VEC2_BENCHMARKS seq_vec2_benchmarks)
     set(STD_SUM_BENCHMARKS std_sum_benchmarks)
     set(STD_PREFIXSUM_BENCHMARKS std_prefixsum_benchmarks)
+    set(STD_MIN_BENCHMARKS std_min_benchmarks)
+    set(STD_MAX_BENCHMARKS std_max_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -107,7 +109,9 @@ if (BUILD_BENCHMARKS)
     ${SEQ_VEC3_BENCHMARKS}
     ${SEQ_VEC2_BENCHMARKS}
     ${STD_SUM_BENCHMARKS}
-    ${STD_PREFIXSUM_BENCHMARKS})
+    ${STD_PREFIXSUM_BENCHMARKS}
+    ${STD_MIN_BENCHMARKS}
+    ${STD_MAX_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 

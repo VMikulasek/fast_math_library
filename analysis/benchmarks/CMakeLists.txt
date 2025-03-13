@@ -107,6 +107,10 @@ set(STD_SUM_BENCHMARKS_SOURCE
 mathops/std/std_sum_benchmarks.cpp)
 set(STD_PREFIXSUM_BENCHMARKS_SOURCE
 mathops/std/std_prefixsum_benchmarks.cpp)
+set(STD_MIN_BENCHMARKS_SOURCE
+mathops/std/std_min_benchmarks.cpp)
+set(STD_MAX_BENCHMARKS_SOURCE
+mathops/std/std_max_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -149,6 +153,8 @@ add_executable(${SEQ_VEC3_BENCHMARKS} ${SEQ_VEC3_BENCHMARKS_SOURCE})
 add_executable(${SEQ_VEC2_BENCHMARKS} ${SEQ_VEC2_BENCHMARKS_SOURCE})
 add_executable(${STD_SUM_BENCHMARKS} ${STD_SUM_BENCHMARKS_SOURCE})
 add_executable(${STD_PREFIXSUM_BENCHMARKS} ${STD_PREFIXSUM_BENCHMARKS_SOURCE})
+add_executable(${STD_MIN_BENCHMARKS} ${STD_MIN_BENCHMARKS_SOURCE})
+add_executable(${STD_MAX_BENCHMARKS} ${STD_MAX_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
