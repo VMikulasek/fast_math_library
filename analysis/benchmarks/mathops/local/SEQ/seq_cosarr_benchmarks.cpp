@@ -15,7 +15,7 @@
             for (auto _ : state)
             {
                 benchmark::DoNotOptimize(arr);
-                mathops::seq::fast_cos_arr(arr, size, dst);
+                mathops::seq::cos_arr(arr, size, dst);
                 benchmark::DoNotOptimize(dst);
             }
 

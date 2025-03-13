@@ -15,7 +15,7 @@
             for (auto _ : state)
             {
                 benchmark::DoNotOptimize(arr);
-                mathops::seq::fast_sin_arr(arr, size, dst);
+                mathops::seq::sin_arr(arr, size, dst);
                 benchmark::DoNotOptimize(dst);
             }
 
