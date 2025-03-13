@@ -11,187 +11,165 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::add(reg1, reg2);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f subv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::sub(reg1, reg2);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f mulv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::mul(reg1, reg2);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f divv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::div(reg1, reg2);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f absv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg = Ops::load_vector(vec.data);
 
         Ops::AvxReg resReg = Ops::abs(reg);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
     inline Vec3f minv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::min(reg1, reg2);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
     inline Vec3f maxv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::max(reg1, reg2);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f fast_sqrtv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg = Ops::load_vector(vec.data);
 
         Ops::AvxReg resReg;
         mathops::avx::_fast_invsqrt_arr8(reg, resReg);
         Ops::AvxReg oneReg = Ops::set_register(1.f);
         resReg = Ops::div(oneReg, resReg);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
     inline Vec3f fast_invsqrtv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg = Ops::load_vector(vec.data);
 
         Ops::AvxReg resReg;
         mathops::avx::_fast_invsqrt_arr8(reg, resReg);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f fast_sinv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg = Ops::load_vector(vec.data);
         
         Ops::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
         mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
         Ops::AvxReg resReg = mathops::avx::_fast_sin_arr8(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
     inline Vec3f fast_cosv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg = Ops::load_vector(vec.data);
         
         Ops::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
         mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
         Ops::AvxReg resReg = mathops::avx::_fast_cos_arr8(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(resReg, 0),
-            Ops::materialize_register_at_index(resReg, 1),
-            Ops::materialize_register_at_index(resReg, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(resReg, res.data);
+        return res;
     }
 
     inline Vec3f crossv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg vec1Mul1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg vec1Mul1 = Ops::load_vector(vec1.data);
         Ops::AvxReg vec2Mul1 = Ops::set_register_each(vec2.y, vec2.z, vec2.x, 0, 0, 0, 0, 0);
         Ops::AvxReg vec1Mul2 = Ops::set_register_each(vec1.y, vec1.z, vec1.x, 0, 0, 0, 0, 0);
-        Ops::AvxReg vec2Mul2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg vec2Mul2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg firstProduct = Ops::mul(vec1Mul1, vec2Mul1);
         Ops::AvxReg secondProduct = Ops::mul(vec1Mul2, vec2Mul2);
@@ -208,8 +186,8 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::set_register_each(vec1.x, vec1.y, vec1.z, 0, 0, 0, 0, 0);
-        Ops::AvxReg reg2 = Ops::set_register_each(vec2.x, vec2.y, vec2.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
+        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
 
         Ops::AvxReg resReg = Ops::mul(reg1, reg2);
         resReg = Ops::horizontal_add(resReg, resReg);
@@ -221,7 +199,7 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        Ops::AvxReg reg = Ops::load_vector(vec.data);
 
         reg = Ops::mul(reg, reg);
         reg = Ops::horizontal_add(reg, reg);
@@ -234,14 +212,12 @@ namespace avx
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
         auto lengthReg = Ops::set_register(lengthv3f(vec));
-        auto inputReg = Ops::set_register_each(vec.x, vec.y, vec.z, 0, 0, 0, 0, 0);
+        auto inputReg = Ops::load_vector(vec.data);
         auto result = Ops::div(inputReg, lengthReg);
 
-        return Vec3f(
-            Ops::materialize_register_at_index(result, 0),
-            Ops::materialize_register_at_index(result, 1),
-            Ops::materialize_register_at_index(result, 2)
-        );
+        Vec3f res;
+        Ops::materialize_register(result, res.data);
+        return res;
     }
 } // namespace avx
 } // namespace simd
