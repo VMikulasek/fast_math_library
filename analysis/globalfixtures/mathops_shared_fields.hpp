@@ -72,7 +72,7 @@ namespace analysis
     {
         float *bigArr = _alloc_aligned_memory_float(BIG_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);
 
-        std::fill(bigArr, bigArr + BIG_ARR_SIZE, std::rand());
+        std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1.f);
 
         return bigArr;
     }
@@ -81,7 +81,7 @@ namespace analysis
     {
         int *bigArr = reinterpret_cast<int *>(_alloc_aligned_memory(BIG_ARR_SIZE * sizeof(int), AVX_ALIGNMENT));
         
-        std::fill(bigArr, bigArr + BIG_ARR_SIZE, std::rand());
+        std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1.f);
     
         return bigArr;
     }
@@ -90,7 +90,7 @@ namespace analysis
     {
         float *mediumArr = _alloc_aligned_memory_float(MEDIUM_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);
 
-        std::fill(mediumArr, mediumArr + MEDIUM_ARR_SIZE, std::rand());
+        std::fill(mediumArr, mediumArr + MEDIUM_ARR_SIZE, 1.f);
 
         return mediumArr;
     }

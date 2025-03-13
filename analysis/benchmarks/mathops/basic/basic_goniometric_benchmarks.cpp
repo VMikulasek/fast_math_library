@@ -8,21 +8,23 @@ namespace benchmarks
 {
     static void BM_Sin(benchmark::State &state)
     {
-        volatile float num = std::rand();
+        volatile float num = 3.1231413412313f;
 
         for (auto _ : state)
         {
-            float res = std::sin(num);
+            benchmark::DoNotOptimize(num);
+            float res = mathops::sin(num);
             benchmark::DoNotOptimize(res);
         }
     }
 
     static void BM_Cos(benchmark::State &state)
     {
-        volatile float num = std::rand();
+        volatile float num = 3.1231413412313f;
         
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(num);
             float res = mathops::cos(num);
             benchmark::DoNotOptimize(res);
         }

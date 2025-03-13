@@ -8,7 +8,7 @@ namespace benchmarks
 {
     static void BM_Sin(benchmark::State &state)
     {
-        volatile float num = std::rand();
+        volatile float num = 3.1231413412313f;
 
         for (auto _ : state)
         {
@@ -19,7 +19,7 @@ namespace benchmarks
 
     static void BM_Cos(benchmark::State &state)
     {
-        volatile float num = std::rand();
+        volatile float num = 3.1231413412313f;
 
         for (auto _ : state)
         {
