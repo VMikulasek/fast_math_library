@@ -9,8 +9,6 @@ namespace analysis
 {
 namespace benchmarks
 {
-#ifdef HAS_AVX
-
     static void BM_PrefixSum(benchmark::State &state, const float *srcArr, size_t size)
     {
         float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
@@ -49,7 +47,5 @@ namespace benchmarks
     BENCHMARK(BM_PrefixSum9Elem);
     BENCHMARK(BM_PrefixSum10kElem);
     BENCHMARK(BM_PrefixSum15MElem);
-
-#endif // HAS_AVX
 } // benchmarks
 } // analysis

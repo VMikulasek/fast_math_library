@@ -9,8 +9,6 @@ namespace analysis
 {
 namespace benchmarks
 {
-#ifdef HAS_AVX
-
     static void BM_Max(benchmark::State &state, const float *arr, size_t size)
     {
         for (auto _ : state)
@@ -45,7 +43,5 @@ namespace benchmarks
     BENCHMARK(BM_Max9Elem);
     BENCHMARK(BM_Max10kElem);
     BENCHMARK(BM_Max15MElem);
-
-#endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis

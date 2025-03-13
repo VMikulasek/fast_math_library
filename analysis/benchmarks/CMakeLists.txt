@@ -119,6 +119,8 @@ set(STD_MAX_BENCHMARKS_SOURCE
 mathops/std/std_max_benchmarks.cpp)
 set(BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE
 mathops/boost/boost_arithmeticmean_benchmarks.cpp)
+set(BOOST_VARIANCE_BENCHMARKS_SOURCE
+mathops/boost/boost_variance_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -164,6 +166,7 @@ add_executable(${STD_PREFIXSUM_BENCHMARKS} ${STD_PREFIXSUM_BENCHMARKS_SOURCE})
 add_executable(${STD_MIN_BENCHMARKS} ${STD_MIN_BENCHMARKS_SOURCE})
 add_executable(${STD_MAX_BENCHMARKS} ${STD_MAX_BENCHMARKS_SOURCE})
 add_executable(${BOOST_ARITHMETICMEAN_BENCHMARKS} ${BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE})
+add_executable(${BOOST_VARIANCE_BENCHMARKS} ${BOOST_VARIANCE_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
@@ -183,3 +186,4 @@ target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm-header-only)
 target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm-header-only)
 
 target_link_libraries(${BOOST_ARITHMETICMEAN_BENCHMARKS} PRIVATE boost_math)
+target_link_libraries(${BOOST_VARIANCE_BENCHMARKS} PRIVATE boost_math)

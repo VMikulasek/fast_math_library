@@ -9,8 +9,6 @@ namespace analysis
 {
 namespace benchmarks
 {
-#ifdef HAS_AVX
-
     static void BM_Min(benchmark::State &state, const float *arr, size_t size)
     {
         for (auto _ : state)
@@ -45,7 +43,5 @@ namespace benchmarks
     BENCHMARK(BM_Min9Elem);
     BENCHMARK(BM_Min10kElem);
     BENCHMARK(BM_Min15MElem);
-
-#endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis

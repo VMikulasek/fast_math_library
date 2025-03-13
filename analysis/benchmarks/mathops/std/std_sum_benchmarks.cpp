@@ -9,8 +9,6 @@ namespace analysis
 {
 namespace benchmarks
 {
-#ifdef HAS_AVX
-
     static void BM_Sum(benchmark::State &state, const float *arr, size_t size)
     {
         for (auto _ : state)
@@ -45,7 +43,5 @@ namespace benchmarks
     BENCHMARK(BM_Sum9Elem);
     BENCHMARK(BM_Sum10kElem);
     BENCHMARK(BM_Sum15MElem);
-
-#endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis
