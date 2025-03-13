@@ -23,7 +23,13 @@ FetchContent_Declare(
     GIT_TAG        0af55ccecd98d4e5a8d1fad7de25ba429d60e863 # version 1.0.1
 )
 
-FetchContent_MakeAvailable(googletest benchmark glm)
+FetchContent_Declare(
+    boostmath
+    GIT_REPOSITORY https://github.com/boostorg/math.git
+    GIT_TAG        f1b0b95a04f56717b3454cb599e0647770c5852e # version 1.87
+)
+
+FetchContent_MakeAvailable(googletest benchmark glm boostmath)
 
 set(ACCELERATED_SQRT_BENCHMARKS_SOURCE
 mathops/local/accelerated/accelerated_sqrt_benchmarks.cpp)
@@ -111,6 +117,8 @@ set(STD_MIN_BENCHMARKS_SOURCE
 mathops/std/std_min_benchmarks.cpp)
 set(STD_MAX_BENCHMARKS_SOURCE
 mathops/std/std_max_benchmarks.cpp)
+set(BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE
+mathops/boost/boost_arithmeticmean_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -155,6 +163,7 @@ add_executable(${STD_SUM_BENCHMARKS} ${STD_SUM_BENCHMARKS_SOURCE})
 add_executable(${STD_PREFIXSUM_BENCHMARKS} ${STD_PREFIXSUM_BENCHMARKS_SOURCE})
 add_executable(${STD_MIN_BENCHMARKS} ${STD_MIN_BENCHMARKS_SOURCE})
 add_executable(${STD_MAX_BENCHMARKS} ${STD_MAX_BENCHMARKS_SOURCE})
+add_executable(${BOOST_ARITHMETICMEAN_BENCHMARKS} ${BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
@@ -169,6 +178,8 @@ foreach(BENCHMARK ${BENCHMARKS})
     )
 endforeach()
 
-target_link_libraries(${GLM_VEC4_BENCHMARKS} PRIVATE glm)
-target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm)
-target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm)
+target_link_libraries(${GLM_VEC4_BENCHMARKS} PRIVATE glm-header-only)
+target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm-header-only)
+target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm-header-only)
+
+target_link_libraries(${BOOST_ARITHMETICMEAN_BENCHMARKS} PRIVATE boost_math)

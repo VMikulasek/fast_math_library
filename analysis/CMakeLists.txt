@@ -67,6 +67,7 @@ if (BUILD_BENCHMARKS)
     set(STD_PREFIXSUM_BENCHMARKS std_prefixsum_benchmarks)
     set(STD_MIN_BENCHMARKS std_min_benchmarks)
     set(STD_MAX_BENCHMARKS std_max_benchmarks)
+    set(BOOST_ARITHMETICMEAN_BENCHMARKS boost_arithmeticmean_benchmarks)
     
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
@@ -111,7 +112,8 @@ if (BUILD_BENCHMARKS)
     ${STD_SUM_BENCHMARKS}
     ${STD_PREFIXSUM_BENCHMARKS}
     ${STD_MIN_BENCHMARKS}
-    ${STD_MAX_BENCHMARKS})
+    ${STD_MAX_BENCHMARKS}
+    ${BOOST_ARITHMETICMEAN_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 
