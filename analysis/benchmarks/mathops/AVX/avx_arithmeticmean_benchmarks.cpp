@@ -14,6 +14,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::avx::arithmetic_mean(arr, size);
             benchmark::DoNotOptimize(res);
         }

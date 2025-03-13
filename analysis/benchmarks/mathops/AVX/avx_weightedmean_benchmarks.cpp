@@ -14,6 +14,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::avx::weighted_mean(arr, arr, size);
             benchmark::DoNotOptimize(res);
         }

@@ -14,6 +14,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::avx::max(arr, size);
             benchmark::DoNotOptimize(res);
         }

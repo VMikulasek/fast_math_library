@@ -14,6 +14,7 @@ namespace benchmarks
 
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(srcArr);
             mathops::seq::prefix_sum(srcArr, size, dst);
             benchmark::DoNotOptimize(dst);
         } 

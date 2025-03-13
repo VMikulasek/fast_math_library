@@ -12,6 +12,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::seq::variance(arr, size);
             benchmark::DoNotOptimize(res);
         }
@@ -21,6 +22,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::seq::variance(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
@@ -30,6 +32,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::seq::sample_variance(arr, size);
             benchmark::DoNotOptimize(res);
         }

@@ -12,6 +12,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::seq::min(arr, size);
             benchmark::DoNotOptimize(res);
         }

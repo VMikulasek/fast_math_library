@@ -14,6 +14,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::avx::variance(arr, size);
             benchmark::DoNotOptimize(res);
         }
@@ -23,6 +24,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::avx::variance(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
@@ -32,6 +34,7 @@ namespace benchmarks
     {
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(arr);
             float res = mathops::avx::sample_variance(arr, size);
             benchmark::DoNotOptimize(res);
         }
