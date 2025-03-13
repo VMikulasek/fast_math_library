@@ -12,6 +12,7 @@ namespace benchmarks
 
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(num);
             float res = mathops::invsqrt(num);
             benchmark::DoNotOptimize(res);
         }
@@ -23,6 +24,7 @@ namespace benchmarks
 
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(num);
             float res = mathops::sqrt(num);
             benchmark::DoNotOptimize(res);
         }

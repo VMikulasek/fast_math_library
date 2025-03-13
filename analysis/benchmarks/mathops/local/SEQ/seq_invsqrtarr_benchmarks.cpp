@@ -15,7 +15,7 @@
             for (auto _ : state)
             {
                 benchmark::DoNotOptimize(arr);
-                mathops::seq::fast_invsqrt_arr(arr, size, dst);
+                mathops::seq::invsqrt_arr(arr, size, dst);
                 benchmark::DoNotOptimize(dst);
             }
 

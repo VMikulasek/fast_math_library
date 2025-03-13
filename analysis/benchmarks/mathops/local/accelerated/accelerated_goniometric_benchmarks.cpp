@@ -12,6 +12,7 @@ namespace benchmarks
 
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(num);
             float res = mathops::fast_sin(num);
             benchmark::DoNotOptimize(res);
         }
@@ -23,6 +24,7 @@ namespace benchmarks
 
         for (auto _ : state)
         {
+            benchmark::DoNotOptimize(num);
             float res = mathops::fast_cos(num);
             benchmark::DoNotOptimize(res);
         }
