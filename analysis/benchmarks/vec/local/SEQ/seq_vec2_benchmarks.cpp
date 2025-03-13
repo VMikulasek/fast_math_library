@@ -148,7 +148,6 @@ namespace benchmarks
     {
         volatile float num = std::rand();
         simd::Vec2f vec(num, num);
-        benchmark::DoNotOptimize(vec);
         
         for (auto _ : state)
         {
