@@ -69,7 +69,9 @@ if (BUILD_BENCHMARKS)
     set(STD_MAX_BENCHMARKS std_max_benchmarks)
     set(BOOST_ARITHMETICMEAN_BENCHMARKS boost_arithmeticmean_benchmarks)
     set(BOOST_VARIANCE_BENCHMARKS boost_variance_benchmarks)
-    
+    set(SEQ_MODE_BENCHMARKS seq_mode_benchmarks)
+    set(SEQ_MEDIAN_BENCHMARKS seq_median_benchmarks)
+
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
     ${BASIC_SQRT_BENCHMARKS}
@@ -115,7 +117,9 @@ if (BUILD_BENCHMARKS)
     ${STD_MIN_BENCHMARKS}
     ${STD_MAX_BENCHMARKS}
     ${BOOST_ARITHMETICMEAN_BENCHMARKS}
-    ${BOOST_VARIANCE_BENCHMARKS})
+    ${BOOST_VARIANCE_BENCHMARKS}
+    ${SEQ_MODE_BENCHMARKS}
+    ${SEQ_MEDIAN_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 

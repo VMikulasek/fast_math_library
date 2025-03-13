@@ -94,6 +94,15 @@ namespace analysis
 
         return mediumArr;
     }
+
+    inline int *AllocMediumIntArr()
+    {
+        int *mediumArr = reinterpret_cast<int *>(_alloc_aligned_memory(MEDIUM_ARR_SIZE * sizeof(int), AVX_ALIGNMENT));
+        
+        std::fill(mediumArr, mediumArr + MEDIUM_ARR_SIZE, 1.f);
+    
+        return mediumArr;
+    }
 } // namespace analysis
 
 #endif // MATHOPS_SHARED_FIELDS_HPP
