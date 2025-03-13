@@ -69,6 +69,8 @@ if (BUILD_BENCHMARKS)
     set(STD_MAX_BENCHMARKS std_max_benchmarks)
     set(BOOST_ARITHMETICMEAN_BENCHMARKS boost_arithmeticmean_benchmarks)
     set(BOOST_VARIANCE_BENCHMARKS boost_variance_benchmarks)
+    set(BOOST_MODE_BENCHMARKS boost_mode_benchmarks)
+    set(BOOST_MEDIAN_BENCHMARKS boost_median_benchmarks)
     set(SEQ_MODE_BENCHMARKS seq_mode_benchmarks)
     set(SEQ_MEDIAN_BENCHMARKS seq_median_benchmarks)
 
@@ -118,6 +120,8 @@ if (BUILD_BENCHMARKS)
     ${STD_MAX_BENCHMARKS}
     ${BOOST_ARITHMETICMEAN_BENCHMARKS}
     ${BOOST_VARIANCE_BENCHMARKS}
+    ${BOOST_MODE_BENCHMARKS}
+    ${BOOST_MEDIAN_BENCHMARKS}
     ${SEQ_MODE_BENCHMARKS}
     ${SEQ_MEDIAN_BENCHMARKS})
 

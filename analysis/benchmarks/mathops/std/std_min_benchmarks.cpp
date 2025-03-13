@@ -1,4 +1,5 @@
 #include <mathops_shared_fields.hpp>
+#include <common/detail/memory_common.inl>
 
 #include <algorithm>
 #include <execution>

@@ -121,6 +121,10 @@ set(BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE
 mathops/boost/boost_arithmeticmean_benchmarks.cpp)
 set(BOOST_VARIANCE_BENCHMARKS_SOURCE
 mathops/boost/boost_variance_benchmarks.cpp)
+set(BOOST_MODE_BENCHMARKS_SOURCE
+mathops/boost/boost_mode_benchmarks.cpp)
+set(BOOST_MEDIAN_BENCHMARKS_SOURCE
+mathops/boost/boost_median_benchmarks.cpp)
 set(SEQ_MODE_BENCHMARKS_SOURCE
 mathops/local/SEQ/seq_mode_benchmarks.cpp)
 set(SEQ_MEDIAN_BENCHMARKS_SOURCE
@@ -171,6 +175,8 @@ add_executable(${STD_MIN_BENCHMARKS} ${STD_MIN_BENCHMARKS_SOURCE})
 add_executable(${STD_MAX_BENCHMARKS} ${STD_MAX_BENCHMARKS_SOURCE})
 add_executable(${BOOST_ARITHMETICMEAN_BENCHMARKS} ${BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE})
 add_executable(${BOOST_VARIANCE_BENCHMARKS} ${BOOST_VARIANCE_BENCHMARKS_SOURCE})
+add_executable(${BOOST_MODE_BENCHMARKS} ${BOOST_MODE_BENCHMARKS_SOURCE})
+add_executable(${BOOST_MEDIAN_BENCHMARKS} ${BOOST_MEDIAN_BENCHMARKS_SOURCE})
 add_executable(${SEQ_MODE_BENCHMARKS} ${SEQ_MODE_BENCHMARKS_SOURCE})
 add_executable(${SEQ_MEDIAN_BENCHMARKS} ${SEQ_MEDIAN_BENCHMARKS_SOURCE})
 
@@ -187,9 +193,13 @@ foreach(BENCHMARK ${BENCHMARKS})
     )
 endforeach()
 
+set(GLM_LIB glm-header-only)
+
 target_link_libraries(${GLM_VEC4_BENCHMARKS} PRIVATE glm-header-only)
 target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm-header-only)
 target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm-header-only)
 
 target_link_libraries(${BOOST_ARITHMETICMEAN_BENCHMARKS} PRIVATE boost_math)
 target_link_libraries(${BOOST_VARIANCE_BENCHMARKS} PRIVATE boost_math)
+target_link_libraries(${BOOST_MODE_BENCHMARKS} PRIVATE boost_math)
+target_link_libraries(${BOOST_MEDIAN_BENCHMARKS} PRIVATE boost_math)

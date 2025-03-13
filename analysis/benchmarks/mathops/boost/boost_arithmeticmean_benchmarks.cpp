@@ -1,4 +1,5 @@
 #include <mathops_shared_fields.hpp>
+#include <common/detail/memory_common.inl>
 
 #include <boost/math/statistics/univariate_statistics.hpp>
 #include <execution>
