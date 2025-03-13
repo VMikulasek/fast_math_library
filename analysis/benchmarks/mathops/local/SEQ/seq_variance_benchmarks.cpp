@@ -18,22 +18,22 @@ namespace benchmarks
         }
     }
     
-    static void BM_VarianceWithProbabilities(benchmark::State &state, const float *arr, const float *probabilities, size_t size)
-    {
-        for (auto _ : state)
-        {
-            benchmark::DoNotOptimize(arr);
-            float res = mathops::seq::variance(arr, probabilities, size);
-            benchmark::DoNotOptimize(res);
-        }
-    }
-
     static void BM_SampleVariance(benchmark::State &state, const float *arr, size_t size)
     {
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
             float res = mathops::seq::sample_variance(arr, size);
+            benchmark::DoNotOptimize(res);
+        }
+    }
+
+    static void BM_VarianceWithProbabilities(benchmark::State &state, const float *arr, const float *probabilities, size_t size)
+    {
+        for (auto _ : state)
+        {
+            benchmark::DoNotOptimize(arr);
+            float res = mathops::seq::variance(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -55,6 +55,27 @@ namespace benchmarks
         float *bigArr = AllocBigArr();
 
         BM_Variance(state, bigArr, BIG_ARR_SIZE);
+
+        _free_aligned_memory(bigArr);
+    }
+
+    static void BM_SampleVariance9Elem(benchmark::State &state)
+    {
+        BM_SampleVariance(state, _9ElemArr, _9_ELEM_ARR_SIZE);
+    }
+    static void BM_SampleVariance10kElem(benchmark::State &state)
+    {
+        float *medArr = AllocMediumArr();
+
+        BM_SampleVariance(state, medArr, MEDIUM_ARR_SIZE);
+
+        _free_aligned_memory(medArr);
+    }
+    static void BM_SampleVariance15MElem(benchmark::State &state)
+    {
+        float *bigArr = AllocBigArr();
+
+        BM_SampleVariance(state, bigArr, BIG_ARR_SIZE);
 
         _free_aligned_memory(bigArr);
     }
@@ -89,37 +110,16 @@ namespace benchmarks
         _free_aligned_memory(probabilities);
     }
 
-    static void BM_SampleVariance9Elem(benchmark::State &state)
-    {
-        BM_SampleVariance(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-    }
-    static void BM_SampleVariance10kElem(benchmark::State &state)
-    {
-        float *medArr = AllocMediumArr();
-
-        BM_SampleVariance(state, medArr, MEDIUM_ARR_SIZE);
-
-        _free_aligned_memory(medArr);
-    }
-    static void BM_SampleVariance15MElem(benchmark::State &state)
-    {
-        float *bigArr = AllocBigArr();
-
-        BM_SampleVariance(state, bigArr, BIG_ARR_SIZE);
-
-        _free_aligned_memory(bigArr);
-    }
-
     BENCHMARK(BM_Variance9Elem);
     BENCHMARK(BM_Variance10kElem);
     BENCHMARK(BM_Variance15MElem);
 
-    BENCHMARK(BM_VarianceWithProbabilities9Elem);
-    BENCHMARK(BM_VarianceWithProbabilities10kElem);
-    BENCHMARK(BM_VarianceWithProbabilities15MElem);
-
     BENCHMARK(BM_SampleVariance9Elem);
     BENCHMARK(BM_SampleVariance10kElem);
     BENCHMARK(BM_SampleVariance15MElem);
+
+    BENCHMARK(BM_VarianceWithProbabilities9Elem);
+    BENCHMARK(BM_VarianceWithProbabilities10kElem);
+    BENCHMARK(BM_VarianceWithProbabilities15MElem);
 } // namespace benchmarks
 } // namespace analysis

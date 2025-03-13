@@ -2,7 +2,6 @@
 #include <common/detail/memory_common.inl>
 
 #include <algorithm>
-#include <execution>
 
 #include <benchmark/benchmark.h>
 
@@ -15,7 +14,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            auto res = std::min_element(std::execution::unseq, arr, arr + size);
+            auto res = std::min_element(arr, arr + size);
             benchmark::DoNotOptimize(res);
         }
     }

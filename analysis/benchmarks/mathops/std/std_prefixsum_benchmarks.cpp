@@ -2,7 +2,6 @@
 #include <common/detail/memory_common.inl>
 
 #include <numeric>
-#include <execution>
 
 #include <benchmark/benchmark.h>
 
@@ -17,7 +16,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(srcArr);
-            std::inclusive_scan(std::execution::unseq, srcArr, srcArr + size, dst);
+            std::inclusive_scan(srcArr, srcArr + size, dst);
             benchmark::DoNotOptimize(dst);
         } 
 
