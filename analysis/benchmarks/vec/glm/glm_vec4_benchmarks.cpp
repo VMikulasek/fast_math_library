@@ -17,8 +17,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = vec + vec;
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = vec + vec;
             benchmark::DoNotOptimize(res);
         }
     }
@@ -29,8 +29,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = vec - vec;
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = vec - vec;
             benchmark::DoNotOptimize(res);
         }
     }
@@ -41,8 +41,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = vec * vec;
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = vec * vec;
             benchmark::DoNotOptimize(res);
         }
     }
@@ -53,8 +53,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = vec / vec;
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = vec / vec;
             benchmark::DoNotOptimize(res);
         }
     }
@@ -66,8 +66,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::abs(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::abs(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -78,8 +78,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::min(vec, vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::min(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -90,8 +90,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::max(vec, vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::max(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -103,8 +103,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::sqrt(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::sqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -115,8 +115,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_lowp> res = glm::sqrt(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_lowp> res = glm::sqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -127,8 +127,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::inversesqrt(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::inversesqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -139,8 +139,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_lowp> res = glm::inversesqrt(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_lowp> res = glm::inversesqrt(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -152,8 +152,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::sin(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::sin(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -164,8 +164,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_lowp> res = glm::sin(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_lowp> res = glm::sin(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -176,8 +176,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::cos(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::cos(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -188,8 +188,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_lowp> res = glm::cos(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_lowp> res = glm::cos(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -200,8 +200,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::tan(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::tan(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -212,8 +212,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::vec<4, float, glm::aligned_highp>(num, num, num, num) / glm::tan(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::vec<4, float, glm::aligned_highp>(num, num, num, num) / glm::tan(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -225,8 +225,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            float res = glm::dot(vec, vec);
             benchmark::DoNotOptimize(vec);
+            float res = glm::dot(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -237,8 +237,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            float res = vec.length();
             benchmark::DoNotOptimize(vec);
+            float res = vec.length();
             benchmark::DoNotOptimize(res);
         }
     }
@@ -249,8 +249,8 @@ namespace benchmarks
 
         for (auto _ : state)
         {
-            glm::vec<4, float, glm::aligned_highp> res = glm::normalize(vec);
             benchmark::DoNotOptimize(vec);
+            glm::vec<4, float, glm::aligned_highp> res = glm::normalize(vec);
             benchmark::DoNotOptimize(res);
         }
     }

@@ -23,68 +23,74 @@ FetchContent_Declare(
     GIT_TAG        0af55ccecd98d4e5a8d1fad7de25ba429d60e863 # version 1.0.1
 )
 
-FetchContent_MakeAvailable(googletest benchmark glm)
+FetchContent_Declare(
+    boostmath
+    GIT_REPOSITORY https://github.com/boostorg/math.git
+    GIT_TAG        f1b0b95a04f56717b3454cb599e0647770c5852e # version 1.87
+)
+
+FetchContent_MakeAvailable(googletest benchmark glm boostmath)
 
 set(ACCELERATED_SQRT_BENCHMARKS_SOURCE
-mathops/accelerated/accelerated_sqrt_benchmarks.cpp)
+mathops/local/accelerated/accelerated_sqrt_benchmarks.cpp)
 set(BASIC_SQRT_BENCHMARKS_SOURCE
-mathops/basic/basic_sqrt_benchmarks.cpp)
+mathops/local/basic/basic_sqrt_benchmarks.cpp)
 set(ACCELERATED_GONIOMETRIC_BENCHMARKS_SOURCE
-mathops/accelerated/accelerated_goniometric_benchmarks.cpp)
+mathops/local/accelerated/accelerated_goniometric_benchmarks.cpp)
 set(BASIC_GONIOMETRIC_BENCHMARKS_SOURCE
-mathops/basic/basic_goniometric_benchmarks.cpp)
+mathops/local/basic/basic_goniometric_benchmarks.cpp)
 set(AVX_SUM_BENCHMARKS_SOURCE
-mathops/AVX/avx_sum_benchmarks.cpp)
+mathops/local/AVX/avx_sum_benchmarks.cpp)
 set(SEQ_SUM_BENCHMARKS_SOURCE
-mathops/SEQ/seq_sum_benchmarks.cpp)
+mathops/local/SEQ/seq_sum_benchmarks.cpp)
 set(AVX_PREFIXSUM_BENCHMARKS_SOURCE
-mathops/AVX/avx_prefixsum_benchmarks.cpp)
+mathops/local/AVX/avx_prefixsum_benchmarks.cpp)
 set(SEQ_PREFIXSUM_BENCHMARKS_SOURCE
-mathops/SEQ/seq_prefixsum_benchmarks.cpp)
+mathops/local/SEQ/seq_prefixsum_benchmarks.cpp)
 set(AVX_SQRTARR_BENCHMARKS_SOURCE
-mathops/AVX/avx_sqrtarr_benchmarks.cpp)
+mathops/local/AVX/avx_sqrtarr_benchmarks.cpp)
 set(SEQ_SQRTARR_BENCHMARKS_SOURCE
-mathops/SEQ/seq_sqrtarr_benchmarks.cpp)
+mathops/local/SEQ/seq_sqrtarr_benchmarks.cpp)
 set(AVX_INVSQRTARR_BENCHMARKS_SOURCE
-mathops/AVX/avx_invsqrtarr_benchmarks.cpp)
+mathops/local/AVX/avx_invsqrtarr_benchmarks.cpp)
 set(SEQ_INVSQRTARR_BENCHMARKS_SOURCE
-mathops/SEQ/seq_invsqrtarr_benchmarks.cpp)
+mathops/local/SEQ/seq_invsqrtarr_benchmarks.cpp)
 set(AVX_SINARR_BENCHMARKS_SOURCE
-mathops/AVX/avx_sinarr_benchmarks.cpp)
+mathops/local/AVX/avx_sinarr_benchmarks.cpp)
 set(SEQ_SINARR_BENCHMARKS_SOURCE
-mathops/SEQ/seq_sinarr_benchmarks.cpp)
+mathops/local/SEQ/seq_sinarr_benchmarks.cpp)
 set(AVX_COSARR_BENCHMARKS_SOURCE
-mathops/AVX/avx_cosarr_benchmarks.cpp)
+mathops/local/AVX/avx_cosarr_benchmarks.cpp)
 set(SEQ_COSARR_BENCHMARKS_SOURCE
-mathops/SEQ/seq_cosarr_benchmarks.cpp)
+mathops/local/SEQ/seq_cosarr_benchmarks.cpp)
 set(AVX_MIN_BENCHMARKS_SOURCE
-mathops/AVX/avx_min_benchmarks.cpp)
+mathops/local/AVX/avx_min_benchmarks.cpp)
 set(SEQ_MIN_BENCHMARKS_SOURCE
-mathops/SEQ/seq_min_benchmarks.cpp)
+mathops/local/SEQ/seq_min_benchmarks.cpp)
 set(AVX_MAX_BENCHMARKS_SOURCE
-mathops/AVX/avx_max_benchmarks.cpp)
+mathops/local/AVX/avx_max_benchmarks.cpp)
 set(SEQ_MAX_BENCHMARKS_SOURCE
-mathops/SEQ/seq_max_benchmarks.cpp)
+mathops/local/SEQ/seq_max_benchmarks.cpp)
 set(AVX_ARITHMETICMEAN_BENCHMARKS_SOURCE
-mathops/AVX/avx_arithmeticmean_benchmarks.cpp)
+mathops/local/AVX/avx_arithmeticmean_benchmarks.cpp)
 set(SEQ_ARITHMETICMEAN_BENCHMARKS_SOURCE
-mathops/SEQ/seq_arithmeticmean_benchmarks.cpp)
+mathops/local/SEQ/seq_arithmeticmean_benchmarks.cpp)
 set(AVX_GEOMETRICMEAN_BENCHMARKS_SOURCE
-mathops/AVX/avx_geometricmean_benchmarks.cpp)
+mathops/local/AVX/avx_geometricmean_benchmarks.cpp)
 set(SEQ_GEOMETRICMEAN_BENCHMARKS_SOURCE
-mathops/SEQ/seq_geometricmean_benchmarks.cpp)
+mathops/local/SEQ/seq_geometricmean_benchmarks.cpp)
 set(AVX_WEIGHTEDMEAN_BENCHMARKS_SOURCE
-mathops/AVX/avx_weightedmean_benchmarks.cpp)
+mathops/local/AVX/avx_weightedmean_benchmarks.cpp)
 set(SEQ_WEIGHTEDMEAN_BENCHMARKS_SOURCE
-mathops/SEQ/seq_weightedmean_benchmarks.cpp)
+mathops/local/SEQ/seq_weightedmean_benchmarks.cpp)
 set(AVX_VARIANCE_BENCHMARKS_SOURCE
-mathops/AVX/avx_variance_benchmarks.cpp)
+mathops/local/AVX/avx_variance_benchmarks.cpp)
 set(SEQ_VARIANCE_BENCHMARKS_SOURCE
-mathops/SEQ/seq_variance_benchmarks.cpp)
+mathops/local/SEQ/seq_variance_benchmarks.cpp)
 set(AVX_STDDEVIATION_BENCHMARKS_SOURCE
-mathops/AVX/avx_stddeviation_benchmarks.cpp)
+mathops/local/AVX/avx_stddeviation_benchmarks.cpp)
 set(SEQ_STDDEVIATION_BENCHMARKS_SOURCE
-mathops/SEQ/seq_stddeviation_benchmarks.cpp)
+mathops/local/SEQ/seq_stddeviation_benchmarks.cpp)
 set(GLM_VEC4_BENCHMARKS_SOURCE
 vec/glm/glm_vec4_benchmarks.cpp)
 set(GLM_VEC3_BENCHMARKS_SOURCE
@@ -103,6 +109,26 @@ set(SEQ_VEC3_BENCHMARKS_SOURCE
 vec/local/SEQ/seq_vec3_benchmarks.cpp)
 set(SEQ_VEC2_BENCHMARKS_SOURCE
 vec/local/SEQ/seq_vec2_benchmarks.cpp)
+set(STD_SUM_BENCHMARKS_SOURCE
+mathops/std/std_sum_benchmarks.cpp)
+set(STD_PREFIXSUM_BENCHMARKS_SOURCE
+mathops/std/std_prefixsum_benchmarks.cpp)
+set(STD_MIN_BENCHMARKS_SOURCE
+mathops/std/std_min_benchmarks.cpp)
+set(STD_MAX_BENCHMARKS_SOURCE
+mathops/std/std_max_benchmarks.cpp)
+set(BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE
+mathops/boost/boost_arithmeticmean_benchmarks.cpp)
+set(BOOST_VARIANCE_BENCHMARKS_SOURCE
+mathops/boost/boost_variance_benchmarks.cpp)
+set(BOOST_MODE_BENCHMARKS_SOURCE
+mathops/boost/boost_mode_benchmarks.cpp)
+set(BOOST_MEDIAN_BENCHMARKS_SOURCE
+mathops/boost/boost_median_benchmarks.cpp)
+set(SEQ_MODE_BENCHMARKS_SOURCE
+mathops/local/SEQ/seq_mode_benchmarks.cpp)
+set(SEQ_MEDIAN_BENCHMARKS_SOURCE
+mathops/local/SEQ/seq_median_benchmarks.cpp)
 
 add_executable(${ACCELERATED_SQRT_BENCHMARKS} ${ACCELERATED_SQRT_BENCHMARKS_SOURCE})
 add_executable(${BASIC_SQRT_BENCHMARKS} ${BASIC_SQRT_BENCHMARKS_SOURCE})
@@ -143,6 +169,16 @@ add_executable(${AVX_VEC2_BENCHMARKS} ${AVX_VEC2_BENCHMARKS_SOURCE})
 add_executable(${SEQ_VEC4_BENCHMARKS} ${SEQ_VEC4_BENCHMARKS_SOURCE})
 add_executable(${SEQ_VEC3_BENCHMARKS} ${SEQ_VEC3_BENCHMARKS_SOURCE})
 add_executable(${SEQ_VEC2_BENCHMARKS} ${SEQ_VEC2_BENCHMARKS_SOURCE})
+add_executable(${STD_SUM_BENCHMARKS} ${STD_SUM_BENCHMARKS_SOURCE})
+add_executable(${STD_PREFIXSUM_BENCHMARKS} ${STD_PREFIXSUM_BENCHMARKS_SOURCE})
+add_executable(${STD_MIN_BENCHMARKS} ${STD_MIN_BENCHMARKS_SOURCE})
+add_executable(${STD_MAX_BENCHMARKS} ${STD_MAX_BENCHMARKS_SOURCE})
+add_executable(${BOOST_ARITHMETICMEAN_BENCHMARKS} ${BOOST_ARITHMETICMEAN_BENCHMARKS_SOURCE})
+add_executable(${BOOST_VARIANCE_BENCHMARKS} ${BOOST_VARIANCE_BENCHMARKS_SOURCE})
+add_executable(${BOOST_MODE_BENCHMARKS} ${BOOST_MODE_BENCHMARKS_SOURCE})
+add_executable(${BOOST_MEDIAN_BENCHMARKS} ${BOOST_MEDIAN_BENCHMARKS_SOURCE})
+add_executable(${SEQ_MODE_BENCHMARKS} ${SEQ_MODE_BENCHMARKS_SOURCE})
+add_executable(${SEQ_MEDIAN_BENCHMARKS} ${SEQ_MEDIAN_BENCHMARKS_SOURCE})
 
 foreach(BENCHMARK ${BENCHMARKS})
     target_link_libraries(
@@ -157,6 +193,13 @@ foreach(BENCHMARK ${BENCHMARKS})
     )
 endforeach()
 
-target_link_libraries(${GLM_VEC4_BENCHMARKS} PRIVATE glm)
-target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm)
-target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm)
+set(GLM_LIB glm-header-only)
+
+target_link_libraries(${GLM_VEC4_BENCHMARKS} PRIVATE glm-header-only)
+target_link_libraries(${GLM_VEC3_BENCHMARKS} PRIVATE glm-header-only)
+target_link_libraries(${GLM_VEC2_BENCHMARKS} PRIVATE glm-header-only)
+
+target_link_libraries(${BOOST_ARITHMETICMEAN_BENCHMARKS} PRIVATE boost_math)
+target_link_libraries(${BOOST_VARIANCE_BENCHMARKS} PRIVATE boost_math)
+target_link_libraries(${BOOST_MODE_BENCHMARKS} PRIVATE boost_math)
+target_link_libraries(${BOOST_MEDIAN_BENCHMARKS} PRIVATE boost_math)

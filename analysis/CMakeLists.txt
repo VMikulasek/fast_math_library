@@ -63,7 +63,17 @@ if (BUILD_BENCHMARKS)
     set(SEQ_VEC4_BENCHMARKS seq_vec4_benchmarks)
     set(SEQ_VEC3_BENCHMARKS seq_vec3_benchmarks)
     set(SEQ_VEC2_BENCHMARKS seq_vec2_benchmarks)
-    
+    set(STD_SUM_BENCHMARKS std_sum_benchmarks)
+    set(STD_PREFIXSUM_BENCHMARKS std_prefixsum_benchmarks)
+    set(STD_MIN_BENCHMARKS std_min_benchmarks)
+    set(STD_MAX_BENCHMARKS std_max_benchmarks)
+    set(BOOST_ARITHMETICMEAN_BENCHMARKS boost_arithmeticmean_benchmarks)
+    set(BOOST_VARIANCE_BENCHMARKS boost_variance_benchmarks)
+    set(BOOST_MODE_BENCHMARKS boost_mode_benchmarks)
+    set(BOOST_MEDIAN_BENCHMARKS boost_median_benchmarks)
+    set(SEQ_MODE_BENCHMARKS seq_mode_benchmarks)
+    set(SEQ_MEDIAN_BENCHMARKS seq_median_benchmarks)
+
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
     ${BASIC_SQRT_BENCHMARKS}
@@ -103,7 +113,17 @@ if (BUILD_BENCHMARKS)
     ${AVX_VEC2_BENCHMARKS}
     ${SEQ_VEC4_BENCHMARKS}
     ${SEQ_VEC3_BENCHMARKS}
-    ${SEQ_VEC2_BENCHMARKS})
+    ${SEQ_VEC2_BENCHMARKS}
+    ${STD_SUM_BENCHMARKS}
+    ${STD_PREFIXSUM_BENCHMARKS}
+    ${STD_MIN_BENCHMARKS}
+    ${STD_MAX_BENCHMARKS}
+    ${BOOST_ARITHMETICMEAN_BENCHMARKS}
+    ${BOOST_VARIANCE_BENCHMARKS}
+    ${BOOST_MODE_BENCHMARKS}
+    ${BOOST_MEDIAN_BENCHMARKS}
+    ${SEQ_MODE_BENCHMARKS}
+    ${SEQ_MEDIAN_BENCHMARKS})
 
     add_subdirectory(benchmarks)
 
