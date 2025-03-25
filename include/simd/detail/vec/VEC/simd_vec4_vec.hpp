@@ -6,41 +6,41 @@
 
 namespace simd
 {
-namespace avx
+namespace vec
 {
     template<typename T, InstructionSet S>
-    inline Vec<4, T> addv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline Vec<4, T> addv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> subv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline Vec<4, T> subv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> mulv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline Vec<4, T> mulv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> divv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline Vec<4, T> divv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
     
     template<typename T, InstructionSet S>
-    inline Vec<4, T> absv4v(const Vec<4, T> &vec);
+    inline Vec<4, T> absv4(const Vec<4, T> &vec);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> minv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline Vec<4, T> minv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> maxv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline Vec<4, T> maxv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
 
     template<typename T, InstructionSet S>
-    inline Vec<4, T> fast_sqrtv4v(const Vec<4, T> &vec);
+    inline Vec<4, T> fast_sqrtv4(const Vec<4, T> &vec);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> fast_invsqrtv4v(const Vec<4, T> &vec);
+    inline Vec<4, T> fast_invsqrtv4(const Vec<4, T> &vec);
 
     template<typename T, InstructionSet S>
-    inline Vec<4, T> fast_sinv4v(const Vec2f &vec);
+    inline Vec<4, T> fast_sinv4(const Vec2f &vec);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> fast_cosv4v(const Vec2f &vec);
+    inline Vec<4, T> fast_cosv4(const Vec2f &vec);
 
     template<typename T, InstructionSet S>
-    inline T dotv4v(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
+    inline T dotv4(const Vec<4, T> &vec1, const Vec<4, T> &vec2);
     template<typename T, InstructionSet S>
-    inline T lengthv4v(const Vec<4, T> &vec);
+    inline T lengthv4(const Vec<4, T> &vec);
     template<typename T, InstructionSet S>
-    inline Vec<4, T> normalizev4v(const Vec<4, T> &vec);
-} // namespace avx
+    inline Vec<4, T> normalizev4(const Vec<4, T> &vec);
+} // namespace vec
 } // namespace simd
 
 #include <simd/detail/vec/VEC/simd_vec4_vec.inl>

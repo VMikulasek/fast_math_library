@@ -40,8 +40,8 @@ simd/detail/vec/SEQ/simd_vec_seq.hpp
 simd/detail/vec/SEQ/simd_vec_seq.inl)
 
 set(SIMD_VECTOR_DETAIL_AVX
-simd/detail/vec/VEC/simd_vec_avx_float.hpp
-simd/detail/vec/VEC/simd_vec_avx_float.inl
+simd/detail/vec/VEC/simd_vec_vec.hpp
+simd/detail/vec/VEC/simd_vec_vec.inl
 simd/detail/vec/VEC/simd_vec2_vec.hpp
 simd/detail/vec/VEC/simd_vec2_vec.inl
 simd/detail/vec/VEC/simd_vec3_vec.hpp

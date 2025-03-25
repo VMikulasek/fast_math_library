@@ -8,10 +8,10 @@
 
 namespace simd
 {
-namespace avx
+namespace vec
 {
     template<typename T, InstructionSet S>
-    inline Vec<2, T> addv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline Vec<2, T> addv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -26,7 +26,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline Vec<2, T> subv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline Vec<2, T> subv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -41,7 +41,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline Vec<2, T> mulv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline Vec<2, T> mulv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -56,7 +56,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline Vec<2, T> divv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline Vec<2, T> divv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -71,7 +71,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline Vec<2, T> absv2v(const Vec<2, T> &vec)
+    inline Vec<2, T> absv2(const Vec<2, T> &vec)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -84,7 +84,7 @@ namespace avx
         return res;
     }
     template<typename T, InstructionSet S>
-    inline Vec<2, T> minv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline Vec<2, T> minv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -98,7 +98,7 @@ namespace avx
         return res;
     }
     template<typename T, InstructionSet S>
-    inline Vec<2, T> maxv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline Vec<2, T> maxv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -113,7 +113,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline Vec<2, T> fast_sqrtv2v(const Vec<2, T> &vec)
+    inline Vec<2, T> fast_sqrtv2(const Vec<2, T> &vec)
     {
         static_assert(std::is_floating_point_v<T>, "Fast square root only supported for floating point data types.");
 
@@ -131,7 +131,7 @@ namespace avx
         return res;
     }
     template<typename T, InstructionSet S>
-    inline Vec<2, T> fast_invsqrtv2v(const Vec<2, T> &vec)
+    inline Vec<2, T> fast_invsqrtv2(const Vec<2, T> &vec)
     {
         static_assert(std::is_floating_point_v<T>, "Fast inverse square root only supported for floating point data types.");
 
@@ -148,7 +148,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline Vec<2, T> fast_sinv2v(const Vec<2, T> &vec)
+    inline Vec<2, T> fast_sinv2(const Vec<2, T> &vec)
     {
         static_assert(std::is_floating_point_v<T>, "Fast sin only supported for floating point data types.");
 
@@ -166,7 +166,7 @@ namespace avx
         return res;
     }
     template<typename T, InstructionSet S>
-    inline Vec<2, T> fast_cosv2v(const Vec<2, T> &vec)
+    inline Vec<2, T> fast_cosv2(const Vec<2, T> &vec)
     {
         static_assert(std::is_floating_point_v<T>, "Fast cos only supported for floating point data types.");
 
@@ -185,7 +185,7 @@ namespace avx
     }
 
     template<typename T, InstructionSet S>
-    inline T dotv2v(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
+    inline T dotv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
         using Ops = SIMDOperations<T, S>;
 
@@ -198,7 +198,7 @@ namespace avx
         return Ops::materialize_register_at_index(resReg, 0);
     }
     template<typename T, InstructionSet S>
-    inline T lengthv2v(const Vec<2, T> &vec)
+    inline T lengthv2(const Vec<2, T> &vec)
     {
         static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
 
@@ -212,7 +212,7 @@ namespace avx
         return mathops::sqrt(Ops::materialize_register_at_index(reg, 0));
     }
     template<typename T, InstructionSet S>
-    inline Vec<2, T> normalizev2v(const Vec<2, T> &vec)
+    inline Vec<2, T> normalizev2(const Vec<2, T> &vec)
     {
         static_assert(std::is_floating_point_v<T>, "Normalize only supported for floating point data types.");
 
@@ -230,7 +230,7 @@ namespace avx
         Ops::materialize_register(result, res.data);
         return res;
     }
-} // namespace avx
+} // namespace vec
 } // namespace simd
 
 #endif // SIMD_VEC2_VEC_INL

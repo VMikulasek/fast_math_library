@@ -20,11 +20,11 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::addv3v<T, InstructionSet::AVX>(*this, other);
+            return vec::addv3<T, InstructionSet::AVX>(*this, other);
         }
         else if constexpr (std::is_same_v<T, int> && HAS_AVX2)
         {
-            return avx::addv3v<T, InstructionSet::AVX2>(*this, other);
+            return vec::addv3<T, InstructionSet::AVX2>(*this, other);
         }
         else
         {
@@ -36,11 +36,11 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::subv3v<T, InstructionSet::AVX>(*this, other);
+            return vec::subv3<T, InstructionSet::AVX>(*this, other);
         }
         else if constexpr (std::is_same_v<T, int> && HAS_AVX2)
         {
-            return avx::subv3v<T, InstructionSet::AVX2>(*this, other);
+            return vec::subv3<T, InstructionSet::AVX2>(*this, other);
         }
         else
         {
@@ -52,7 +52,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::mulv3v<T, InstructionSet::AVX>(*this, other);
+            return vec::mulv3<T, InstructionSet::AVX>(*this, other);
         }
         else
         {
@@ -64,7 +64,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::divv3v<T, InstructionSet::AVX>(*this, other);
+            return vec::divv3<T, InstructionSet::AVX>(*this, other);
         }
         else
         {
@@ -77,7 +77,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::absv3v<T, InstructionSet::AVX>(*this);
+            return vec::absv3<T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -89,7 +89,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::minv3v<T, InstructionSet::AVX>(vec1, vec2);
+            return vec::minv3<T, InstructionSet::AVX>(vec1, vec2);
         }
         else
         {
@@ -101,7 +101,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::maxv3v<T, InstructionSet::AVX>(vec1, vec2);
+            return vec::maxv3<T, InstructionSet::AVX>(vec1, vec2);
         }
         else
         {
@@ -119,7 +119,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::fast_sqrtv3v<T, InstructionSet::AVX>(*this);
+            return vec::fast_sqrtv3<T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -136,7 +136,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::fast_invsqrtv3v<T, InstructionSet::AVX>(*this);
+            return vec::fast_invsqrtv3<T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -169,7 +169,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::fast_sinv3v<T, InstructionSet::AVX>(*this);
+            return vec::fast_sinv3<T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -181,7 +181,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::fast_cosv3v<T, InstructionSet::AVX>(*this);
+            return vec::fast_cosv3<T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -194,7 +194,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::crossv3v<T, InstructionSet::AVX>(vec2, vec1);
+            return vec::crossv3v<T, InstructionSet::AVX>(vec2, vec1);
         }
         else
         {
@@ -206,7 +206,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::dotv3v<T, InstructionSet::AVX>(vec2, vec1);
+            return vec::dotv3<T, InstructionSet::AVX>(vec2, vec1);
         }
         else
         {
@@ -218,7 +218,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::lengthv3v<T, InstructionSet::AVX>(*this);
+            return vec::lengthv3<T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -230,7 +230,7 @@ namespace simd
     {
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return avx::normalizev3v<T, InstructionSet::AVX>(*this);
+            return vec::normalizev3<T, InstructionSet::AVX>(*this);
         }
         else
         {

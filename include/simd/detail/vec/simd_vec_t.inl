@@ -3,53 +3,9 @@
 
 #include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
-#include <simd/detail/vec/VEC/simd_vec_avx_float.hpp>
+#include <simd/detail/vec/VEC/simd_vec_vec.hpp>
 
 #include <type_traits>
-
-#ifdef HAS_AVX
-
-#define addvf(vec1, vec2) avx::addvf(vec1, vec2)
-#define subvf(vec1, vec2) avx::subvf(vec1, vec2)
-#define mulvf(vec1, vec2) avx::mulvf(vec1, vec2)
-#define divvf(vec1, vec2) avx::divvf(vec1, vec2)
-
-#define absvf(vec) avx::absvf(vec)
-#define minvf(vec1, vec2) avx::minvf(vec1, vec2)
-#define maxvf(vec1, vec2) avx::maxvf(vec1, vec2)
-
-#define fast_sqrtvf(vec) avx::fast_sqrtvf(vec)
-#define fast_invsqrtvf(vec) avx::fast_invsqrtvf(vec)
-
-#define fast_sinvf(vec) avx::fast_sinvf(vec)
-#define fast_cosvf(vec) avx::fast_cosvf(vec)
-
-#define dotvf(vec1, vec2) avx::dotvf(vec1, vec2)
-#define lengthvf(vec) avx::lengthvf(vec)
-#define normalizevf(vec) avx::normalizevf(vec)
-
-#else // HAS_AVX
-
-#define addvf(vec1, vec2) seq::addv(vec1, vec2)
-#define subvf(vec1, vec2) seq::subv(vec1, vec2)
-#define mulvf(vec1, vec2) seq::mulv(vec1, vec2)
-#define divvf(vec1, vec2) seq::divv(vec1, vec2)
-
-#define absvf(vec) seq::absv(vec)
-#define minvf(vec1, vec2) seq::minv(vec1, vec2)
-#define maxvf(vec1, vec2) seq::maxv(vec1, vec2)
-
-#define fast_sqrtvf(vec) seq::fast_sqrtv(vec)
-#define fast_invsqrtvf(vec) seq::fast_invsqrtv(vec)
-
-#define fast_sinvf(vec) seq::fast_sinv(vec)
-#define fast_cosvf(vec) seq::fast_cosv(vec)
-
-#define dotvf(vec1, vec2) seq::dotv(vec1, vec2)
-#define lengthvf(vec) seq::lengthv(vec)
-#define normalizevf(vec) seq::normalizev(vec)
-
-#endif // HAS_AVX
 
 namespace simd
 {
@@ -67,9 +23,13 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::operator+(const Vec &other) const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return addvf(*this, other);
+            return vec::addv<L, T, InstructionSet::AVX>(*this, other);
+        }
+        else if constexpr (std::is_same_v<T, int> && HAS_AVX2)
+        {
+            return vec::addv<L, T, InstructionSet::AVX2>(*this, other);
         }
         else
         {
@@ -79,9 +39,13 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::operator-(const Vec<L, T> &other) const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return subvf(*this, other);
+            return vec::subv<L, T, InstructionSet::AVX>(*this, other);
+        }
+        else if constexpr (std::is_same_v<T, int> && HAS_AVX2)
+        {
+            return vec::addv<L, T, InstructionSet::AVX2>(*this, other);
         }
         else
         {
@@ -91,9 +55,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::operator*(const Vec<L, T> &other) const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return mulvf(*this, other);
+            return vec::mulv<L, T, InstructionSet::AVX>(*this, other);
         }
         else
         {
@@ -103,22 +67,22 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::operator/(const Vec<L, T> &other) const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return divvf(*this, other);
+            return vec::divv<L, T, InstructionSet::AVX>(*this, other);
         }
         else
         {
-            return seq::divv(*this, other);
+            return seq::divv<float, InstructionSet::AVX>(*this, other);
         }
     }
 
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::abs() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return absvf(*this);
+            return vec::absv<L, T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -128,9 +92,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::min(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return minvf(vec1, vec2);
+            return vec::minv<L, T, InstructionSet::AVX>(vec1, vec2);
         }
         else
         {
@@ -140,9 +104,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::max(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return maxvf(vec1, vec2);
+            return vec::maxv<L, T, InstructionSet::AVX>(vec1, vec2);
         }
         else
         {
@@ -158,9 +122,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_sqrt() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return fast_sqrtvf(*this);
+            return vec::fast_sqrtv<L, T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -175,9 +139,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_invsqrt() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return fast_invsqrtvf(*this);
+            return vec::fast_invsqrtv<L, T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -208,9 +172,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_sin() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return fast_sinvf(*this);
+            return vec::fast_sinv<L, T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -220,9 +184,9 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_cos() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return fast_cosvf(*this);
+            return vec::fast_cosv<L, T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -233,9 +197,9 @@ namespace simd
     template<size_t L, typename T>
     inline T Vec<L, T>::dot(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return dotvf(vec1, vec2);
+            return vec::dotv<L, T, InstructionSet::AVX>(vec1, vec2);
         }
         else
         {
@@ -245,9 +209,9 @@ namespace simd
     template<size_t L, typename T>
     inline T Vec<L, T>::length() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return lengthvf(*this);
+            return vec::lengthv<L, T, InstructionSet::AVX>(*this);
         }
         else
         {
@@ -256,9 +220,9 @@ namespace simd
     }template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::normalize() const
     {
-        if constexpr (std::is_same_v<T, float>)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
-            return normalizevf(*this);
+            return vec::normalizev<L, T, InstructionSet::AVX>(*this);
         }
         else
         {

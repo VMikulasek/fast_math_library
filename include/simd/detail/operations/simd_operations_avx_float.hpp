@@ -36,6 +36,15 @@ namespace simd
         using Reg = __m256;
 
         /**
+         * @brief Number of floats that fit into register
+         */
+        static const size_t REG_SIZE = 8;
+        /**
+         * @brief Alignment required by AVX instructions
+         */
+        static const size_t ALIGNMENT = 32;
+
+        /**
          * @brief Loads array of floats to register which is returned
          * 
          * @param arr Float array to load to register,

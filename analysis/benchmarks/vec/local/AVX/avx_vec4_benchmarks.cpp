@@ -18,7 +18,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::addv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            simd::Vec4f res = simd::vec::addv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -30,7 +30,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::subv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            simd::Vec4f res = simd::vec::subv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -42,7 +42,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::mulv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            simd::Vec4f res = simd::vec::mulv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -54,7 +54,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::divv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            simd::Vec4f res = simd::vec::divv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -67,7 +67,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::absv4v<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec4f res = simd::vec::absv4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -79,7 +79,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::minv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            simd::Vec4f res = simd::vec::minv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -91,7 +91,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::maxv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            simd::Vec4f res = simd::vec::maxv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -116,7 +116,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::fast_sqrtv4v<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec4f res = simd::vec::fast_sqrtv4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -140,7 +140,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::fast_invsqrtv4v<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec4f res = simd::vec::fast_invsqrtv4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -165,7 +165,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::fast_sinv4v<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec4f res = simd::vec::fast_sinv4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -189,7 +189,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::fast_cosv4v<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec4f res = simd::vec::fast_cosv4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -226,7 +226,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            float res = simd::avx::dotv4v<float, simd::InstructionSet::AVX>(vec, vec);
+            float res = simd::vec::dotv4<float, simd::InstructionSet::AVX>(vec, vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -238,7 +238,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            float res = simd::avx::lengthv4v<float, simd::InstructionSet::AVX>(vec);
+            float res = simd::vec::lengthv4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -250,7 +250,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec4f res = simd::avx::normalizev4v<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec4f res = simd::vec::normalizev4<float, simd::InstructionSet::AVX>(vec);
             benchmark::DoNotOptimize(res);
         }
     }

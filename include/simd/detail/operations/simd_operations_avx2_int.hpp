@@ -19,6 +19,15 @@ namespace simd
         using Reg = __m256i;
 
         /**
+         * @brief Number of ints that fit into register
+         */
+        static const size_t REG_SIZE = 8;
+        /**
+         * @brief Alignment required by AVX2 instructions
+         */
+        static const size_t ALIGNMENT = 32;
+
+        /**
          * @brief Loads array of ints to register which is returned
          * 
          * @param arr Int array to load to register,
