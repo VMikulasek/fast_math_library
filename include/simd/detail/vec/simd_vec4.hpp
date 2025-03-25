@@ -18,7 +18,7 @@ namespace simd
         union alignas(AVX_ALIGNMENT)
         {
             struct{ T x, y, z, w; };
-            T data[8];
+            T data[32 / sizeof(T)];
         };
         
         /**
