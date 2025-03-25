@@ -3,7 +3,7 @@
 
 #include <simd/detail/vec/simd_vec3.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
-#include <simd/detail/vec/AVX/simd_vec3_avx_float.hpp>
+#include <simd/detail/vec/VEC/simd_vec3_avx_float.hpp>
 
 #ifdef HAS_AVX
 

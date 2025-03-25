@@ -3,7 +3,7 @@
 
 #include <simd/detail/vec/simd_vec_t.hpp>
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
-#include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
+#include <simd/detail/vec/VEC/simd_vec_avx_float.hpp>
 
 #include <type_traits>
 

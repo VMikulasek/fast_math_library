@@ -1,7 +1,7 @@
 #ifndef SIMD_VEC_AVX_FLOAT_INL
 #define SIMD_VEC_AVX_FLOAT_INL
 
-#include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
+#include <simd/detail/vec/VEC/simd_vec_avx_float.hpp>
 #include <simd/simd_operations_avx.hpp>
 #include <simd/simd_common.hpp>
 #include <mathops/detail/AVX/avx_transcedentals.hpp>

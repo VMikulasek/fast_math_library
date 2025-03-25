@@ -40,14 +40,14 @@ simd/detail/vec/SEQ/simd_vec_seq.hpp
 simd/detail/vec/SEQ/simd_vec_seq.inl)
 
 set(SIMD_VECTOR_DETAIL_AVX
-simd/detail/vec/AVX/simd_vec_avx_float.hpp
-simd/detail/vec/AVX/simd_vec_avx_float.inl
-simd/detail/vec/AVX/simd_vec2_avx_float.hpp
-simd/detail/vec/AVX/simd_vec2_avx_float.inl
-simd/detail/vec/AVX/simd_vec3_avx_float.hpp
-simd/detail/vec/AVX/simd_vec3_avx_float.inl
-simd/detail/vec/AVX/simd_vec4_avx_float.hpp
-simd/detail/vec/AVX/simd_vec4_avx_float.inl)
+simd/detail/vec/VEC/simd_vec_avx_float.hpp
+simd/detail/vec/VEC/simd_vec_avx_float.inl
+simd/detail/vec/VEC/simd_vec2_vec.hpp
+simd/detail/vec/VEC/simd_vec2_vec.inl
+simd/detail/vec/VEC/simd_vec3_avx_float.hpp
+simd/detail/vec/VEC/simd_vec3_avx_float.inl
+simd/detail/vec/VEC/simd_vec4_avx_float.hpp
+simd/detail/vec/VEC/simd_vec4_avx_float.inl)
 
 set(MATHOPS_DETAIL
 mathops/detail/sums.inl

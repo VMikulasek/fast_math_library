@@ -2,7 +2,7 @@
 #define SIMD_VEC4_INL
 
 #include <simd/detail/vec/simd_vec4.hpp>
-#include <simd/detail/vec/AVX/simd_vec4_avx_float.hpp>
+#include <simd/detail/vec/VEC/simd_vec4_avx_float.hpp>
 
 #ifdef HAS_AVX
 

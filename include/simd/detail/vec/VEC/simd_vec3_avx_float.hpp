@@ -29,6 +29,6 @@ namespace avx
 } // namespace avx
 } // namespace simd
 
-#include <simd/detail/vec/AVX/simd_vec3_avx_float.inl>
+#include <simd/detail/vec/VEC/simd_vec3_avx_float.inl>
 
 #endif // SIMD_VEC3_AVX_FLOAT_HPP

@@ -1,14 +1,13 @@
-#ifndef SIMD_VEC4_AVX_FLOAT_INL
-#define SIMD_VEC4_AVX_FLOAT_INL
+#ifndef SIMD_VEC3_AVX_FLOAT_INL
+#define SIMD_VEC3_AVX_FLOAT_INL
 
-#include <simd/detail/vec/AVX/simd_vec4_avx_float.hpp>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <simd/detail/vec/VEC/simd_vec3_avx_float.hpp>
 
 namespace simd
 {
 namespace avx
 {
-    inline Vec4f addv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f addv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -17,12 +16,12 @@ namespace avx
 
         Ops::Reg resReg = Ops::add(reg1, reg2);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline Vec4f subv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f subv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -31,12 +30,12 @@ namespace avx
 
         Ops::Reg resReg = Ops::sub(reg1, reg2);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline Vec4f mulv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f mulv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -45,12 +44,12 @@ namespace avx
 
         Ops::Reg resReg = Ops::mul(reg1, reg2);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline Vec4f divv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f divv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -59,12 +58,12 @@ namespace avx
 
         Ops::Reg resReg = Ops::div(reg1, reg2);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline Vec4f absv4f(const Vec4f &vec)
+    inline Vec3f absv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -72,11 +71,11 @@ namespace avx
 
         Ops::Reg resReg = Ops::abs(reg);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
-    inline Vec4f minv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f minv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -85,11 +84,11 @@ namespace avx
 
         Ops::Reg resReg = Ops::min(reg1, reg2);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
-    inline Vec4f maxv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f maxv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -98,12 +97,12 @@ namespace avx
 
         Ops::Reg resReg = Ops::max(reg1, reg2);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline Vec4f fast_sqrtv4f(const Vec4f &vec)
+    inline Vec3f fast_sqrtv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -114,11 +113,11 @@ namespace avx
         Ops::Reg oneReg = Ops::set_register(1.f);
         resReg = Ops::div(oneReg, resReg);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
-    inline Vec4f fast_invsqrtv4f(const Vec4f &vec)
+    inline Vec3f fast_invsqrtv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -127,12 +126,12 @@ namespace avx
         Ops::Reg resReg;
         mathops::avx::_fast_invsqrt_arr8(reg, resReg);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline Vec4f fast_sinv4f(const Vec4f &vec)
+    inline Vec3f fast_sinv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -143,11 +142,11 @@ namespace avx
         Ops::Reg resReg = mathops::avx::_fast_sin_arr8(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
-    inline Vec4f fast_cosv4f(const Vec4f &vec)
+    inline Vec3f fast_cosv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -158,12 +157,32 @@ namespace avx
         Ops::Reg resReg = mathops::avx::_fast_cos_arr8(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
 
-    inline float dotv4f(const Vec4f &vec1, const Vec4f &vec2)
+    inline Vec3f crossv3f(const Vec3f &vec1, const Vec3f &vec2)
+    {
+        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+
+        Ops::Reg vec1Mul1 = Ops::load_vector(vec1.data);
+        Ops::Reg vec2Mul1 = Ops::set_register_each(vec2.y, vec2.z, vec2.x, 0, 0, 0, 0, 0);
+        Ops::Reg vec1Mul2 = Ops::set_register_each(vec1.y, vec1.z, vec1.x, 0, 0, 0, 0, 0);
+        Ops::Reg vec2Mul2 = Ops::load_vector(vec2.data);
+
+        Ops::Reg firstProduct = Ops::mul(vec1Mul1, vec2Mul1);
+        Ops::Reg secondProduct = Ops::mul(vec1Mul2, vec2Mul2);
+
+        Ops::Reg resReg = Ops::sub(firstProduct, secondProduct);
+
+        return Vec3f(
+            Ops::materialize_register_at_index(resReg, 1),
+            Ops::materialize_register_at_index(resReg, 2),
+            Ops::materialize_register_at_index(resReg, 0)
+        );
+    }
+    inline float dotv3f(const Vec3f &vec1, const Vec3f &vec2)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -176,7 +195,7 @@ namespace avx
 
         return Ops::materialize_register_at_index(resReg, 0);
     }
-    inline float lengthv4f(const Vec4f &vec)
+    inline float lengthv3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
@@ -188,19 +207,19 @@ namespace avx
 
         return mathops::sqrt(Ops::materialize_register_at_index(reg, 0));
     }
-    inline Vec4f normalizev4f(const Vec4f &vec)
+    inline Vec3f normalizev3f(const Vec3f &vec)
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        auto lengthReg = Ops::set_register(lengthv4f(vec));
+        auto lengthReg = Ops::set_register(lengthv3f(vec));
         auto inputReg = Ops::load_vector(vec.data);
         auto result = Ops::div(inputReg, lengthReg);
 
-        Vec4f res;
+        Vec3f res;
         Ops::materialize_register(result, res.data);
         return res;
     }
 } // namespace avx
 } // namespace simd
 
-#endif // SIMD_VEC4_AVX_FLOAT_INL
+#endif // SIMD_VEC3_AVX_FLOAT_INL
