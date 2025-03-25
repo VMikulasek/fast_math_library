@@ -22,7 +22,7 @@ namespace avx
 
     inline float min(const float *arr, size_t size)
     {
-        FloatOps::AvxReg minReg = FloatOps::set_register(std::numeric_limits<float>::max());
+        FloatOps::Reg minReg = FloatOps::set_register(std::numeric_limits<float>::max());
 
         for ( ; size >= AVX_FLOAT_VECTOR_SIZE; size -= 8, arr += 8)
         {
@@ -48,7 +48,7 @@ namespace avx
 
     inline float max(const float *arr, size_t size)
     {
-        FloatOps::AvxReg maxReg = FloatOps::set_register(std::numeric_limits<float>::min());
+        FloatOps::Reg maxReg = FloatOps::set_register(std::numeric_limits<float>::min());
 
         for ( ; size >= AVX_FLOAT_VECTOR_SIZE; size -= AVX_FLOAT_VECTOR_SIZE, arr += AVX_FLOAT_VECTOR_SIZE)
         {
@@ -84,7 +84,7 @@ namespace avx
         if (size == 0) return 0.f;
 
         float elementsToProcess = size;
-        FloatOps::AvxReg productReg = FloatOps::set_register(1.f);
+        FloatOps::Reg productReg = FloatOps::set_register(1.f);
 
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
                 elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
@@ -112,16 +112,16 @@ namespace avx
 
     inline float weighted_mean(const float *values, const float *weights, size_t size)
     {
-        FloatOps::AvxReg sumReg = FloatOps::set_register_zero();
-        FloatOps::AvxReg weightSumReg = FloatOps::set_register_zero();
+        FloatOps::Reg sumReg = FloatOps::set_register_zero();
+        FloatOps::Reg weightSumReg = FloatOps::set_register_zero();
 
         for ( ; size >= AVX_FLOAT_VECTOR_SIZE;
             size -= AVX_FLOAT_VECTOR_SIZE,
             values += AVX_FLOAT_VECTOR_SIZE,
             weights += AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg weightReg = FloatOps::load_vector(weights);
-            FloatOps::AvxReg valueReg = FloatOps::load_vector(values);
+            FloatOps::Reg weightReg = FloatOps::load_vector(weights);
+            FloatOps::Reg valueReg = FloatOps::load_vector(values);
             weightSumReg = FloatOps::add(weightSumReg, weightReg);
             sumReg = FloatOps::add(sumReg, FloatOps::mul(weightReg, valueReg));
         }
@@ -153,16 +153,16 @@ namespace avx
 
         float elementsToProcess = size;
 
-        FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
-        FloatOps::AvxReg meanReg = FloatOps::set_register_zero();
+        FloatOps::Reg varianceReg = FloatOps::set_register_zero();
+        FloatOps::Reg meanReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
                 elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
                 arr += AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            FloatOps::Reg x = FloatOps::load_vector(arr);
             meanReg = FloatOps::add(meanReg, x);
 
-            FloatOps::AvxReg x2 = FloatOps::mul(x, x);
+            FloatOps::Reg x2 = FloatOps::mul(x, x);
             varianceReg = FloatOps::add(varianceReg, x2);
         }
 
@@ -191,21 +191,21 @@ namespace avx
 
         float elementsToProcess = size;
 
-        FloatOps::AvxReg meanReg = FloatOps::set_register_zero();
-        FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
+        FloatOps::Reg meanReg = FloatOps::set_register_zero();
+        FloatOps::Reg varianceReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
             elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
             arr += AVX_FLOAT_VECTOR_SIZE,
             probabilities += AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg x = FloatOps::load_vector(arr);
-            FloatOps::AvxReg x2 = FloatOps::mul(x, x);
+            FloatOps::Reg x = FloatOps::load_vector(arr);
+            FloatOps::Reg x2 = FloatOps::mul(x, x);
 
-            FloatOps::AvxReg p = FloatOps::load_vector(probabilities);
-            FloatOps::AvxReg xp = FloatOps::mul(x, p);
+            FloatOps::Reg p = FloatOps::load_vector(probabilities);
+            FloatOps::Reg xp = FloatOps::mul(x, p);
             meanReg = FloatOps::add(meanReg, xp);
 
-            FloatOps::AvxReg x2p = FloatOps::mul(x2, p);
+            FloatOps::Reg x2p = FloatOps::mul(x2, p);
             varianceReg = FloatOps::add(varianceReg, x2p);
         }
 
@@ -235,16 +235,16 @@ namespace avx
 
         float elementsToProcess = size;
 
-        FloatOps::AvxReg meanReg = FloatOps::set_register_zero();
-        FloatOps::AvxReg varianceReg = FloatOps::set_register_zero();
+        FloatOps::Reg meanReg = FloatOps::set_register_zero();
+        FloatOps::Reg varianceReg = FloatOps::set_register_zero();
         for ( ; elementsToProcess >= AVX_FLOAT_VECTOR_SIZE;
                 elementsToProcess -= AVX_FLOAT_VECTOR_SIZE,
                 arr += AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            FloatOps::Reg x = FloatOps::load_vector(arr);
             meanReg = FloatOps::add(meanReg, x);
 
-            FloatOps::AvxReg x2 = FloatOps::mul(x, x);
+            FloatOps::Reg x2 = FloatOps::mul(x, x);
             varianceReg = FloatOps::add(varianceReg, x2);
         }
 

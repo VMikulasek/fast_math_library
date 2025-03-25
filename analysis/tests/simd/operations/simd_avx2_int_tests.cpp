@@ -17,9 +17,9 @@ namespace tests
     protected:
         using Ops = simd::SIMDOperations<int, simd::InstructionSet::AVX2>;
 
-        Ops::Avx2IReg reg1;
-        Ops::Avx2IReg reg2;
-        Ops::Avx2IReg resultReg;
+        Ops::Reg reg1;
+        Ops::Reg reg2;
+        Ops::Reg resultReg;
 
         __m256 floatReg;
 
@@ -71,7 +71,7 @@ namespace tests
                 EXPECT_EQ(result[i], expected);
             }
         }
-        void CheckResult(int expected, Ops::Avx2IReg reg)
+        void CheckResult(int expected, Ops::Reg reg)
         {
             alignas(AVX_ALIGNMENT) int result[AVX_INT_VECTOR_SIZE];
             Ops::materialize_register(reg, result);
@@ -119,7 +119,7 @@ namespace tests
 
     TEST_F(SimdAvx2IntTests, LoadStore)
     {
-        Ops::Avx2IReg reg = Ops::load_vector(basicVec1);
+        Ops::Reg reg = Ops::load_vector(basicVec1);
         alignas(AVX_ALIGNMENT) int result[AVX_INT_VECTOR_SIZE];
         Ops::materialize_register(reg, result);
 
@@ -131,7 +131,7 @@ namespace tests
 
     TEST_F(SimdAvx2IntTests, SetZeros)
     {
-        Ops::Avx2IReg reg = Ops::set_register_zero();
+        Ops::Reg reg = Ops::set_register_zero();
 
         CheckResult(0, reg);
     }
@@ -142,7 +142,7 @@ namespace tests
 
         for (unsigned i = 0; i < 50; i++, testNum += 1, testNum *= -2)
         {
-            Ops::Avx2IReg reg = Ops::set_register(testNum);
+            Ops::Reg reg = Ops::set_register(testNum);
 
             CheckResult(testNum, reg);
         }

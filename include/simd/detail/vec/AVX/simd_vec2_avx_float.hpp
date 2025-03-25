@@ -7,7 +7,9 @@ namespace simd
 {
 namespace avx
 {
-    inline Vec2f addv2f(const Vec2f &vec1, const Vec2f &vec2);
+
+    template<typename T>
+    inline Vec<2, T> addv2f(const Vec<2, T> &vec1, const Vec<2, T> &vec2);
     inline Vec2f subv2f(const Vec2f &vec1, const Vec2f &vec2);
     inline Vec2f mulv2f(const Vec2f &vec1, const Vec2f &vec2);
     inline Vec2f divv2f(const Vec2f &vec1, const Vec2f &vec2);

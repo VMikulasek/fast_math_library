@@ -297,7 +297,7 @@ namespace avx
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
         
         float length = 0;
-        Ops::AvxReg tmpResult = Ops::set_register_zero();
+        Ops::Reg tmpResult = Ops::set_register_zero();
 
         size_t i = 0;
         for (; i + AVX_FLOAT_VECTOR_SIZE < L; i += AVX_FLOAT_VECTOR_SIZE)

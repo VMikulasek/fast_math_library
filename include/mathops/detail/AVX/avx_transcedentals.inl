@@ -15,41 +15,41 @@ namespace avx
     using FloatOps = simd::SIMDOperations<float, simd::AVX>;
     using IntOps = simd::SIMDOperations<int, simd::AVX2>;
 
-    inline void _fast_invsqrt_arr8(FloatOps::AvxReg &x, FloatOps::AvxReg &res)
+    inline void _fast_invsqrt_arr8(FloatOps::Reg &x, FloatOps::Reg &res)
     {
         /* float xhalf = 0.5f * x; */
-        FloatOps::AvxReg xHalf;
-        FloatOps::AvxReg halfConst = FloatOps::set_register(0.5f);
+        FloatOps::Reg xHalf;
+        FloatOps::Reg halfConst = FloatOps::set_register(0.5f);
         xHalf = FloatOps::mul(x, halfConst);
 
         /* int i = *(int *)&x; */
-        IntOps::Avx2IReg i = *reinterpret_cast<IntOps::Avx2IReg *>(&x);
+        IntOps::Reg i = *reinterpret_cast<IntOps::Reg *>(&x);
 
         /* i = 0x5f375a86 - (i >> 1); */
         i = IntOps::shift_right(i, 1);
-        IntOps::Avx2IReg magicConstant = IntOps::set_register(0x5f375a86);
+        IntOps::Reg magicConstant = IntOps::set_register(0x5f375a86);
         i = IntOps::sub(magicConstant, i);
 
         /* x = *(float *)&i; */
-        x = *reinterpret_cast<FloatOps::AvxReg *>(&i);
+        x = *reinterpret_cast<FloatOps::Reg *>(&i);
 
         /* x = x * (1.5f - xhalf * x * x); */
         res = FloatOps::mul(x, x);
         res = FloatOps::mul(xHalf, res);
-        FloatOps::AvxReg constReg = FloatOps::set_register(1.5f);
+        FloatOps::Reg constReg = FloatOps::set_register(1.5f);
         res = FloatOps::sub(constReg, res);
         res = FloatOps::mul(x, res);
     }
 
     inline void fast_sqrt_arr(const float *arr, size_t size, float *dst)
     {
-        FloatOps::AvxReg oneReg = FloatOps::set_register(1.f);
+        FloatOps::Reg oneReg = FloatOps::set_register(1.f);
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg res;
+            FloatOps::Reg res;
             
-            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            FloatOps::Reg x = FloatOps::load_vector(arr);
             _fast_invsqrt_arr8(x, res);
             res = FloatOps::div(oneReg, res);
             
@@ -70,9 +70,9 @@ namespace avx
     {
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg res;
+            FloatOps::Reg res;
 
-            FloatOps::AvxReg x = FloatOps::load_vector(arr);
+            FloatOps::Reg x = FloatOps::load_vector(arr);
             _fast_invsqrt_arr8(x, res);
             
             FloatOps::materialize_register(res, dst);
@@ -88,17 +88,17 @@ namespace avx
         }
     }
 
-    inline FloatOps::AvxReg _sin5q8(
-        const FloatOps::AvxReg &x,
-        const FloatOps::AvxReg &A,
-        const FloatOps::AvxReg &B,
-        const FloatOps::AvxReg &C)
+    inline FloatOps::Reg _sin5q8(
+        const FloatOps::Reg &x,
+        const FloatOps::Reg &A,
+        const FloatOps::Reg &B,
+        const FloatOps::Reg &C)
     {
         // x2 = x * x;
-        FloatOps::AvxReg x2 = FloatOps::mul(x, x);
+        FloatOps::Reg x2 = FloatOps::mul(x, x);
 
         // return x * (A + x2 * (B + x2 * C));
-        FloatOps::AvxReg res = FloatOps::mul(x2, C);
+        FloatOps::Reg res = FloatOps::mul(x2, C);
         res = FloatOps::add(B, res);
         res = FloatOps::mul(x2, res);
         res = FloatOps::add(A, res);
@@ -107,11 +107,11 @@ namespace avx
     }
 
     inline void _init_sincos_constants(
-        FloatOps::AvxReg &AVec,
-        FloatOps::AvxReg &BVec,
-        FloatOps::AvxReg &CVec,
-        FloatOps::AvxReg &pi2Vec,
-        FloatOps::AvxReg &quarter)
+        FloatOps::Reg &AVec,
+        FloatOps::Reg &BVec,
+        FloatOps::Reg &CVec,
+        FloatOps::Reg &pi2Vec,
+        FloatOps::Reg &quarter)
     {
         AVec = FloatOps::set_register(A);
         BVec = FloatOps::set_register(B);
@@ -120,11 +120,11 @@ namespace avx
         quarter = FloatOps::set_register(0.25);
     }
 
-    inline FloatOps::AvxReg _compute_sincos_z(
-        const FloatOps::AvxReg &x_2,
-        const FloatOps::AvxReg &quarter)
+    inline FloatOps::Reg _compute_sincos_z(
+        const FloatOps::Reg &x_2,
+        const FloatOps::Reg &quarter)
     {
-        FloatOps::AvxReg z = FloatOps::round(x_2);
+        FloatOps::Reg z = FloatOps::round(x_2);
         z = FloatOps::sub(x_2, z);
         z = FloatOps::abs(z);
         z = FloatOps::sub(quarter, z);
@@ -132,17 +132,17 @@ namespace avx
         return z;
     }
 
-    inline FloatOps::AvxReg _fast_sin_arr8(const FloatOps::AvxReg &num,
-        const FloatOps::AvxReg &pi2Vec, const FloatOps::AvxReg &quarter,
-        const FloatOps::AvxReg &AVec, const FloatOps::AvxReg &BVec,
-        const FloatOps::AvxReg &CVec)
+    inline FloatOps::Reg _fast_sin_arr8(const FloatOps::Reg &num,
+        const FloatOps::Reg &pi2Vec, const FloatOps::Reg &quarter,
+        const FloatOps::Reg &AVec, const FloatOps::Reg &BVec,
+        const FloatOps::Reg &CVec)
     {
         // float x_2 = 0.25f - num * pi2;
-        FloatOps::AvxReg x_2 = FloatOps::mul(num, pi2Vec);
+        FloatOps::Reg x_2 = FloatOps::mul(num, pi2Vec);
         x_2 = FloatOps::sub(quarter, x_2);
 
         // float z = 0.25f - abs(x_2 - round(x_2));
-        FloatOps::AvxReg z = _compute_sincos_z(x_2, quarter);
+        FloatOps::Reg z = _compute_sincos_z(x_2, quarter);
 
         // dst = sin5q(z);
         return _sin5q8(z, AVec, BVec, CVec);
@@ -150,13 +150,13 @@ namespace avx
 
     inline void fast_sin_arr(const float *src, size_t size, float *dst)
     {
-        FloatOps::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
+        FloatOps::Reg AVec, BVec, CVec, pi2Vec, quarter;
         _init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
         
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg num = FloatOps::load_vector(src);
-            FloatOps::AvxReg res = _fast_sin_arr8(num, pi2Vec,
+            FloatOps::Reg num = FloatOps::load_vector(src);
+            FloatOps::Reg res = _fast_sin_arr8(num, pi2Vec,
                 quarter, AVec, BVec, CVec);
 
             FloatOps::materialize_register(res, dst);
@@ -172,16 +172,16 @@ namespace avx
         }
     }
 
-    inline FloatOps::AvxReg _fast_cos_arr8(const FloatOps::AvxReg &num,
-        const FloatOps::AvxReg &pi2Vec, const FloatOps::AvxReg &quarter,
-        const FloatOps::AvxReg &AVec, const FloatOps::AvxReg &BVec,
-        const FloatOps::AvxReg &CVec)
+    inline FloatOps::Reg _fast_cos_arr8(const FloatOps::Reg &num,
+        const FloatOps::Reg &pi2Vec, const FloatOps::Reg &quarter,
+        const FloatOps::Reg &AVec, const FloatOps::Reg &BVec,
+        const FloatOps::Reg &CVec)
     {
         // float x_2 = num * pi2;
-        FloatOps::AvxReg x_2 = FloatOps::mul(num, pi2Vec);
+        FloatOps::Reg x_2 = FloatOps::mul(num, pi2Vec);
 
         // float z = 0.25f - abs(x_2 - round(x_2));            
-        FloatOps::AvxReg z = _compute_sincos_z(x_2, quarter);
+        FloatOps::Reg z = _compute_sincos_z(x_2, quarter);
 
         // dst = sin5q(z);
         return _sin5q8(z, AVec, BVec, CVec);
@@ -189,13 +189,13 @@ namespace avx
 
     inline void fast_cos_arr(const float *src, size_t size, float *dst)
     {
-        FloatOps::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
+        FloatOps::Reg AVec, BVec, CVec, pi2Vec, quarter;
         _init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg num = FloatOps::load_vector(src);
-            FloatOps::AvxReg res = _fast_cos_arr8(num, pi2Vec,
+            FloatOps::Reg num = FloatOps::load_vector(src);
+            FloatOps::Reg res = _fast_cos_arr8(num, pi2Vec,
                 quarter, AVec, BVec, CVec);
             FloatOps::materialize_register(res, dst);
 

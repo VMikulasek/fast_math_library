@@ -15,7 +15,7 @@ namespace avx
     using FloatOps = simd::SIMDOperations<float, simd::AVX>;
 
     // private
-    inline FloatOps::AvxReg _load_reg(const float *&arr, size_t &size)
+    inline FloatOps::Reg _load_reg(const float *&arr, size_t &size)
     {
         auto reg = FloatOps::load_vector(arr);
         arr += AVX_FLOAT_VECTOR_SIZE;
@@ -30,9 +30,9 @@ namespace avx
             return seq::sum(arr, size);
         }
 
-        FloatOps::AvxReg tmpResultReg = _load_reg(arr, size);
+        FloatOps::Reg tmpResultReg = _load_reg(arr, size);
 
-        FloatOps::AvxReg secondOpReg;
+        FloatOps::Reg secondOpReg;
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
@@ -53,16 +53,16 @@ namespace avx
 
     inline void prefix_sum(const float *arr, size_t size, float *dstArr)
     {
-        FloatOps::AvxReg zeroVec = FloatOps::set_register_zero();
+        FloatOps::Reg zeroVec = FloatOps::set_register_zero();
 
-        FloatOps::AvxReg lastElemOfCalculatedSequenceDistributed = FloatOps::set_register_zero();
+        FloatOps::Reg lastElemOfCalculatedSequenceDistributed = FloatOps::set_register_zero();
 
         while (size >= AVX_FLOAT_VECTOR_SIZE)
         {
-            FloatOps::AvxReg res = _load_reg(arr, size);
+            FloatOps::Reg res = _load_reg(arr, size);
 
             // calculate prefix sum for halves isolated
-            FloatOps::AvxReg shifted = FloatOps::rotate_halves_right_32bits(res);
+            FloatOps::Reg shifted = FloatOps::rotate_halves_right_32bits(res);
             shifted = FloatOps::blend<0b11101110>(zeroVec, shifted);
             res = FloatOps::add(res, shifted);
             shifted = FloatOps::rotate_halves_64bits(res);
@@ -70,7 +70,7 @@ namespace avx
             res = FloatOps::add(res, shifted);
 
             // calculate prefix sum for whole register isolated
-            FloatOps::AvxReg lastElemOfFirstHalf = FloatOps::permute_reg_inside_halves<0b11111111>(res);
+            FloatOps::Reg lastElemOfFirstHalf = FloatOps::permute_reg_inside_halves<0b11111111>(res);
             lastElemOfFirstHalf = FloatOps::blend<0b00001111>(zeroVec, lastElemOfFirstHalf);
             lastElemOfFirstHalf = FloatOps::swap_halves(lastElemOfFirstHalf);
             res = FloatOps::add(res, lastElemOfFirstHalf);

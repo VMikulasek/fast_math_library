@@ -8,16 +8,17 @@ namespace simd
 {
 namespace avx
 {
-    inline Vec2f addv2f(const Vec2f &vec1, const Vec2f &vec2)
+    template<typename T>
+    inline Vec<2, T> addv2f(const Vec<2, T> &vec1, const Vec<2, T> &vec2)
     {
-        using Ops = SIMDOperations<float, InstructionSet::AVX>;
+        using Ops = SIMDOperations<T, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        typename Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        typename Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::add(reg1, reg2);
+        typename Ops::Reg resReg = Ops::add(reg1, reg2);
 
-        Vec2f res;
+        Vec<2, T> res;
         Ops::materialize_register(resReg, res.data);
         return res;
     }
@@ -26,10 +27,10 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::sub(reg1, reg2);
+        Ops::Reg resReg = Ops::sub(reg1, reg2);
 
         Vec2f res;
         Ops::materialize_register(resReg, res.data);
@@ -40,10 +41,10 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::mul(reg1, reg2);
+        Ops::Reg resReg = Ops::mul(reg1, reg2);
 
         Vec2f res;
         Ops::materialize_register(resReg, res.data);
@@ -54,10 +55,10 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::div(reg1, reg2);
+        Ops::Reg resReg = Ops::div(reg1, reg2);
 
         Vec2f res;
         Ops::materialize_register(resReg, res.data);
@@ -68,9 +69,9 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::load_vector(vec.data);
+        Ops::Reg reg = Ops::load_vector(vec.data);
 
-        Ops::AvxReg resReg = Ops::abs(reg);
+        Ops::Reg resReg = Ops::abs(reg);
 
         Vec2f res;
         Ops::materialize_register(resReg, res.data);
@@ -80,10 +81,10 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::min(reg1, reg2);
+        Ops::Reg resReg = Ops::min(reg1, reg2);
 
         Vec2f res;
         Ops::materialize_register(resReg, res.data);
@@ -93,10 +94,10 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::max(reg1, reg2);
+        Ops::Reg resReg = Ops::max(reg1, reg2);
 
         Vec2f res;
         Ops::materialize_register(resReg, res.data);
@@ -107,11 +108,11 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::load_vector(vec.data);
+        Ops::Reg reg = Ops::load_vector(vec.data);
 
-        Ops::AvxReg resReg;
+        Ops::Reg resReg;
         mathops::avx::_fast_invsqrt_arr8(reg, resReg);
-        Ops::AvxReg oneReg = Ops::set_register(1.f);
+        Ops::Reg oneReg = Ops::set_register(1.f);
         resReg = Ops::div(oneReg, resReg);
 
         Vec2f res;
@@ -122,9 +123,9 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::load_vector(vec.data);
+        Ops::Reg reg = Ops::load_vector(vec.data);
 
-        Ops::AvxReg resReg;
+        Ops::Reg resReg;
         mathops::avx::_fast_invsqrt_arr8(reg, resReg);
 
         Vec2f res;
@@ -136,11 +137,11 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::load_vector(vec.data);
+        Ops::Reg reg = Ops::load_vector(vec.data);
         
-        Ops::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
+        Ops::Reg AVec, BVec, CVec, pi2Vec, quarter;
         mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
-        Ops::AvxReg resReg = mathops::avx::_fast_sin_arr8(reg, pi2Vec,
+        Ops::Reg resReg = mathops::avx::_fast_sin_arr8(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
         Vec2f res;
@@ -151,11 +152,11 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::load_vector(vec.data);
+        Ops::Reg reg = Ops::load_vector(vec.data);
         
-        Ops::AvxReg AVec, BVec, CVec, pi2Vec, quarter;
+        Ops::Reg AVec, BVec, CVec, pi2Vec, quarter;
         mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
-        Ops::AvxReg resReg = mathops::avx::_fast_cos_arr8(reg, pi2Vec,
+        Ops::Reg resReg = mathops::avx::_fast_cos_arr8(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
         Vec2f res;
@@ -167,10 +168,10 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg1 = Ops::load_vector(vec1.data);
-        Ops::AvxReg reg2 = Ops::load_vector(vec2.data);
+        Ops::Reg reg1 = Ops::load_vector(vec1.data);
+        Ops::Reg reg2 = Ops::load_vector(vec2.data);
 
-        Ops::AvxReg resReg = Ops::mul(reg1, reg2);
+        Ops::Reg resReg = Ops::mul(reg1, reg2);
         resReg = Ops::horizontal_add(resReg, resReg);
 
         return Ops::materialize_register_at_index(resReg, 0);
@@ -179,7 +180,7 @@ namespace avx
     {
         using Ops = SIMDOperations<float, InstructionSet::AVX>;
 
-        Ops::AvxReg reg = Ops::load_vector(vec.data);
+        Ops::Reg reg = Ops::load_vector(vec.data);
 
         reg = Ops::mul(reg, reg);
         reg = Ops::horizontal_add(reg, reg);

@@ -17,9 +17,9 @@ namespace tests
     protected:
         using Ops = simd::SIMDOperations<float, simd::AVX>;
 
-        Ops::AvxReg reg1;
-        Ops::AvxReg reg2;
-        Ops::AvxReg resultReg;
+        Ops::Reg reg1;
+        Ops::Reg reg2;
+        Ops::Reg resultReg;
 
         __m256i intReg;
 
@@ -159,7 +159,7 @@ namespace tests
                 ExpectEqFloat(result[i], expected);
             }
         }
-        void CheckResult(float expected, Ops::AvxReg reg)
+        void CheckResult(float expected, Ops::Reg reg)
         {
             alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
             Ops::materialize_register(reg, result);
@@ -173,7 +173,7 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, LoadStore)
     {        
-        Ops::AvxReg reg = Ops::load_vector(basicVec1);
+        Ops::Reg reg = Ops::load_vector(basicVec1);
         alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
         Ops::materialize_register(reg, result);
 
@@ -185,7 +185,7 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, SetZeros)
     {
-        Ops::AvxReg reg = Ops::set_register_zero();
+        Ops::Reg reg = Ops::set_register_zero();
 
         CheckResult(0, reg);
     }
@@ -196,7 +196,7 @@ namespace tests
 
         for (unsigned i = 0; i < 50; i++, testNum += 1, testNum *= -2)
         {
-            Ops::AvxReg reg = Ops::set_register(testNum);
+            Ops::Reg reg = Ops::set_register(testNum);
 
             CheckResult(testNum, reg);
         }
@@ -206,7 +206,7 @@ namespace tests
     {
         float testNums[] = {1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f};
 
-        Ops::AvxReg reg = Ops::set_register_each(testNums[0], testNums[1], testNums[2],
+        Ops::Reg reg = Ops::set_register_each(testNums[0], testNums[1], testNums[2],
             testNums[3], testNums[4], testNums[5], testNums[6], testNums[7]);
 
         alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
@@ -220,7 +220,7 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, MaterializeRegisterAtIndex)
     {
-        Ops::AvxReg reg = Ops::load_vector(decimalVec1);
+        Ops::Reg reg = Ops::load_vector(decimalVec1);
 
         for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
         {
