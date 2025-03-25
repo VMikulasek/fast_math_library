@@ -275,7 +275,7 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> normalizev(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
+        static_assert(std::is_floating_point_v<T>, "Normalize only supported for floating point data types.");
 
         Vec<L, T> result;
 

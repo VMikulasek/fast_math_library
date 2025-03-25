@@ -2,6 +2,7 @@
 #define SIMD_VEC2_VEC_HPP
 
 #include <simd/detail/vec/simd_vec2.hpp>
+#include <simd/simd_common.hpp>
 
 namespace simd
 {
