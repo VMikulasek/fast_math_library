@@ -108,6 +108,9 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
+
+#ifdef HAS_AVX2
+
     static void BM_Vec2fSqrtLowp(benchmark::State &state)
     {
         volatile float num = std::rand();
@@ -116,10 +119,13 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec2f res = simd::vec::fast_sqrtv2<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec2f res = simd::vec::fast_sqrtv2<float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
+
+#endif // HAS_AVX2
+
     static void BM_Vec2fInvSqrt(benchmark::State &state)
     {
         volatile float num = std::rand();
@@ -132,6 +138,9 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
+
+#ifdef HAS_AVX2
+
     static void BM_Vec2fInvSqrtLowp(benchmark::State &state)
     {
         volatile float num = std::rand();
@@ -140,10 +149,12 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            simd::Vec2f res = simd::vec::fast_invsqrtv2<float, simd::InstructionSet::AVX>(vec);
+            simd::Vec2f res = simd::vec::fast_invsqrtv2<float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>(vec);
             benchmark::DoNotOptimize(res);
         }
     }
+
+#endif // HAS_AVX2
 
     static void BM_Vec2fSin(benchmark::State &state)
     {

@@ -2,7 +2,7 @@
 #define SIMD_VEC3_VEC_INL
 
 #include <simd/detail/vec/VEC/simd_vec3_vec.hpp>
-#include <mathops/detail/VEC/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/vec_transcendentals.hpp>
 #include <simd/simd_common.hpp>
 
 namespace simd
@@ -111,15 +111,15 @@ namespace vec
         return res;
     }
 
-    template<typename T, InstructionSet S>
+    template<typename T, InstructionSet FS, InstructionSet IS>
     inline Vec<3, T> fast_sqrtv3(const Vec<3, T> &vec)
     {
-        using Ops = SIMDOperations<T, S>;
+        using Ops = SIMDOperations<T, FS>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
 
         typename Ops::Reg resReg;
-        mathops::avx::_fast_invsqrt_arr8(reg, resReg);
+        mathops::vec::_fast_invsqrt_arr8<T, FS, IS>(reg, resReg);
         typename Ops::Reg oneReg = Ops::set_register(1.f);
         resReg = Ops::div(oneReg, resReg);
 
@@ -127,15 +127,15 @@ namespace vec
         Ops::materialize_register(resReg, res.data);
         return res;
     }
-    template<typename T, InstructionSet S>
+    template<typename T, InstructionSet FS, InstructionSet IS>
     inline Vec<3, T> fast_invsqrtv3(const Vec<3, T> &vec)
     {
-        using Ops = SIMDOperations<T, S>;
+        using Ops = SIMDOperations<T, FS>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
 
         typename Ops::Reg resReg;
-        mathops::avx::_fast_invsqrt_arr8(reg, resReg);
+        mathops::vec::_fast_invsqrt_arr8<T, FS, IS>(reg, resReg);
 
         Vec<3, T> res;
         Ops::materialize_register(resReg, res.data);
@@ -150,8 +150,8 @@ namespace vec
         typename Ops::Reg reg = Ops::load_vector(vec.data);
         
         typename Ops::Reg AVec, BVec, CVec, pi2Vec, quarter;
-        mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
-        typename Ops::Reg resReg = mathops::avx::_fast_sin_arr8(reg, pi2Vec,
+        mathops::vec::_init_sincos_constants<T, S>(AVec, BVec, CVec, pi2Vec, quarter);
+        typename Ops::Reg resReg = mathops::vec::_fast_sin_arr8<T, S>(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
         Vec<3, T> res;
@@ -166,8 +166,8 @@ namespace vec
         typename Ops::Reg reg = Ops::load_vector(vec.data);
         
         typename Ops::Reg AVec, BVec, CVec, pi2Vec, quarter;
-        mathops::avx::_init_sincos_constants(AVec, BVec, CVec, pi2Vec, quarter);
-        typename Ops::Reg resReg = mathops::avx::_fast_cos_arr8(reg, pi2Vec,
+        mathops::vec::_init_sincos_constants<T, S>(AVec, BVec, CVec, pi2Vec, quarter);
+        typename Ops::Reg resReg = mathops::vec::_fast_cos_arr8<T, S>(reg, pi2Vec,
             quarter, AVec, BVec, CVec);
 
         Vec<3, T> res;

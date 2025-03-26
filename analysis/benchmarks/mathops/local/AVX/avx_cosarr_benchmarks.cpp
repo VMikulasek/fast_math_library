@@ -1,6 +1,7 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
-#include <mathops/detail/VEC/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/vec_transcendentals.hpp>
+#include <simd/simd_common.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -17,7 +18,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            mathops::avx::fast_cos_arr(arr, size, dst);
+            mathops::vec::fast_cos_arr<float, simd::InstructionSet::AVX>(arr, size, dst);
             benchmark::DoNotOptimize(dst);
         }
 

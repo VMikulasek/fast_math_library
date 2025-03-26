@@ -23,9 +23,9 @@ simd/vec/SEQ/seq_float_vec_tests.cpp
 simd/vec/SEQ/seq_int_vec_tests.cpp
 mathops/AVX/avx_sums_tests.cpp
 mathops/SEQ/seq_sums_tests.cpp
-mathops/transcedentals_tests.cpp
-mathops/SEQ/seq_transcedentals_tests.cpp
-mathops/AVX/avx_transcedentals_tests.cpp
+mathops/transcendentals_tests.cpp
+mathops/SEQ/seq_transcendentals_tests.cpp
+mathops/AVX/avx_transcendentals_tests.cpp
 mathops/SEQ/seq_statisticals_tests.cpp
 mathops/AVX/avx_statisticals_tests.cpp)
 

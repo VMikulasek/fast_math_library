@@ -1,5 +1,5 @@
-#include <mathops/transcedentals_tests_fixture.hpp>
-#include <mathops/transcedentals.hpp>
+#include <mathops/transcendentals_tests_fixture.hpp>
+#include <mathops/transcendentals.hpp>
 
 #include <gtest/gtest.h>
 #include <numbers>
@@ -11,11 +11,11 @@ namespace tests
 {
     TEST_F(TranscedentalsTests, SqrtZero)
     {
-        EXPECT_FLOAT_EQ(mathops::sqrt(0), std::sqrt(0));
+        EXPECT_FLOAT_EQ(mathops::sqrt(0.f), std::sqrt(0.f));
     }
     TEST_F(TranscedentalsTests, SqrtPerfect)
     {
-        EXPECT_FLOAT_EQ(mathops::sqrt(9), std::sqrt(9));
+        EXPECT_FLOAT_EQ(mathops::sqrt(9.f), std::sqrt(9.f));
     }
     TEST_F(TranscedentalsTests, SqrtReal)
     {
@@ -27,16 +27,16 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, SqrtNegative)
     {
-        EXPECT_TRUE(std::isnan(mathops::sqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::sqrt(-1.f)));
     }
 
     TEST_F(TranscedentalsTests, InvSqrtZero)
     {
-        EXPECT_FLOAT_EQ(mathops::invsqrt(0), 1 / std::sqrt(0));
+        EXPECT_FLOAT_EQ(mathops::invsqrt(0.f), 1 / std::sqrt(0.f));
     }
     TEST_F(TranscedentalsTests, InvSqrtPerfect)
     {
-        EXPECT_FLOAT_EQ(mathops::invsqrt(9), 1 / std::sqrt(9));
+        EXPECT_FLOAT_EQ(mathops::invsqrt(9.f), 1 / std::sqrt(9.f));
     }
     TEST_F(TranscedentalsTests, InvSqrtReal)
     {
@@ -48,17 +48,17 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, InvSqrtNegative)
     {
-        EXPECT_TRUE(std::isnan(mathops::invsqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::invsqrt(-1.f)));
     }
 
     TEST_F(TranscedentalsTests, FastSqrtZero)
     {
-        EXPECT_NEAR(mathops::fast_sqrt(0), std::sqrt(0), 0.01 * maximalFastInvSqrtRelativeError);
+        EXPECT_NEAR(mathops::fast_sqrt(0.f), std::sqrt(0.f), 0.01 * maximalFastInvSqrtRelativeError);
     }
     TEST_F(TranscedentalsTests, FastSqrtPerfect)
     {
-        float expected = std::sqrt(9);
-        EXPECT_NEAR(mathops::fast_sqrt(9), expected,
+        float expected = std::sqrt(9.f);
+        EXPECT_NEAR(mathops::fast_sqrt(9.f), expected,
             expected * maximalFastInvSqrtRelativeError);
     }
     TEST_F(TranscedentalsTests, FastSqrtReal)
@@ -75,17 +75,17 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, FastSqrtNegative)
     {
-        EXPECT_TRUE(std::isnan(mathops::fast_sqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::fast_sqrt(-1.f)));
     }
 
     TEST_F(TranscedentalsTests, FastInvSqrtZero)
     {
-        EXPECT_FLOAT_EQ(mathops::fast_invsqrt(0), 1 / std::sqrt(0));
+        EXPECT_FLOAT_EQ(mathops::fast_invsqrt(0.f), 1 / std::sqrt(0.f));
     }
     TEST_F(TranscedentalsTests, FastInvSqrtPerfect)
     {
-        float expected = 1 / std::sqrt(9);
-        EXPECT_NEAR(mathops::fast_invsqrt(9), expected,
+        float expected = 1 / std::sqrt(9.f);
+        EXPECT_NEAR(mathops::fast_invsqrt(9.f), expected,
             expected * maximalFastInvSqrtRelativeError);
     }
     TEST_F(TranscedentalsTests, FastInvSqrtReal)
@@ -102,12 +102,12 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, FastInvSqrtNegative)
     {
-        EXPECT_TRUE(std::isnan(mathops::fast_invsqrt(-1)));
+        EXPECT_TRUE(std::isnan(mathops::fast_invsqrt(-1.f)));
     }
 
     TEST_F(TranscedentalsTests, SinZero)
     {
-        EXPECT_FLOAT_EQ(mathops::sin(0), std::sin(0));
+        EXPECT_FLOAT_EQ(mathops::sin(0.f), std::sin(0.f));
     }
     TEST_F(TranscedentalsTests, SinReal)
     {
@@ -119,12 +119,12 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, SinNegative)
     {
-        EXPECT_FLOAT_EQ(mathops::sin(-1), std::sin(-1));
+        EXPECT_FLOAT_EQ(mathops::sin(-1.f), std::sin(-1.f));
     }
 
     TEST_F(TranscedentalsTests, CosZero)
     {
-        EXPECT_FLOAT_EQ(mathops::cos(0), std::cos(0));
+        EXPECT_FLOAT_EQ(mathops::cos(0.f), std::cos(0.f));
     }
     TEST_F(TranscedentalsTests, CosReal)
     {
@@ -136,12 +136,12 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, CosNegative)
     {
-        EXPECT_FLOAT_EQ(mathops::cos(-1), std::cos(-1));
+        EXPECT_FLOAT_EQ(mathops::cos(-1.f), std::cos(-1.f));
     }
 
     TEST_F(TranscedentalsTests, FastSinZero)
     {
-        EXPECT_NEAR(mathops::fast_sin(0), std::sin(0), maximalSinCosAbsoluteError);
+        EXPECT_NEAR(mathops::fast_sin(0.f), std::sin(0.f), maximalSinCosAbsoluteError);
     }
     TEST_F(TranscedentalsTests, FastSinReal)
     {
@@ -153,12 +153,12 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, FastSinNegative)
     {
-        EXPECT_NEAR(mathops::fast_sin(-1), std::sin(-1), maximalSinCosAbsoluteError);
+        EXPECT_NEAR(mathops::fast_sin(-1.f), std::sin(-1.f), maximalSinCosAbsoluteError);
     }
 
     TEST_F(TranscedentalsTests, FastCosZero)
     {
-        EXPECT_NEAR(mathops::fast_cos(0), std::cos(0), maximalSinCosAbsoluteError);
+        EXPECT_NEAR(mathops::fast_cos(0.f), std::cos(0.f), maximalSinCosAbsoluteError);
     }
     TEST_F(TranscedentalsTests, FastCosReal)
     {
@@ -170,12 +170,12 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, FastCosNegative)
     {
-        EXPECT_NEAR(mathops::fast_cos(-1), std::cos(-1), maximalSinCosAbsoluteError);
+        EXPECT_NEAR(mathops::fast_cos(-1.f), std::cos(-1.f), maximalSinCosAbsoluteError);
     }
 
     TEST_F(TranscedentalsTests, TanZero)
     {
-        EXPECT_FLOAT_EQ(mathops::tan(0), std::tan(0));
+        EXPECT_FLOAT_EQ(mathops::tan(0.f), std::tan(0.f));
     }
     TEST_F(TranscedentalsTests, TanPi2)
     {
@@ -192,12 +192,12 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, TanNegative)
     {
-        EXPECT_FLOAT_EQ(mathops::tan(-1), std::tan(-1));
+        EXPECT_FLOAT_EQ(mathops::tan(-1.f), std::tan(-1.f));
     }
     
     TEST_F(TranscedentalsTests, CotZero)
     {
-        EXPECT_FLOAT_EQ(mathops::cot(0), 1 / std::tan(0));
+        EXPECT_FLOAT_EQ(mathops::cot(0.f), 1 / std::tan(0.f));
     }
     TEST_F(TranscedentalsTests, CotPi2)
     {
@@ -214,7 +214,7 @@ namespace tests
     }
     TEST_F(TranscedentalsTests, CotNegative)
     {
-        EXPECT_FLOAT_EQ(mathops::cot(-1), 1 / std::tan(-1));
+        EXPECT_FLOAT_EQ(mathops::cot(-1.f), 1 / std::tan(-1.f));
     }
 } // tests
 } // analysis

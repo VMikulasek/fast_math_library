@@ -13,6 +13,8 @@ namespace tests
     static constexpr float maximalFastInvSqrtRelativeError = 0.00175124;
     static constexpr float maximalSinCosAbsoluteError = 0.00048828128;
 
+#ifdef HAS_AVX
+
     TEST(FloatAvxVector4, VecAddPositive)
     {
         constexpr size_t vecLen = 4;
@@ -236,6 +238,8 @@ namespace tests
         }
     }
 
+#ifdef HAS_AVX2
+
     TEST(FloatAvxVector4, VecFastSqrt)
     {
         constexpr size_t vecLen = 4;
@@ -243,7 +247,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        auto res = simd::vec::fast_sqrtv4<float, simd::InstructionSet::AVX>(vec);
+        auto res = simd::vec::fast_sqrtv4<float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -258,7 +262,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        auto res = simd::vec::fast_invsqrtv4<float, simd::InstructionSet::AVX>(vec);
+        auto res = simd::vec::fast_invsqrtv4<float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -266,6 +270,8 @@ namespace tests
             EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
+
+#endif // HAS_AVX2
 
     TEST(FloatAvxVector4, VecFastSinPositive)
     {
@@ -391,5 +397,7 @@ namespace tests
         EXPECT_FLOAT_EQ(res.data[2], 0.626039103584565);
         EXPECT_FLOAT_EQ(res.data[3], 0.464480625240161);
     }
+
+#endif // HAS_AVX
 }
 }

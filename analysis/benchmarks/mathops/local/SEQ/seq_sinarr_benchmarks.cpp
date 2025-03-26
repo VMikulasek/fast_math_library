@@ -1,6 +1,6 @@
     #include <mathops_shared_fields.hpp>
     #include <common/detail/memory_common.inl>
-    #include <mathops/detail/SEQ/seq_transcedentals.hpp>
+    #include <mathops/detail/SEQ/seq_transcendentals.hpp>
 
     #include <benchmark/benchmark.h>
 

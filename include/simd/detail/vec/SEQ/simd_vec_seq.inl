@@ -2,7 +2,7 @@
 #define SIMDVECSEQ_INL
 
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
-#include <mathops/transcedentals.hpp>
+#include <mathops/transcendentals.hpp>
 
 #include <cmath>
 

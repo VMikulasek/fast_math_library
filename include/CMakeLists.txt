@@ -15,7 +15,7 @@ simd/simd_vec.hpp)
 
 set(MATHOPS_INCLUDE
 mathops/sums.hpp
-mathops/transcedentals.hpp
+mathops/transcendentals.hpp
 mathops/statisticals.hpp)
 
 set(SIMD_OPERATIONS
@@ -51,22 +51,22 @@ simd/detail/vec/VEC/simd_vec4_vec.inl)
 
 set(MATHOPS_DETAIL
 mathops/detail/sums.inl
-mathops/detail/transcedentals.inl
+mathops/detail/transcendentals.inl
 mathops/detail/statisticals.inl)
 
 set(MATHOPS_VEC
 mathops/detail/VEC/vec_sums.hpp
 mathops/detail/VEC/vec_sums.inl
-mathops/detail/VEC/avx_transcedentals.hpp
-mathops/detail/VEC/avx_transcedentals.inl
+mathops/detail/VEC/vec_transcendentals.hpp
+mathops/detail/VEC/vec_transcendentals.inl
 mathops/detail/VEC/vec_statisticals.hpp
 mathops/detail/VEC/vec_statisticals.inl)
 
 set(MATHOPS_SEQ
 mathops/detail/SEQ/seq_sums.hpp
 mathops/detail/SEQ/seq_sums.inl
-mathops/detail/SEQ/seq_transcedentals.hpp
-mathops/detail/SEQ/seq_transcedentals.inl
+mathops/detail/SEQ/seq_transcendentals.hpp
+mathops/detail/SEQ/seq_transcendentals.inl
 mathops/detail/SEQ/seq_statisticals.hpp
 mathops/detail/SEQ/seq_statisticals.inl)
 

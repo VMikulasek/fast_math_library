@@ -123,9 +123,9 @@ namespace simd
     {
         static_assert(std::is_floating_point_v<T>);
 
-        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX && HAS_AVX2)
         {
-            return vec::fast_sqrtv2<T, InstructionSet::AVX>(*this);
+            return vec::fast_sqrtv2<T, InstructionSet::AVX, InstructionSet::AVX2>(*this);
         }
         else
         {
@@ -144,9 +144,9 @@ namespace simd
     {
         static_assert(std::is_floating_point_v<T>);
 
-        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        if constexpr (std::is_same_v<T, float> && HAS_AVX && HAS_AVX2)
         {
-            return vec::fast_invsqrtv2<T, InstructionSet::AVX>(*this);
+            return vec::fast_invsqrtv2<T, InstructionSet::AVX, InstructionSet::AVX2>(*this);
         }
         else
         {

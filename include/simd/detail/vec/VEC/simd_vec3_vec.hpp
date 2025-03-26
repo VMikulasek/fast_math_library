@@ -24,9 +24,9 @@ namespace vec
     template<typename T, InstructionSet S>
     inline Vec<3, T> maxv3(const Vec<3, T> &vec1, const Vec<3, T> &vec2);
 
-    template<typename T, InstructionSet S>
+    template<typename T, InstructionSet FS, InstructionSet IS>
     inline Vec<3, T> fast_sqrtv3(const Vec<3, T> &vec);
-    template<typename T, InstructionSet S>
+    template<typename T, InstructionSet FS, InstructionSet IS>
     inline Vec<3, T> fast_invsqrtv3(const Vec<3, T> &vec);
 
     template<typename T, InstructionSet S>

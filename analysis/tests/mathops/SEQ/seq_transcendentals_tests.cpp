@@ -1,5 +1,5 @@
-#include <mathops/transcedentals_tests_fixture.hpp>
-#include <mathops/detail/SEQ/seq_transcedentals.hpp>
+#include <mathops/transcendentals_tests_fixture.hpp>
+#include <mathops/detail/SEQ/seq_transcendentals.hpp>
 #include <mathops_shared_fields.hpp>
 
 #include <gtest/gtest.h>
@@ -14,25 +14,25 @@ namespace tests
     protected:
         void test_sqrt_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_sqrt_arr(mathops::seq::fast_sqrt_arr,
+            TranscedentalsTests::test_sqrt_arr(mathops::seq::fast_sqrt_arr<float>,
                 arr, size);
         }
 
         void test_invsqrt_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_invsqrt_arr(mathops::seq::fast_invsqrt_arr,
+            TranscedentalsTests::test_invsqrt_arr(mathops::seq::fast_invsqrt_arr<float>,
                 arr, size);
         }
 
         void test_sin_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_sin_arr(mathops::seq::fast_sin_arr,
+            TranscedentalsTests::test_sin_arr(mathops::seq::fast_sin_arr<float>,
                 arr, size);
         }
 
         void test_cos_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_cos_arr(mathops::seq::fast_cos_arr,
+            TranscedentalsTests::test_cos_arr(mathops::seq::fast_cos_arr<float>,
                 arr, size);
         }
     };
@@ -171,37 +171,37 @@ namespace tests
 
     TEST_F(SeqTranscedentalsTests, SqrtArrBigArr)
     {
-        TranscedentalsTests::test_sqrt_arr(mathops::seq::sqrt_arr,
+        TranscedentalsTests::test_sqrt_arr(mathops::seq::sqrt_arr<float>,
             _9ElemArr, _9_ELEM_ARR_SIZE);
     }
 
     TEST_F(SeqTranscedentalsTests, InvSqrtArrBigArr)
     {
-        TranscedentalsTests::test_invsqrt_arr(mathops::seq::invsqrt_arr,
+        TranscedentalsTests::test_invsqrt_arr(mathops::seq::invsqrt_arr<float>,
             _9ElemArr, _9_ELEM_ARR_SIZE);
     }
 
     TEST_F(SeqTranscedentalsTests, SinArrBigArr)
     {
-        TranscedentalsTests::test_sin_arr(mathops::seq::sin_arr,
+        TranscedentalsTests::test_sin_arr(mathops::seq::sin_arr<float>,
             _9ElemArr, _9_ELEM_ARR_SIZE);
     }
 
     TEST_F(SeqTranscedentalsTests, CosArrBigArr)
     {
-        TranscedentalsTests::test_cos_arr(mathops::seq::cos_arr,
+        TranscedentalsTests::test_cos_arr(mathops::seq::cos_arr<float>,
             _9ElemArr, _9_ELEM_ARR_SIZE);
     }
 
     TEST_F(SeqTranscedentalsTests, TanArrBigArr)
     {
-        TranscedentalsTests::test_tan_arr(mathops::seq::tan_arr,
+        TranscedentalsTests::test_tan_arr(mathops::seq::tan_arr<float>,
             _9ElemArr, _9_ELEM_ARR_SIZE);
     }
 
     TEST_F(SeqTranscedentalsTests, CotArrBigArr)
     {
-        TranscedentalsTests::test_cot_arr(mathops::seq::cot_arr,
+        TranscedentalsTests::test_cot_arr(mathops::seq::cot_arr<float>,
             _9ElemArr, _9_ELEM_ARR_SIZE);
     }
 } // namespace tests

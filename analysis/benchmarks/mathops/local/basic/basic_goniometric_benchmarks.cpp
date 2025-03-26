@@ -1,4 +1,4 @@
-#include <mathops/transcedentals.hpp>
+#include <mathops/transcendentals.hpp>
 
 #include <benchmark/benchmark.h>
 

@@ -4,7 +4,7 @@
 #include <simd/detail/vec/VEC/simd_vec_vec.hpp>
 #include <simd/simd_operations_avx.hpp>
 #include <simd/simd_common.hpp>
-#include <mathops/detail/VEC/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/vec_transcendentals.hpp>
 
 #include <cmath>
 
@@ -195,17 +195,17 @@ namespace vec
         return result;
     }
 
-    template<size_t L, typename T, InstructionSet S>
+    template<size_t L, typename T, InstructionSet FS, InstructionSet IS>
     inline Vec<L, T> fast_sqrtv(const Vec<L, T> &vec)
     {
-        using Ops = SIMDOperations<T, S>;
+        using Ops = SIMDOperations<T, FS>;
         Vec<L, T> result;
 
         size_t i = 0;
 
         for (; i + Ops::REG_SIZE < L; i += Ops::REG_SIZE)
         {
-            mathops::avx::fast_sqrt_arr(&(vec.data[i]), L, &(result.data[i]));
+            mathops::vec::fast_sqrt_arr<T, FS, IS>(&(vec.data[i]), L, &(result.data[i]));
         }
 
         for (; i < L; i++)
@@ -215,17 +215,17 @@ namespace vec
         
         return result;
     }
-    template<size_t L, typename T, InstructionSet S>
+    template<size_t L, typename T, InstructionSet FS, InstructionSet IS>
     inline Vec<L, T> fast_invsqrtv(const Vec<L, T> &vec)
     {
-        using Ops = SIMDOperations<T, S>;
+        using Ops = SIMDOperations<T, FS>;
         Vec<L, T> result;
 
         size_t i = 0;
 
         for (; i + Ops::REG_SIZE < L; i += Ops::REG_SIZE)
         {
-            mathops::avx::fast_invsqrt_arr(&(vec.data[i]), L, &(result.data[i]));
+            mathops::vec::fast_invsqrt_arr<T, FS, IS>(&(vec.data[i]), L, &(result.data[i]));
         }
 
         for (; i < L; i++)
@@ -246,7 +246,7 @@ namespace vec
 
         for (; i + Ops::REG_SIZE < L; i += Ops::REG_SIZE)
         {
-            mathops::avx::fast_sin_arr(&(vec.data[i]), L, &(result.data[i]));
+            mathops::vec::fast_sin_arr<T, S>(&(vec.data[i]), L, &(result.data[i]));
         }
 
         for (; i < L; i++)
@@ -266,7 +266,7 @@ namespace vec
 
         for (; i + Ops::REG_SIZE < L; i += Ops::REG_SIZE)
         {
-            mathops::avx::fast_cos_arr(&(vec.data[i]), L, &(result.data[i]));
+            mathops::vec::fast_cos_arr<T, S>(&(vec.data[i]), L, &(result.data[i]));
         }
 
         for (; i < L; i++)
