@@ -1,6 +1,7 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
-#include <mathops/detail/AVX/avx_statisticals.hpp>
+#include <mathops/detail/VEC/vec_statisticals.hpp>
+#include <simd/simd_common.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -15,7 +16,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::variance(arr, size);
+            float res = mathops::vec::variance<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -25,7 +26,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::sample_variance(arr, size);
+            float res = mathops::vec::sample_variance<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -35,7 +36,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::variance(arr, probabilities, size);
+            float res = mathops::vec::variance<float, simd::InstructionSet::AVX>(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
     }

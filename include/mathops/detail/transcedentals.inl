@@ -2,7 +2,7 @@
 #define TRANSCEDENTALS_INL
 
 #include <mathops/transcedentals.hpp>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/avx_transcedentals.hpp>
 #include <mathops/detail/SEQ/seq_transcedentals.hpp>
 #include <common/detail/memory_common.inl>
 #include <simd/simd_common.hpp>

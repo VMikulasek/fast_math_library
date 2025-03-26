@@ -1,7 +1,7 @@
 #ifdef HAS_AVX
 
 #include <mathops/sums_tests_fixture.hpp>
-#include <mathops/detail/AVX/avx_sums.hpp>
+#include <mathops/detail/VEC/avx_sums.hpp>
 
 #include <gtest/gtest.h>
 #include <numeric> // std::reduce

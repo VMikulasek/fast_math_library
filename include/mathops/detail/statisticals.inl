@@ -2,155 +2,248 @@
 #define STATISTICALS_INL
 
 #include <mathops/statisticals.hpp>
-#include <mathops/detail/AVX/avx_statisticals.hpp>
+#include <mathops/detail/VEC/vec_statisticals.hpp>
 #include <mathops/detail/SEQ/seq_statisticals.hpp>
+
+#include <type_traits>
 
 namespace mathops
 {
-#if defined(HAS_AVX)
-
-#define MIN avx::min
-#define MAX avx::max
-
-#define ARITHMETIC_MEAN avx::arithmetic_mean
-#define GEOMETRIC_MEAN avx::geometric_mean
-#define WEIGHTED_MEAN avx::weighted_mean
-
-#define VARIANCE avx::variance
-#define SAMPLE_VARIANCE avx::sample_variance
-#define STD_DEVIATION avx::std_deviation
-#define SAMPLE_STD_DEVIATION avx::sample_std_deviation
-
-#else // HAS_AVX
-
-#define MIN seq::min
-#define MAX seq::max
-
-#define ARITHMETIC_MEAN seq::arithmetic_mean
-#define GEOMETRIC_MEAN seq::geometric_mean
-#define WEIGHTED_MEAN seq::weighted_mean
-
-#define VARIANCE seq::variance
-#define SAMPLE_VARIANCE seq::sample_variance
-#define STD_DEVIATION seq::std_deviation
-#define SAMPLE_STD_DEVIATION seq::sample_std_deviation
-
-#endif // HAS_AVX
-
-    inline float min(const float *arr, size_t size)
+    template<typename T>
+    inline T min(const T *arr, size_t size)
     {
-        return MIN(arr, size);
+        static_assert(std::is_arithmetic_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::min<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::min(arr, size);
+        }
     }
-    inline float min(const std::vector<float> &arr)
+    template<typename T>
+    inline T min(const std::vector<T> &arr)
     {
-        return MIN(arr.data(), arr.size());
+        return min(arr.data(), arr.size());
     }
-    inline float max(const float *arr, size_t size)
+    template<typename T>
+    inline T max(const T *arr, size_t size)
     {
-        return MAX(arr, size);
+        static_assert(std::is_arithmetic_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::max<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::max(arr, size);
+        }   
     }
-    inline float max(const std::vector<float> &arr)
+    template<typename T>
+    inline T max(const std::vector<T> &arr)
     {
-        return MAX(arr.data(), arr.size());
+        return max(arr.data(), arr.size());
     }
 
-    inline float arithmetic_mean(const float *arr, size_t size)
+    template<typename T>
+    inline T arithmetic_mean(const T *arr, size_t size)
     {
-        return ARITHMETIC_MEAN(arr, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::arithmetic_mean<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::arithmetic_mean(arr, size);
+        }
     }
-    inline float arithmetic_mean(const std::vector<float> &arr)
+    template<typename T>
+    inline T arithmetic_mean(const std::vector<T> &arr)
     {
-        return ARITHMETIC_MEAN(arr.data(), arr.size());
+        return arithmetic_mean(arr.data(), arr.size());
     }
-    inline float geometric_mean(const float *arr, size_t size)
+    template<typename T>
+    inline T geometric_mean(const T *arr, size_t size)
     {
-        return GEOMETRIC_MEAN(arr, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::geometric_mean<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::geometric_mean(arr, size);
+        }
     }
-    inline float geometric_mean(const std::vector<float> &arr)
+    template<typename T>
+    inline T geometric_mean(const std::vector<T> &arr)
     {
-        return GEOMETRIC_MEAN(arr.data(), arr.size());
+        return geometric_mean(arr.data(), arr.size());
     }
-    inline float weighted_mean(const float *values, const float *weights, size_t size)
+    template<typename T>
+    inline T weighted_mean(const T *values, const T *weights, size_t size)
     {
-        return WEIGHTED_MEAN(values, weights, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::weighted_mean<T, simd::InstructionSet::AVX>(values, weights, size);
+        }
+        else
+        {
+            return seq::weighted_mean(values, weights, size);
+        }
     }
-    inline float weighted_mean(const std::vector<float> &values, const std::vector<float> &weights)
+    template<typename T>
+    inline T weighted_mean(const std::vector<T> &values, const std::vector<T> &weights)
     {
-        return WEIGHTED_MEAN(values.data(), weights.data(), values.size());
+        return weighted_mean(values.data(), weights.data(), values.size());
     }
 
-    inline int mode(const int *arr, size_t size)
+    template<typename T>
+    inline T mode(const T *arr, size_t size)
     {
+        static_assert(std::is_integral_v<T>);
+
         return seq::mode(arr, size);
     }
-    inline int mode(const std::vector<int> &arr)
+    template<typename T>
+    inline T mode(const std::vector<T> &arr)
     {
         return seq::mode(arr.data(), arr.size());
     }
-    inline float median(const float *arr, size_t size)
+    template<typename T>
+    inline T median(const T *arr, size_t size)
     {
+        static_assert(std::is_arithmetic_v<T>);
+
         return seq::median(arr, size);
     }
-    inline float median(const std::vector<float> &arr)
-    {
-        return seq::median(arr.data(), arr.size());
-    }
-    inline float median(const int *arr, size_t size)
-    {
-        return seq::median(arr, size);
-    }
-    inline float median(const std::vector<int> &arr)
+    template<typename T>
+    inline T median(const std::vector<T> &arr)
     {
         return seq::median(arr.data(), arr.size());
     }
 
-    inline float variance(const float *arr, size_t size)
+    template<typename T>
+    inline T variance(const T *arr, size_t size)
     {
-        return VARIANCE(arr, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::variance<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::variance(arr, size);
+        }
     }
-    inline float variance(const std::vector<float> &arr)
+    template<typename T>
+    inline T variance(const std::vector<T> &arr)
     {
-        return VARIANCE(arr.data(), arr.size());
+        return variance(arr.data(), arr.size());
     }
-    inline float variance(const float *values, const float *probabilities, size_t size)
+    template<typename T>
+    inline T variance(const T *values, const T *probabilities, size_t size)
     {
-        return VARIANCE(values, probabilities, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::variance<T, simd::InstructionSet::AVX>(values, probabilities, size);
+        }
+        else
+        {
+            return seq::variance(values, probabilities, size);
+        }
     }
-    inline float variance(const std::vector<float> &values, const std::vector<float> &probabilities)
+    template<typename T>
+    inline T variance(const std::vector<T> &values, const std::vector<T> &probabilities)
     {
-        return VARIANCE(values.data(), probabilities.data(), values.size());
+        return variance(values.data(), probabilities.data(), values.size());
     }
-    inline float sample_variance(const float *arr, size_t size)
+    template<typename T>
+    inline T sample_variance(const T *arr, size_t size)
     {
-        return SAMPLE_VARIANCE(arr, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::sample_variance<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::sample_variance(arr, size);
+        }
     }
-    inline float sample_variance(const std::vector<float> &arr)
+    template<typename T>
+    inline T sample_variance(const std::vector<T> &arr)
     {
-        return SAMPLE_VARIANCE(arr.data(), arr.size());
+        return sample_variance(arr.data(), arr.size());
     }
-    inline float std_deviation(const float *arr, size_t size)
+    template<typename T>
+    inline T std_deviation(const T *arr, size_t size)
     {
-        return STD_DEVIATION(arr, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::std_deviation<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::std_deviation(arr, size);
+        }
     }
-    inline float std_deviation(const std::vector<float> &arr)
+    template<typename T>
+    inline T std_deviation(const std::vector<T> &arr)
     {
-        return STD_DEVIATION(arr.data(), arr.size());
+        return std_deviation(arr.data(), arr.size());
     }
-    inline float std_deviation(const float *values, const float *probabilities, size_t size)
+    template<typename T>
+    inline T std_deviation(const T *values, const T *probabilities, size_t size)
     {
-        return STD_DEVIATION(values, probabilities, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::std_deviation<T, simd::InstructionSet::AVX>(values, probabilities, size);
+        }
+        else
+        {
+            return seq::std_deviation(values, probabilities, size);
+        }
     }
-    inline float std_deviation(const std::vector<float> &values, const std::vector<float> &probabilities)
+    template<typename T>
+    inline T std_deviation(const std::vector<T> &values, const std::vector<T> &probabilities)
     {
-        return STD_DEVIATION(values.data(), probabilities.data(), values.size());
+        return std_deviation(values.data(), probabilities.data(), values.size());
     }
-    inline float sample_std_deviation(const float *arr, size_t size)
+    template<typename T>
+    inline T sample_std_deviation(const T *arr, size_t size)
     {
-        return SAMPLE_STD_DEVIATION(arr, size);
+        static_assert(std::is_floating_point_v<T>);
+
+        if constexpr (std::is_same_v<T, float> && HAS_AVX)
+        {
+            return vec::sample_std_deviation<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::sample_std_deviation(arr, size);
+        }
     }
-    inline float sample_std_deviation(const std::vector<float> &arr)
+    template<typename T>
+    inline T sample_std_deviation(const std::vector<T> &arr)
     {
-        return SAMPLE_STD_DEVIATION(arr.data(), arr.size());
+        return sample_std_deviation(arr.data(), arr.size());
     }
 } // namespace mathops
 

@@ -1,7 +1,7 @@
 #ifndef AVX_TRANSCEDENTALS_INL
 #define AVX_TRANSCEDENTALS_INL
 
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/avx_transcedentals.hpp>
 #include <mathops/transcedentals.hpp>
 #include <simd/simd_operations.hpp>
 

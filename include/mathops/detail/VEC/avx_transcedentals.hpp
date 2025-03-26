@@ -15,6 +15,6 @@ namespace avx
 } // namespace avx
 } // namespace mathops
 
-#include <mathops/detail/AVX/avx_transcedentals.inl>
+#include <mathops/detail/VEC/avx_transcedentals.inl>
 
 #endif // AVX_TRANSCEDENTALS_HPP

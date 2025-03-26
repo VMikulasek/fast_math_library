@@ -1,5 +1,5 @@
 #include <mathops/transcedentals_tests_fixture.hpp>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/avx_transcedentals.hpp>
 #include <mathops_shared_fields.hpp>
 
 #include <gtest/gtest.h>

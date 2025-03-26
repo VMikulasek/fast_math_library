@@ -2,7 +2,7 @@
 #define SUMS_INL
 
 #include <mathops/sums.hpp>
-#include <mathops/detail/AVX/avx_sums.hpp>
+#include <mathops/detail/VEC/avx_sums.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
 #include <common/detail/memory_common.inl>
 

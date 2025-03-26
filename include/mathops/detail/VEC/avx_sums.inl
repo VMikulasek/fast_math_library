@@ -1,7 +1,7 @@
 #ifndef AVX_SUMS_INL
 #define AVX_SUMS_INL
 
-#include <mathops/detail/AVX/avx_sums.hpp>
+#include <mathops/detail/VEC/avx_sums.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
 #include <simd/simd_operations.hpp>
 
