@@ -2,7 +2,7 @@
 #define SIMD_VEC3_VEC_INL
 
 #include <simd/detail/vec/VEC/simd_vec3_vec.hpp>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/avx_transcedentals.hpp>
 #include <simd/simd_common.hpp>
 
 namespace simd
@@ -114,8 +114,6 @@ namespace vec
     template<typename T, InstructionSet S>
     inline Vec<3, T> fast_sqrtv3(const Vec<3, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast square root only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
@@ -132,8 +130,6 @@ namespace vec
     template<typename T, InstructionSet S>
     inline Vec<3, T> fast_invsqrtv3(const Vec<3, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast inverse square root only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
@@ -149,8 +145,6 @@ namespace vec
     template<typename T, InstructionSet S>
     inline Vec<3, T> fast_sinv3(const Vec<3, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast sin only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
@@ -167,8 +161,6 @@ namespace vec
     template<typename T, InstructionSet S>
     inline Vec<3, T> fast_cosv3(const Vec<3, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast cos only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
@@ -221,8 +213,6 @@ namespace vec
     template<typename T, InstructionSet S>
     inline T lengthv3(const Vec<3, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         typename Ops::Reg reg = Ops::load_vector(vec.data);
@@ -236,8 +226,6 @@ namespace vec
     template<typename T, InstructionSet S>
     inline Vec<3, T> normalizev3(const Vec<3, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Normalize only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         typename Ops::Reg inputReg = Ops::load_vector(vec.data);

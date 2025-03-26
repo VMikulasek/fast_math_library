@@ -1,5 +1,5 @@
 #include <mathops_shared_fields.hpp>
-#include <mathops/detail/AVX/avx_sums.hpp>
+#include <mathops/detail/VEC/avx_sums.hpp>
 
 #include <benchmark/benchmark.h>
 

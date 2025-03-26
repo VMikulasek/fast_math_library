@@ -8,7 +8,6 @@ namespace simd
 {
 namespace vec
 {
-
     template<typename T, InstructionSet S>
     inline Vec<2, T> addv2(const Vec<2, T> &vec1, const Vec<2, T> &vec2);
     template<typename T, InstructionSet S>

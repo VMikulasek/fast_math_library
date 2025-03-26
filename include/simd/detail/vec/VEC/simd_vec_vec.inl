@@ -4,7 +4,7 @@
 #include <simd/detail/vec/VEC/simd_vec_vec.hpp>
 #include <simd/simd_operations_avx.hpp>
 #include <simd/simd_common.hpp>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/avx_transcedentals.hpp>
 
 #include <cmath>
 
@@ -12,9 +12,6 @@ namespace simd
 {
 namespace vec
 {
-
-#ifdef HAS_AVX
-
     template<size_t L, typename T, InstructionSet S>
     inline Vec<L, T> addv(const Vec<L, T> &vec1, const Vec<L, T> &vec2)
     {
@@ -201,8 +198,6 @@ namespace vec
     template<size_t L, typename T, InstructionSet S>
     inline Vec<L, T> fast_sqrtv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast square root only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
         Vec<L, T> result;
 
@@ -223,8 +218,6 @@ namespace vec
     template<size_t L, typename T, InstructionSet S>
     inline Vec<L, T> fast_invsqrtv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast inverse square root only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
         Vec<L, T> result;
 
@@ -246,8 +239,6 @@ namespace vec
     template<size_t L, typename T, InstructionSet S>
     inline Vec<L, T> fast_sinv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast sin only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
         Vec<L, T> result;
 
@@ -268,8 +259,6 @@ namespace vec
     template<size_t L, typename T, InstructionSet S>
     inline Vec<L, T> fast_cosv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast cos only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
         Vec<L, T> result;
 
@@ -322,8 +311,6 @@ namespace vec
     template<size_t L, typename T, InstructionSet S>
     inline T lengthv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Length root only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
         
         T length = 0;
@@ -351,8 +338,6 @@ namespace vec
     template<size_t L, typename T, InstructionSet S>
     inline Vec<L, T> normalizev(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Normalize only supported for floating point data types.");
-
         using Ops = SIMDOperations<T, S>;
 
         T length = lengthv<L, T, S>(vec);
@@ -375,9 +360,6 @@ namespace vec
 
         return normalized;
     }
-
-#endif // HAS_AVX
-
 } // namespace vec
 } // namespace simd
 

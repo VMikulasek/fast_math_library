@@ -117,11 +117,15 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::sqrt() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         return seq::sqrtv(*this);
     }
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_sqrt() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
             return vec::fast_sqrtv<L, T, InstructionSet::AVX>(*this);
@@ -134,11 +138,15 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::invsqrt() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         return seq::invsqrtv(*this);
     }
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_invsqrt() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
             return vec::fast_invsqrtv<L, T, InstructionSet::AVX>(*this);
@@ -152,26 +160,36 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::sin() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         return seq::sinv(*this);
     }
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::cos() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         return seq::cosv(*this);
     }
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::tan() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         return seq::tanv(*this);
     }
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::cot() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         return seq::cotv(*this);
     }
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_sin() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
             return vec::fast_sinv<L, T, InstructionSet::AVX>(*this);
@@ -184,6 +202,8 @@ namespace simd
     template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::fast_cos() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
             return vec::fast_cosv<L, T, InstructionSet::AVX>(*this);
@@ -209,6 +229,8 @@ namespace simd
     template<size_t L, typename T>
     inline T Vec<L, T>::length() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
             return vec::lengthv<L, T, InstructionSet::AVX>(*this);
@@ -220,6 +242,8 @@ namespace simd
     }template<size_t L, typename T>
     inline Vec<L, T> Vec<L, T>::normalize() const
     {
+        static_assert(std::is_floating_point_v<T>);
+
         if constexpr (std::is_same_v<T, float> && HAS_AVX)
         {
             return vec::normalizev<L, T, InstructionSet::AVX>(*this);

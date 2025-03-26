@@ -1,6 +1,6 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/avx_transcedentals.hpp>
 
 #include <benchmark/benchmark.h>
 

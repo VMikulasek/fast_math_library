@@ -39,7 +39,7 @@ set(SIMD_VECTOR_DETAIL_SEQ
 simd/detail/vec/SEQ/simd_vec_seq.hpp
 simd/detail/vec/SEQ/simd_vec_seq.inl)
 
-set(SIMD_VECTOR_DETAIL_AVX
+set(SIMD_VECTOR_DETAIL_VEC
 simd/detail/vec/VEC/simd_vec_vec.hpp
 simd/detail/vec/VEC/simd_vec_vec.inl
 simd/detail/vec/VEC/simd_vec2_vec.hpp
@@ -54,13 +54,13 @@ mathops/detail/sums.inl
 mathops/detail/transcedentals.inl
 mathops/detail/statisticals.inl)
 
-set(MATHOPS_AVX
-mathops/detail/AVX/avx_sums.hpp
-mathops/detail/AVX/avx_sums.inl
-mathops/detail/AVX/avx_transcedentals.hpp
-mathops/detail/AVX/avx_transcedentals.inl
-mathops/detail/AVX/avx_statisticals.hpp
-mathops/detail/AVX/avx_statisticals.inl)
+set(MATHOPS_VEC
+mathops/detail/VEC/avx_sums.hpp
+mathops/detail/VEC/avx_sums.inl
+mathops/detail/VEC/avx_transcedentals.hpp
+mathops/detail/VEC/avx_transcedentals.inl
+mathops/detail/VEC/vec_statisticals.hpp
+mathops/detail/VEC/vec_statisticals.inl)
 
 set(MATHOPS_SEQ
 mathops/detail/SEQ/seq_sums.hpp
@@ -79,7 +79,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops PREFIX "Math include" FILE
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/operations PREFIX "SIMD operations" FILES ${SIMD_OPERATIONS})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec PREFIX "SIMD vector detail" FILES ${SIMD_VECTOR_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail PREFIX "Math detail" FILES ${MATHOPS_DETAIL})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/AVX PREFIX "Math AVX" FILES ${MATHOPS_AVX})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/VEC PREFIX "Math VEC" FILES ${MATHOPS_VEC})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/SEQ PREFIX "Math SEQ" FILES ${MATHOPS_SEQ})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/common/detail PREFIX "Common detail" FILES ${COMMON_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec/SEQ PREFIX "SIMD vector detail seq" FILES ${SIMD_VECTOR_DETAIL_SEQ})
@@ -91,11 +91,11 @@ ${SIMD_VECTOR_DETAIL}
 ${INCLUDE_CMAKELISTS}
 ${MATHOPS_INCLUDE}
 ${MATHOPS_DETAIL}
-${MATHOPS_AVX}
+${MATHOPS_VEC}
 ${MATHOPS_SEQ}
 ${COMMON_DETAIL}
 ${SIMD_VECTOR_DETAIL_SEQ}
-${SIMD_VECTOR_DETAIL_AVX})
+${SIMD_VECTOR_DETAIL_VEC})
 
 if (SSE_SUPPORTED)
 	message(STATUS "SSE supported")
