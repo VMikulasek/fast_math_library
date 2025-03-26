@@ -1,5 +1,6 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
+#include <simd/simd_operations.hpp>
 
 #include <numeric>
 
@@ -11,7 +12,7 @@ namespace benchmarks
 {
     static void BM_PrefixSum(benchmark::State &state, const float *srcArr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        float *dst = _alloc_avxaligned_memory_float(size * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT);
 
         for (auto _ : state)
         {

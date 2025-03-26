@@ -23,15 +23,16 @@ namespace tests
 
         __m256 floatReg;
 
-        alignas(AVX_ALIGNMENT) const int basicVec1[AVX_INT_VECTOR_SIZE]{ 1, 1, 1, 1, 1, 1, 1, 1 };
-        alignas(AVX_ALIGNMENT) const int basicVec2[AVX_INT_VECTOR_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 3 };
-        alignas(AVX_ALIGNMENT) const int negativeVec1[AVX_INT_VECTOR_SIZE]{ -1, -3, -6, -7, -134, 1767, 451, 0 };
-        alignas(AVX_ALIGNMENT) const int negativeVec2[AVX_INT_VECTOR_SIZE]{ 41, 13, 3, -100, -12, -652, -65, -1 };
-        alignas(AVX_ALIGNMENT) const int zerosVec[AVX_INT_VECTOR_SIZE]{ 0, 0, 0, 0, 0, 0, 0 };
-        alignas(AVX_ALIGNMENT) const int bigNumVec1[AVX_INT_VECTOR_SIZE]{ -2147483648, 2147483647, 341431412, 5465281, 13153455, 9999999, 47100 };
-        alignas(AVX_ALIGNMENT) const int bigNumVec2[AVX_INT_VECTOR_SIZE]{ -1, 1, 130451, 1305051, -11034958, 41281010, 405011 };
+        alignas(Ops::ALIGNMENT) const int basicVec1[Ops::REG_SIZE]{ 1, 1, 1, 1, 1, 1, 1, 1 };
+        alignas(Ops::ALIGNMENT) const int basicVec2[Ops::REG_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 3 };
+        alignas(Ops::ALIGNMENT) const int negativeVec1[Ops::REG_SIZE]{ -1, -3, -6, -7, -134, 1767, 451, 0 };
+        alignas(Ops::ALIGNMENT) const int negativeVec2[Ops::REG_SIZE]{ 41, 13, 3, -100, -12, -652, -65, -1 };
+        alignas(Ops::ALIGNMENT) const int zerosVec[Ops::REG_SIZE]{ 0, 0, 0, 0, 0, 0, 0 };
+        alignas(Ops::ALIGNMENT) const int bigNumVec1[Ops::REG_SIZE]{ -2147483648, 2147483647, 341431412, 5465281, 13153455, 9999999, 47100 };
+        alignas(Ops::ALIGNMENT) const int bigNumVec2[Ops::REG_SIZE]{ -1, 1, 130451, 1305051, -11034958, 41281010, 405011 };
 
-        alignas(AVX_ALIGNMENT) const float basicFloatVec[AVX_FLOAT_VECTOR_SIZE]{ 0, 1, -1, 134.134, -451.54, 13415301.4, -624551.7, 0.5 };
+        alignas(Ops::ALIGNMENT) const float basicFloatVec[simd::SIMDOperations<float, simd::InstructionSet::AVX>::REG_SIZE]
+            { 0, 1, -1, 134.134, -451.54, 13415301.4, -624551.7, 0.5 };
 
         const int *usedVec1;
         const int *usedVec2;
@@ -61,10 +62,10 @@ namespace tests
 
         void CheckResult(const std::function<int(int, int)> &operation)
         {
-            alignas(AVX_ALIGNMENT) int result[AVX_INT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) int result[Ops::REG_SIZE];
             Ops::materialize_register(resultReg, result);
 
-            for (unsigned i = 0; i < AVX_INT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 int expected = operation(usedVec1[i], usedVec2[i]);
 
@@ -73,20 +74,20 @@ namespace tests
         }
         void CheckResult(int expected, Ops::Reg reg)
         {
-            alignas(AVX_ALIGNMENT) int result[AVX_INT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) int result[Ops::REG_SIZE];
             Ops::materialize_register(reg, result);
 
-            for (unsigned i = 0; i < AVX_INT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 EXPECT_EQ(result[i], expected);
             }
         }
         void CheckResult(const std::function<int(int,int)> &operation, int num)
         {
-            alignas(AVX_ALIGNMENT) int result[AVX_INT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) int result[Ops::REG_SIZE];
             Ops::materialize_register(resultReg, result);
 
-            for (unsigned i = 0; i < AVX_INT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 int expected = operation(usedVec1[i], num);
 
@@ -120,10 +121,10 @@ namespace tests
     TEST_F(SimdAvx2IntTests, LoadStore)
     {
         Ops::Reg reg = Ops::load_vector(basicVec1);
-        alignas(AVX_ALIGNMENT) int result[AVX_INT_VECTOR_SIZE];
+        alignas(Ops::ALIGNMENT) int result[Ops::REG_SIZE];
         Ops::materialize_register(reg, result);
 
-        for (unsigned i = 0; i < AVX_INT_VECTOR_SIZE; i++)
+        for (unsigned i = 0; i < Ops::REG_SIZE; i++)
         {
             EXPECT_EQ(result[i], basicVec1[i]);
         }

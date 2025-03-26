@@ -1,5 +1,7 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
+#include <simd/simd_operations.hpp>
+#include <simd/simd_common.hpp>
 
 #include <boost/math/statistics/univariate_statistics.hpp>
 
@@ -21,7 +23,7 @@ namespace benchmarks
 
     static void BM_Median9Elem(benchmark::State &state)
     {
-        float *arr = _alloc_aligned_memory_float(_9_ELEM_ARR_SIZE * sizeof(float), AVX_ALIGNMENT);
+        float *arr = _alloc_avxaligned_memory_float(_9_ELEM_ARR_SIZE * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT);
 
         BM_Median(state, arr, _9_ELEM_ARR_SIZE);
 

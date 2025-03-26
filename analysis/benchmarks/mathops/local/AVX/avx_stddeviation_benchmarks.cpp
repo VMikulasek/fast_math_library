@@ -2,6 +2,7 @@
 #include <common/detail/memory_common.inl>
 #include <mathops/detail/VEC/vec_statisticals.hpp>
 #include <simd/simd_common.hpp>
+#include <simd/simd_operations.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -85,7 +86,7 @@ namespace benchmarks
 
     static void BM_StdDeviationWithProbabilities9Elem(benchmark::State &state)
     {
-        alignas(AVX_ALIGNMENT) float probabilities[_9_ELEM_ARR_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 1 }; 
+        alignas(simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT) float probabilities[_9_ELEM_ARR_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 1 }; 
         BM_StdDeviationWithProbabilities(state, _9ElemArr, probabilities, _9_ELEM_ARR_SIZE);
     }
     static void BM_StdDeviationWithProbabilities10kElem(benchmark::State &state)
