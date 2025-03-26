@@ -2,7 +2,7 @@
 #define SIMDVECSEQ_INL
 
 #include <simd/detail/vec/SEQ/simd_vec_seq.hpp>
-#include <mathops/transcedentals.hpp>
+#include <mathops/transcendentals.hpp>
 
 #include <cmath>
 
@@ -99,8 +99,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> sqrtv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Square root only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -113,8 +111,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> fast_sqrtv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast square root only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -127,8 +123,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> invsqrtv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Inverse square root only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -141,8 +135,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> fast_invsqrtv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast inverse square root only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -156,8 +148,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> sinv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Sin only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -170,8 +160,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> cosv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Cos only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -184,8 +172,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> tanv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Tan only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -198,8 +184,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> cotv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Cot only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -212,8 +196,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> fast_sinv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast sin only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -226,8 +208,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> fast_cosv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Fast cos only supported for floating point data types.");
-
         Vec<L, T> result;
 
         for (size_t i = 0; i < L; i++)
@@ -261,8 +241,6 @@ namespace seq
     template<size_t L, typename T>
     inline T lengthv(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
-
         T result = 0;
 
         for(size_t i = 0; i < L; i++)
@@ -275,8 +253,6 @@ namespace seq
     template<size_t L, typename T>
     inline Vec<L, T> normalizev(const Vec<L, T> &vec)
     {
-        static_assert(std::is_floating_point_v<T>, "Length only supported for floating point data types.");
-
         Vec<L, T> result;
 
         T length = lengthv(vec);

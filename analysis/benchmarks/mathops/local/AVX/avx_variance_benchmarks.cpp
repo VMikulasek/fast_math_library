@@ -1,6 +1,8 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
-#include <mathops/detail/AVX/avx_statisticals.hpp>
+#include <mathops/detail/VEC/vec_statisticals.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/simd_operations.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -15,7 +17,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::variance(arr, size);
+            float res = mathops::vec::variance<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -25,7 +27,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::sample_variance(arr, size);
+            float res = mathops::vec::sample_variance<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -35,7 +37,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::variance(arr, probabilities, size);
+            float res = mathops::vec::variance<float, simd::InstructionSet::AVX>(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
     }
@@ -84,7 +86,7 @@ namespace benchmarks
 
     static void BM_VarianceWithProbabilities9Elem(benchmark::State &state)
     {
-        alignas(AVX_ALIGNMENT) float probabilities[_9_ELEM_ARR_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 1 }; 
+        alignas(simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT) float probabilities[_9_ELEM_ARR_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 1 }; 
         BM_VarianceWithProbabilities(state, _9ElemArr, probabilities, _9_ELEM_ARR_SIZE);
     }
     static void BM_VarianceWithProbabilities10kElem(benchmark::State &state)

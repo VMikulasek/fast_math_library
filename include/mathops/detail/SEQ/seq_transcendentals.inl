@@ -1,14 +1,15 @@
-#ifndef SEQ_TRANSCEDENTALS_INL
-#define SEQ_TRANSCEDENTALS_INL
+#ifndef SEQ_TRANSCENDENTALS_INL
+#define SEQ_TRANSCENDENTALS_INL
 
-#include <mathops/detail/SEQ/seq_transcedentals.hpp>
-#include <mathops/transcedentals.hpp>
+#include <mathops/detail/SEQ/seq_transcendentals.hpp>
+#include <mathops/transcendentals.hpp>
 
 namespace mathops
 {
 namespace seq
 {
-    inline void fast_sqrt_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void fast_sqrt_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -16,7 +17,8 @@ namespace seq
         }
     }
 
-    inline void fast_invsqrt_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void fast_invsqrt_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -24,7 +26,8 @@ namespace seq
         }
     }
 
-    inline void fast_sin_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void fast_sin_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -32,7 +35,8 @@ namespace seq
         }
     }
 
-    inline void fast_cos_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void fast_cos_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -40,7 +44,8 @@ namespace seq
         }
     }
 
-    inline void sqrt_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void sqrt_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -48,7 +53,8 @@ namespace seq
         }
     }
 
-    inline void invsqrt_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void invsqrt_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -56,7 +62,8 @@ namespace seq
         }
     }
 
-    inline void sin_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void sin_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -64,7 +71,8 @@ namespace seq
         }
     }
 
-    inline void cos_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void cos_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -72,7 +80,8 @@ namespace seq
         }
     }
 
-    inline void tan_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void tan_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -80,7 +89,8 @@ namespace seq
         }
     }
 
-    inline void cot_arr(const float *arr, size_t size, float *dst)
+    template<typename T>
+    inline void cot_arr(const T *arr, size_t size, T *dst)
     {
         for (size_t i = 0; i < size; i++)
         {
@@ -90,4 +100,4 @@ namespace seq
 } // namespace seq
 } // namespace mathops
 
-#endif // SEQ_TRANSCEDENTALS_INL
+#endif // SEQ_TRANSCENDENTALS_INL

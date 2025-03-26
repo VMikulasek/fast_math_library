@@ -2,45 +2,57 @@
 #define SUMS_INL
 
 #include <mathops/sums.hpp>
-#include <mathops/detail/AVX/avx_sums.hpp>
+#include <mathops/detail/VEC/vec_sums.hpp>
 #include <mathops/detail/SEQ/seq_sums.hpp>
 #include <common/detail/memory_common.inl>
+#include <simd/simd_common.hpp>
+
+#include <type_traits>
 
 namespace mathops
 {
-
-#ifdef HAS_AVX
-
-#define SUM avx::sum
-#define PREFIX_SUM avx::prefix_sum
-
-#else // HAS_AVX
-
-#define SUM seq::sum
-#define PREFIX_SUM seq::prefix_sum
-
-#endif // HAS_AVX
-
-    inline float sum(const float *arr, size_t size)
+    template<typename T>
+    inline T sum(const T *arr, size_t size)
     {
-        return SUM(arr, size);
+        static_assert(std::is_arithmetic_v<T>);
+
+        if constexpr (std::is_same_v<T, T> && HAS_AVX)
+        {
+            return vec::sum<T, simd::InstructionSet::AVX>(arr, size);
+        }
+        else
+        {
+            return seq::sum(arr, size);
+        }
     }
 
-    inline float sum(const std::vector<float> &arr)
+    template<typename T>
+    inline T sum(const std::vector<T> &arr)
     {
         return sum(arr.data(), arr.size());
     }
 
-    inline float *prefix_sum(const float *arr, size_t size)
+    template<typename T>
+    inline T *prefix_sum(const T *arr, size_t size)
     {
+        static_assert(std::is_arithmetic_v<T>);
+
         ALLOC_DST;
 
-        PREFIX_SUM(arr, size, dst);
+        if constexpr (std::is_same_v<T, T> && HAS_AVX)
+        {
+            vec::prefix_sum<T, simd::InstructionSet::AVX>(arr, size, dst);
+        }
+        else
+        {
+            seq::prefix_sum(arr, size, dst);
+        }
 
         return dst;
     }
 
-    inline float *prefix_sum(const std::vector<float> &arr)
+    template<typename T>
+    inline T *prefix_sum(const std::vector<T> &arr)
     {
         return prefix_sum(arr.data(), arr.size());
     }

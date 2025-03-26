@@ -17,23 +17,23 @@ namespace tests
     protected:
         using Ops = simd::SIMDOperations<float, simd::AVX>;
 
-        Ops::AvxReg reg1;
-        Ops::AvxReg reg2;
-        Ops::AvxReg resultReg;
+        Ops::Reg reg1;
+        Ops::Reg reg2;
+        Ops::Reg resultReg;
 
         __m256i intReg;
 
-        alignas(AVX_ALIGNMENT) const float basicVec1[AVX_FLOAT_VECTOR_SIZE]{ 1, 1, 1, 1, 1, 1, 1, 1 };
-        alignas(AVX_ALIGNMENT) const float basicVec2[AVX_FLOAT_VECTOR_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 3 };
-        alignas(AVX_ALIGNMENT) const float decimalVec1[AVX_FLOAT_VECTOR_SIZE] { 1.543, 1.2, 1.134, 1.3, 1.5, 1.13413, 1.1, 1.0 };
-        alignas(AVX_ALIGNMENT) const float decimalVec2[AVX_FLOAT_VECTOR_SIZE] { 2.1, 2.2, 2.3, 2.1341, 2.341, 2.34, 2.1324, 3.1431 };
-        alignas(AVX_ALIGNMENT) const float negativeVec1[AVX_FLOAT_VECTOR_SIZE] { 1.2, 1.1, 1.2, -1.1, 1.2, -1.1, 1.2, 1.1 };
-        alignas(AVX_ALIGNMENT) const float negativeVec2[AVX_FLOAT_VECTOR_SIZE] { -2.1, -2.2, -2.1, -2.2, -2.1, -2.2, -2.1, -3.2 };
-        alignas(AVX_ALIGNMENT) const float zerosVec[AVX_FLOAT_VECTOR_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0 };
-        alignas(AVX_ALIGNMENT) const float bigNumsVec1[AVX_FLOAT_VECTOR_SIZE] { 134541516143341341534.1, 35736435.0, 674674763465.0, 145598647.3, 354.2, 12413451.1324, 134134112141.12, 123341.1341 };
-        alignas(AVX_ALIGNMENT) const float bigNumsVec2[AVX_FLOAT_VECTOR_SIZE] { 1341431.0, 1344313414.0, 13416463.0, 425245264512341341.0, 56335763424522452.0, 76859757.44, 467365573.245, 1341334124351265685.56535 };
+        alignas(Ops::ALIGNMENT) const float basicVec1[Ops::REG_SIZE]{ 1, 1, 1, 1, 1, 1, 1, 1 };
+        alignas(Ops::ALIGNMENT) const float basicVec2[Ops::REG_SIZE]{ 2, 2, 2, 2, 2, 2, 2, 3 };
+        alignas(Ops::ALIGNMENT) const float decimalVec1[Ops::REG_SIZE] { 1.543, 1.2, 1.134, 1.3, 1.5, 1.13413, 1.1, 1.0 };
+        alignas(Ops::ALIGNMENT) const float decimalVec2[Ops::REG_SIZE] { 2.1, 2.2, 2.3, 2.1341, 2.341, 2.34, 2.1324, 3.1431 };
+        alignas(Ops::ALIGNMENT) const float negativeVec1[Ops::REG_SIZE] { 1.2, 1.1, 1.2, -1.1, 1.2, -1.1, 1.2, 1.1 };
+        alignas(Ops::ALIGNMENT) const float negativeVec2[Ops::REG_SIZE] { -2.1, -2.2, -2.1, -2.2, -2.1, -2.2, -2.1, -3.2 };
+        alignas(Ops::ALIGNMENT) const float zerosVec[Ops::REG_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0 };
+        alignas(Ops::ALIGNMENT) const float bigNumsVec1[Ops::REG_SIZE] { 134541516143341341534.1, 35736435.0, 674674763465.0, 145598647.3, 354.2, 12413451.1324, 134134112141.12, 123341.1341 };
+        alignas(Ops::ALIGNMENT) const float bigNumsVec2[Ops::REG_SIZE] { 1341431.0, 1344313414.0, 13416463.0, 425245264512341341.0, 56335763424522452.0, 76859757.44, 467365573.245, 1341334124351265685.56535 };
 
-        alignas(AVX_ALIGNMENT) const int basicIntVec[AVX_INT_VECTOR_SIZE]{ 0, -1345, 9087, 3, 4, -1, 1000000, -1000000 };
+        alignas(Ops::ALIGNMENT) const int basicIntVec[simd::SIMDOperations<int, simd::InstructionSet::AVX2>::REG_SIZE]{ 0, -1345, 9087, 3, 4, -1, 1000000, -1000000 };
 
         const float *usedVec1;
         const float *usedVec2;
@@ -78,23 +78,23 @@ namespace tests
                 i *= 2;
                 const float *workingVec;
 
-                if (i < AVX_FLOAT_VECTOR_SIZE / 2)
+                if (i < Ops::REG_SIZE / 2)
                 {
                     workingVec = vec1;
                 }
-                else if (i < AVX_FLOAT_VECTOR_SIZE)
+                else if (i < Ops::REG_SIZE)
                 {
-                    i -= AVX_FLOAT_VECTOR_SIZE / 2;
+                    i -= Ops::REG_SIZE / 2;
                     workingVec = vec2;
                 }
-                else if (i < AVX_FLOAT_VECTOR_SIZE + AVX_FLOAT_VECTOR_SIZE / 2)
+                else if (i < Ops::REG_SIZE + Ops::REG_SIZE / 2)
                 {
-                    i -= AVX_FLOAT_VECTOR_SIZE / 2;
+                    i -= Ops::REG_SIZE / 2;
                     workingVec = vec1;
                 }
                 else
                 {
-                    i -= AVX_FLOAT_VECTOR_SIZE;
+                    i -= Ops::REG_SIZE;
                     workingVec = vec2;
                 }
 
@@ -113,10 +113,10 @@ namespace tests
 
         void CheckResult(const std::function<float(float)> &operation)
         {
-            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
             Ops::materialize_register(resultReg, result);
 
-            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 float expected = operation(usedVec1[i]);
 
@@ -125,10 +125,10 @@ namespace tests
         }
         void CheckResult(const std::function<float(float, float)> &operation, OperationDirection direction = VERTICAL)
         {
-            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
             Ops::materialize_register(resultReg, result);
 
-            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 float expected = GetExpected(i, usedVec1, usedVec2, direction, operation);
 
@@ -137,10 +137,10 @@ namespace tests
         }
         void CheckResult(const std::function<float(int)> &operation)
         {
-            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
             Ops::materialize_register(resultReg, result);
 
-            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 float expected = operation(usedIntVec[i]);
 
@@ -149,22 +149,22 @@ namespace tests
         }
         void CheckResult(const int *indexes)
         {
-            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
             Ops::materialize_register(resultReg, result);
 
-            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 float expected = usedVec1[indexes[i]];
 
                 ExpectEqFloat(result[i], expected);
             }
         }
-        void CheckResult(float expected, Ops::AvxReg reg)
+        void CheckResult(float expected, Ops::Reg reg)
         {
-            alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+            alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
             Ops::materialize_register(reg, result);
 
-            for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+            for (unsigned i = 0; i < Ops::REG_SIZE; i++)
             {
                 ExpectEqFloat(result[i], expected);
             }
@@ -173,11 +173,11 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, LoadStore)
     {        
-        Ops::AvxReg reg = Ops::load_vector(basicVec1);
-        alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+        Ops::Reg reg = Ops::load_vector(basicVec1);
+        alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
         Ops::materialize_register(reg, result);
 
-        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        for (unsigned i = 0; i < Ops::REG_SIZE; i++)
         {
             EXPECT_FLOAT_EQ(result[i], basicVec1[i]);
         }
@@ -185,7 +185,7 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, SetZeros)
     {
-        Ops::AvxReg reg = Ops::set_register_zero();
+        Ops::Reg reg = Ops::set_register_zero();
 
         CheckResult(0, reg);
     }
@@ -196,7 +196,7 @@ namespace tests
 
         for (unsigned i = 0; i < 50; i++, testNum += 1, testNum *= -2)
         {
-            Ops::AvxReg reg = Ops::set_register(testNum);
+            Ops::Reg reg = Ops::set_register(testNum);
 
             CheckResult(testNum, reg);
         }
@@ -206,13 +206,13 @@ namespace tests
     {
         float testNums[] = {1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f};
 
-        Ops::AvxReg reg = Ops::set_register_each(testNums[0], testNums[1], testNums[2],
+        Ops::Reg reg = Ops::set_register_each(testNums[0], testNums[1], testNums[2],
             testNums[3], testNums[4], testNums[5], testNums[6], testNums[7]);
 
-        alignas(AVX_ALIGNMENT) float result[AVX_FLOAT_VECTOR_SIZE];
+        alignas(Ops::ALIGNMENT) float result[Ops::REG_SIZE];
         Ops::materialize_register(reg, result);
         
-        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        for (unsigned i = 0; i < Ops::REG_SIZE; i++)
         {
             EXPECT_FLOAT_EQ(result[i], testNums[i]);
         }
@@ -220,9 +220,9 @@ namespace tests
 
     TEST_F(SimdAvxFloatTest, MaterializeRegisterAtIndex)
     {
-        Ops::AvxReg reg = Ops::load_vector(decimalVec1);
+        Ops::Reg reg = Ops::load_vector(decimalVec1);
 
-        for (unsigned i = 0; i < AVX_FLOAT_VECTOR_SIZE; i++)
+        for (unsigned i = 0; i < Ops::REG_SIZE; i++)
         {
             EXPECT_FLOAT_EQ(Ops::materialize_register_at_index(reg, i), decimalVec1[i]);
         }

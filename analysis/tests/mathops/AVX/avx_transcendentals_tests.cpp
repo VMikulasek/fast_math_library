@@ -1,6 +1,7 @@
-#include <mathops/transcedentals_tests_fixture.hpp>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/transcendentals_tests_fixture.hpp>
+#include <mathops/detail/VEC/vec_transcendentals.hpp>
 #include <mathops_shared_fields.hpp>
+#include <simd/simd_common.hpp>
 
 #include <gtest/gtest.h>
 #include <cstddef>
@@ -14,25 +15,25 @@ namespace tests
     protected:
         void test_sqrt_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_sqrt_arr(mathops::avx::fast_sqrt_arr,
+            TranscedentalsTests::test_sqrt_arr(mathops::vec::fast_sqrt_arr<float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>,
                 arr, size);
         }
 
         void test_invsqrt_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_invsqrt_arr(mathops::avx::fast_invsqrt_arr,
+            TranscedentalsTests::test_invsqrt_arr(mathops::vec::fast_invsqrt_arr<float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>,
                 arr, size);
         }
 
         void test_sin_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_sin_arr(mathops::avx::fast_sin_arr,
+            TranscedentalsTests::test_sin_arr(mathops::vec::fast_sin_arr<float, simd::InstructionSet::AVX>,
                 arr, size);
         }
 
         void test_cos_arr(const float *arr, size_t size)
         {
-            TranscedentalsTests::test_cos_arr(mathops::avx::fast_cos_arr,
+            TranscedentalsTests::test_cos_arr(mathops::vec::fast_cos_arr<float, simd::InstructionSet::AVX>,
                 arr, size);
         }
     };

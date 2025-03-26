@@ -1,6 +1,8 @@
 #include <mathops_shared_fields.hpp>
 #include <common/detail/memory_common.inl>
-#include <mathops/detail/AVX/avx_transcedentals.hpp>
+#include <mathops/detail/VEC/vec_transcendentals.hpp>
+#include <simd/simd_common.hpp>
+#include <simd/simd_operations.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -12,12 +14,12 @@ namespace benchmarks
 
     static void BM_Sin(benchmark::State &state, const float *arr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        float *dst = _alloc_avxaligned_memory_float(size * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT);
 
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            mathops::avx::fast_sin_arr(arr, size, dst);
+            mathops::vec::fast_sin_arr<float, simd::InstructionSet::AVX>(arr, size, dst);
             benchmark::DoNotOptimize(dst);
         }
 

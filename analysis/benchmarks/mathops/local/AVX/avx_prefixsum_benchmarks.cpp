@@ -1,6 +1,8 @@
 #include <mathops_shared_fields.hpp>
-#include <mathops/detail/AVX/avx_sums.hpp>
+#include <mathops/detail/VEC/vec_sums.hpp>
 #include <common/detail/memory_common.inl>
+#include <simd/simd_common.hpp>
+#include <simd/simd_operations.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -12,12 +14,12 @@ namespace benchmarks
 
     static void BM_PrefixSum(benchmark::State &state, const float *srcArr, size_t size)
     {
-        float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);
+        float *dst = _alloc_avxaligned_memory_float(size * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT);
 
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(srcArr);
-            mathops::avx::prefix_sum(srcArr, size, dst);
+            mathops::vec::prefix_sum<float, simd::InstructionSet::AVX>(srcArr, size, dst);
             benchmark::DoNotOptimize(dst);
         } 
 

@@ -1,28 +1,9 @@
 #include <simd/detail/vec/simd_vec_t.hpp>
-#include <simd/detail/vec/AVX/simd_vec_avx_float.hpp>
+#include <simd/detail/vec/VEC/simd_vec_vec.hpp>
 
 #include <cmath>
 
 #include <gtest/gtest.h>
-
-#undef addvf
-#undef subvf
-#undef mulvf
-#undef divvf
-
-#undef absvf
-#undef minvf
-#undef maxvf
-
-#undef fast_sqrtvf
-#undef fast_invsqrtvf
-
-#undef fast_sinvf
-#undef fast_cosvf
-
-#undef dotvf
-#undef lengthvf
-#undef normalizevf
 
 namespace analysis
 {
@@ -30,6 +11,8 @@ namespace tests
 {
     static constexpr float maximalFastInvSqrtRelativeError = 0.00175124;
     static constexpr float maximalSinCosAbsoluteError = 0.00048828128;
+
+#if defined(HAS_AVX)
 
     TEST(FloatAvxVector, Vec4AddPositive)
     {
@@ -40,7 +23,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::addvf(vec1, vec2);
+        auto res = simd::vec::addv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -58,7 +41,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::addvf(vec1, vec2);
+        auto res = simd::vec::addv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -74,7 +57,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::subvf(vec1, vec2);
+        auto res = simd::vec::subv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -92,7 +75,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::subvf(vec1, vec2);
+        auto res = simd::vec::subv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -108,7 +91,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::mulvf(vec1, vec2);
+        auto res = simd::vec::mulv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -126,7 +109,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::mulvf(vec1, vec2);
+        auto res = simd::vec::mulv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -142,7 +125,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::divvf(vec1, vec2);
+        auto res = simd::vec::divv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -160,7 +143,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::divvf(vec1, vec2);
+        auto res = simd::vec::divv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -175,7 +158,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        auto res = simd::avx::absvf(vec);
+        auto res = simd::vec::absv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -190,7 +173,7 @@ namespace tests
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
             vecData[5], vecData[6], vecData[7], vecData[8]);
 
-        auto res = simd::avx::absvf(vec);
+        auto res = simd::vec::absv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -206,7 +189,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::minvf(vec1, vec2);
+        auto res = simd::vec::minv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -224,7 +207,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::minvf(vec1, vec2);
+        auto res = simd::vec::minv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -240,7 +223,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        auto res = simd::avx::maxvf(vec1, vec2);
+        auto res = simd::vec::maxv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -258,13 +241,15 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        auto res = simd::avx::maxvf(vec1, vec2);
+        auto res = simd::vec::maxv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         for (size_t i = 0; i < vecLen; i++)
         {
             EXPECT_FLOAT_EQ(res.data[i], std::max(vec1Data[i], vec2Data[i]));
         }
     }
+
+#if defined(HAS_AVX2)
 
     TEST(FloatAvxVector, Vec9FastSqrt)
     {
@@ -274,7 +259,7 @@ namespace tests
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3],
             vecData[4], vecData[5], vecData[6], vecData[7], vecData[8]);
 
-        auto res = simd::avx::fast_sqrtvf(vec);
+        auto res = simd::vec::fast_sqrtv<vecLen, float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -290,7 +275,7 @@ namespace tests
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3],
             vecData[4], vecData[5], vecData[6], vecData[7], vecData[8]);
 
-        auto res = simd::avx::fast_invsqrtvf(vec);
+        auto res = simd::vec::fast_invsqrtv<vecLen, float, simd::InstructionSet::AVX, simd::InstructionSet::AVX2>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -298,6 +283,8 @@ namespace tests
             EXPECT_NEAR(res.data[i], expected, maximalFastInvSqrtRelativeError * std::abs(expected == 0 ? 0.1 : expected));
         }
     }
+
+#endif // HAS_AVX2
     
     TEST(FloatAvxVector, Vec4FastSinPositive)
     {
@@ -306,7 +293,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        auto res = simd::avx::fast_sinvf(vec);
+        auto res = simd::vec::fast_sinv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -322,7 +309,7 @@ namespace tests
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
             vecData[5], vecData[6], vecData[7], vecData[8]);
 
-        auto res = simd::avx::fast_sinvf(vec);
+        auto res = simd::vec::fast_sinv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -337,7 +324,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        auto res = simd::avx::fast_cosvf(vec);
+        auto res = simd::vec::fast_cosv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -353,7 +340,7 @@ namespace tests
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3], vecData[4],
             vecData[5], vecData[6], vecData[7], vecData[8]);
 
-        auto res = simd::avx::fast_cosvf(vec);
+        auto res = simd::vec::fast_cosv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         for (size_t i = 0; i < vecLen; i++)
         {
@@ -371,7 +358,7 @@ namespace tests
         auto vec1 = simd::Vec<vecLen, float>(vec1Data[0], vec1Data[1], vec1Data[2], vec1Data[3]);
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3]);
 
-        float res = simd::avx::dotvf(vec1, vec2);
+        float res = simd::vec::dotv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         float expected = 0;
         for (size_t i = 0; i < vecLen; i++)
@@ -392,7 +379,7 @@ namespace tests
         auto vec2 = simd::Vec<vecLen, float>(vec2Data[0], vec2Data[1], vec2Data[2], vec2Data[3], vec2Data[4],
             vec2Data[5], vec2Data[6], vec2Data[7], vec2Data[8]);
 
-        float res = simd::avx::dotvf(vec1, vec2);
+        float res = simd::vec::dotv<vecLen, float, simd::InstructionSet::AVX>(vec1, vec2);
 
         float expected = 0;
         for (size_t i = 0; i < vecLen; i++)
@@ -409,7 +396,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        float res = simd::avx::lengthvf(vec);
+        float res = simd::vec::lengthv<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         EXPECT_FLOAT_EQ(res, 4.951767361255979);
     }
@@ -420,7 +407,7 @@ namespace tests
 
         auto vec = simd::Vec<vecLen, float>(vecData[0], vecData[1], vecData[2], vecData[3]);
 
-        auto res = simd::avx::normalizevf(vec);
+        auto res = simd::vec::normalizev<vecLen, float, simd::InstructionSet::AVX>(vec);
 
         EXPECT_FLOAT_EQ(res.data[0], 0.02019480979305);
         EXPECT_FLOAT_EQ(res.data[1], 0.626039103584565);
@@ -428,4 +415,6 @@ namespace tests
         EXPECT_FLOAT_EQ(res.data[3], 0.464480625240161);
     }
 }
+
+#endif // HAS_AVX
 }

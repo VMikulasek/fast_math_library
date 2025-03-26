@@ -15,7 +15,7 @@ simd/simd_vec.hpp)
 
 set(MATHOPS_INCLUDE
 mathops/sums.hpp
-mathops/transcedentals.hpp
+mathops/transcendentals.hpp
 mathops/statisticals.hpp)
 
 set(SIMD_OPERATIONS
@@ -39,34 +39,34 @@ set(SIMD_VECTOR_DETAIL_SEQ
 simd/detail/vec/SEQ/simd_vec_seq.hpp
 simd/detail/vec/SEQ/simd_vec_seq.inl)
 
-set(SIMD_VECTOR_DETAIL_AVX
-simd/detail/vec/AVX/simd_vec_avx_float.hpp
-simd/detail/vec/AVX/simd_vec_avx_float.inl
-simd/detail/vec/AVX/simd_vec2_avx_float.hpp
-simd/detail/vec/AVX/simd_vec2_avx_float.inl
-simd/detail/vec/AVX/simd_vec3_avx_float.hpp
-simd/detail/vec/AVX/simd_vec3_avx_float.inl
-simd/detail/vec/AVX/simd_vec4_avx_float.hpp
-simd/detail/vec/AVX/simd_vec4_avx_float.inl)
+set(SIMD_VECTOR_DETAIL_VEC
+simd/detail/vec/VEC/simd_vec_vec.hpp
+simd/detail/vec/VEC/simd_vec_vec.inl
+simd/detail/vec/VEC/simd_vec2_vec.hpp
+simd/detail/vec/VEC/simd_vec2_vec.inl
+simd/detail/vec/VEC/simd_vec3_vec.hpp
+simd/detail/vec/VEC/simd_vec3_vec.inl
+simd/detail/vec/VEC/simd_vec4_vec.hpp
+simd/detail/vec/VEC/simd_vec4_vec.inl)
 
 set(MATHOPS_DETAIL
 mathops/detail/sums.inl
-mathops/detail/transcedentals.inl
+mathops/detail/transcendentals.inl
 mathops/detail/statisticals.inl)
 
-set(MATHOPS_AVX
-mathops/detail/AVX/avx_sums.hpp
-mathops/detail/AVX/avx_sums.inl
-mathops/detail/AVX/avx_transcedentals.hpp
-mathops/detail/AVX/avx_transcedentals.inl
-mathops/detail/AVX/avx_statisticals.hpp
-mathops/detail/AVX/avx_statisticals.inl)
+set(MATHOPS_VEC
+mathops/detail/VEC/vec_sums.hpp
+mathops/detail/VEC/vec_sums.inl
+mathops/detail/VEC/vec_transcendentals.hpp
+mathops/detail/VEC/vec_transcendentals.inl
+mathops/detail/VEC/vec_statisticals.hpp
+mathops/detail/VEC/vec_statisticals.inl)
 
 set(MATHOPS_SEQ
 mathops/detail/SEQ/seq_sums.hpp
 mathops/detail/SEQ/seq_sums.inl
-mathops/detail/SEQ/seq_transcedentals.hpp
-mathops/detail/SEQ/seq_transcedentals.inl
+mathops/detail/SEQ/seq_transcendentals.hpp
+mathops/detail/SEQ/seq_transcendentals.inl
 mathops/detail/SEQ/seq_statisticals.hpp
 mathops/detail/SEQ/seq_statisticals.inl)
 
@@ -79,7 +79,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops PREFIX "Math include" FILE
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/operations PREFIX "SIMD operations" FILES ${SIMD_OPERATIONS})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec PREFIX "SIMD vector detail" FILES ${SIMD_VECTOR_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail PREFIX "Math detail" FILES ${MATHOPS_DETAIL})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/AVX PREFIX "Math AVX" FILES ${MATHOPS_AVX})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/VEC PREFIX "Math VEC" FILES ${MATHOPS_VEC})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/mathops/detail/SEQ PREFIX "Math SEQ" FILES ${MATHOPS_SEQ})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/common/detail PREFIX "Common detail" FILES ${COMMON_DETAIL})
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/simd/detail/vec/SEQ PREFIX "SIMD vector detail seq" FILES ${SIMD_VECTOR_DETAIL_SEQ})
@@ -91,11 +91,11 @@ ${SIMD_VECTOR_DETAIL}
 ${INCLUDE_CMAKELISTS}
 ${MATHOPS_INCLUDE}
 ${MATHOPS_DETAIL}
-${MATHOPS_AVX}
+${MATHOPS_VEC}
 ${MATHOPS_SEQ}
 ${COMMON_DETAIL}
 ${SIMD_VECTOR_DETAIL_SEQ}
-${SIMD_VECTOR_DETAIL_AVX})
+${SIMD_VECTOR_DETAIL_VEC})
 
 if (SSE_SUPPORTED)
 	message(STATUS "SSE supported")

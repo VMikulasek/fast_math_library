@@ -13,9 +13,10 @@ namespace mathops
 {
 namespace seq
 {
-    inline float min(const float *arr, size_t size)
+    template<typename T>
+    inline T min(const T *arr, size_t size)
     {
-        float min = arr[0];
+        T min = arr[0];
 
         for (size_t i = 1; i < size; i++)
         {
@@ -25,9 +26,10 @@ namespace seq
         return min;
     }
 
-    inline float max(const float *arr, size_t size)
+    template<typename T>
+    inline T max(const T *arr, size_t size)
     {
-        float max = arr[0];
+        T max = arr[0];
 
         for (size_t i = 1; i < size; i++)
         {
@@ -37,19 +39,21 @@ namespace seq
         return max;
     }
 
-    inline float arithmetic_mean(const float *arr, size_t size)
+    template<typename T>
+    inline T arithmetic_mean(const T *arr, size_t size)
     {
         if (size == 0) return 0;
 
-        float sum = std::accumulate(arr, arr + size, 0.f);
+        T sum = std::accumulate(arr, arr + size, 0.f);
         return sum / size;
     }
 
-    inline float geometric_mean(const float *arr, size_t size)
+    template<typename T>
+    inline T geometric_mean(const T *arr, size_t size)
     {
         if (size == 0) return 0;
 
-        float product = arr[0];
+        T product = arr[0];
 
         for (size_t i = 1; i < size; i++)
         {
@@ -59,12 +63,13 @@ namespace seq
         return std::pow(product, 1.f / size);
     }
 
-    inline float weighted_mean(const float *values, const float *weights, size_t size)
+    template<typename T>
+    inline T weighted_mean(const T *values, const T *weights, size_t size)
     {
         if (size == 0) return 0;
 
-        float sum = values[0] * weights[0];
-        float weightSum = weights[0];
+        T sum = values[0] * weights[0];
+        T weightSum = weights[0];
 
         for (size_t i = 1; i < size; i++)
         {
@@ -77,17 +82,18 @@ namespace seq
         return sum / weightSum;
     }
 
-    inline int mode(const int *arr, size_t size)
+    template<typename T>
+    inline T mode(const T *arr, size_t size)
     {
-        std::unordered_map<int, int> frequencyMap;
+        std::unordered_map<T, T> frequencyMap;
 
         for (size_t i = 0; i < size; i++)
         {
             frequencyMap[arr[i]]++;
         }
 
-        int mode = 0;
-        int maxCount = 0;
+        T mode = 0;
+        T maxCount = 0;
 
         for (const auto &pair : frequencyMap)
         {
@@ -101,13 +107,14 @@ namespace seq
         return mode;
     }
 
-    inline float median(const float *arr, size_t size)
+    template<typename T>
+    inline T median(const T *arr, size_t size)
     {
-        float *tmp = new float[size];
+        T *tmp = new T[size];
         std::copy(arr, arr + size, tmp);
         std::sort(tmp, tmp + size);
     
-        float median;
+        T median;
         if (size % 2 == 1)
         {
             median = tmp[size / 2];
@@ -121,32 +128,13 @@ namespace seq
         return median;
     }
 
-    inline float median(const int *arr, size_t size)
-    {
-        int *tmp = new int[size];
-        std::copy(arr, arr + size, tmp);
-        std::sort(tmp, tmp + size);
-    
-        float median;
-        if (size % 2 == 1)
-        {
-            median = tmp[size / 2];
-        }
-        else
-        {
-            median = (tmp[size / 2 - 1] + tmp[size / 2]) / 2.0;
-        }
-    
-        delete[] tmp;
-        return median;
-    }
-
-    inline float variance(const float *arr, size_t size)
+    template<typename T>
+    inline T variance(const T *arr, size_t size)
     {
         if (size == 0) return 0.f;
 
-        float mean = 0.f;
-        float variance = 0.f;
+        T mean = 0.f;
+        T variance = 0.f;
         for (size_t i = 0; i < size; i++)
         {
             mean += arr[i];
@@ -156,10 +144,11 @@ namespace seq
         return (variance / size) - std::pow(mean / size, 2);
     }
     
-    inline float variance(const float *arr, const float *probabilities, size_t size)
+    template<typename T>
+    inline T variance(const T *arr, const T *probabilities, size_t size)
     {
-        float mean = 0.f;
-        float variance = 0.f;
+        T mean = 0.f;
+        T variance = 0.f;
         for (size_t i = 0; i < size; i++)
         {
             mean += arr[i] * probabilities[i];
@@ -169,12 +158,13 @@ namespace seq
         return variance - std::pow(mean, 2);
     }
 
-    inline float sample_variance(const float *arr, size_t size)
+    template<typename T>
+    inline T sample_variance(const T *arr, size_t size)
     {
         if (size <= 1) return 0.f;
 
-        float mean = 0.f;
-        float variance = 0;
+        T mean = 0.f;
+        T variance = 0;
         for (size_t i = 0; i < size; i++)
         {
             mean += arr[i];
@@ -184,17 +174,20 @@ namespace seq
         return (variance - (std::pow(mean / size, 2) * size)) / (size - 1);
     }
 
-    inline float std_deviation(const float *arr, size_t size)
+    template<typename T>
+    inline T std_deviation(const T *arr, size_t size)
     {
         return std::sqrt(variance(arr, size));
     }
 
-    float std_deviation(const float *arr, const float *probabilities, size_t size)
+    template<typename T>
+    T std_deviation(const T *arr, const T *probabilities, size_t size)
     {
         return std::sqrt(variance(arr, probabilities, size));
     }
 
-    inline float sample_std_deviation(const float *arr, size_t size)
+    template<typename T>
+    inline T sample_std_deviation(const T *arr, size_t size)
     {
         return std::sqrt(sample_variance(arr, size));
     }

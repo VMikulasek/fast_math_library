@@ -10,12 +10,14 @@ namespace mathops
 {
 namespace seq
 {
-    inline float sum(const float *arr, size_t size)
+    template<typename T>
+    inline T sum(const T *arr, size_t size)
     {
         return std::accumulate(arr, arr + size, 0.0f);
     }
 
-    inline void prefix_sum(const float *arr, size_t size, float *dstArr)
+    template<typename T>
+    inline void prefix_sum(const T *arr, size_t size, T *dstArr)
     {
         std::inclusive_scan(arr, arr + size, dstArr);
     }

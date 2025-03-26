@@ -16,7 +16,16 @@ namespace simd
         static const InstructionSet INS_SET = InstructionSet::AVX2;
 
     public:
-        using Avx2IReg = __m256i;
+        using Reg = __m256i;
+
+        /**
+         * @brief Number of ints that fit into register
+         */
+        static const size_t REG_SIZE = 8;
+        /**
+         * @brief Alignment required by AVX2 instructions
+         */
+        static const size_t ALIGNMENT = 32;
 
         /**
          * @brief Loads array of ints to register which is returned
@@ -28,19 +37,19 @@ namespace simd
          * 
          * @return Register with loaded vector
          */
-        static Avx2IReg load_vector(const int *arr);
+        static Reg load_vector(const int *arr);
 
         /**
          * @brief Loads zeros to register which is returned
          * 
          * @return Register with zeros
          */
-        static Avx2IReg set_register_zero();
+        static Reg set_register_zero();
 
         /**
          * @brief Sets every field of register to num
          */
-        static Avx2IReg set_register(int num);
+        static Reg set_register(int num);
 
         /**
          * @brief Stores vector from register to int *dst
@@ -49,17 +58,17 @@ namespace simd
          * @param dst int * aligned to 32 bytes with at least 8 ints
          * of size
          */
-        static void materialize_register(const Avx2IReg &reg, int *dst);
+        static void materialize_register(const Reg &reg, int *dst);
 
         /**
          * @brief Adds vec2 to vec1 and returns result
          */
-        static Avx2IReg add(const Avx2IReg &vec1, const Avx2IReg &vec2);
+        static Reg add(const Reg &vec1, const Reg &vec2);
 
         /**
          * @brief Subtracts vec2 from vec1 and returns result
          */
-        static Avx2IReg sub(const Avx2IReg &vec1, const Avx2IReg &vec2);
+        static Reg sub(const Reg &vec1, const Reg &vec2);
 
         /**
          * @brief Shift every int in reg left by count bits
@@ -68,9 +77,9 @@ namespace simd
          * @param reg Register to shift
          * @param count Count of bits to shift, if more than 32,
          * then undefined behavior
-         * @return Avx2IReg shifted result
+         * @return Reg shifted result
          */
-        static Avx2IReg shift_left(const Avx2IReg &vec, int count);
+        static Reg shift_left(const Reg &vec, int count);
 
         /**
          * @brief Shift every int in reg right by count bits
@@ -79,9 +88,9 @@ namespace simd
          * @param reg Register to shift
          * @param count Count of bits to shift, if more than 32,
          * then undefined behavior
-         * @return Avx2IReg Shifted result
+         * @return Reg Shifted result
          */
-        static Avx2IReg shift_right(const Avx2IReg &vec, int count);
+        static Reg shift_right(const Reg &vec, int count);
     };
 } // namespace simd
 

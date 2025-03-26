@@ -1,6 +1,9 @@
 #ifndef MEMORY_COMMON_INL
 #define MEMORY_COMMON_INL
 
+#include <simd/simd_operations.hpp>
+#include <simd/simd_common.hpp>
+
 #include <cstddef>
 #include <cstdlib> // std::aligned_alloc
 
@@ -8,13 +11,7 @@
 #include <malloc.h> // _aligned_malloc
 #endif // _MSC_VER
 
-#define ALLOC_DST                                                                       \
-    float *dst = _alloc_aligned_memory_float(size * sizeof(float), AVX_ALIGNMENT);      \
-    if (dst == nullptr)                                                                 \
-    {                                                                                   \
-        return nullptr;                                                                 \
-    }                                                                                   \
-    do; while (false)
+#define ALLOC_DST float *dst = _alloc_avxaligned_memory_float(size * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT)
 
 inline void *_alloc_aligned_memory(size_t size, int alignment)
 {
@@ -25,7 +22,7 @@ inline void *_alloc_aligned_memory(size_t size, int alignment)
 #endif // _MSC_VER
 }
 
-inline float *_alloc_aligned_memory_float(size_t size, int alignment)
+inline float *_alloc_avxaligned_memory_float(size_t size, int alignment)
 {
     return reinterpret_cast<float *>(_alloc_aligned_memory(size, alignment));
 }

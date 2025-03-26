@@ -2,9 +2,20 @@
 #define SIMDVECT_HPP
 
 #include <simd/simd_common.hpp>
+#include <simd/simd_operations.hpp>
 
 #include <type_traits>
 #include <cstddef>
+
+#ifdef HAS_AVX
+
+#define VEC_ALIGNMENT SIMDOperations<float, AVX>::ALIGNMENT
+
+#else // HAS_AVX
+
+#define VEC_ALIGNMENT 8
+
+#endif // HAS_AVX
 
 namespace simd
 {
@@ -18,7 +29,7 @@ namespace simd
         static_assert(std::is_arithmetic_v<T>);
 
     public:
-        alignas(AVX_ALIGNMENT) T data[L];
+        alignas(VEC_ALIGNMENT) T data[L];
 
         /**
          * @brief Constructs vector with args.
