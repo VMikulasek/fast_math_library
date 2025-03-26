@@ -1,5 +1,6 @@
 #include <mathops_shared_fields.hpp>
-#include <mathops/detail/VEC/avx_sums.hpp>
+#include <mathops/detail/VEC/vec_sums.hpp>
+#include <simd/simd_common.hpp>
 
 #include <benchmark/benchmark.h>
 
@@ -14,7 +15,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::avx::sum(arr, size);
+            float res = mathops::vec::sum<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
     }

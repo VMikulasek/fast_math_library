@@ -2,7 +2,7 @@
 #define VEC_STATISTICALS_INL
 
 #include <mathops/detail/VEC/vec_statisticals.hpp>
-#include <mathops/detail/VEC/avx_sums.hpp>
+#include <mathops/detail/VEC/vec_sums.hpp>
 #include <simd/simd_operations.hpp>
 #include <simd/simd_common.hpp>
 
@@ -78,7 +78,7 @@ namespace vec
     {
         if (size == 0) return 0.f;
 
-        return mathops::avx::sum(arr, size) / size;
+        return mathops::vec::sum<T, S>(arr, size) / size;
     }
 
     template<typename T, simd::InstructionSet S>

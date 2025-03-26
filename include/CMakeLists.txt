@@ -55,8 +55,8 @@ mathops/detail/transcedentals.inl
 mathops/detail/statisticals.inl)
 
 set(MATHOPS_VEC
-mathops/detail/VEC/avx_sums.hpp
-mathops/detail/VEC/avx_sums.inl
+mathops/detail/VEC/vec_sums.hpp
+mathops/detail/VEC/vec_sums.inl
 mathops/detail/VEC/avx_transcedentals.hpp
 mathops/detail/VEC/avx_transcedentals.inl
 mathops/detail/VEC/vec_statisticals.hpp

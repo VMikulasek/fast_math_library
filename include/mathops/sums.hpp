@@ -16,9 +16,10 @@ namespace mathops
      * otherwise segmentation fault may be generated
      * @param size Size of array
      * 
-     * @returns float Sum of arr
+     * @returns Sum of arr
      */
-    float sum(const float *arr, size_t size);
+    template<typename T>
+    T sum(const T *arr, size_t size);
     /**
      * @brief Computes sum of arr accelerated with
      * biggest SIMD unit supported and available on
@@ -28,9 +29,10 @@ namespace mathops
      * @param arr Vector to perform prefix sum on,
      * vector.data() has to be aligned to 32 bytes
      * 
-     * @returns float Sum of arr
+     * @returns Sum of arr
      */
-    float sum(const std::vector<float> &arr);
+    template<typename T>
+    T sum(const std::vector<T> &arr);
     
     /**
      * @brief Computes prefix sum of arr accelerated
@@ -42,12 +44,13 @@ namespace mathops
      * has to be aligned to 32 bytes
      * @param size Size of array
      * 
-     * @returns Array with results and size of size floats,
+     * @returns Array with results,
      * that has to be freed after use.
      * If used on windows, then has to be freed with _aligned_free().
      * In case of allocation fail returns nullptr.
      */
-    float *prefix_sum(const float *arr, size_t size);
+    template<typename T>
+    T *prefix_sum(const T *arr, size_t size);
 
     /**
      * @brief Computes prefix sum of arr accelerated
@@ -58,12 +61,13 @@ namespace mathops
      * @param arr Vector to perform prefix sum on,
      * vector.data() has to be aligned to 32 bytes
      * 
-     * @returns Array with results and size of size vector.size() floats,
+     * @returns Array with results,
      * that has to be freed after use.
      * If used on windows, then has to be freed with _aligned_free().
      * In case of allocation fail returns nullptr.
      */
-    float *prefix_sum(const std::vector<float> &arr);
+    template<typename T>
+    T *prefix_sum(const std::vector<T> &arr);
 } // namespace mathops
 
 #include <mathops/detail/sums.inl>

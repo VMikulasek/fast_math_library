@@ -17,7 +17,7 @@ namespace tests
     protected:
         void test_prefix_sum(const float *arr, size_t size)
         {
-            SumsTests::test_prefix_sum(mathops::seq::prefix_sum, arr, size);
+            SumsTests::test_prefix_sum(mathops::seq::prefix_sum<float>, arr, size);
         }
     };
 

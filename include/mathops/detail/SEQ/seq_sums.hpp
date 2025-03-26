@@ -7,9 +7,11 @@ namespace mathops
 {
 namespace seq
 {
-    float sum(const float *arr, size_t size);
+    template<typename T>
+    T sum(const T *arr, size_t size);
 
-    void prefix_sum(const float *arr, size_t size, float *dstArr);
+    template<typename T>
+    void prefix_sum(const T *arr, size_t size, T *dstArr);
 } // namespace seq
 } // namespace math
 
