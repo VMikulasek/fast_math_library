@@ -281,7 +281,7 @@ namespace vec
             variance += std::pow((*arr), 2);
         }
 
-        return (variance - (std::pow(mean / size, 2) * size)) / (size - 1);
+        return (variance - (std::pow(mean, 2) / size)) / (size - 1);
     }
 
     template<typename T, simd::InstructionSet S>

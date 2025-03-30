@@ -171,7 +171,7 @@ namespace seq
             variance += std::pow(arr[i], 2);
         }
 
-        return (variance - (std::pow(mean / size, 2) * size)) / (size - 1);
+        return (variance - (std::pow(mean, 2) / size)) / (size - 1);
     }
 
     template<typename T>
