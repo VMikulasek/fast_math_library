@@ -45,6 +45,8 @@ namespace mathops
         return 1 / std::sqrt(num);
     }
 
+
+    // source C. Lomont - Fast inverse square root
     template<typename T>
     inline T fast_invsqrt(T num)
     {
@@ -96,7 +98,7 @@ namespace mathops
         return std::cos(num) / std::sin(num);
     }
 
-    // source swiftshader
+    // source swiftshader Optimizing Sin/Cos
     template<typename T>
     inline T _sin5q(T x)
     {
@@ -105,6 +107,7 @@ namespace mathops
         T x2 = x * x;
         return x * (A + x2 * (B + x2 * C));
     }
+    // source swiftshader Optimizing Sin/Cos
     template<typename T>
     inline T fast_sin(T num)
     {
@@ -114,6 +117,7 @@ namespace mathops
         T z = 0.25f - abs(x_2 - round(x_2));
         return _sin5q(z);
     }
+    // source swiftshader
     template<typename T>
     inline T fast_cos(T num)
     {
