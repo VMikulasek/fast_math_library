@@ -23,6 +23,7 @@ namespace analysis
     static const size_t BIG_ARR_SIZE = 15000000;
 
     using FloatAvxOps = simd::SIMDOperations<float, simd::InstructionSet::AVX>;
+    using IntAvx2Ops = simd::SIMDOperations<int, simd::InstructionSet::AVX2>;
 
     alignas(FloatAvxOps::ALIGNMENT) static const float _1ElemArr[_1_ELEM_ARR_SIZE]
         { 2 };
@@ -73,7 +74,7 @@ namespace analysis
 
     inline float *AllocBigArr()
     {
-        float *bigArr = _alloc_avxaligned_memory_float(BIG_ARR_SIZE * sizeof(float), FloatAvxOps::ALIGNMENT);
+        float *bigArr = _alloc_aligned_memory_float(BIG_ARR_SIZE * sizeof(float), FloatAvxOps::ALIGNMENT);
 
         std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1.f);
 
@@ -82,7 +83,7 @@ namespace analysis
 
     inline int *AllocBigIntArr()
     {
-        int *bigArr = reinterpret_cast<int *>(_alloc_aligned_memory(BIG_ARR_SIZE * sizeof(int), FloatAvxOps::ALIGNMENT));
+        int *bigArr = reinterpret_cast<int *>(_alloc_aligned_memory(BIG_ARR_SIZE * sizeof(int), IntAvx2Ops::ALIGNMENT));
         
         std::fill(bigArr, bigArr + BIG_ARR_SIZE, 1.f);
     
@@ -91,7 +92,7 @@ namespace analysis
 
     inline float *AllocMediumArr()
     {
-        float *mediumArr = _alloc_avxaligned_memory_float(MEDIUM_ARR_SIZE * sizeof(float), FloatAvxOps::ALIGNMENT);
+        float *mediumArr = _alloc_aligned_memory_float(MEDIUM_ARR_SIZE * sizeof(float), FloatAvxOps::ALIGNMENT);
 
         std::fill(mediumArr, mediumArr + MEDIUM_ARR_SIZE, 1.f);
 
@@ -100,11 +101,20 @@ namespace analysis
 
     inline int *AllocMediumIntArr()
     {
-        int *mediumArr = reinterpret_cast<int *>(_alloc_aligned_memory(MEDIUM_ARR_SIZE * sizeof(int), FloatAvxOps::ALIGNMENT));
+        int *mediumArr = reinterpret_cast<int *>(_alloc_aligned_memory(MEDIUM_ARR_SIZE * sizeof(int), IntAvx2Ops::ALIGNMENT));
         
         std::fill(mediumArr, mediumArr + MEDIUM_ARR_SIZE, 1.f);
     
         return mediumArr;
+    }
+
+    inline float *AllocAvxAlignedArr(size_t size)
+    {
+        float *arr = reinterpret_cast<float *>(_alloc_aligned_memory(size * sizeof(float), FloatAvxOps::ALIGNMENT));
+        
+        std::fill(arr, arr + size, 1.f);
+    
+        return arr;
     }
 } // namespace analysis
 

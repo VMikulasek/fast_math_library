@@ -8,39 +8,22 @@ namespace analysis
 {
 namespace benchmarks
 {
-    static void BM_Median(benchmark::State &state, const float *arr, size_t size)
+    static void BM_Median(benchmark::State &state)
     {
+        size_t size = state.range(0);
+        float *arr = AllocAvxAlignedArr(size);
+
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
             float res = mathops::seq::median(arr, size);
             benchmark::DoNotOptimize(res);
         }
+        
+        _free_aligned_memory(arr);
     }
 
-    static void BM_Median9Elem(benchmark::State &state)
-    {
-        BM_Median(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-    }
-    static void BM_Median10kElem(benchmark::State &state)
-    {
-        float *medArr = AllocMediumArr();
+    BENCHMARK(BM_Median)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
 
-        BM_Median(state, medArr, MEDIUM_ARR_SIZE);
-
-        _free_aligned_memory(medArr);
-    }
-    static void BM_Median15MElem(benchmark::State &state)
-    {
-        float *bigArr = AllocBigArr();
-
-        BM_Median(state, bigArr, BIG_ARR_SIZE);
-
-        _free_aligned_memory(bigArr);
-    }
-
-    BENCHMARK(BM_Median9Elem);
-    BENCHMARK(BM_Median10kElem);
-    BENCHMARK(BM_Median15MElem);
 } // namespace benchmarks
 } // namespace analysis

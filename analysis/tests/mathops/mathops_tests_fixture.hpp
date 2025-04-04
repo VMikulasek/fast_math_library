@@ -45,8 +45,8 @@ namespace tests
             std::function<void(const float *, size_t, float *)>referenceArrOperation ,
             const float *arr, size_t size, float maximalError, bool relativeError)
         {
-            float* result = _alloc_avxaligned_memory_float(size * sizeof(float), FloatAvxOps::ALIGNMENT);
-            float* expected = _alloc_avxaligned_memory_float(size * sizeof(float), FloatAvxOps::ALIGNMENT);
+            float* result = _alloc_aligned_memory_float(size * sizeof(float), FloatAvxOps::ALIGNMENT);
+            float* expected = _alloc_aligned_memory_float(size * sizeof(float), FloatAvxOps::ALIGNMENT);
 
             testedArrOperation(arr, size, result);
             referenceArrOperation(arr, size, expected);

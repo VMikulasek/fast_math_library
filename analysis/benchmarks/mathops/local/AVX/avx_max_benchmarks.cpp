@@ -11,40 +11,22 @@ namespace benchmarks
 {
 #ifdef HAS_AVX
 
-    static void BM_Max(benchmark::State &state, const float *arr, size_t size)
+    static void BM_Max(benchmark::State &state)
     {
+        size_t size = state.range(0);
+        float *arr = AllocAvxAlignedArr(size);
+
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
             float res = mathops::vec::max<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
+
+        _free_aligned_memory(arr);
     }
 
-    static void BM_Max9Elem(benchmark::State &state)
-    {
-        BM_Max(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-    }
-    static void BM_Max10kElem(benchmark::State &state)
-    {
-        float *medArr = AllocMediumArr();
-
-        BM_Max(state, medArr, MEDIUM_ARR_SIZE);
-
-        _free_aligned_memory(medArr);
-    }
-    static void BM_Max15MElem(benchmark::State &state)
-    {
-        float *bigArr = AllocBigArr();
-
-        BM_Max(state, bigArr, BIG_ARR_SIZE);
-
-        _free_aligned_memory(bigArr);
-    }
-
-    BENCHMARK(BM_Max9Elem);
-    BENCHMARK(BM_Max10kElem);
-    BENCHMARK(BM_Max15MElem);
+    BENCHMARK(BM_Max)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
 
 #endif // HAS_AVX
 } // namespace benchmarks

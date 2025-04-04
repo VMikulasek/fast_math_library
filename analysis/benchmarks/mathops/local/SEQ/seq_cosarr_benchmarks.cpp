@@ -9,43 +9,23 @@
     {
     namespace benchmarks
     {
-        static void BM_Cos(benchmark::State &state, const float *arr, size_t size)
+        static void BM_Cos(benchmark::State &state)
         {
-            float *dst = _alloc_avxaligned_memory_float(size * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT);
-
+            size_t size = state.range(0);
+            float *arr = AllocAvxAlignedArr(size);
+            float *dst = AllocAvxAlignedArr(size);
+    
             for (auto _ : state)
             {
                 benchmark::DoNotOptimize(arr);
                 mathops::seq::cos_arr(arr, size, dst);
                 benchmark::DoNotOptimize(dst);
             }
-
+            
+            _free_aligned_memory(arr);
             _free_aligned_memory(dst);
         }
 
-        static void BM_Cos9Elem(benchmark::State &state)
-        {
-            BM_Cos(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-        }
-        static void BM_Cos10kElem(benchmark::State &state)
-        {
-            float *medArr = AllocMediumArr();
-
-            BM_Cos(state, medArr, MEDIUM_ARR_SIZE);
-
-            _free_aligned_memory(medArr);
-        }
-        static void BM_Cos15MElem(benchmark::State &state)
-        {
-            float *bigArr = AllocBigArr();
-
-            BM_Cos(state, bigArr, BIG_ARR_SIZE);
-
-            _free_aligned_memory(bigArr);
-        }
-
-        BENCHMARK(BM_Cos9Elem);
-        BENCHMARK(BM_Cos10kElem);
-        BENCHMARK(BM_Cos15MElem);
+        BENCHMARK(BM_Cos)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
     } // namespace benchmarks
     } // namespace analysis

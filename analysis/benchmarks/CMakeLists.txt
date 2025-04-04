@@ -191,6 +191,8 @@ foreach(BENCHMARK ${BENCHMARKS})
         ${BENCHMARK} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
     )
+
+    target_compile_options(${BENCHMARK} PRIVATE -O2)
 endforeach()
 
 set(GLM_LIB glm-header-only)

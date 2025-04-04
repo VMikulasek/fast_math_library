@@ -12,119 +12,57 @@ namespace benchmarks
 {
 #ifdef HAS_AVX
 
-    static void BM_StdDeviation(benchmark::State &state, const float *arr, size_t size)
+    static void BM_StdDeviation(benchmark::State &state)
     {
+        size_t size = state.range(0);
+        float *arr = AllocAvxAlignedArr(size);
+
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
             float res = mathops::vec::std_deviation<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
+
+        _free_aligned_memory(arr);
     }
     
-    static void BM_SampleStdDeviation(benchmark::State &state, const float *arr, size_t size)
+    static void BM_SampleStdDeviation(benchmark::State &state)
     {
+        size_t size = state.range(0);
+        float *arr = AllocAvxAlignedArr(size);
+
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
             float res = mathops::vec::sample_std_deviation<float, simd::InstructionSet::AVX>(arr, size);
             benchmark::DoNotOptimize(res);
         }
+
+        _free_aligned_memory(arr);
     }
 
-    static void BM_StdDeviationWithProbabilities(benchmark::State &state, const float *arr, const float *probabilities, size_t size)
+    static void BM_StdDeviationWithProbabilities(benchmark::State &state)
     {
+        size_t size = state.range(0);
+        float *arr = AllocAvxAlignedArr(size);
+        float *probabilities = AllocAvxAlignedArr(size);
+
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
             float res = mathops::vec::std_deviation<float, simd::InstructionSet::AVX>(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
-    }
-
-    static void BM_StdDeviation9Elem(benchmark::State &state)
-    {
-        BM_StdDeviation(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-    }
-    static void BM_StdDeviation10kElem(benchmark::State &state)
-    {
-        float *medArr = AllocMediumArr();
-
-        BM_StdDeviation(state, medArr, MEDIUM_ARR_SIZE);
-
-        _free_aligned_memory(medArr);
-    }
-    static void BM_StdDeviation15MElem(benchmark::State &state)
-    {
-        float *bigArr = AllocBigArr();
-
-        BM_StdDeviation(state, bigArr, BIG_ARR_SIZE);
-
-        _free_aligned_memory(bigArr);
-    }
-
-    static void BM_SampleStdDeviation9Elem(benchmark::State &state)
-    {
-        BM_SampleStdDeviation(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-    }
-    static void BM_SampleStdDeviation10kElem(benchmark::State &state)
-    {
-        float *medArr = AllocMediumArr();
-
-        BM_SampleStdDeviation(state, medArr, MEDIUM_ARR_SIZE);
-
-        _free_aligned_memory(medArr);
-    }
-    static void BM_SampleStdDeviation15MElem(benchmark::State &state)
-    {
-        float *bigArr = AllocBigArr();
-
-        BM_SampleStdDeviation(state, bigArr, BIG_ARR_SIZE);
-
-        _free_aligned_memory(bigArr);
-    }
-
-    static void BM_StdDeviationWithProbabilities9Elem(benchmark::State &state)
-    {
-        alignas(simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT) float probabilities[_9_ELEM_ARR_SIZE] { 0, 0, 0, 0, 0, 0, 0, 0, 1 }; 
-        BM_StdDeviationWithProbabilities(state, _9ElemArr, probabilities, _9_ELEM_ARR_SIZE);
-    }
-    static void BM_StdDeviationWithProbabilities10kElem(benchmark::State &state)
-    {
-        float *medArr = AllocMediumArr();
-        float *probabilities = AllocMediumArr();
-        std::fill(probabilities, probabilities + MEDIUM_ARR_SIZE, 0.f);
-        probabilities[0] = 1.f;
-
-        BM_StdDeviationWithProbabilities(state, medArr, probabilities, MEDIUM_ARR_SIZE);
-
-        _free_aligned_memory(medArr);
-        _free_aligned_memory(probabilities);
-    }
-    static void BM_StdDeviationWithProbabilities15MElem(benchmark::State &state)
-    {
-        float *bigArr = AllocBigArr();
-        float *probabilities = AllocBigArr();
-        std::fill(probabilities, probabilities + BIG_ARR_SIZE, 0.f);
-        probabilities[0] = 1.f;
-
-        BM_StdDeviationWithProbabilities(state, bigArr, probabilities, BIG_ARR_SIZE);
-
-        _free_aligned_memory(bigArr);
+        
+        _free_aligned_memory(arr);
         _free_aligned_memory(probabilities);
     }
 
-    BENCHMARK(BM_StdDeviation9Elem);
-    BENCHMARK(BM_StdDeviation10kElem);
-    BENCHMARK(BM_StdDeviation15MElem);
+    BENCHMARK(BM_StdDeviation)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
+    BENCHMARK(BM_SampleStdDeviation)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
+    BENCHMARK(BM_StdDeviationWithProbabilities)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
 
-    BENCHMARK(BM_SampleStdDeviation9Elem);
-    BENCHMARK(BM_SampleStdDeviation10kElem);
-    BENCHMARK(BM_SampleStdDeviation15MElem);
-
-    BENCHMARK(BM_StdDeviationWithProbabilities9Elem);
-    BENCHMARK(BM_StdDeviationWithProbabilities10kElem);
-    BENCHMARK(BM_StdDeviationWithProbabilities15MElem);
 #endif // HAS_AVX
 } // namespace benchmarks
 } // namespace analysis

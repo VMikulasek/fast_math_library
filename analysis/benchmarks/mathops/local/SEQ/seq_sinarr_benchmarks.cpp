@@ -9,10 +9,12 @@
     {
     namespace benchmarks
     {
-        static void BM_Sin(benchmark::State &state, const float *arr, size_t size)
+        static void BM_Sin(benchmark::State &state)
         {
-            float *dst = _alloc_avxaligned_memory_float(size * sizeof(float), simd::SIMDOperations<float, simd::InstructionSet::AVX>::ALIGNMENT);
-
+            size_t size = state.range(0);
+            float *arr = AllocAvxAlignedArr(size);
+            float *dst = AllocAvxAlignedArr(size);
+    
             for (auto _ : state)
             {
                 benchmark::DoNotOptimize(arr);
@@ -20,32 +22,11 @@
                 benchmark::DoNotOptimize(dst);
             }
 
+            _free_aligned_memory(arr);
             _free_aligned_memory(dst);
         }
 
-        static void BM_Sin9Elem(benchmark::State &state)
-        {
-            BM_Sin(state, _9ElemArr, _9_ELEM_ARR_SIZE);
-        }
-        static void BM_Sin10kElem(benchmark::State &state)
-        {
-            float *medArr = AllocMediumArr();
+        BENCHMARK(BM_Sin)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
 
-            BM_Sin(state, medArr, MEDIUM_ARR_SIZE);
-
-            _free_aligned_memory(medArr);
-        }
-        static void BM_Sin15MElem(benchmark::State &state)
-        {
-            float *bigArr = AllocBigArr();
-
-            BM_Sin(state, bigArr, BIG_ARR_SIZE);
-
-            _free_aligned_memory(bigArr);
-        }
-
-        BENCHMARK(BM_Sin9Elem);
-        BENCHMARK(BM_Sin10kElem);
-        BENCHMARK(BM_Sin15MElem);
     } // namespace benchmarks
     } // namespace analysis
