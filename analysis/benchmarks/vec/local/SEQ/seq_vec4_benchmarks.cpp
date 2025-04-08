@@ -9,7 +9,7 @@ namespace benchmarks
 {
 #ifdef HAS_AVX
 
-    static void BM_Vec4Add(benchmark::State &state)
+    static void BM_Add(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -21,7 +21,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Sub(benchmark::State &state)
+    static void BM_Sub(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -33,7 +33,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Mul(benchmark::State &state)
+    static void BM_Mul(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -45,7 +45,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Div(benchmark::State &state)
+    static void BM_Div(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -58,7 +58,7 @@ namespace benchmarks
         }
     }
 
-    static void BM_Vec4Abs(benchmark::State &state)
+    static void BM_Abs(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -70,7 +70,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Min(benchmark::State &state)
+    static void BM_Min(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -82,7 +82,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Max(benchmark::State &state)
+    static void BM_Max(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -95,7 +95,7 @@ namespace benchmarks
         }
     }
 
-    static void BM_Vec4Sqrt(benchmark::State &state)
+    static void BM_Sqrt(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -107,7 +107,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4SqrtLowp(benchmark::State &state)
+    static void BM_SqrtLowp(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -119,7 +119,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4InvSqrt(benchmark::State &state)
+    static void BM_InvSqrt(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -131,7 +131,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4InvSqrtLowp(benchmark::State &state)
+    static void BM_InvSqrtLowp(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -144,7 +144,7 @@ namespace benchmarks
         }
     }
 
-    static void BM_Vec4Sin(benchmark::State &state)
+    static void BM_Sin(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -156,7 +156,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4SinLowp(benchmark::State &state)
+    static void BM_SinLowp(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -168,7 +168,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Cos(benchmark::State &state)
+    static void BM_Cos(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -180,7 +180,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4CosLowp(benchmark::State &state)
+    static void BM_CosLowp(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -192,7 +192,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Tan(benchmark::State &state)
+    static void BM_Tan(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -204,7 +204,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Cot(benchmark::State &state)
+    static void BM_Cot(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -217,7 +217,7 @@ namespace benchmarks
         }
     }
     
-    static void BM_Vec4Dot(benchmark::State &state)
+    static void BM_Dot(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -229,7 +229,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Length(benchmark::State &state)
+    static void BM_Length(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -241,7 +241,7 @@ namespace benchmarks
             benchmark::DoNotOptimize(res);
         }
     }
-    static void BM_Vec4Normalize(benchmark::State &state)
+    static void BM_Normalize(benchmark::State &state)
     {
         volatile float num = std::rand();
         simd::Vec4f vec(num, num, num, num);
@@ -254,26 +254,26 @@ namespace benchmarks
         }
     }
 
-    BENCHMARK(BM_Vec4Add);
-    BENCHMARK(BM_Vec4Sub);
-    BENCHMARK(BM_Vec4Mul);
-    BENCHMARK(BM_Vec4Div);
-    BENCHMARK(BM_Vec4Abs);
-    BENCHMARK(BM_Vec4Min);
-    BENCHMARK(BM_Vec4Max);
-    BENCHMARK(BM_Vec4Sqrt);
-    BENCHMARK(BM_Vec4SqrtLowp);
-    BENCHMARK(BM_Vec4InvSqrt);
-    BENCHMARK(BM_Vec4InvSqrtLowp);
-    BENCHMARK(BM_Vec4Sin);
-    BENCHMARK(BM_Vec4SinLowp);
-    BENCHMARK(BM_Vec4Cos);
-    BENCHMARK(BM_Vec4CosLowp);
-    BENCHMARK(BM_Vec4Tan);
-    BENCHMARK(BM_Vec4Cot);
-    BENCHMARK(BM_Vec4Dot);
-    BENCHMARK(BM_Vec4Length);
-    BENCHMARK(BM_Vec4Normalize);
+    BENCHMARK(BM_Add);
+    BENCHMARK(BM_Sub);
+    BENCHMARK(BM_Mul);
+    BENCHMARK(BM_Div);
+    BENCHMARK(BM_Abs);
+    BENCHMARK(BM_Min);
+    BENCHMARK(BM_Max);
+    BENCHMARK(BM_Sqrt);
+    BENCHMARK(BM_SqrtLowp);
+    BENCHMARK(BM_InvSqrt);
+    BENCHMARK(BM_InvSqrtLowp);
+    BENCHMARK(BM_Sin);
+    BENCHMARK(BM_SinLowp);
+    BENCHMARK(BM_Cos);
+    BENCHMARK(BM_CosLowp);
+    BENCHMARK(BM_Tan);
+    BENCHMARK(BM_Cot);
+    BENCHMARK(BM_Dot);
+    BENCHMARK(BM_Length);
+    BENCHMARK(BM_Normalize);
 
 #endif // HAS_AVX
 } // namespace benchmarks
