@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from typing import List
 from collections import defaultdict
+from matplotlib.patches import Rectangle
 
 BENCHMARK_DIR = "../../build/analysis/benchmarks/"
 
@@ -21,7 +22,7 @@ NON_ARRAY_BENCHMARKS = ("accelerated_goniometric_benchmarks",
                         "seq_vec3_benchmarks",
                         "seq_vec4_benchmarks")
 
-BENCHMARK_REPETITIONS = 10
+BENCHMARK_REPETITIONS = 2
 
 def explore_benchmarks() -> List[str]:
     result = subprocess.run(["ls", BENCHMARK_DIR], stdout=subprocess.PIPE, text=True, check=True)
@@ -139,7 +140,7 @@ def configure_graph_array():
 def configure_graph_nonarray(ax, x):
     ax.set_ylabel("Time (ns)")
     ax.set_xticks(np.arange(len(x)))
-    ax.set_xticklabels(x)
+    ax.set_xticklabels(x, rotation=90)
     ax.legend()
     plt.grid(True)
     plt.tight_layout()
@@ -155,7 +156,17 @@ def print_data_array(benchmark_data, color, benchmark_variant, y):
 def print_data_nonarray(ax, benchmark_data, color, width, offset, benchmark_variant, y):
     stddev = [benchmark["stddev"] for benchmark in benchmark_data]
     x_coordinates = np.arange(len(y))
-    ax.bar(x_coordinates + offset, y, width, yerr=stddev, capsize=20, label=benchmark_variant, color=color)
+    ax.bar(x_coordinates + offset, y, width, label=benchmark_variant, color=color)
+    
+    for xi, yi, stddevi in zip(x_coordinates, y, stddev):
+        rect = Rectangle(
+            (xi + offset - 0.5 * width, yi - stddevi),
+            width,
+            2 * stddevi,
+            color='red',
+            alpha=0.3
+        )
+        ax.add_patch(rect)
 
 
 def log_results(ys, variants, benchmark_operation):
@@ -210,51 +221,56 @@ i = 0
 
 print("Running array benchmarks [1/2]")
 
-for benchmark_group in array_benchmark_groups:
-    i += 1
-    benchmark_operation = benchmark_group[0].split("_")[1]
-    print(f"\tRunning {benchmark_operation} benchmarks [{i}/{len(array_benchmark_groups)}]")
+# for benchmark_group in array_benchmark_groups:
+#     i += 1
+#     benchmark_operation = benchmark_group[0].split("_")[1]
+#     print(f"\tRunning {benchmark_operation} benchmarks [{i}/{len(array_benchmark_groups)}]")
 
-    color_i = 0
-    plt.figure(figsize=(10, 6))
+#     color_i = 0
+#     plt.figure(figsize=(6, 6))
     
-    ys = defaultdict(list)
-    variants = []
+#     ys = defaultdict(list)
+#     variants = []
 
-    j = 0
-    for benchmark in benchmark_group:
-        j += 1
-        print(f"\t\tRunning {benchmark} [{j}/{len(benchmark_group)}]")
-        color = colors[color_i]
-        color_i += 1
+#     j = 0
+#     for benchmark in benchmark_group:
+#         j += 1
+#         print(f"\t\tRunning {benchmark} [{j}/{len(benchmark_group)}]")
+#         color = colors[color_i]
+#         color_i += 1
 
-        benchmark_json = run_benchmark(benchmark)
-        benchmark_data = extract_data_array(benchmark_json)
+#         benchmark_json = run_benchmark(benchmark)
+#         benchmark_data = extract_data_array(benchmark_json)
         
-        benchmark_variant = benchmark.split("_")[0]
-        variants.append(benchmark_variant)
-        y = [benchmark["y"] for benchmark in benchmark_data]
-        ys[benchmark_variant] = y
+#         benchmark_variant = benchmark.split("_")[0]
+#         variants.append(benchmark_variant)
+#         y = [benchmark["y"] for benchmark in benchmark_data]
+#         ys[benchmark_variant] = y
 
-        print_data_array(benchmark_data, color, benchmark_variant, y)
+#         print_data_array(benchmark_data, color, benchmark_variant, y)
 
-    log_results(ys, variants, benchmark_operation)
-    configure_graph_array()
-    plt.savefig(f"../../img/{benchmark_operation}.svg")
+#     log_results(ys, variants, benchmark_operation)
+#     configure_graph_array()
+#     plt.savefig(f"../../img/{benchmark_operation}.svg")
 
 print("Running non-array benchmarks [2/2]")
 
 i = 0
-barwidth = 0.35
 
 for benchmark_group in nonarray_benchmark_groups:
     i += 1
     benchmark_operation = benchmark_group[0].split("_")[1]
     print(f"\tRunning {benchmark_operation} benchmarks [{i}/{len(nonarray_benchmark_groups)}]")
 
+    if "vec" in benchmark_operation:
+        barwidth = 0.25
+        figwidth = 10
+    else:
+        barwidth = 0.35
+        figwidth = 6
+
     color_i = 0
-    plt.figure(figsize=(10, 6))
-    _, ax = plt.subplots()
+    _, ax = plt.subplots(figsize=(figwidth, 6))
 
     ys = defaultdict(list)
     variants = []
@@ -268,18 +284,21 @@ for benchmark_group in nonarray_benchmark_groups:
 
         benchmark_json = run_benchmark(benchmark)
         benchmark_data = extract_data_nonarray(benchmark_json)
-        
+
         benchmark_variant = benchmark.split("_")[0]
         variants.append(benchmark_variant)
         x = [benchmark["x"] for benchmark in benchmark_data]
         y = [benchmark["y"] for benchmark in benchmark_data]
         ys[benchmark_variant] = y
         
-        offset = (j - ((len(x) - 1) * 0.5) - 1) * barwidth
+        offset = (j - ((len(benchmark_group) - 1) * 0.5) - 1) * barwidth
         print_data_nonarray(ax, benchmark_data, color, barwidth, offset, benchmark_variant, y)
 
     log_results(ys, variants, benchmark_operation)
     configure_graph_nonarray(ax, x)
+    if "vec" in benchmark_operation:
+        plt.yscale("log")
+    
     plt.savefig(f"../../img/{benchmark_operation}.svg")
 
 
