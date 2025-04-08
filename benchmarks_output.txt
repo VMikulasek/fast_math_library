@@ -1,0 +1,108 @@
+
+arithmeticmean
+avx - reference
+boost - 2.1047662701091743 x slower
+seq - 6.07581843545803 x slower
+
+cosarr
+avx - reference
+seq - 13.168600431382913 x slower
+
+geometricmean
+avx - reference
+seq - 6.61521633300571 x slower
+
+invsqrtarr
+avx - reference
+seq - 11.486417692242231 x slower
+
+max
+avx - reference
+seq - 7.17814108754321 x slower
+std - 18.069028712445796 x slower
+
+median
+boost - reference
+seq - 4.389883573934092 x slower
+
+min
+avx - reference
+seq - 7.062367773801442 x slower
+std - 17.629140393340926 x slower
+
+mode
+boost - reference
+seq - 7.288285876639797 x slower
+
+prefixsum
+avx - reference
+seq - 1.8066631495925272 x slower
+std - 1.6965226482028524 x slower
+
+samplestddeviation
+seq - reference
+
+samplevariance
+avx - reference
+boost - 37.860918832669455 x slower
+seq - 32.65610826447909 x slower
+
+sinarr
+avx - reference
+seq - 12.370344549166216 x slower
+
+sqrtarr
+avx - reference
+seq - 13.353074709177573 x slower
+
+stddeviation
+avx - reference
+seq - 32.37229655103293 x slower
+
+stddeviationsample
+avx - reference
+
+stddeviationwithprobabilities
+avx - reference
+seq - 22.917639485628765 x slower
+
+sum
+avx - reference
+seq - 6.254506239270101 x slower
+std - 2.170312619598795 x slower
+
+variance
+avx - reference
+boost - 38.19276165826117 x slower
+seq - 32.89354047754317 x slower
+
+variancewithprobabilities
+avx - reference
+seq - 24.410973822201935 x slower
+
+weightedmean
+avx - reference
+seq - 5.736151070779739 x slower
+
+goniometric
+accelerated - reference
+std - 0.9989615639072477 x slower
+
+sqrt
+accelerated - reference
+std - 0.9129371718647739 x slower
+
+vec2
+avx - reference
+glm - 1.7624251496833707 x slower
+seq - 1.3372809820871323 x slower
+
+vec3
+avx - reference
+glm - 2.1958034503022286 x slower
+seq - 1.9421112537532554 x slower
+
+vec4
+avx - reference
+glm - 1.9366354019834078 x slower
+seq - 2.237916504973307 x slower
