@@ -25,9 +25,9 @@ endif()
 
 if (BUILD_BENCHMARKS)
     set(ACCELERATED_SQRT_BENCHMARKS accelerated_sqrt_benchmarks)
-    set(BASIC_SQRT_BENCHMARKS basic_sqrt_benchmarks)
+    set(STD_SQRT_BENCHMARKS std_sqrt_benchmarks)
     set(ACCELERATED_GONIOMETRIC_BENCHMARKS accelerated_goniometric_benchmarks)
-    set(BASIC_GONIOMETRIC_BENCHMARKS basic_goniometric_benchmarks)
+    set(STD_GONIOMETRIC_BENCHMARKS std_goniometric_benchmarks)
     set(AVX_SUM_BENCHMARKS avx_sum_benchmarks)
     set(SEQ_SUM_BENCHMARKS seq_sum_benchmarks)
     set(AVX_PREFIXSUM_BENCHMARKS avx_prefixsum_benchmarks)
@@ -51,9 +51,17 @@ if (BUILD_BENCHMARKS)
     set(AVX_WEIGHTEDMEAN_BENCHMARKS avx_weightedmean_benchmarks)
     set(SEQ_WEIGHTEDMEAN_BENCHMARKS seq_weightedmean_benchmarks)
     set(AVX_VARIANCE_BENCHMARKS avx_variance_benchmarks)
+    set(AVX_SAMPLEVARIANCE_BENCHMARKS avx_samplevariance_benchmarks)
+    set(AVX_VARIANCEWITHPROBABILITIES_BENCHMARKS avx_variancewithprobabilities_benchmarks)
     set(SEQ_VARIANCE_BENCHMARKS seq_variance_benchmarks)
+    set(SEQ_SAMPLEVARIANCE_BENCHMARKS seq_samplevariance_benchmarks)
+    set(SEQ_VARIANCEWITHPROBABILITIES_BENCHMARKS seq_variancewithprobabilities_benchmarks)
     set(AVX_STDDEVIATION_BENCHMARKS avx_stddeviation_benchmarks)
+    set(AVX_SAMPLESTDDEVIATION_BENCHMARKS avx_stddeviationsample_benchmarks)
+    set(AVX_STDDEVIATIONWITHPROBABILITIES_BENCHMARKS avx_stddeviationwithprobabilities_benchmarks)
     set(SEQ_STDDEVIATION_BENCHMARKS seq_stddeviation_benchmarks)
+    set(SEQ_SAMPLESTDDEVIATION_BENCHMARKS seq_samplestddeviation_benchmarks)
+    set(SEQ_STDDEVIATIONWITHPROBABILITIES_BENCHMARKS seq_stddeviationwithprobabilities_benchmarks)
     set(GLM_VEC4_BENCHMARKS glm_vec4_benchmarks)
     set(GLM_VEC3_BENCHMARKS glm_vec3_benchmarks)
     set(GLM_VEC2_BENCHMARKS glm_vec2_benchmarks)
@@ -69,6 +77,7 @@ if (BUILD_BENCHMARKS)
     set(STD_MAX_BENCHMARKS std_max_benchmarks)
     set(BOOST_ARITHMETICMEAN_BENCHMARKS boost_arithmeticmean_benchmarks)
     set(BOOST_VARIANCE_BENCHMARKS boost_variance_benchmarks)
+    set(BOOST_SAMPLEVARIANCE_BENCHMARKS boost_samplevariance_benchmarks)
     set(BOOST_MODE_BENCHMARKS boost_mode_benchmarks)
     set(BOOST_MEDIAN_BENCHMARKS boost_median_benchmarks)
     set(SEQ_MODE_BENCHMARKS seq_mode_benchmarks)
@@ -76,9 +85,9 @@ if (BUILD_BENCHMARKS)
 
     set(BENCHMARKS
     ${ACCELERATED_SQRT_BENCHMARKS}
-    ${BASIC_SQRT_BENCHMARKS}
+    ${STD_SQRT_BENCHMARKS}
     ${ACCELERATED_GONIOMETRIC_BENCHMARKS}
-    ${BASIC_GONIOMETRIC_BENCHMARKS}
+    ${STD_GONIOMETRIC_BENCHMARKS}
     ${AVX_SUM_BENCHMARKS}
     ${SEQ_SUM_BENCHMARKS}
     ${AVX_PREFIXSUM_BENCHMARKS}
@@ -102,9 +111,17 @@ if (BUILD_BENCHMARKS)
     ${AVX_WEIGHTEDMEAN_BENCHMARKS}
     ${SEQ_WEIGHTEDMEAN_BENCHMARKS}
     ${AVX_VARIANCE_BENCHMARKS}
+    ${AVX_SAMPLEVARIANCE_BENCHMARKS}
+    ${AVX_VARIANCEWITHPROBABILITIES_BENCHMARKS}
     ${SEQ_VARIANCE_BENCHMARKS}
+    ${SEQ_SAMPLEVARIANCE_BENCHMARKS}
+    ${SEQ_VARIANCEWITHPROBABILITIES_BENCHMARKS}
     ${AVX_STDDEVIATION_BENCHMARKS}
+    ${AVX_SAMPLESTDDEVIATION_BENCHMARKS}
+    ${AVX_STDDEVIATIONWITHPROBABILITIES_BENCHMARKS}
     ${SEQ_STDDEVIATION_BENCHMARKS}
+    ${SEQ_SAMPLESTDDEVIATION_BENCHMARKS}
+    ${SEQ_STDDEVIATIONWITHPROBABILITIES_BENCHMARKS}
     ${GLM_VEC4_BENCHMARKS}
     ${GLM_VEC3_BENCHMARKS}
     ${GLM_VEC2_BENCHMARKS}
@@ -120,6 +137,7 @@ if (BUILD_BENCHMARKS)
     ${STD_MAX_BENCHMARKS}
     ${BOOST_ARITHMETICMEAN_BENCHMARKS}
     ${BOOST_VARIANCE_BENCHMARKS}
+    ${BOOST_SAMPLEVARIANCE_BENCHMARKS}
     ${BOOST_MODE_BENCHMARKS}
     ${BOOST_MEDIAN_BENCHMARKS}
     ${SEQ_MODE_BENCHMARKS}

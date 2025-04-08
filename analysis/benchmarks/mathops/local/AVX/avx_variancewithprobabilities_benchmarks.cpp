@@ -12,22 +12,24 @@ namespace benchmarks
 {
 #ifdef HAS_AVX
 
-    static void BM_Variance(benchmark::State &state)
+    static void BM_VarianceWithProbabilities(benchmark::State &state)
     {
         size_t size = state.range(0);
         float *arr = AllocAvxAlignedArr(size);
+        float *probabilities = AllocAvxAlignedArr(size);
 
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(arr);
-            float res = mathops::vec::variance<float, simd::InstructionSet::AVX>(arr, size);
+            float res = mathops::vec::variance<float, simd::InstructionSet::AVX>(arr, probabilities, size);
             benchmark::DoNotOptimize(res);
         }
 
         _free_aligned_memory(arr);
+        _free_aligned_memory(probabilities);
     }
 
-    BENCHMARK(BM_Variance)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
+    BENCHMARK(BM_VarianceWithProbabilities)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
 
 #endif // HAS_AVX
 } // namespace benchmarks

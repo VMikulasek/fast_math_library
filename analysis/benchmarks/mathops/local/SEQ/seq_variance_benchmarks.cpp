@@ -23,42 +23,8 @@ namespace benchmarks
     
         _free_aligned_memory(arr);
     }
-    
-    static void BM_SampleVariance(benchmark::State &state)
-    {
-        size_t size = state.range(0);
-        float *arr = AllocAvxAlignedArr(size);
-
-        for (auto _ : state)
-        {
-            benchmark::DoNotOptimize(arr);
-            float res = mathops::seq::sample_variance(arr, size);
-            benchmark::DoNotOptimize(res);
-        }
-
-        _free_aligned_memory(arr);
-    }
-
-    static void BM_VarianceWithProbabilities(benchmark::State &state)
-    {
-        size_t size = state.range(0);
-        float *arr = AllocAvxAlignedArr(size);
-        float *probabilities = AllocAvxAlignedArr(size);
-
-        for (auto _ : state)
-        {
-            benchmark::DoNotOptimize(arr);
-            float res = mathops::seq::variance(arr, probabilities, size);
-            benchmark::DoNotOptimize(res);
-        }
-
-        _free_aligned_memory(arr);
-        _free_aligned_memory(probabilities);
-    }
 
     BENCHMARK(BM_Variance)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
-    BENCHMARK(BM_SampleVariance)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
-    BENCHMARK(BM_VarianceWithProbabilities)->Range(_8_ELEM_ARR_SIZE, BIG_ARR_SIZE);
 
 } // namespace benchmarks
 } // namespace analysis
