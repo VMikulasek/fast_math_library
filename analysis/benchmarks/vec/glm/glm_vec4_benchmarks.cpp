@@ -238,7 +238,7 @@ namespace benchmarks
         for (auto _ : state)
         {
             benchmark::DoNotOptimize(vec);
-            float res = vec.length();
+            float res = length(vec);
             benchmark::DoNotOptimize(res);
         }
     }

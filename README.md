@@ -156,12 +156,14 @@ Open solution in Visual Studio, build targets `seq_math_lib_benchmarks`, `avx_ma
 
 ### Benchmarks example results
 
+All benchmarks are implemented to measure throughput, not latency
+
 Example machine specifications:
 - CPU: 12th Gen Intel® Core™ i5-1240P × 16
 - Memory: DDR4 SDRAM 16GB 3200 MT/s
 - Compiler: GCC (optimizations O3)
 
-Note: seq and avx marked results are this library
+seq and avx marked results are this library
 
 ![Sum](img/sum.svg)
 
@@ -186,9 +188,11 @@ Note: std::execution::par used
 ![Max](img/max.svg)
 
 ![Median](img/median.svg)
+
 Note: boost variant uses in-place sort
 
 ![Mode](img/mode.svg)
+
 Note: boost variant uses in-place sort
 
 ![Arithmetic mean](img/arithmeticmean.svg)
@@ -216,6 +220,9 @@ Note: std::execution::par used in boost variant
 ![Vec3](img/vec3.svg)
 
 ![Vec4](img/vec4.svg)
+
 Note:
 * 4-element vector is the only vectorized variant in GLM
 * seq variant of 4-element vector is vectorized by compiler for simple operations
+* glm uses vector sqrt instruction - can be improved here
+* glm SqrtLowp uses approximated invsqrt with multiplication instead of division - can be improved here
