@@ -2,6 +2,20 @@
 
 Library with support for summation, transcedental and statistical functions, where some of them are accelerated (see table with supported functions below), wrapped SIMD instructions into templated interface and vector type with vectorized operations with SIMD instructions.
 
+[Supported math functions](#supported-math-functions)
+
+[Supported vector data type operations](#supported-vector-data-type-operations)
+
+[SIMD support](#simd-support)
+
+[Wrapped Intel SIMD intrinsics](#wrapped-intel-simd-intrinsics)
+
+[Project health](#project-health)
+
+[Library usage](#library-usage)
+
+[Tests and benchmarks](#tests-and-benchmarks)
+
 ## Supported math functions
 
 | Summation | Acceleration | Transcedental | Acceleration | Statistical | Acceleration |
