@@ -219,7 +219,7 @@ foreach(BENCHMARK ${BENCHMARKS})
         ${CMAKE_CURRENT_SOURCE_DIR}
     )
 
-    target_compile_options(${BENCHMARK} PRIVATE -O2)
+    target_compile_options(${BENCHMARK} PRIVATE -O3)
 endforeach()
 
 set(GLM_LIB glm-header-only)

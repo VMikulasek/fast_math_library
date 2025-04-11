@@ -1,108 +1,106 @@
 
 arithmeticmean
 avx - reference
-boost - 2.1047662701091743 x slower
-seq - 6.07581843545803 x slower
+boost - 1.9915591865599254 x slower
+seq - 4.959578737084451 x slower
 
 cosarr
 avx - reference
-seq - 13.168600431382913 x slower
+seq - 11.970966612898629 x slower
 
 geometricmean
 avx - reference
-seq - 6.61521633300571 x slower
+seq - 5.2430539745591584 x slower
 
 invsqrtarr
 avx - reference
-seq - 11.486417692242231 x slower
+seq - 11.24626557693161 x slower
 
 max
 avx - reference
-seq - 7.17814108754321 x slower
-std - 18.069028712445796 x slower
+seq - 6.499089714427482 x slower
+std - 7.889110610837101 x slower
 
 median
 boost - reference
-seq - 4.389883573934092 x slower
+seq - 3.3011883696184143 x slower
 
 min
 avx - reference
-seq - 7.062367773801442 x slower
-std - 17.629140393340926 x slower
+seq - 6.588863589095374 x slower
+std - 7.834935433324 x slower
 
 mode
 boost - reference
-seq - 7.288285876639797 x slower
+seq - 6.71361859491999 x slower
 
 prefixsum
 avx - reference
-seq - 1.8066631495925272 x slower
-std - 1.6965226482028524 x slower
+seq - 1.7324021458505439 x slower
+std - 1.7133280493686505 x slower
 
 samplestddeviation
-seq - reference
+avx - reference
+seq - 25.39469311983547 x slower
 
 samplevariance
 avx - reference
-boost - 37.860918832669455 x slower
-seq - 32.65610826447909 x slower
+boost - 29.118584467189944 x slower
+seq - 25.69388730762021 x slower
 
 sinarr
 avx - reference
-seq - 12.370344549166216 x slower
+seq - 11.521429249974977 x slower
 
 sqrtarr
 avx - reference
-seq - 13.353074709177573 x slower
+seq - 12.397093570777379 x slower
 
 stddeviation
 avx - reference
-seq - 32.37229655103293 x slower
-
-stddeviationsample
-avx - reference
+seq - 26.16838892471259 x slower
 
 stddeviationwithprobabilities
 avx - reference
-seq - 22.917639485628765 x slower
+seq - 18.26312583512972 x slower
 
 sum
 avx - reference
-seq - 6.254506239270101 x slower
-std - 2.170312619598795 x slower
+seq - 5.066909020783041 x slower
+std - 2.069438562252544 x slower
 
 variance
 avx - reference
-boost - 38.19276165826117 x slower
-seq - 32.89354047754317 x slower
+boost - 29.52114504675913 x slower
+seq - 26.238278171581275 x slower
 
 variancewithprobabilities
 avx - reference
-seq - 24.410973822201935 x slower
+seq - 19.913048876822863 x slower
 
 weightedmean
 avx - reference
-seq - 5.736151070779739 x slower
+seq - 5.366534437600791 x slower
 
 goniometric
-accelerated - reference
-std - 0.9989615639072477 x slower
+std - reference
+accelerated - 1.0026374549359276 x slower
 
 sqrt
-accelerated - reference
-std - 0.9129371718647739 x slower
+std - reference
+accelerated - 1.0750300151836902 x slower
 
 vec2
 avx - reference
-glm - 1.7624251496833707 x slower
-seq - 1.3372809820871323 x slower
+glm - 1.4637278560713345 x slower
+seq - 1.30248979860348 x slower
 
 vec3
 avx - reference
-glm - 2.1958034503022286 x slower
-seq - 1.9421112537532554 x slower
+glm - 1.4769865919974077 x slower
+seq - 1.5159980944587326 x slower
 
 vec4
 avx - reference
-glm - 1.9366354019834078 x slower
-seq - 2.237916504973307 x slower
+glm - 1.005745609839 x slower
+seq - 1.2750132990167125 x slower

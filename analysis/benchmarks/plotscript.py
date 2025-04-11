@@ -5,6 +5,7 @@ import numpy as np
 from typing import List
 from collections import defaultdict
 from matplotlib.patches import Rectangle
+from matplotlib.patches import Patch
 
 BENCHMARK_DIR = "../../build/analysis/benchmarks/"
 
@@ -22,7 +23,7 @@ NON_ARRAY_BENCHMARKS = ("accelerated_goniometric_benchmarks",
                         "seq_vec3_benchmarks",
                         "seq_vec4_benchmarks")
 
-BENCHMARK_REPETITIONS = 2
+BENCHMARK_REPETITIONS = 5
 
 def explore_benchmarks() -> List[str]:
     result = subprocess.run(["ls", BENCHMARK_DIR], stdout=subprocess.PIPE, text=True, check=True)
@@ -141,7 +142,9 @@ def configure_graph_nonarray(ax, x):
     ax.set_ylabel("Time (ns)")
     ax.set_xticks(np.arange(len(x)))
     ax.set_xticklabels(x, rotation=90)
-    ax.legend()
+    std_patch = Patch(facecolor='red', alpha=0.3, label='std. deviation')
+    ax.legend(handles=[std_patch, *ax.get_legend_handles_labels()[0]], loc='center left', bbox_to_anchor=(1, 0.5))
+
     plt.grid(True)
     plt.tight_layout()
 
@@ -170,35 +173,35 @@ def print_data_nonarray(ax, benchmark_data, color, width, offset, benchmark_vari
 
 
 def log_results(ys, variants, benchmark_operation):
-    results = [0] * len(variants)
-    results[0] = (len(ys[variants[0]]))
+    results = [1] * len(variants)
+    results[0] = 1
 
     j = 0
     for variant in variants:
-        if variant == variant[0]:
+        if variant == variants[0]:
             j += 1
             continue
 
         for i in range(len(ys[variant])):
-            results[j] += ys[variant][i] / ys[variant][0]
+            results[j] *= ys[variant][i] / ys[variants[0]][i]
 
         j += 1
 
     fastest_i = 0
     for i in range(1, len(results)):
-        if results[i] < fastest_i:
+        if results[i] < results[fastest_i]:
             fastest_i = i
 
-    results = [0] * len(variants)
+    results = [1] * len(variants)
     j = 0
     for variant in variants:
         for i in range(len(ys[variant])):
-            results[j] += ys[variant][i] / ys[variants[fastest_i]][i]
+            results[j] *= ys[variant][i] / ys[variants[fastest_i]][i]
 
         j += 1
 
-    for i in range(len(variants)):
-        results[i] /= len(ys[variants[0]])
+    for i in range(len(results)):
+        results[i] = results[i] ** (1 / len(ys[variants[0]]))
 
     with open("../../benchmarks_output.txt", "a") as f:
         print(f"\n{benchmark_operation}", file=f)
@@ -221,37 +224,37 @@ i = 0
 
 print("Running array benchmarks [1/2]")
 
-# for benchmark_group in array_benchmark_groups:
-#     i += 1
-#     benchmark_operation = benchmark_group[0].split("_")[1]
-#     print(f"\tRunning {benchmark_operation} benchmarks [{i}/{len(array_benchmark_groups)}]")
+for benchmark_group in array_benchmark_groups:
+    i += 1
+    benchmark_operation = benchmark_group[0].split("_")[1]
+    print(f"\tRunning {benchmark_operation} benchmarks [{i}/{len(array_benchmark_groups)}]")
 
-#     color_i = 0
-#     plt.figure(figsize=(6, 6))
+    color_i = 0
+    plt.figure(figsize=(6, 6))
     
-#     ys = defaultdict(list)
-#     variants = []
+    ys = defaultdict(list)
+    variants = []
 
-#     j = 0
-#     for benchmark in benchmark_group:
-#         j += 1
-#         print(f"\t\tRunning {benchmark} [{j}/{len(benchmark_group)}]")
-#         color = colors[color_i]
-#         color_i += 1
+    j = 0
+    for benchmark in benchmark_group:
+        j += 1
+        print(f"\t\tRunning {benchmark} [{j}/{len(benchmark_group)}]")
+        color = colors[color_i]
+        color_i += 1
 
-#         benchmark_json = run_benchmark(benchmark)
-#         benchmark_data = extract_data_array(benchmark_json)
+        benchmark_json = run_benchmark(benchmark)
+        benchmark_data = extract_data_array(benchmark_json)
         
-#         benchmark_variant = benchmark.split("_")[0]
-#         variants.append(benchmark_variant)
-#         y = [benchmark["y"] for benchmark in benchmark_data]
-#         ys[benchmark_variant] = y
+        benchmark_variant = benchmark.split("_")[0]
+        variants.append(benchmark_variant)
+        y = [benchmark["y"] for benchmark in benchmark_data]
+        ys[benchmark_variant] = y
 
-#         print_data_array(benchmark_data, color, benchmark_variant, y)
+        print_data_array(benchmark_data, color, benchmark_variant, y)
 
-#     log_results(ys, variants, benchmark_operation)
-#     configure_graph_array()
-#     plt.savefig(f"../../img/{benchmark_operation}.svg")
+    log_results(ys, variants, benchmark_operation)
+    configure_graph_array()
+    plt.savefig(f"../../img/{benchmark_operation}.svg")
 
 print("Running non-array benchmarks [2/2]")
 
@@ -298,8 +301,9 @@ for benchmark_group in nonarray_benchmark_groups:
     configure_graph_nonarray(ax, x)
     if "vec" in benchmark_operation:
         plt.yscale("log")
-    
+
     plt.savefig(f"../../img/{benchmark_operation}.svg")
+    plt.close()
 
 
 print("Done")
