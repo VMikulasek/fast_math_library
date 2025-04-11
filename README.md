@@ -161,7 +161,11 @@ Example machine specifications:
 - Memory: DDR4 SDRAM 16GB 3200 MT/s
 - Compiler: GCC (optimizations O3)
 
+Note: seq and avx marked results are this library
+
 ![Sum](img/sum.svg)
+
+Note: std::execution::par used
 
 ![Prefix sum](img/prefixsum.svg)
 
@@ -181,7 +185,15 @@ Example machine specifications:
 
 ![Max](img/max.svg)
 
+![Median](img/median.svg)
+Note: boost variant uses in-place sort
+
+![Mode](img/mode.svg)
+Note: boost variant uses in-place sort
+
 ![Arithmetic mean](img/arithmeticmean.svg)
+
+Note: std::execution::par used in boost variant
 
 ![Geometric mean](img/geometricmean.svg)
 
@@ -204,3 +216,6 @@ Example machine specifications:
 ![Vec3](img/vec3.svg)
 
 ![Vec4](img/vec4.svg)
+Note:
+* 4-element vector is the only vectorized variant in GLM
+* seq variant of 4-element vector is vectorized by compiler for simple operations
