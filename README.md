@@ -162,7 +162,7 @@ sudo cpupower frequency-set --governor powersave > /dev/null 2>&1
 ```
 
 Windows:
-Open solution in Visual Studio, build targets `seq_math_lib_benchmarks`, `avx_math_lib_benchmarks`,... and run produced binaries.
+Open solution in Visual Studio, build targets `seq_variance_benchmarks`, `avx_variance_benchmarks`,... and run produced binaries.
 
 ### Comparing benchmarks
 
